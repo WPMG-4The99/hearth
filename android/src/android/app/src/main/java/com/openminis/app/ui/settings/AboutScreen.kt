@@ -99,7 +99,7 @@ fun AboutScreen(onBack: () -> Unit) {
                 // LocalInAppBrowserLauncher ambient defaults to a no-op when
                 // no InAppBrowserHost is in the tree above this screen — and
                 // nothing wraps Settings, so the row used to be a dead tap.
-                // nanoMuse: this build's repository. The upstream row below stays on nanoMuse.
+                // nanoMuse: this build's repository. The credits row below names nanoMuse and opens the same source.
                 onClick = { openExternalUrl(context, "https://github.com/WPMG-4The99/hearth") },
                 trailing = { ExternalLinkIcon() },
                 showDivider = false,
@@ -124,7 +124,8 @@ fun AboutScreen(onBack: () -> Unit) {
                 iconColor = tileBlue,
                 title = stringResource(R.string.nm_about_upstream),
                 subtitle = stringResource(R.string.nm_about_upstream_detail),
-                onClick = { openExternalUrl(context, "https://github.com/nano-muse/nanoMuse") },
+                // nanoMuse: the credits line names the upstream project; this link is Hearth's source.
+                onClick = { openExternalUrl(context, "https://github.com/WPMG-4The99/hearth") },
                 trailing = { ExternalLinkIcon() },
                 minHeight = 72.dp,
             )

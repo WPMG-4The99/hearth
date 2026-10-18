@@ -610,6 +610,11 @@ class Settings:
     # themselves, so "139 0000 1111" works. With SIGNUP_OPEN=0 the relay is
     # private and only members may sign in at all (the pre-release behaviour).
     allowed_identifiers: str = field(default_factory=lambda: _env("ALLOWED_IDENTIFIERS"))
+    # Households that may send each other a panic or an alert, and nothing else.
+    # One household is two or more e-mail addresses separated by `|`. Several
+    # households are separated by commas or newlines. There is no self-service
+    # linking: an address that is not in a household cannot reach another account.
+    households: str = field(default_factory=lambda: _env("HOUSEHOLDS"))
     signup_open: bool = field(default_factory=lambda: _env("SIGNUP_OPEN", "1") not in ("0", "false", "no"))
     # A sign-in for an app store's reviewer, who cannot receive our codes: for the
     # e-mail addresses in REVIEW_ADDRESSES (comma-separated) a code request sends nothing and

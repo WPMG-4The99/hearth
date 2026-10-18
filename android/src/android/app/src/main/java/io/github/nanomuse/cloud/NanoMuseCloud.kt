@@ -50,7 +50,7 @@ object NanoMuseCloud {
     const val DEFAULT_BASE = "https://hearth-cloud-the99.zocomputer.io"
     /** The Hearth repository: docs, releases, and the community links. */
     const val PROJECT_URL = "https://github.com/WPMG-4The99/hearth"
-    const val LABEL = "nanoMuse Cloud"
+    const val LABEL = "Hearth"
 
     private const val PREFS = "nanomuse"
     private const val KEY_BASE = "cloud.base"

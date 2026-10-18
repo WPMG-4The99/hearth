@@ -124,6 +124,11 @@ object FirstRunSetup {
     fun sourceChosen(context: Context): Boolean = prefs(context).getBoolean(KEY_SOURCE, false)
     fun markSourceChosen(context: Context) { prefs(context).edit().putBoolean(KEY_SOURCE, true).apply() }
 
+    private const val KEY_GROK = "setup.want_grok"
+    fun wantGrok(context: Context): Boolean = prefs(context).getBoolean(KEY_GROK, false)
+    fun markWantGrok(context: Context) { prefs(context).edit().putBoolean(KEY_GROK, true).apply() }
+    fun clearWantGrok(context: Context) { prefs(context).edit().remove(KEY_GROK).apply() }
+
     private fun prefs(context: Context) = context.getSharedPreferences(PREFS, Context.MODE_PRIVATE)
 
     /**
@@ -135,8 +140,12 @@ object FirstRunSetup {
      * install, no conversation yet, until *Start* has been tapped, so the last page is a real
      * step and the hand-off into the first conversation is deliberate.
      */
+    /**
+     * Pages after the account exists. Sign-in itself is a wall on the home, so a signed-out
+     * phone never reaches these pages, even when it already holds a key.
+     */
     fun needed(signedIn: Boolean, hasProviders: Boolean, hasSessions: Boolean, done: Boolean): Boolean =
-        (!signedIn && !hasProviders) || (!hasSessions && !done)
+        signedIn && !hasSessions && !done
 
     enum class Stage { WELCOME, PASSWORD, SOURCE, MODELS, HANDS, MEET }
 
@@ -158,9 +167,10 @@ object FirstRunSetup {
         passwordAnswered: Boolean = true,
         hasProviders: Boolean = signedIn,
     ): Stage = when {
-        !signedIn && !hasProviders -> Stage.WELCOME
-        signedIn && fresh && !passwordAnswered -> Stage.PASSWORD
-        signedIn && !sourceChosen -> Stage.SOURCE
+        // Sign-in is the home's own wall. This page is not shown while signed out.
+        !signedIn -> Stage.WELCOME
+        fresh && !passwordAnswered -> Stage.PASSWORD
+        !sourceChosen -> Stage.SOURCE
         !hasGroups && !modelsSkipped -> Stage.MODELS
         !handsSeen && handsPossible -> Stage.HANDS
         else -> Stage.MEET
@@ -192,6 +202,19 @@ fun FirstRunSetupScreen(
     var modelsSkipped by remember { mutableStateOf(false) }
     var handsSeen by remember { mutableStateOf(FirstRunSetup.handsGuideSeen(context)) }
     var sourceChosen by remember { mutableStateOf(FirstRunSetup.sourceChosen(context)) }
+    val owner = LocalLifecycleOwner.current
+    DisposableEffect(owner, signedIn) {
+        val obs = LifecycleEventObserver { _, e ->
+            if (e == Lifecycle.Event.ON_RESUME && FirstRunSetup.wantGrok(context) && io.github.nanomuse.cloud.ModelSource.grokReady(context)) {
+                io.github.nanomuse.cloud.ModelSource.useGrok(context)
+                FirstRunSetup.clearWantGrok(context)
+                FirstRunSetup.markSourceChosen(context)
+                sourceChosen = true
+            }
+        }
+        owner.lifecycle.addObserver(obs)
+        onDispose { owner.lifecycle.removeObserver(obs) }
+    }
     // a sign-in that created the account owes the password page; answered (or skipped) once
     var fresh by remember(signedIn) { mutableStateOf(signedIn && NanoMuseCloud.freshAccount(context)) }
     var passwordAnswered by remember { mutableStateOf(false) }
@@ -235,8 +258,12 @@ fun FirstRunSetupScreen(
                         onDone = { NanoMuseCloud.clearFreshAccount(context); passwordAnswered = true; fresh = false },
                     )
                     FirstRunSetup.Stage.SOURCE -> SourcePage(
-                        onCloud = { FirstRunSetup.markSourceChosen(context); sourceChosen = true },
-                        onOwnKey = { FirstRunSetup.markSourceChosen(context); sourceChosen = true; onAddProvider() },
+                        onRelay = {
+                            io.github.nanomuse.cloud.ModelSource.useRelay(context)
+                            FirstRunSetup.markSourceChosen(context)
+                            sourceChosen = true
+                        },
+                        onGrok = { FirstRunSetup.markWantGrok(context); onAddProvider() },
                     )
                     FirstRunSetup.Stage.MODELS -> ModelsPage(onSelectModels = onSelectModels, onSkip = { modelsSkipped = true })
                     FirstRunSetup.Stage.HANDS -> HandsPage(
@@ -285,20 +312,20 @@ private fun WelcomePage(onSignIn: () -> Unit, onOwnKey: () -> Unit) {
  * OpenMinis' provider screen; the Cloud provider stays either way.
  */
 @Composable
-private fun SourcePage(onCloud: () -> Unit, onOwnKey: () -> Unit) {
+private fun SourcePage(onRelay: () -> Unit, onGrok: () -> Unit) {
     Page(
         hero = { HeroGlyph(Icons.Outlined.CloudQueue) },
         title = stringResource(R.string.nm_setup_source_title),
         subtitle = stringResource(R.string.nm_setup_source_sub),
         primaryLabel = stringResource(R.string.nm_setup_source_cloud),
-        onPrimary = onCloud,
-        secondaryLabel = stringResource(R.string.nm_setup_own_key),
-        onSecondary = onOwnKey,
+        onPrimary = onRelay,
+        secondaryLabel = stringResource(R.string.nm_setup_source_grok),
+        onSecondary = onGrok,
         finePrint = stringResource(R.string.nm_setup_source_fine_print),
     ) {
         FeatureRow(Icons.Outlined.CloudQueue, stringResource(R.string.nm_setup_source_cloud), stringResource(R.string.nm_setup_source_cloud_sub))
         Spacer(Modifier.height(10.dp))
-        FeatureRow(Icons.Outlined.Key, stringResource(R.string.nm_setup_own_key), stringResource(R.string.nm_setup_source_own_sub))
+        FeatureRow(Icons.Outlined.Key, stringResource(R.string.nm_setup_source_grok), stringResource(R.string.nm_setup_source_grok_sub))
     }
 }
 

@@ -86,6 +86,8 @@ private const val CLOUD_DOC_URL = "${NanoMuseCloud.PROJECT_URL}/blob/main/docs/c
 fun CloudSignInScreen(
     onBack: () -> Unit,
     onSignedIn: () -> Unit,
+    /** First launch: no back control. The relay address stays under Advanced. */
+    wall: Boolean = false,
 ) {
     val context = LocalContext.current
     val scope = rememberCoroutineScope()
@@ -186,8 +188,10 @@ fun CloudSignInScreen(
             MuseTopAppBar(
                 title = {},
                 navigationIcon = {
-                    IconButton(onClick = onBack) {
-                        Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = stringResource(R.string.settings_back))
+                    if (!wall) {
+                        IconButton(onClick = onBack) {
+                            Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = stringResource(R.string.settings_back))
+                        }
                     }
                 },
             )

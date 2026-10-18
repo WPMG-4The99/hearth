@@ -256,7 +256,7 @@ fun AllowanceWaysCard(
                     Spacer(Modifier.width(5.dp))
                     Text(stringResource(R.string.nm_ways_invite_share), fontSize = 13.sp, color = MuseTones.action)
                 }
-                TextButton(onClick = { clipboard.setPlainText("nanoMuse", link); copied = true }) {
+                TextButton(onClick = { clipboard.setPlainText("Hearth", link); copied = true }) {
                     Icon(Icons.Outlined.ContentCopy, contentDescription = null, modifier = Modifier.size(15.dp), tint = MuseTones.action)
                     Spacer(Modifier.width(5.dp))
                     Text(stringResource(if (copied) R.string.nm_cloud_invite_copied else R.string.nm_ways_invite_copy), fontSize = 13.sp, color = MuseTones.action)

@@ -27,7 +27,7 @@ class AlarmOffloadManager(private val context: Context) {
         private const val PREFS_NAME = "minis_alarms_prefs"
         private const val KEY_ALARMS = "alarms_json"
         const val CHANNEL_ID = "minis_alarms"
-        private const val CHANNEL_NAME = "nanoMuse Alarms & Timers"
+        private const val CHANNEL_NAME = "Hearth Alarms & Timers" // nanoMuse: Hearth product name.
 
         const val EXTRA_ALARM_ID = "alarm_id"
         const val EXTRA_ALARM_LABEL = "alarm_label"
@@ -49,7 +49,7 @@ class AlarmOffloadManager(private val context: Context) {
                 CHANNEL_NAME,
                 NotificationManager.IMPORTANCE_HIGH
             ).apply {
-                description = "Alarms and timers scheduled by the nanoMuse agent"
+                description = "Alarms and timers scheduled by the Hearth agent" // nanoMuse: Hearth product name.
                 enableVibration(true)
             }
             notificationManager.createNotificationChannel(channel)

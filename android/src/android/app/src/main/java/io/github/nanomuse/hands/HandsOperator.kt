@@ -57,7 +57,7 @@ class HandsOperator(private val context: Context) {
         /** A cap on steps for callers that want one; 0 (the default) means the run goes on until the task is done, the person stops it, or the time limit. */
         val maxSteps: Int = DEFAULT_MAX_STEPS,
         val sessionId: String? = null,
-        val agentName: String = "nanoMuse",
+        val agentName: String = "Hearth",
         val language: String = "the user's language",
     )
 

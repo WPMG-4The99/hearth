@@ -4,10 +4,10 @@
 <resources>
     <string name="nm_about_build">Build ini</string>
     <string name="nm_about_license">Lisensi</string>
-    <string name="nm_about_upstream">Berbasis OpenMinis 1.13</string>
-    <string name="nm_about_upstream_detail">GPL-3.0 · dimodifikasi sejak 2026-09-24 · sumber di GitHub</string>
+    <string name="nm_about_upstream">Kredit</string>
+    <string name="nm_about_upstream_detail">Hearth adalah cabang dari nanoMuse (github.com/nano-muse/nanoMuse), GPL-3.0</string>
     <string name="nm_about_trademark">Tidak berafiliasi dengan Meta</string>
-    <string name="nm_about_trademark_detail">Muse adalah merek dagang Meta Platforms, Inc. nanoMuse adalah proyek perangkat lunak bebas yang independen.</string>
+    <string name="nm_about_trademark_detail">Muse adalah merek dagang Meta Platforms, Inc. Hearth adalah proyek perangkat lunak bebas yang independen.</string>
 
     <!-- Chat header -->
     <string name="nm_avatar_content_description">Agenmu. Ketuk untuk mengganti nama, ikon atau gayanya.</string>
@@ -22,26 +22,26 @@
     <string name="nm_star_action">Beri bintang di GitHub</string>
     <string name="nm_star_later">Nanti saja</string>
     <string name="nm_star_done">Sudah saya beri bintang</string>
-    <string name="nm_star_signed_in">Selamat datang. nanoMuse gratis, open source dan nirlaba: agen pribadi untuk siapa saja yang menjalankannya. Jika itu berarti bagimu, bintang di GitHub adalah cara orang berikutnya menemukannya.</string>
+    <string name="nm_star_signed_in">Selamat datang. Hearth gratis, open source dan nirlaba: agen pribadi untuk siapa saja yang menjalankannya. Jika itu berarti bagimu, bintang di GitHub adalah cara orang berikutnya menemukannya.</string>
     <plurals name="nm_star_tasks">
-        <item quantity="other">%1$d tugas selesai. Jika nanoMuse berguna, bintang di GitHub membantu orang berikutnya menemukannya.</item>
+        <item quantity="other">%1$d tugas selesai. Jika Hearth berguna, bintang di GitHub membantu orang berikutnya menemukannya.</item>
     </plurals>
-    <string name="nm_star_days_used_week">Seminggu bersama nanoMuse. Jika ia sudah punya tempat dalam harimu, bintang di GitHub membantu orang berikutnya menemukannya.</string>
-    <string name="nm_star_days_used_month">Sebulan bersama nanoMuse. Jika ia sudah jadi bagian dari rutinitasmu, bintang di GitHub memberi tahu orang lain bahwa ia layak dicoba.</string>
+    <string name="nm_star_days_used_week">Seminggu bersama Hearth. Jika ia sudah punya tempat dalam harimu, bintang di GitHub membantu orang berikutnya menemukannya.</string>
+    <string name="nm_star_days_used_month">Sebulan bersama Hearth. Jika ia sudah jadi bagian dari rutinitasmu, bintang di GitHub memberi tahu orang lain bahwa ia layak dicoba.</string>
     <plurals name="nm_star_days_used">
-        <item quantity="other">%1$d hari bersama nanoMuse. Jika ia sudah punya tempat dalam harimu, bintang di GitHub membantu orang berikutnya menemukannya.</item>
+        <item quantity="other">%1$d hari bersama Hearth. Jika ia sudah punya tempat dalam harimu, bintang di GitHub membantu orang berikutnya menemukannya.</item>
     </plurals>
-    <string name="nm_star_goal_done">Tujuan tercapai. Jika nanoMuse membantumu sampai di sini, bintang di GitHub memberi tahu orang-orang yang membangunnya.</string>
-    <string name="nm_star_new_look">Wajah baru, digambar untukmu. Jika kamu suka arah nanoMuse, bintang di GitHub membantu lebih banyak orang menemukannya.</string>
-    <string name="nm_star_exhausted">Kuota gratis sudah habis. Terima kasih sudah sampai sejauh ini. Jika nanoMuse layak mendapatkannya, bintang di GitHub menjaga proyek ini tetap terlihat bagi orang berikutnya.</string>
+    <string name="nm_star_goal_done">Tujuan tercapai. Jika Hearth membantumu sampai di sini, bintang di GitHub memberi tahu orang-orang yang membangunnya.</string>
+    <string name="nm_star_new_look">Wajah baru, digambar untukmu. Jika kamu suka arah Hearth, bintang di GitHub membantu lebih banyak orang menemukannya.</string>
+    <string name="nm_star_exhausted">Kuota gratis sudah habis. Terima kasih sudah sampai sejauh ini. Jika Hearth layak mendapatkannya, bintang di GitHub menjaga proyek ini tetap terlihat bagi orang berikutnya.</string>
     <string name="nm_chat_menu_rename">Ubah nama chat</string>
 
     <!-- Foreground-service notification title while no tool is running -->
     <string name="nm_notif_working">%1$s sedang bekerja</string>
 
     <!-- First conversation: the scripted opening (see io.github.nanomuse.onboarding) -->
-    <string name="nm_intro_hello">Hai, aku nanoMuse, asisten yang tinggal di ponselmu. Biar aku bantu ringankan beberapa urusanmu.</string>
-    <string name="nm_intro_how_i_work">Sedikit tentang cara kerjaku:\n\n- Aku punya komputer sendiri (sandbox Linux dan browser), jadi aku bisa menjalankan perintah, membuka situs web dan mengisi formulir.\n- Aku bisa membaca dan merapikan file dan foto yang kamu pasang untukku, serta mengurus pengingat dan tugas terjadwal.\n- Sebelum langkah yang penting, aku bertanya dulu padamu.\n- Semuanya berjalan di ponsel ini. Pesanmu dikirim ke model yang kamu atur; dengan nanoMuse Cloud, percakapan ini juga mengikutimu ke perangkatmu yang lain; bisa dimatikan di Kontrol data.</string>
+    <string name="nm_intro_hello">Halo, saya Nix. Saya ada di ponsel ini dan bisa mengambil beberapa urusan darimu.</string>
+    <string name="nm_intro_how_i_work">Sedikit tentang cara kerjaku:\n\n- Aku punya komputer sendiri (sandbox Linux dan browser), jadi aku bisa menjalankan perintah, membuka situs web dan mengisi formulir.\n- Aku bisa membaca dan merapikan file dan foto yang kamu pasang untukku, serta mengurus pengingat dan tugas terjadwal.\n- Sebelum langkah yang penting, aku bertanya dulu padamu.\n- Semuanya berjalan di ponsel ini. Pesanmu dikirim ke model yang kamu atur; dengan Hearth, percakapan ini juga mengikutimu ke perangkatmu yang lain; bisa dimatikan di Kontrol data.</string>
     <string name="nm_intro_ask_name">Sebelum mulai, aku harus memanggilmu apa?</string>
 
     <!-- First conversation: the name chooser -->
@@ -193,7 +193,7 @@
     <string name="nm_risk_class_outbound">Kirim</string>
     <string name="nm_risk_class_money">Bayar</string>
     <string name="nm_risk_class_install">Pasang</string>
-    <string name="nm_grants_header">Persetujuan yang diingat nanoMuse</string>
+    <string name="nm_grants_header">Persetujuan yang diingat Hearth</string>
     <string name="nm_grants_empty">Belum ada yang diingat</string>
     <string name="nm_grants_revoke">Cabut</string>
     <string name="nm_grants_revoke_confirm">Cabut persetujuan ini? Lain kali muncul, kamu akan ditanya lagi.</string>
@@ -201,7 +201,7 @@
     <string name="nm_risk_remember_money_note">Dikonfirmasi dengan kunci layarmu. Pembayaran di satu aplikasi atau situs ini lalu berjalan tanpa kartu; tercantum paling atas di Pengaturan → Izin, dan bisa kamu cabut kapan saja.</string>
     <string name="nm_risk_remember_money_needs_lock">Untuk mengingat pembayaran, atur kunci layar dulu (Pengaturan → Keamanan): mengingatnya dikonfirmasi dengan kunci itu.</string>
     <string name="nm_risk_lock_title">Pastikan ini kamu</string>
-    <string name="nm_risk_lock_subtitle">nanoMuse akan mengingat persetujuan pembayaran untuk %1$s dan menjalankannya tanpa bertanya.</string>
+    <string name="nm_risk_lock_subtitle">Hearth akan mengingat persetujuan pembayaran untuk %1$s dan menjalankannya tanpa bertanya.</string>
     <string name="nm_risk_remembered_toast">Diingat · lihat Pengaturan → Izin untuk mencabut</string>
     <string name="nm_risk_tier_highest">Berjalan tanpa bertanya · pembayaran</string>
     <string name="nm_risk_tier_confirm">Diingat dari kartu · hapus dan kirim</string>
@@ -272,7 +272,7 @@
     <string name="nm_sysfiles_open_memory">Buka memori</string>
     <string name="nm_sysfiles_footer">File-file ini milik agen: siapa dirinya, apa yang diketahuinya tentangmu, apa yang diingatnya, apa yang ditulisnya untukmu dan kapan ia bangun. Semuanya tersimpan di penyimpanan ponselmu; agen membaca dan mengeditnya dari shell-nya di /var/minis/memory, dan kamu bisa mengedit apa pun di sini.</string>
     <string name="nm_sysfile_about_lead">Tentang file ini.</string>
-    <string name="nm_sysfile_about_soul">Ini persona agen: nilai dan kebiasaan yang berusaha dipegangnya di setiap percakapan, namanya, dan gaya jawabannya. Berawal dari templat bawaan nanoMuse; agen bisa memperhalusnya seiring waktu dan memberitahumu saat melakukannya. Kamu bisa mengeditnya kapan saja. Catatan ini bukan bagian dari file.</string>
+    <string name="nm_sysfile_about_soul">Ini persona agen: nilai dan kebiasaan yang berusaha dipegangnya di setiap percakapan, namanya, dan gaya jawabannya. Berawal dari templat bawaan Hearth; agen bisa memperhalusnya seiring waktu dan memberitahumu saat melakukannya. Kamu bisa mengeditnya kapan saja. Catatan ini bukan bagian dari file.</string>
     <string name="nm_sysfile_about_user">Agen menyimpan file ini sebagai catatan kerjanya tentangmu: namamu, cara kamu ingin disapa, zona waktumu, dan konteks yang dibutuhkannya agar berguna, misalnya apa yang sedang kamu kerjakan. Ia mengisinya seiring waktu dari percakapanmu dan membacanya di awal setiap percakapan. Isinya mencerminkan pemahaman agen saat ini, jadi bisa saja tidak lengkap atau usang. Kamu bisa mengedit apa pun di sini, dan agen akan mengikuti apa yang kamu tulis. Catatan ini bukan bagian dari file.</string>
     <string name="nm_sysfile_about_memory">Catatan tahan lama yang disimpan agen lintas percakapan: hal-hal yang layak diingat, dengan kata-katanya sendiri, ditambah apa pun yang kamu impor dari asisten lain. Catatan harian per hari ada di sebelahnya dalam folder memori. Dibaca di awal setiap percakapan saat memori menyala. Catatan ini bukan bagian dari file.</string>
     <string name="nm_sysfile_about_feed">Satu paragraf yang mengarahkan feed: apa yang kamu ingin lebih banyak, apa yang dilewati, seberapa panjang tulisannya. Rutinitas feed harian membacanya sebelum menulis. Catatan ini bukan bagian dari file.</string>
@@ -353,7 +353,7 @@
     <string name="nm_own_clip_title">Klip Anda sendiri</string>
     <string name="nm_own_clip_body">Video pendek milik Anda diputar sebagai wajah saat diam, dan suasana lain memakainya juga. MP4 atau MOV dengan video H.264, paling lama 15 detik dan 30 MB; diputar tanpa suara, berulang.</string>
     <string name="nm_own_clip_on">Klip Anda aktif dan diputar untuk setiap suasana; di tempat gambar diam ditampilkan, gambar yang digambar tetap dipakai. “Wajah bawaan” menghapusnya.</string>
-    <string name="nm_own_clip_local">Klip tetap di ponsel ini. Tidak diunggah ke nanoMuse Cloud dan tidak disinkronkan ke perangkat Anda yang lain.</string>
+    <string name="nm_own_clip_local">Klip tetap di ponsel ini. Tidak diunggah ke Hearth dan tidak disinkronkan ke perangkat Anda yang lain.</string>
     <string name="nm_own_clip_choose">Pilih klip</string>
     <string name="nm_own_clip_replace">Ganti klip</string>
     <string name="nm_own_clip_default">Wajah bawaan</string>
@@ -371,7 +371,7 @@
     <string name="nm_a11y_own_clip_preview">Pratinjau klip Anda</string>
 
     <!-- First run (Muse-style welcome; the steps are OpenMinis' provider and model screens) -->
-    <string name="nm_setup_title">Selamat datang di nanoMuse</string>
+    <string name="nm_setup_title">Selamat datang di Hearth</string>
     <string name="nm_setup_step_models">Pilih model</string>
     <string name="nm_setup_step_models_sub">Model yang disediakan penyediamu ditampilkan untukmu; pilih paling banyak tiga</string>
     <string name="nm_setup_step_start">Berkenalan dengan %1$s</string>
@@ -387,7 +387,7 @@
     <string name="nm_settings_no_model">Belum ada model</string>
     <string name="nm_settings_no_model_sub">Tambahkan penyedia dan pilih modelnya</string>
     <string name="nm_settings_change_model">Ganti</string>
-    <string name="nm_settings_version">nanoMuse %1$s (%2$d)</string>
+    <string name="nm_settings_version">Hearth %1$s (%2$d)</string>
     <string name="nm_version_title">Versi</string>
     <string name="nm_version_checking">Memeriksa rilis terbaru…</string>
     <string name="nm_version_have">Terbaru %1$s, sudah kamu pakai</string>
@@ -467,7 +467,7 @@
     <string name="nm_avatar_share_title">Bagikan avatarku</string>
     <string name="nm_avatar_share_subtitle">Pilih kartu. Dibagikan lewat lembar berbagi sistem.</string>
     <string name="nm_avatar_share_system">Bagikan</string>
-    <string name="nm_avatar_share_bubble">Hai, aku %1$s, agen AI pribadi. Kenalan dengan nanoMuse: open source, berjalan di ponselmu.</string>
+    <string name="nm_avatar_share_bubble">Hai, aku %1$s, agen AI pribadi. Kenalan dengan Hearth: open source, berjalan di ponselmu.</string>
     <string name="nm_avatar_share_tagline">Agen AI pribadimu, open source · github.com/WPMG-4The99/hearth</string>
 
     <!-- 0.1.10 · Motion -->
@@ -519,7 +519,7 @@
     <string name="nm_hands_section_needs">Yang dibutuhkan</string>
     <string name="nm_hands_needs_footer">Layanan aksesibilitas mengambil tangkapan layar dan melakukan gestur; ia tidak membaca isi layar. Menggambar di atas aplikasi lain dipakai untuk kapsul.</string>
     <string name="nm_hands_need_a11y">Layanan aksesibilitas</string>
-    <string name="nm_hands_need_a11y_fix">Nyalakan nanoMuse di bagian Aplikasi terpasang pada pengaturan aksesibilitas</string>
+    <string name="nm_hands_need_a11y_fix">Nyalakan Hearth di bagian Aplikasi terpasang pada pengaturan aksesibilitas</string>
     <string name="nm_hands_need_overlay">Tampil di atas aplikasi lain</string>
     <string name="nm_hands_need_overlay_fix">Izinkan, supaya kapsul dengan tombol Berhenti bisa ditampilkan</string>
     <string name="nm_hands_need_model">Model yang bisa melihat gambar</string>
@@ -536,7 +536,7 @@
     <string name="nm_hands_why_default">bawaan tangan di bawah kuncimu sendiri</string>
     <string name="nm_hands_why_chat">model chat yang kamu pilih</string>
     <string name="nm_hands_why_group">yang pertama bisa melihat di grup bawaanmu</string>
-    <string name="nm_hands_why_menu">model layar nanoMuse Cloud</string>
+    <string name="nm_hands_why_menu">model layar Hearth</string>
     <string name="nm_hands_why_vision_group">Grup Visimu</string>
     <string name="nm_hands_why_any">satu-satunya model aktif yang bisa melihat</string>
     <string name="nm_hands_section_rules">Cara kerjanya</string>
@@ -557,7 +557,7 @@
     <string name="nm_hands_protected_screen">Layar ini dilindungi dan tidak bisa dibaca. Selesaikan bagian ini sendiri, lalu ketuk Lanjutkan.</string>
     <string name="nm_hands_secret_field">Kolom kata sandi atau kode: isi sendiri ya, lalu ketuk Lanjutkan.</string>
     <string name="nm_hands_approval_title">Menunggu persetujuanmu</string>
-    <string name="nm_hands_approval_detail">Ketuk “%1$s”: konfirmasi di nanoMuse (ia meminta kunci layarmu).</string>
+    <string name="nm_hands_approval_detail">Ketuk “%1$s”: konfirmasi di Hearth (ia meminta kunci layarmu).</string>
     <string name="nm_hands_approval_here">Ketuk “%1$s”?</string>
     <string name="nm_hands_allow_once">Izinkan</string>
     <string name="nm_hands_deny">Tolak</string>
@@ -588,10 +588,10 @@
     <!-- Reach (0.1.13): the phone drives your computer -->
     <string name="nm_pc_title">Komputer</string>
     <string name="nm_pc_none_short">Tidak ada</string>
-    <string name="nm_pc_intro">Ucapkan di sini, dikerjakan di komputermu: perintah, file, halaman di browser-nya, melihat layarnya, atau satu tugas utuh untuk nanoMuse di sana. Ponsel yang mengendalikan komputer, tidak pernah sebaliknya; setiap persetujuan diputuskan di sini dulu.</string>
-    <string name="nm_pc_hub_title">Cara mudah: nanoMuse Desktop, akun yang sama</string>
-    <string name="nm_pc_hub_body">Pasang nanoMuse Desktop di komputer dan masuk dengan akun ponsel ini; komputer muncul di Akun → Perangkat dalam hitungan detik.</string>
-    <string name="nm_pc_hub_download">Dapatkan nanoMuse Desktop</string>
+    <string name="nm_pc_intro">Ucapkan di sini, dikerjakan di komputermu: perintah, file, halaman di browser-nya, melihat layarnya, atau satu tugas utuh untuk Hearth di sana. Ponsel yang mengendalikan komputer, tidak pernah sebaliknya; setiap persetujuan diputuskan di sini dulu.</string>
+    <string name="nm_pc_hub_title">Cara mudah: Hearth Desktop, akun yang sama</string>
+    <string name="nm_pc_hub_body">Pasang Hearth Desktop di komputer dan masuk dengan akun ponsel ini; komputer muncul di Akun → Perangkat dalam hitungan detik.</string>
+    <string name="nm_pc_hub_download">Dapatkan Hearth Desktop</string>
     <string name="nm_pc_hub_account">Akun dan perangkat</string>
     <string name="nm_pc_section_paired">Komputer di akun ini</string>
     <string name="nm_pc_none">Belum ada komputer</string>
@@ -600,11 +600,11 @@
     <string name="nm_pc_last_seen">terlihat %1$s</string>
     <string name="nm_pc_offline">offline</string>
     <string name="nm_pc_online">online</string>
-    <string name="nm_pc_account_none">Ponsel ini belum masuk ke nanoMuse Cloud; masuk dulu, lalu komputer dengan akun yang sama.</string>
+    <string name="nm_pc_account_none">Ponsel ini belum masuk ke Hearth; masuk dulu, lalu komputer dengan akun yang sama.</string>
     <string name="nm_pc_account_hint">Ponsel ini masuk sebagai %1$s; komputer harus masuk dengan akun yang sama.</string>
     <string name="nm_pc_checking">Memeriksa…</string>
     <string name="nm_pc_answering">%1$s menjawab</string>
-    <string name="nm_pc_not_answering">%1$s tidak menjawab. Apakah nanoMuse Desktop masih berjalan di sana?</string>
+    <string name="nm_pc_not_answering">%1$s tidak menjawab. Apakah Hearth Desktop masih berjalan di sana?</string>
 
     <!-- the approval card -->
     <string name="nm_risk_desc_on_computer">Di komputer “%1$s”, bukan di ponsel ini.</string>
@@ -625,11 +625,11 @@
     <string name="nm_welcome_email">Masuk (gratis)</string>
     <string name="nm_welcome_fine_print">Satu akun menyatukan perangkatmu dan membawa pemakaian model gratis; tidak ada tagihan. Kunci API-mu sendiri bisa ditambahkan setelahnya.</string>
     <string name="nm_setup_source_title">Model mana yang menjawab?</string>
-    <string name="nm_setup_source_sub">Akunmu sudah membawa satu. Kamu juga bisa menambahkan kunci API sendiri dan berpindah kapan saja.</string>
-    <string name="nm_setup_source_cloud">Pakai model nanoMuse Cloud</string>
-    <string name="nm_setup_source_cloud_sub">DeepSeek untuk chat dan Qwen untuk tangan, dengan kuota gratis per akun yang dibayar pengembang. Tidak perlu diatur apa-apa.</string>
+    <string name="nm_setup_source_sub">Keduanya bisa memakai alat di ponsel ini. Nanti bisa diubah di Setelan, Model.</string>
+    <string name="nm_setup_source_cloud">Relay Hearth</string>
+    <string name="nm_setup_source_cloud_sub">Model di relay rumah ini. Tidak ada yang perlu ditempel.</string>
     <string name="nm_setup_source_own_sub">OpenAI, Anthropic, DeepSeek, Bailian dan endpoint lain yang kompatibel dengan OpenAI. Kuncinya tetap di ponsel ini.</string>
-    <string name="nm_setup_source_fine_print">Keduanya tidak saling bersaing: model Cloud tetap tersedia, dan setiap grup model memilih modelnya sendiri.</string>
+    <string name="nm_setup_source_fine_print">Pilih satu untuk mulai. Yang lain bisa ditambah nanti.</string>
     <string name="nm_setup_password_title">Atur kata sandi</string>
     <string name="nm_setup_password_sub">Akunmu sudah masuk. Dengan kata sandi, komputermu dan ponselmu yang lain bisa langsung masuk tanpa menunggu kode.</string>
     <string name="nm_setup_password_set">Atur kata sandi</string>
@@ -639,21 +639,21 @@
     <string name="nm_welcome_feat_hands">Tangan: ia memakai ponselmu</string>
     <string name="nm_welcome_feat_hands_sub">Memesan kereta, memesan makanan, mencari sesuatu di aplikasi; kamu mengawasi, dan bisa menghentikannya kapan saja</string>
     <string name="nm_welcome_feat_reach">Jangkauan: komputermu, dari sini</string>
-    <string name="nm_welcome_feat_reach_sub">Pasang nanoMuse Desktop di mesin Mac, Windows atau Linux, masuk dengan akun yang sama, lalu beri pekerjaan dari ponsel</string>
-    <string name="nm_welcome_notice">nanoMuse adalah proyek komunitas open source nirlaba: gratis, selamanya. Modelnya datang dengan kuota gratis yang dibayar pengembang; setelah itu, kuncimu sendiri. Tidak ada yang dijual; apa yang disimpan relay ada di kebijakan privasi, dan Pengaturan → Kontrol data ada di tanganmu.</string>
+    <string name="nm_welcome_feat_reach_sub">Pasang Hearth Desktop di mesin Mac, Windows atau Linux, masuk dengan akun yang sama, lalu beri pekerjaan dari ponsel</string>
+    <string name="nm_welcome_notice">Hearth adalah proyek komunitas open source nirlaba: gratis, selamanya. Modelnya datang dengan kuota gratis yang dibayar pengembang; setelah itu, kuncimu sendiri. Tidak ada yang dijual; apa yang disimpan relay ada di kebijakan privasi, dan Pengaturan → Kontrol data ada di tanganmu.</string>
     <string name="nm_welcome_hands_title">Izinkan ia memakai ponselmu</string>
     <string name="nm_welcome_hands_sub">Dengan dua izin ia bisa membuka aplikasi, mengetuk dan mengetik untukmu. Kapsul dengan setiap langkah dan tombol Berhenti tetap ada di layar; login, kata sandi dan kode selalu milikmu.</string>
     <string name="nm_welcome_hands_turn_on">Nyalakan</string>
     <string name="nm_welcome_skip">Lewati dulu</string>
     <string name="nm_welcome_hands_fine_print">Yang lain tetap berfungsi tanpa ini. Keduanya ada di Pengaturan → Tangan kapan pun kamu mau.</string>
     <string name="nm_welcome_meet_fine_print">Sebelum hal yang tidak bisa ditarik kembali (menghapus, mengirim, membayar) ia berhenti dan bertanya dulu padamu.</string>
-    <string name="nm_cloud_signin_title">Mulai dengan nanoMuse Cloud</string>
-    <string name="nm_cloud_signin_subtitle">Kode ke ponsel atau kotak masukmu, atau kata sandimu, setelah kamu mengaturnya.</string>
+    <string name="nm_cloud_signin_title">Masuk ke Hearth</string>
+    <string name="nm_cloud_signin_subtitle">Email dulu, lalu kode sekali pakai. Relay ini menulis kode ke log-nya.</string>
     <string name="nm_cloud_mode_code">Dengan kode</string>
     <string name="nm_cloud_mode_password">Dengan kata sandi</string>
     <string name="nm_cloud_password">Kata sandi</string>
     <string name="nm_cloud_forgot_password">Lupa kata sandi? Masuk dengan kode</string>
-    <string name="nm_cloud_identifier">Nomor ponsel Tiongkok daratan atau e-mail</string>
+    <string name="nm_cloud_identifier">Email</string>
     <string name="nm_cloud_identifier_hint">kamu@example.com</string>
     <string name="nm_cloud_code">Kode</string>
     <string name="nm_cloud_send_code">Kirim kode</string>
@@ -662,7 +662,7 @@
     <string name="nm_cloud_verify">Masuk</string>
 
     <!-- Your own relay (0.1.38): the sign-in screen's server form and the account page's row -->
-    <string name="nm_cloud_other_server">Gunakan server lain</string>
+    <string name="nm_cloud_other_server">Lanjutan: server lain</string>
     <string name="nm_cloud_server_url">Alamat relay</string>
     <string name="nm_cloud_server_check">Periksa</string>
     <string name="nm_cloud_server_use">Gunakan server ini</string>
@@ -672,7 +672,7 @@
     <string name="nm_cloud_server_https">Gunakan https untuk server di luar jaringanmu sendiri. http cukup untuk alamat privat (10.x, 192.168.x, 172.16-31.x, localhost, nama .local atau .ts.net).</string>
     <string name="nm_lan_only_https">http:// polos hanya berfungsi untuk alamat di jaringanmu sendiri (10.x, 172.16-31.x, 192.168.x, nama .local); gunakan https:// untuk %1$s.</string>
     <string name="nm_cloud_server_unreachable">Tidak ada relay yang menjawab di %1$s. Periksa alamatnya dan pastikan relay berjalan.</string>
-    <string name="nm_cloud_server_default">Kembali ke nanoMuse Cloud</string>
+    <string name="nm_cloud_server_default">Kembali ke Hearth</string>
     <string name="nm_cloud_server_row">Server</string>
     <string name="nm_cloud_server_change">Ganti</string>
     <string name="nm_cloud_server_change_confirm">Kunci ponsel ini milik server saat ini. Keluar dulu di sini, lalu masuk ke server lain dari layar masuk.</string>
@@ -693,11 +693,11 @@
     <string name="nm_cloud_used_today_open">Hari ini %1$s</string>
     <string name="nm_cloud_refresh">Segarkan saldo</string>
     <string name="nm_cloud_refreshing">Menyegarkan…</string>
-    <string name="nm_cloud_how_it_works">nanoMuse Cloud adalah penyedia biasa di aplikasi ini: modelnya tercantum di Penyedia dan bisa dicampur dengan modelmu sendiri dalam satu grup model.</string>
+    <string name="nm_cloud_how_it_works">Hearth adalah penyedia biasa di aplikasi ini: modelnya tercantum di Penyedia dan bisa dicampur dengan modelmu sendiri dalam satu grup model.</string>
     <string name="nm_cloud_open_provider">Pengaturan penyedia</string>
     <string name="nm_cloud_sign_out">Keluar</string>
     <string name="nm_cloud_sign_out_sub">Kunci ponsel ini dicabut dan penyedia Cloud dihapus; kuota tetap di akunmu.</string>
-    <string name="nm_cloud_sign_out_confirm">Penyedia nanoMuse Cloud dan modelnya akan dihapus dari ponsel ini.</string>
+    <string name="nm_cloud_sign_out_confirm">Penyedia Hearth dan modelnya akan dihapus dari ponsel ini.</string>
     <string name="nm_cloud_row_remaining">%1$s tersisa</string>
     <string name="nm_cloud_row_sign_in">Masuk</string>
     <string name="nm_cloud_err_bad_identifier">Itu tidak tampak seperti alamat e-mail.</string>
@@ -715,7 +715,7 @@
     <string name="nm_cloud_err_allowance_abroad">Kuota gratis sudah habis. Undang teman (+¥%1$s untuk kalian masing-masing) atau tambahkan kuncimu sendiri di Pengaturan → Penyedia; OpenRouter yang paling cepat: satu akun, satu kunci, bayar sesuai pemakaian.</string>
     <string name="nm_cloud_warn_line">Kuota gratis hampir habis: tersisa ¥%1$s dari ¥%2$s. Undang teman (+¥%3$s untuk kalian masing-masing) atau tambahkan kuncimu sendiri, keduanya di Akun.</string>
     <string name="nm_cloud_err_rate_limited">Terlalu banyak permintaan sekaligus. Tunggu sebentar.</string>
-    <string name="nm_cloud_err_unreachable">Tidak bisa menjangkau nanoMuse Cloud. Periksa koneksi.</string>
+    <string name="nm_cloud_err_unreachable">Tidak bisa menjangkau Hearth. Periksa koneksi.</string>
     <string name="nm_cloud_err_generic">Ada yang salah.</string>
     <string name="nm_cloud_err_bad_credentials">E-mail atau kata sandi salah.</string>
     <string name="nm_cloud_err_no_password">Akun ini belum punya kata sandi. Masuk dengan kode, lalu atur di Akun.</string>
@@ -731,10 +731,10 @@
     <string name="nm_cloud_err_content_rejected">Pemeriksaan konten penyedia model menolak permintaan ini. Coba kata-kata lain, atau mulai obrolan baru jika terus terjadi: kata-kata yang ditolaknya bisa berada lebih awal dalam percakapan.</string>
     <string name="nm_cloud_err_provider_busy">Penyedia model sedang sibuk. Coba lagi sebentar lagi.</string>
     <string name="nm_cloud_err_provider_busy_wait">Penyedia model sedang sibuk. Coba lagi dalam %1$s.</string>
-    <string name="nm_cloud_err_model_not_offered">nanoMuse Cloud tidak lagi menyediakan model itu. Pilih yang lain di Pengaturan → nanoMuse Cloud.</string>
-    <string name="nm_cloud_err_relay_down">nanoMuse Cloud tidak menjawab. Coba lagi sebentar lagi.</string>
-    <string name="nm_cloud_err_allowance_paused">Kuota gratis di relay ini dijeda untuk sementara, bukan habis. Tambahkan kunci sendiri atau masuk dengan paket yang sudah kamu bayar, di Pengaturan → nanoMuse Cloud. Login, perangkat, dan sisa kuotamu tetap seperti semula.</string>
-    <string name="nm_cloud_err_service_paused">nanoMuse Cloud dijeda oleh operatornya untuk sementara; login dan datamu tetap tersimpan. Coba lagi nanti.</string>
+    <string name="nm_cloud_err_model_not_offered">Hearth tidak lagi menyediakan model itu. Pilih yang lain di Pengaturan → Hearth.</string>
+    <string name="nm_cloud_err_relay_down">Hearth tidak menjawab. Coba lagi sebentar lagi.</string>
+    <string name="nm_cloud_err_allowance_paused">Kuota gratis di relay ini dijeda untuk sementara, bukan habis. Tambahkan kunci sendiri atau masuk dengan paket yang sudah kamu bayar, di Pengaturan → Hearth. Login, perangkat, dan sisa kuotamu tetap seperti semula.</string>
+    <string name="nm_cloud_err_service_paused">Hearth dijeda oleh operatornya untuk sementara; login dan datamu tetap tersimpan. Coba lagi nanti.</string>
     <string name="nm_cloud_err_sync_paused">Sinkronisasi percakapan di relay ini dijeda untuk sementara; yang tersimpan tetap ada, dan perangkatmu tetap bekerja sendiri-sendiri.</string>
     <string name="nm_cloud_err_hub_paused">Hubungan antar perangkat di relay ini dijeda untuk sementara; setiap perangkat tetap bekerja sendiri.</string>
     <string name="nm_refusal_relay_says">Kata relay: %1$s</string>
@@ -778,7 +778,7 @@
     <string name="nm_cloud_invite_share">Bagikan tautan</string>
     <string name="nm_cloud_invite_copy">Salin</string>
     <string name="nm_cloud_invite_copied">Disalin</string>
-    <string name="nm_cloud_invite_share_text">Coba nanoMuse bersamaku: agen pribadi yang sepenuhnya open source, gratis dipakai. Daftar dengan kodeku %1$s: %2$s</string>
+    <string name="nm_cloud_invite_share_text">Coba Hearth bersamaku: agen pribadi yang sepenuhnya open source, gratis dipakai. Daftar dengan kodeku %1$s: %2$s</string>
     <string name="nm_cloud_invite_count">%1$d teman bergabung</string>
     <string name="nm_cloud_invite_earned">¥%1$s ditambahkan dari undangan</string>
     <string name="nm_cloud_invite_have">Punya kode undangan?</string>
@@ -819,8 +819,8 @@
     <string name="nm_cloud_ev_contribute_deleted">Kontrol data: percakapan yang disimpan dihapus</string>
     <string name="nm_cloud_ev_contribute_default">Kontrol data: nyala untuk akun baru</string>
     <string name="nm_data_title">Kontrol data</string>
-    <string name="nm_data_improve">Bantu tingkatkan model AI nanoMuse</string>
-    <string name="nm_data_why">Selama ini nyala, teks chat-mu dengan model nanoMuse Cloud (apa yang kamu tulis, apa jawabannya dan alat yang dipilihnya) disimpan di relay untuk melatih model terbuka milik komunitas. Bukan memorimu atau SOUL (prompt sistem), bukan hasil yang dikembalikan alat, bukan gambar, dan tidak pernah disandingkan dengan identitasmu. Kunci API-mu sendiri tidak pernah melewati relay.</string>
+    <string name="nm_data_improve">Bantu tingkatkan model AI Hearth</string>
+    <string name="nm_data_why">Selama ini nyala, teks chat-mu dengan model Hearth (apa yang kamu tulis, apa jawabannya dan alat yang dipilihnya) disimpan di relay untuk melatih model terbuka milik komunitas. Bukan memorimu atau SOUL (prompt sistem), bukan hasil yang dikembalikan alat, bukan gambar, dan tidak pernah disandingkan dengan identitasmu. Kunci API-mu sendiri tidak pernah melewati relay.</string>
     <string name="nm_data_default_on">Akun baru memulainya dalam keadaan nyala.</string>
     <string name="nm_data_default_off">Akun baru memulainya dalam keadaan mati.</string>
     <string name="nm_data_kept">%1$d giliran disimpan sejauh ini.</string>
@@ -830,7 +830,7 @@
     <string name="nm_data_delete_sub">Menghapus setiap giliran yang disimpan dari akun ini, baik sakelarnya sedang nyala maupun mati. Mematikan sakelar tetap menyimpan yang sudah ada sampai kamu menghapusnya di sini.</string>
     <string name="nm_data_delete_confirm">Percakapan yang disimpan dihapus dari server. Ini tidak bisa dibatalkan.</string>
     <string name="nm_data_deleted">%1$d giliran dihapus.</string>
-    <string name="nm_data_sign_in">Masuk ke nanoMuse Cloud untuk memakainya.</string>
+    <string name="nm_data_sign_in">Masuk ke Hearth untuk memakainya.</string>
     <string name="nm_data_privacy">Kebijakan privasi</string>
     <string name="nm_data_status_on">Nyala</string>
     <string name="nm_data_status_off">Mati</string>
@@ -878,7 +878,7 @@
     <!-- 0.1.20: the coding agents on the account's computers -->
     <string name="nm_coding_title">Agen coding</string>
     <string name="nm_coding_intro">Cursor, Codex dan Claude Code di komputermu: sesi mereka, balasan terakhir mereka, dan pesan ke salah satunya, dari sini. Tidak ada milik mereka yang disalin ke ponsel.</string>
-    <string name="nm_coding_no_computer">Tidak ada komputer dengan agen coding yang online. Jalankan nanoMuse di komputer tempat Cursor, Codex atau Claude Code terpasang, masuk dengan akun ini.</string>
+    <string name="nm_coding_no_computer">Tidak ada komputer dengan agen coding yang online. Jalankan Hearth di komputer tempat Cursor, Codex atau Claude Code terpasang, masuk dengan akun ini.</string>
     <string name="nm_coding_account_hint">Ponsel ini masuk sebagai %1$s; komputer harus memakai akun yang sama.</string>
     <string name="nm_coding_refresh">Segarkan</string>
     <string name="nm_coding_all">Semua</string>
@@ -912,13 +912,13 @@
     <string name="nm_cloud_tokens_line">%1$s token seluruhnya · %2$s hari ini</string>
     <string name="nm_cloud_notice_title">Gratis, open source, nirlaba</string>
     <string name="nm_cloud_notice_closing">Menemukan bug, ingin fitur, punya patch? Repositori GitHub tempatnya.</string>
-    <string name="nm_cloud_notice">nanoMuse adalah proyek komunitas open source nirlaba: gratis, selamanya. Modelnya datang dengan kuota gratis yang dibayar pengembang; setelah itu, kuncimu sendiri. Tidak ada yang dijual; apa yang disimpan relay ada di kebijakan privasi, dan Pengaturan → Kontrol data ada di tanganmu. Hapus akun kapan pun kamu mau.</string>
+    <string name="nm_cloud_notice">Hearth adalah proyek komunitas open source nirlaba: gratis, selamanya. Modelnya datang dengan kuota gratis yang dibayar pengembang; setelah itu, kuncimu sendiri. Tidak ada yang dijual; apa yang disimpan relay ada di kebijakan privasi, dan Pengaturan → Kontrol data ada di tanganmu. Hapus akun kapan pun kamu mau.</string>
 
     <!-- nanoMuse: devices on the hub -->
     <string name="nm_hub_channel">Pesan dari perangkatmu</string>
     <string name="nm_hub_service_channel">Terhubung ke perangkatmu</string>
-    <string name="nm_hub_service_title">nanoMuse · bisa dijangkau dari perangkatmu</string>
-    <string name="nm_hub_service_connecting">Menghubungkan ke nanoMuse Cloud…</string>
+    <string name="nm_hub_service_title">Hearth · bisa dijangkau dari perangkatmu</string>
+    <string name="nm_hub_service_connecting">Menghubungkan ke Hearth…</string>
     <string name="nm_hub_service_alone">Tidak ada perangkat lain yang online saat ini</string>
     <plurals name="nm_hub_service_devices">
         <item quantity="other">%d perangkat online</item>
@@ -938,7 +938,7 @@
     <string name="nm_devices_connected">Terhubung</string>
     <string name="nm_devices_connecting">Menghubungkan…</string>
     <string name="nm_devices_off">Mati</string>
-    <string name="nm_devices_none">Belum ada perangkat lain. Di komputermu, pasang nanoMuse Desktop dan masuk dengan akun yang sama; ia muncul di sini dalam hitungan detik.</string>
+    <string name="nm_devices_none">Belum ada perangkat lain. Di komputermu, pasang Hearth Desktop dan masuk dengan akun yang sama; ia muncul di sini dalam hitungan detik.</string>
     <string name="nm_devices_online">online</string>
     <string name="nm_devices_offline">offline</string>
     <string name="nm_devices_web">Konsol web</string>
@@ -957,7 +957,7 @@
     <string name="nm_hub_err_not_controllable">Perangkat itu tidak bisa diminta melakukan sesuatu.</string>
     <string name="nm_hub_err_unknown_agent">Agen coding itu tidak ada di komputer.</string>
     <string name="nm_hub_err_no_session">Sesi itu sudah tidak ada di komputer.</string>
-    <string name="nm_hub_err_unknown_action">Komputer menjalankan nanoMuse versi lama yang tidak mengenal aksi ini.</string>
+    <string name="nm_hub_err_unknown_action">Komputer menjalankan Hearth versi lama yang tidak mengenal aksi ini.</string>
     <string name="nm_hub_err_bad_key">Sudah keluar di relay; masuk lagi.</string>
     <string name="nm_hub_err_generic">Komputer tidak bisa melakukannya.</string>
     <string name="nm_devices_refused">Ditolak relay; masuk lagi</string>
@@ -976,7 +976,7 @@
     <string name="nm_connectors_sign_in">Masuk</string>
     <string name="nm_connectors_disconnect">Putuskan</string>
     <string name="nm_connectors_docs">Halaman vendor tentang server ini</string>
-    <string name="nm_connectors_how_oauth">Masuk dengan akun %1$s-mu di browser; nanoMuse mendaftarkan dirinya ke layanan, jadi tidak ada yang perlu diketik. Token tetap di ponsel ini.</string>
+    <string name="nm_connectors_how_oauth">Masuk dengan akun %1$s-mu di browser; Hearth mendaftarkan dirinya ke layanan, jadi tidak ada yang perlu diketik. Token tetap di ponsel ini.</string>
     <string name="nm_connectors_how_key">Memerlukan kunci dari layanan: %1$s. Disimpan hanya di entri MCP pada ponsel ini.</string>
     <string name="nm_connectors_how_none">Terbuka untuk semua; tidak perlu masuk.</string>
     <string name="nm_connectors_how_auto">Memeriksa dulu apa yang dibutuhkan server: tidak ada, masuk, atau kunci.</string>
@@ -1020,13 +1020,13 @@
 
     <!-- Conversation sync between the account's devices (contract C7) -->
     <string name="nm_sync_title">Sinkronkan percakapan antar perangkatku</string>
-    <string name="nm_sync_caption">Teks obrolanmu disimpan di nanoMuse Cloud supaya setiap perangkat menampilkan percakapan yang sama. File dan gambar tetap di perangkat tempat dibuatnya.</string>
+    <string name="nm_sync_caption">Teks obrolanmu disimpan di Hearth supaya setiap perangkat menampilkan percakapan yang sama. File dan gambar tetap di perangkat tempat dibuatnya.</string>
     <string name="nm_sync_sign_in">Masuk untuk menyinkronkan</string>
     <string name="nm_sync_on_toast">Nyala. Percakapan ponsel ini sedang dikirim.</string>
     <string name="nm_sync_off_toast">Mati. Yang tersimpan sudah dihapus.</string>
     <string name="nm_sync_delete">Hapus percakapan yang disinkronkan</string>
-    <string name="nm_sync_delete_sub">Menghapus teks percakapanmu dari nanoMuse Cloud. Setiap perangkat tetap menyimpan yang sudah dimilikinya; sinkronisasi tetap nyala.</string>
-    <string name="nm_sync_delete_confirm">Percakapan yang tersimpan di nanoMuse Cloud dihapus. Obrolan di perangkatmu tetap seperti semula.</string>
+    <string name="nm_sync_delete_sub">Menghapus teks percakapanmu dari Hearth. Setiap perangkat tetap menyimpan yang sudah dimilikinya; sinkronisasi tetap nyala.</string>
+    <string name="nm_sync_delete_confirm">Percakapan yang tersimpan di Hearth dihapus. Obrolan di perangkatmu tetap seperti semula.</string>
     <string name="nm_sync_deleted">Percakapan yang disinkronkan dihapus.</string>
     <string name="nm_sync_from">Dari %1$s</string>
     <string name="nm_sync_attachment_note">[Lampiran %1$s, tetap di perangkat tempat dibuatnya]</string>
@@ -1039,7 +1039,7 @@
     <string name="nm_devices_ask_hint">Ketuk perangkat yang online untuk menulis padanya dari chat: pesan dimulai dengan @ dan namanya, dan perangkat itu yang mengerjakan.</string>
     <string name="nm_reach_the_provider">penyedia</string>
     <string name="nm_reach_unreachable_title">%1$s tidak dapat dijangkau dari jaringan ini</string>
-    <string name="nm_reach_unreachable_body">Tidak ada jawaban dari %1$s. Ini soal jalur dari ponsel ini ke penyedia; server nanoMuse sendiri tidak terlibat.</string>
+    <string name="nm_reach_unreachable_body">Tidak ada jawaban dari %1$s. Ini soal jalur dari ponsel ini ke penyedia; server Hearth sendiri tidak terlibat.</string>
     <string name="nm_reach_region_title">OpenAI tidak melayani wilayah ini</string>
     <string name="nm_reach_region_body">Permintaan sampai ke OpenAI, yang menjawab bahwa layanannya tidak tersedia di tempat asal koneksi ini.</string>
     <string name="nm_reach_signed_out_title">Masuk ChatGPT sudah tidak berlaku</string>
@@ -1082,7 +1082,7 @@
     <string name="nm_network_test_fail">Tidak dapat menjangkau %1$s lewat proxy: %2$s</string>
     <string name="nm_network_test_status">HTTP %1$d</string>
     <string name="nm_network_invalid">Masukkan host dan port antara 1 dan 65535.</string>
-    <string name="nm_network_proxy_caption">Hanya permintaan ke penyedia yang Anda tambahkan dengan kunci sendiri, dan ke paket ChatGPT, yang lewat proxy. nanoMuse Cloud, komputer Anda, dan jaringan lokal tidak pernah. Disimpan di ponsel ini saja.</string>
+    <string name="nm_network_proxy_caption">Hanya permintaan ke penyedia yang Anda tambahkan dengan kunci sendiri, dan ke paket ChatGPT, yang lewat proxy. Hearth, komputer Anda, dan jaringan lokal tidak pernah. Disimpan di ponsel ini saja.</string>
     <string name="nm_network_hosts_caption">Lewat proxy: %1$s</string>
     <string name="nm_ways_title_day">Jatah hari ini dari kuota gratis sudah habis.</string>
     <string name="nm_ways_day_sub">Kembali di hari baru; cara-cara di bawah bisa dipakai sekarang.</string>
@@ -1093,7 +1093,7 @@
     <string name="nm_ways_devices">Perangkat</string>
     <!-- 0.1.41 Choice: Settings → Models, the "Use it for" card, one turn on the Cloud -->
     <string name="nm_models_title">Model</string>
-    <string name="nm_models_intro">Model mana mengerjakan apa. Setiap baris membuka pemilih; nanoMuse Cloud dan penyedia yang kamu tambahkan muncul di sana bersama model yang cocok.</string>
+    <string name="nm_models_intro">Model mana mengerjakan apa. Setiap baris membuka pemilih; Hearth dan penyedia yang kamu tambahkan muncul di sana bersama model yang cocok.</string>
     <string name="nm_models_chat_title">Chat</string>
     <string name="nm_models_chat_sub">Model yang berbicara denganmu.</string>
     <string name="nm_models_hands_title">Mengoperasikan layar</string>
@@ -1105,20 +1105,20 @@
     <string name="nm_models_chat_applies">Berlaku untuk chat utama dan chat baru; chat sampingan tetap memakai modelnya sendiri.</string>
     <string name="nm_models_media_more">Opsi gambar dan klip lainnya</string>
     <string name="nm_models_media_more_sub">Ketik nama model, lihat apa yang berhenti tanpa tiap model, atau periksa lagi model video mana yang bisa dipakai sebuah kunci.</string>
-    <string name="nm_models_cloud_switch">Gunakan model nanoMuse Cloud</string>
-    <string name="nm_models_cloud_on_sub">nanoMuse Cloud adalah salah satu sumber untuk baris di bawah; yang berjalan di sana dipotong dari jatah Anda.</string>
-    <string name="nm_models_cloud_off_sub">Mati: tidak ada yang berjalan di nanoMuse Cloud kecuali Anda mengetuk \"Pakai nanoMuse Cloud kali ini\". Anda tetap masuk untuk sinkronisasi dan perangkat Anda.</string>
-    <string name="nm_models_cloud_off_refused">Tambahkan penyedia Anda sendiri lebih dulu; dengan nanoMuse Cloud mati, tidak ada lagi yang bisa menjawab.</string>
+    <string name="nm_models_cloud_switch">Gunakan model Hearth</string>
+    <string name="nm_models_cloud_on_sub">Hearth adalah salah satu sumber untuk baris di bawah; yang berjalan di sana dipotong dari jatah Anda.</string>
+    <string name="nm_models_cloud_off_sub">Mati: tidak ada yang berjalan di Hearth kecuali Anda mengetuk \"Pakai Hearth kali ini\". Anda tetap masuk untuk sinkronisasi dan perangkat Anda.</string>
+    <string name="nm_models_cloud_off_refused">Tambahkan penyedia Anda sendiri lebih dulu; dengan Hearth mati, tidak ada lagi yang bisa menjawab.</string>
     <string name="nm_chat_no_model">Saat ini tidak ada model yang bisa menjawab. Pilih satu di Setelan › Model.</string>
-    <string name="nm_cloud_provider_no_delete">Penyedia ini adalah akun nanoMuse Cloud Anda. Matikan di atas untuk berhenti memakai modelnya; untuk keluar, buka Pengaturan › nanoMuse Cloud.</string>
+    <string name="nm_cloud_provider_no_delete">Penyedia ini adalah akun Hearth Anda. Matikan di atas untuk berhenti memakai modelnya; untuk keluar, buka Pengaturan › Hearth.</string>
     <string name="nm_welcome_own_key">Pakai kunci API sendiri saja</string>
     <string name="nm_useit_title">Pakai untuk</string>
-    <string name="nm_useit_body">Pilih apa yang ditangani kunci ini. Sisanya tetap ditangani nanoMuse Cloud.</string>
+    <string name="nm_useit_body">Pilih apa yang ditangani kunci ini. Sisanya tetap ditangani Hearth.</string>
     <string name="nm_useit_body_signed_out">Pilih apa yang ditangani kunci ini.</string>
     <string name="nm_useit_use">Pakai</string>
     <string name="nm_useit_not_now">Nanti saja</string>
     <string name="nm_useit_footnote">Kamu bisa mengubahnya kapan saja di Setelan › Model.</string>
-    <string name="nm_retry_on_cloud">Pakai nanoMuse Cloud kali ini</string>
+    <string name="nm_retry_on_cloud">Pakai Hearth kali ini</string>
     <string name="nm_hands_why_chat_provider">bawaan tangan dari penyedia chat-mu</string>
     <string name="nm_models_auto">Otomatis</string>
     <string name="nm_models_auto_currently">Saat ini %1$s</string>
@@ -1153,4 +1153,25 @@
     <string name="nm_font_scale_medium">Sedang</string>
     <string name="nm_font_scale_large">Besar</string>
     <string name="nm_font_scale_extra_large">Sangat besar</string>
+    <string name="nm_setup_source_grok">Akun Grok saya</string>
+    <string name="nm_setup_source_grok_sub">Masuk dengan xAI di ponsel ini. Relay tetap masuk untuk sinkron dan perangkat.</string>
+    <string name="nm_panic">DARURAT</string>
+    <string name="nm_panic_confirm">Ketuk sekali lagi untuk mengirim</string>
+    <string name="nm_panic_sending">Mengirim</string>
+    <string name="nm_panic_delivered">Terkirim.</string>
+    <string name="nm_panic_not_delivered">Tidak terkirim. Ponsel mereka tidak terhubung.</string>
+    <string name="nm_panic_not_linked">Tidak terkirim. Akun ini tidak terhubung ke akun lain.</string>
+    <string name="nm_panic_not_connected">Tidak terkirim. Ponsel ini tidak terhubung.</string>
+    <string name="nm_panic_alert_title">Darurat</string>
+    <string name="nm_panic_from">%1$s membutuhkanmu.</string>
+    <string name="nm_panic_dismiss">Saya di sini</string>
+    <string name="nm_panic_close">Tutup</string>
+    <string name="nm_panic_channel">Darurat</string>
+    <string name="nm_panic_channel_sub">Peringatan darurat dari ponsel lain di rumah ini</string>
+    <string name="nm_todos_title">Tugas</string>
+    <string name="nm_todos_empty">Daftarnya kosong.</string>
+    <string name="nm_todos_hint">Yang perlu dikerjakan</string>
+    <string name="nm_todos_add">Tambah</string>
+    <string name="nm_todos_delete">Hapus</string>
+    <string name="nm_menu_todos">Tugas</string>
 </resources>

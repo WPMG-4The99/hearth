@@ -8,7 +8,7 @@ All notable changes to nanoMuse. The format follows [Keep a Changelog](https://k
 
 - **The apps and the runtime sign in to the Hearth relay and look for updates on GitHub.** The default relay is `https://hearth-cloud-the99.zocomputer.io`. Update checks ask GitHub releases for `WPMG-4The99/hearth` and no longer ask `nanomuse.cn`. Help improve stays off until a person turns it on.
 
-- **A debug Android build installs beside the release app.** The debug application id is `io.github.nanomuse.app.hearth` and the launcher label is Hearth. The release id stays `io.github.nanomuse.app` and the label stays nanoMuse.
+- **Hearth is the name of the phone app.** The application id is `media.wyldephyremg.hearth` (debug builds add `.debug`), the launcher label is Hearth, and links from outside the app use `hearth://`. The first screen is e-mail and a one-time code for the baked-in relay. After that, the model is the Hearth relay or a Grok account on the phone. Nix can keep a to-do list on the phone. A PANIC button sends an alert to the other phone in a household the relay operator linked with `HOUSEHOLDS`. Delivery is only while that phone's hub connection is up.
 
 ### Cloud
 

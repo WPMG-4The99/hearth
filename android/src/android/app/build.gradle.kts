@@ -54,7 +54,7 @@ android {
     }
 
     defaultConfig {
-        applicationId = "io.github.nanomuse.app"
+        applicationId = "media.wyldephyremg.hearth"
         minSdk = 26
         targetSdk = 35
         versionCode = 48
@@ -76,7 +76,7 @@ android {
             abiFilters += listOf((project.findProperty("nm.abi") as String?) ?: "arm64-v8a")
         }
 
-        // nanoMuse: release keeps @string/app_name. Debug replaces the placeholder with Hearth.
+        // nanoMuse: both builds use @string/app_name, which is Hearth in every locale.
         manifestPlaceholders["appLabel"] = "@string/app_name"
 
         externalNativeBuild {
@@ -95,11 +95,10 @@ android {
     }
 
     buildTypes {
-        // nanoMuse: a debug install can sit beside the release app. The suffix is debug
-        // only; the release applicationId and the Kotlin packages stay as they are.
+        // nanoMuse: debug can sit beside a release build of the same id. The suffix is
+        // debug only; the release applicationId and the Kotlin packages stay as they are.
         debug {
-            applicationIdSuffix = ".hearth"
-            manifestPlaceholders["appLabel"] = "Hearth"
+            applicationIdSuffix = ".debug"
         }
         release {
             isMinifyEnabled = true

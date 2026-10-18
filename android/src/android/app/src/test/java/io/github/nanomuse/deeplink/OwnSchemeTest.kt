@@ -6,14 +6,14 @@ import org.junit.Assert.assertTrue
 import org.junit.Test
 import java.io.File
 
-/** The app's two link names: `minis` inside, `nanomuse` towards the system; nothing else is ours. */
+/** The app's link names: `minis` inside, `hearth` towards the system; `nanomuse` is still read. */
 class OwnSchemeTest {
     /** The module directory is the working directory of a unit test; the project directory when run from the IDE. */
     private fun source(rel: String): File = listOf(rel, "app/$rel").map(::File).first { it.exists() }
 
     @Test
     fun `both names are ours, in any case, and nothing else is`() {
-        for (s in listOf("minis", "MINIS", "nanomuse", "NanoMuse")) assertTrue(s, OwnScheme.isOwn(s))
+        for (s in listOf("minis", "MINIS", "hearth", "Hearth", "nanomuse", "NanoMuse")) assertTrue(s, OwnScheme.isOwn(s))
         for (s in listOf(null, "", "http", "https", "minis-mcp", "nanomuse-mcp", "intent", "file")) {
             assertFalse(s ?: "null", OwnScheme.isOwn(s))
         }
@@ -21,13 +21,16 @@ class OwnSchemeTest {
 
     @Test
     fun `the system's name reads as the app's own`() {
+        assertEquals("minis", OwnScheme.internal("hearth"))
+        assertEquals("minis", OwnScheme.internal("HEARTH"))
         assertEquals("minis", OwnScheme.internal("nanomuse"))
         assertEquals("minis", OwnScheme.internal("NANOMUSE"))
         assertEquals("minis", OwnScheme.internal("minis"))
         assertEquals("https", OwnScheme.internal("https"))
         assertEquals(null, OwnScheme.internal(null))
+        assertEquals("minis://settings/soul", OwnScheme.internalUrl("hearth://settings/soul"))
         assertEquals("minis://settings/soul", OwnScheme.internalUrl("nanomuse://settings/soul"))
-        assertEquals("minis://session/abc/index.html?title=x", OwnScheme.internalUrl("NanoMuse://session/abc/index.html?title=x"))
+        assertEquals("minis://session/abc/index.html?title=x", OwnScheme.internalUrl("Hearth://session/abc/index.html?title=x"))
         assertEquals("minis://attachments/a.png", OwnScheme.internalUrl("minis://attachments/a.png"))
         assertEquals("https://nanomuse.cn/", OwnScheme.internalUrl("https://nanomuse.cn/"))
         // the host part is not a scheme
@@ -39,6 +42,7 @@ class OwnSchemeTest {
         val manifest = source("src/main/AndroidManifest.xml").readText()
         assertTrue(manifest.contains("android:scheme=\"${OwnScheme.SYSTEM}\""))
         assertFalse("upstream's scheme must not be registered with the system", manifest.contains("android:scheme=\"${OwnScheme.INTERNAL}\""))
+        assertFalse("the previous scheme is not registered", manifest.contains("android:scheme=\"${OwnScheme.LEGACY}\""))
         assertTrue(manifest.contains("android:name=\".MainActivity\""))
         assertEquals("com.openminis.app.MainActivity", OwnScheme.ACTIVITY)
     }

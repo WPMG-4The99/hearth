@@ -75,7 +75,7 @@ data class SoulMetadata(
         const val DISPLAY_EMOJI = "🐾"
 
         val DEFAULT = SoulMetadata(
-            name = "nanoMuse",
+            name = "Nix", // nanoMuse: Hearth's assistant is Nix
             // Default emoji is intentionally empty — UI uses the fixed
             // [displayEmoji] sparkle and [SoulMDParser.serialize] no longer
             // writes the `emoji:` line. The field is kept on the struct only
@@ -318,7 +318,7 @@ object SoulStore {
      * `SoulStore.defaultContent` byte-for-byte (74c0daf).
      */
     val DEFAULT_CONTENT: String = """---
-name: "nanoMuse"
+name: "Nix"
 style: ""
 lang: "auto"
 ---
@@ -484,7 +484,7 @@ object SystemPromptBuilder {
         val file = SoulStore.load(context)
         val name = (file?.metadata?.name ?: SoulMetadata.DEFAULT.name)
             .trim()
-            .ifEmpty { "nanoMuse" }
+            .ifEmpty { "Nix" } // nanoMuse: Hearth's assistant is Nix
 
         val style = (file?.metadata?.style ?: "").trim()
 
@@ -501,7 +501,10 @@ object SystemPromptBuilder {
             "SOUL.md fields (name / icon / style / lang / body) can be edited two ways:\n" +
             "1. Tool: call `minis-config` to propose changes (user must approve).\n" +
             "2. UI: ask the user to go to Settings → Soul to edit directly.\n" +
-            "Pick whichever the user finds easier in context. Do not say you cannot change your personality."
+            "Pick whichever the user finds easier in context. Do not say you cannot change your personality." +
+            "\n\nHearth tools on this phone: `android-calendar` lists and edits the device calendar. " +
+            "`hearth-todos add`, `list`, `complete` and `delete` are this account's to-do list " +
+            "(To-dos on the home menu). Both work whichever model is answering."
 
         // [T-soul-style-injection 2026-05-18, port iOS 0409e24f] The `style`
         // frontmatter field (response voice / tone / formatting preference,

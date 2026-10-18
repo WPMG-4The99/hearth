@@ -5,43 +5,48 @@ import android.content.Intent
 import android.net.Uri
 
 /**
- * The two names of the app's own links.
+ * The names of the app's own links.
  *
  * Inside the app a link is `minis://…`: that is upstream's vocabulary, shared with the sandbox
- * and with the model (`minis://attachments/x.png`, `minis://settings/soul`, the system prompt,
- * every saved conversation), and it stays. What the app registers with Android is `nanomuse`
- * (`AndroidManifest.xml`), so a phone that also has OpenMinis installed never sees a chooser
- * for the other app's links, and ours never land there. A `nanomuse://…` link coming in from
- * outside means the same as its `minis://…` form; a link the app opens on itself goes to its own
- * activity by name, never through the system's resolution of a scheme.
+ * and with the model, and it stays. What the app registers with Android is `hearth`
+ * (`AndroidManifest.xml`). A `hearth://…` link, and a leftover `nanomuse://…` link, mean the
+ * same as the `minis://…` form. A link the app opens on itself goes to its own activity by
+ * name, never through the system's resolution of a scheme.
  */
 object OwnScheme {
     /** What the manifest registers: the name other apps and web pages can address. */
-    const val SYSTEM = "nanomuse"
+    const val SYSTEM = "hearth"
 
     /** Upstream's in-app vocabulary; never registered with the system. */
     const val INTERNAL = "minis"
 
+    /** The previous public scheme. Read if it arrives; not registered, so it is not claimed. */
+    const val LEGACY = "nanomuse"
+
     /** The activity that takes every deep link, named so no scheme resolution is involved. */
     const val ACTIVITY = "com.openminis.app.MainActivity"
 
-    /** Whether [scheme] is one of the app's own two names. */
+    /** Whether [scheme] is one of the app's own names. */
     fun isOwn(scheme: String?): Boolean {
         val s = scheme?.lowercase() ?: return false
-        return s == INTERNAL || s == SYSTEM
+        return s == INTERNAL || s == SYSTEM || s == LEGACY
     }
 
-    /** `nanomuse://x` read as `minis://x`; any other scheme is left as written. */
-    fun internal(scheme: String?): String? = if (scheme?.lowercase() == SYSTEM) INTERNAL else scheme
+    /** `hearth://x` or `nanomuse://x` read as `minis://x`; any other scheme is left as written. */
+    fun internal(scheme: String?): String? {
+        val s = scheme?.lowercase()
+        return if (s == SYSTEM || s == LEGACY) INTERNAL else scheme
+    }
 
-    /** The `minis://…` form of [url] when it is a `nanomuse://…` link; otherwise [url] itself. */
+    /** The `minis://…` form of [url] when it is a Hearth or legacy link; otherwise [url] itself. */
     fun internalUrl(url: String): String {
-        val prefix = "$SYSTEM://"
-        return if (url.regionMatches(0, prefix, 0, prefix.length, ignoreCase = true)) {
-            "$INTERNAL://" + url.substring(prefix.length)
-        } else {
-            url
+        for (name in listOf(SYSTEM, LEGACY)) {
+            val prefix = "$name://"
+            if (url.regionMatches(0, prefix, 0, prefix.length, ignoreCase = true)) {
+                return "$INTERNAL://" + url.substring(prefix.length)
+            }
         }
+        return url
     }
 
     /** A VIEW intent for [uri] addressed to the app's own activity; [flags] as the caller needs. */

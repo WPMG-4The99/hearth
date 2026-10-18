@@ -45,7 +45,7 @@ object GoalFlow {
     }
 
     private fun creationAddendum(category: GoalCategory): String = """
-        |## Creating a goal (nanoMuse)
+        |## Creating a goal (Hearth)
         |The user just chose to create a goal in the "${category.key}" category from the Goals tab.
         |Shape it together: ask at most three short questions, ONE message at a time,
         |in the user's language: (1) what exactly they want to achieve, (2) why it matters and by
@@ -171,7 +171,7 @@ object GoalFlow {
         else "daily at %02d:%02d".format(java.util.Locale.ROOT, goal.checkHour, goal.checkMinute)
         val steps = goal.steps.mapIndexed { i, s -> "${i + 1}. ${s.text}" }.joinToString("\n").ifEmpty { "(none yet)" }
         return buildString {
-            appendLine("## This conversation tracks a goal (nanoMuse)")
+            appendLine("## This conversation tracks a goal (Hearth)")
             appendLine("Goal: ${goal.title}")
             if (goal.why.isNotBlank()) appendLine("Why: ${goal.why}")
             appendLine("Steps:")

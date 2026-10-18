@@ -605,7 +605,7 @@ private fun AgentBrowsingOverlay(accent: Color, onTakeover: () -> Unit) {
             // nanoMuse: "<name> is browsing" — the Soul name, like the composer placeholder.
             val browsingSoul by com.openminis.app.agent.SoulStore.cachedMetadata.collectAsState()
             Text(
-                stringResource(R.string.browser_minis_browsing, browsingSoul.name.trim().ifEmpty { "nanoMuse" }),
+                stringResource(R.string.browser_minis_browsing, browsingSoul.name.trim().ifEmpty { "Hearth" }), // nanoMuse: Hearth product name.
                 color = Color.White.copy(alpha = 0.9f),
                 fontSize = 13.sp,
                 fontWeight = FontWeight.Medium,

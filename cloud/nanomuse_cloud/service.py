@@ -31,6 +31,8 @@ from .controls import Controls
 from .crypto import IdentifierCrypto
 from .db import Database, now
 from .geo import Place
+from .households import groups as household_groups
+from .households import partner_hashes
 from .identifiers import BadIdentifier, Identifier, parse
 from .nudges import BadNudges
 from .nudges import defaults as nudges_defaults
@@ -393,6 +395,13 @@ class Cloud:
         self.review_hashes: frozenset[str] = frozenset(h for i in self._review_identifiers() for h in i.hashes(settings.hmac_key))
         if self.review_hashes:
             log.warning("review sign-in is on for %d address(es): a fixed code, nothing sent", len(self.review_hashes))
+        linked = household_groups(settings.households)
+        if linked:
+            log.info(
+                "households: %d linked address(es) across %d household(s)",
+                sum(len(g) for g in linked),
+                len(linked),
+            )
         if settings.signup_open:
             log.info(
                 "sign-up is open: %d member(s) without a limit, everyone else ¥%.2f in all (+¥%.2f an invite, to both sides); "
@@ -623,6 +632,35 @@ class Cloud:
             "code_ttl_s": self.s.code_ttl_s,
             "password_min_len": self.s.password_min_len,
         }
+
+    def household_partner_ids(self, account_id: str) -> list[str]:
+        """Other accounts in this one's household. Empty when it is not linked.
+
+        Disabled accounts are left out. The plaintext addresses are not logged.
+        """
+        row = self.db.account(account_id)
+        if row is None:
+            return []
+        hashes = partner_hashes(self.s.households, self.s.hmac_key, row["id_hash"])
+        ids: list[str] = []
+        seen: set[str] = set()
+        for h in hashes:
+            other = self.db.account_by_hash(h)
+            if other is None or other["disabled"] or other["id"] == account_id or other["id"] in seen:
+                continue
+            seen.add(other["id"])
+            ids.append(other["id"])
+        return ids
+
+    def account_label(self, account_id: str) -> str:
+        """A short name for a panic: the e-mail's local part, or the stored hint."""
+        row = self.db.account(account_id)
+        if row is None:
+            return ""
+        ident = self.crypto.decrypt(account_id, (row["identifier_enc"] or "")) or ""
+        if "@" in ident:
+            return ident.split("@", 1)[0][:60]
+        return str(row["hint"] or "")[:60]
 
     # -- sign-up -------------------------------------------------------------------
 

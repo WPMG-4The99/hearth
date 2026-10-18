@@ -4,10 +4,10 @@
 <resources>
     <string name="nm_about_build">このビルド</string>
     <string name="nm_about_license">ライセンス</string>
-    <string name="nm_about_upstream">OpenMinis 1.13 をベースにしています</string>
-    <string name="nm_about_upstream_detail">GPL-3.0 · 2026-09-24 以降に改変 · ソースは GitHub にあります</string>
+    <string name="nm_about_upstream">クレジット</string>
+    <string name="nm_about_upstream_detail">Hearth は nanoMuse (github.com/nano-muse/nanoMuse) のフォークです。GPL-3.0</string>
     <string name="nm_about_trademark">Meta とは関係ありません</string>
-    <string name="nm_about_trademark_detail">Muse は Meta Platforms, Inc. の商標です。nanoMuse は独立した自由ソフトウェアのプロジェクトです。</string>
+    <string name="nm_about_trademark_detail">Muse は Meta Platforms, Inc. の商標です。Hearth は独立した自由ソフトウェアのプロジェクトです。</string>
 
     <!-- Chat header -->
     <string name="nm_avatar_content_description">あなたのエージェントです。タップして名前、アイコン、スタイルを変更できます。</string>
@@ -22,26 +22,26 @@
     <string name="nm_star_action">GitHub でスターを付ける</string>
     <string name="nm_star_later">今はしない</string>
     <string name="nm_star_done">もうスターしました</string>
-    <string name="nm_star_signed_in">ようこそ。nanoMuse は無料でオープンソース、非営利のプロジェクトです：使う人すべてのためのパーソナルエージェントです。もし価値を感じていただけたら、GitHub のスターが次の人がこれを見つける手がかりになります。</string>
+    <string name="nm_star_signed_in">ようこそ。Hearth は無料でオープンソース、非営利のプロジェクトです：使う人すべてのためのパーソナルエージェントです。もし価値を感じていただけたら、GitHub のスターが次の人がこれを見つける手がかりになります。</string>
     <plurals name="nm_star_tasks">
-        <item quantity="other">%1$d 件のタスクが完了しました。nanoMuse が役に立っているなら、GitHub のスターが次の人がこれを見つける助けになります。</item>
+        <item quantity="other">%1$d 件のタスクが完了しました。Hearth が役に立っているなら、GitHub のスターが次の人がこれを見つける助けになります。</item>
     </plurals>
-    <string name="nm_star_days_used_week">nanoMuse と過ごして 1 週間。毎日の中に居場所ができたなら、GitHub のスターが次の人がこれを見つける助けになります。</string>
-    <string name="nm_star_days_used_month">nanoMuse と過ごして 1 か月。日課の一部になったなら、GitHub のスターが試す価値があることをほかの人に伝えます。</string>
+    <string name="nm_star_days_used_week">Hearth と過ごして 1 週間。毎日の中に居場所ができたなら、GitHub のスターが次の人がこれを見つける助けになります。</string>
+    <string name="nm_star_days_used_month">Hearth と過ごして 1 か月。日課の一部になったなら、GitHub のスターが試す価値があることをほかの人に伝えます。</string>
     <plurals name="nm_star_days_used">
-        <item quantity="other">nanoMuse と過ごして %1$d 日。毎日の中に居場所ができたなら、GitHub のスターが次の人がこれを見つける助けになります。</item>
+        <item quantity="other">Hearth と過ごして %1$d 日。毎日の中に居場所ができたなら、GitHub のスターが次の人がこれを見つける助けになります。</item>
     </plurals>
-    <string name="nm_star_goal_done">目標を達成しました。nanoMuse がその助けになったなら、GitHub のスターで作っている人たちに伝わります。</string>
-    <string name="nm_star_new_look">新しい顔ができました。nanoMuse の進む方向が気に入ったら、GitHub のスターがより多くの人に届く助けになります。</string>
-    <string name="nm_star_exhausted">無料枠を使い切りました。ここまで使っていただきありがとうございます。nanoMuse にその価値があると思えたら、GitHub のスターが次の人の目に留まる助けになります。</string>
+    <string name="nm_star_goal_done">目標を達成しました。Hearth がその助けになったなら、GitHub のスターで作っている人たちに伝わります。</string>
+    <string name="nm_star_new_look">新しい顔ができました。Hearth の進む方向が気に入ったら、GitHub のスターがより多くの人に届く助けになります。</string>
+    <string name="nm_star_exhausted">無料枠を使い切りました。ここまで使っていただきありがとうございます。Hearth にその価値があると思えたら、GitHub のスターが次の人の目に留まる助けになります。</string>
     <string name="nm_chat_menu_rename">チャット名を変更</string>
 
     <!-- Foreground-service notification title while no tool is running -->
     <string name="nm_notif_working">%1$s が作業中です</string>
 
     <!-- First conversation: the scripted opening (see io.github.nanomuse.onboarding) -->
-    <string name="nm_intro_hello">こんにちは、nanoMuse です。あなたのスマートフォンの中に住んでいるアシスタントです。いくつかの用事を代わりに引き受けます。</string>
-    <string name="nm_intro_how_i_work">私の働き方について少し:\n\n- 自分のコンピューター（Linux のサンドボックスとブラウザー）を持っているので、コマンドの実行、ウェブサイトを開くこと、フォームの入力ができます。\n- マウントしてもらったファイルや写真を読んで整理し、リマインダーや予定されたタスクを引き受けます。\n- 重要な操作の前には、必ず先にあなたに確認します。\n- すべてはこの端末上で動きます。メッセージは設定したモデルに送られます。nanoMuse Cloud にサインインしていると、この会話はほかの端末にも同期されます。データ管理でオフにできます。</string>
+    <string name="nm_intro_hello">こんにちは、Nix です。この端末にいて、いくつかの用事を引き受けます。</string>
+    <string name="nm_intro_how_i_work">私の働き方について少し:\n\n- 自分のコンピューター（Linux のサンドボックスとブラウザー）を持っているので、コマンドの実行、ウェブサイトを開くこと、フォームの入力ができます。\n- マウントしてもらったファイルや写真を読んで整理し、リマインダーや予定されたタスクを引き受けます。\n- 重要な操作の前には、必ず先にあなたに確認します。\n- すべてはこの端末上で動きます。メッセージは設定したモデルに送られます。Hearth にサインインしていると、この会話はほかの端末にも同期されます。データ管理でオフにできます。</string>
     <string name="nm_intro_ask_name">始める前に、あなたのことを何とお呼びすればいいですか？</string>
 
     <!-- First conversation: the name chooser -->
@@ -193,7 +193,7 @@
     <string name="nm_risk_class_outbound">送信</string>
     <string name="nm_risk_class_money">支払い</string>
     <string name="nm_risk_class_install">インストール</string>
-    <string name="nm_grants_header">nanoMuse が記憶した承認</string>
+    <string name="nm_grants_header">Hearth が記憶した承認</string>
     <string name="nm_grants_empty">まだ記憶した承認はありません</string>
     <string name="nm_grants_revoke">取り消す</string>
     <string name="nm_grants_revoke_confirm">この承認を取り消しますか？次に同じ操作が出てきたときは、改めて確認されます。</string>
@@ -201,7 +201,7 @@
     <string name="nm_risk_remember_money_note">画面ロックで確認します。以後、この 1 つのアプリまたはサイトでの支払いはカードなしで実行されます。設定 → 権限の先頭に表示され、いつでも取り消せます。</string>
     <string name="nm_risk_remember_money_needs_lock">支払いを記憶するには、まず画面ロックを設定してください（設定 → セキュリティ）。記憶する際にそれで確認します。</string>
     <string name="nm_risk_lock_title">本人確認</string>
-    <string name="nm_risk_lock_subtitle">nanoMuse は %1$s での支払いの承認を記憶し、確認せずに実行します。</string>
+    <string name="nm_risk_lock_subtitle">Hearth は %1$s での支払いの承認を記憶し、確認せずに実行します。</string>
     <string name="nm_risk_remembered_toast">記憶しました · 取り消すには設定 → 権限へ</string>
     <string name="nm_risk_tier_highest">確認なしで実行 · 支払い</string>
     <string name="nm_risk_tier_confirm">カードから記憶 · 削除と送信</string>
@@ -272,7 +272,7 @@
     <string name="nm_sysfiles_open_memory">メモリを開く</string>
     <string name="nm_sysfiles_footer">これらはエージェントのファイルです: 自分が何者か、あなたについて知っていること、覚えていること、あなたのために書くもの、そしていつ目を覚ますか。端末のストレージにあり、エージェントは自分のシェルから /var/minis/memory 以下を読み書きします。ここで何でも編集できます。</string>
     <string name="nm_sysfile_about_lead">このファイルについて。</string>
-    <string name="nm_sysfile_about_soul">これはエージェントのペルソナです: すべての会話で守ろうとする価値観と習慣、名前、答え方のスタイル。nanoMuse に付属するテンプレートから始まり、エージェントが時間とともに手を入れることがあり、そのときは知らせます。いつでも編集できます。この注記はファイルの一部ではありません。</string>
+    <string name="nm_sysfile_about_soul">これはエージェントのペルソナです: すべての会話で守ろうとする価値観と習慣、名前、答え方のスタイル。Hearth に付属するテンプレートから始まり、エージェントが時間とともに手を入れることがあり、そのときは知らせます。いつでも編集できます。この注記はファイルの一部ではありません。</string>
     <string name="nm_sysfile_about_user">エージェントがあなたについての作業メモとして持つファイルです: 名前、呼ばれ方の好み、タイムゾーン、そして役に立つために必要な文脈：今取り組んでいることなど。会話から少しずつ書き足し、毎回の会話の始めに読みます。エージェントの現時点の理解を映すものなので、不完全だったり古かったりすることがあります。ここで何でも編集でき、エージェントは書かれたことに従います。この注記はファイルの一部ではありません。</string>
     <string name="nm_sysfile_about_memory">エージェントが会話をまたいで持ち続ける長期的なメモです：覚えておく価値のあることをエージェント自身の言葉で、それにほかのアシスタントから取り込んだものを加えたもの。日々の日記はメモリフォルダの隣にあります。メモリがオンのときは毎回の会話の始めに読まれます。この注記はファイルの一部ではありません。</string>
     <string name="nm_sysfile_about_feed">フィードの方向を決める一段落です: もっと読みたいこと、省くこと、投稿の長さ。毎日のフィードルーティンが書く前に読みます。この注記はファイルの一部ではありません。</string>
@@ -353,7 +353,7 @@
     <string name="nm_own_clip_title">自分の動画</string>
     <string name="nm_own_clip_body">自分の短い動画が待機中の顔として再生され、他の状態でも同じ動画が使われます。H.264 の MP4 または MOV、最長 15 秒、最大 30 MB。無音でループ再生されます。</string>
     <string name="nm_own_clip_on">自分の動画が有効で、すべての状態で再生されます。静止画が使われる場所では描かれた画像がそのまま使われます。「標準の顔」で取り除けます。</string>
-    <string name="nm_own_clip_local">動画はこの端末にだけ保存されます。nanoMuse Cloud にアップロードされず、他の端末にも同期されません。</string>
+    <string name="nm_own_clip_local">動画はこの端末にだけ保存されます。Hearth にアップロードされず、他の端末にも同期されません。</string>
     <string name="nm_own_clip_choose">動画を選ぶ</string>
     <string name="nm_own_clip_replace">動画を差し替える</string>
     <string name="nm_own_clip_default">標準の顔</string>
@@ -371,7 +371,7 @@
     <string name="nm_a11y_own_clip_preview">自分の動画のプレビュー</string>
 
     <!-- First run (Muse-style welcome; the steps are OpenMinis' provider and model screens) -->
-    <string name="nm_setup_title">nanoMuse へようこそ</string>
+    <string name="nm_setup_title">Hearth へようこそ</string>
     <string name="nm_setup_step_models">モデルを選ぶ</string>
     <string name="nm_setup_step_models_sub">プロバイダが提供するモデルを一覧にします。最大 3 つ選べます</string>
     <string name="nm_setup_step_start">%1$s に会う</string>
@@ -387,7 +387,7 @@
     <string name="nm_settings_no_model">モデルがまだありません</string>
     <string name="nm_settings_no_model_sub">プロバイダを追加してモデルを選んでください</string>
     <string name="nm_settings_change_model">変更</string>
-    <string name="nm_settings_version">nanoMuse %1$s (%2$d)</string>
+    <string name="nm_settings_version">Hearth %1$s (%2$d)</string>
     <string name="nm_version_title">バージョン</string>
     <string name="nm_version_checking">最新リリースを確認しています…</string>
     <string name="nm_version_have">最新の %1$s、お使いのものです</string>
@@ -467,7 +467,7 @@
     <string name="nm_avatar_share_title">アバターを共有する</string>
     <string name="nm_avatar_share_subtitle">カードを選んでください。システムの共有シートから送られます。</string>
     <string name="nm_avatar_share_system">共有</string>
-    <string name="nm_avatar_share_bubble">こんにちは、%1$s です。パーソナル AI エージェントです。nanoMuse をどうぞ：オープンソースで、スマートフォンの上で動きます。</string>
+    <string name="nm_avatar_share_bubble">こんにちは、%1$s です。パーソナル AI エージェントです。Hearth をどうぞ：オープンソースで、スマートフォンの上で動きます。</string>
     <string name="nm_avatar_share_tagline">あなたのパーソナル AI エージェント、オープンソース · github.com/WPMG-4The99/hearth</string>
 
     <!-- 0.1.10 · Motion -->
@@ -519,7 +519,7 @@
     <string name="nm_hands_section_needs">必要なもの</string>
     <string name="nm_hands_needs_footer">ユーザー補助サービスがスクリーンショットを撮り、ジェスチャーを行います。画面の内容は読み取りません。他のアプリの上に重ねて表示する権限はカプセルのためです。</string>
     <string name="nm_hands_need_a11y">ユーザー補助サービス</string>
-    <string name="nm_hands_need_a11y_fix">ユーザー補助の設定の「インストール済みアプリ」で nanoMuse をオンにしてください</string>
+    <string name="nm_hands_need_a11y_fix">ユーザー補助の設定の「インストール済みアプリ」で Hearth をオンにしてください</string>
     <string name="nm_hands_need_overlay">他のアプリの上に重ねて表示</string>
     <string name="nm_hands_need_overlay_fix">停止ボタン付きのカプセルを表示できるよう許可してください</string>
     <string name="nm_hands_need_model">画像を見られるモデル</string>
@@ -536,7 +536,7 @@
     <string name="nm_hands_why_default">自分のキーでのハンズの既定</string>
     <string name="nm_hands_why_chat">選んだチャットモデル</string>
     <string name="nm_hands_why_group">既定グループで最初に画面を見られるもの</string>
-    <string name="nm_hands_why_menu">nanoMuse Cloud の画面モデル</string>
+    <string name="nm_hands_why_menu">Hearth の画面モデル</string>
     <string name="nm_hands_why_vision_group">ビジョングループ</string>
     <string name="nm_hands_why_any">有効なモデルのうち画面を見られる唯一のもの</string>
     <string name="nm_hands_section_rules">ふるまい</string>
@@ -557,7 +557,7 @@
     <string name="nm_hands_protected_screen">この画面は保護されていて読み取れません。この部分はご自身で済ませてから、「続ける」をタップしてください。</string>
     <string name="nm_hands_secret_field">パスワードまたはコードの入力欄です：ご自身で入力してから、「続ける」をタップしてください。</string>
     <string name="nm_hands_approval_title">承認を待っています</string>
-    <string name="nm_hands_approval_detail">「%1$s」をタップ：nanoMuse で確認してください（画面ロックを求められます）。</string>
+    <string name="nm_hands_approval_detail">「%1$s」をタップ：Hearth で確認してください（画面ロックを求められます）。</string>
     <string name="nm_hands_approval_here">「%1$s」をタップしますか？</string>
     <string name="nm_hands_allow_once">許可</string>
     <string name="nm_hands_deny">拒否</string>
@@ -588,10 +588,10 @@
     <!-- Reach (0.1.13): the phone drives your computer -->
     <string name="nm_pc_title">コンピューター</string>
     <string name="nm_pc_none_short">なし</string>
-    <string name="nm_pc_intro">ここで言えば、コンピューターで実行されます: コマンド、ファイル、そのブラウザーのページ、画面の確認、あるいはそこにある nanoMuse へのタスク全体。スマートフォンがコンピューターを動かし、その逆はありません。承認はすべてまずここで決まります。</string>
-    <string name="nm_pc_hub_title">簡単な方法: 同じアカウントで nanoMuse Desktop</string>
-    <string name="nm_pc_hub_body">コンピューターに nanoMuse Desktop をインストールし、この端末のアカウントでサインインしてください。数秒でアカウント → デバイスに表示されます。</string>
-    <string name="nm_pc_hub_download">nanoMuse Desktop を入手</string>
+    <string name="nm_pc_intro">ここで言えば、コンピューターで実行されます: コマンド、ファイル、そのブラウザーのページ、画面の確認、あるいはそこにある Hearth へのタスク全体。スマートフォンがコンピューターを動かし、その逆はありません。承認はすべてまずここで決まります。</string>
+    <string name="nm_pc_hub_title">簡単な方法: 同じアカウントで Hearth Desktop</string>
+    <string name="nm_pc_hub_body">コンピューターに Hearth Desktop をインストールし、この端末のアカウントでサインインしてください。数秒でアカウント → デバイスに表示されます。</string>
+    <string name="nm_pc_hub_download">Hearth Desktop を入手</string>
     <string name="nm_pc_hub_account">アカウントとデバイス</string>
     <string name="nm_pc_section_paired">このアカウントのコンピューター</string>
     <string name="nm_pc_none">コンピューターはまだありません</string>
@@ -600,11 +600,11 @@
     <string name="nm_pc_last_seen">最終確認 %1$s</string>
     <string name="nm_pc_offline">オフライン</string>
     <string name="nm_pc_online">オンライン</string>
-    <string name="nm_pc_account_none">この端末はまだ nanoMuse Cloud にサインインしていません。まずここでサインインし、次にコンピューターで同じアカウントを使ってください。</string>
+    <string name="nm_pc_account_none">この端末はまだ Hearth にサインインしていません。まずここでサインインし、次にコンピューターで同じアカウントを使ってください。</string>
     <string name="nm_pc_account_hint">この端末は %1$s としてサインインしています。コンピューターも同じアカウントでサインインする必要があります。</string>
     <string name="nm_pc_checking">確認中…</string>
     <string name="nm_pc_answering">%1$s が応答しました</string>
-    <string name="nm_pc_not_answering">%1$s が応答しません。そちらで nanoMuse Desktop はまだ動いていますか？</string>
+    <string name="nm_pc_not_answering">%1$s が応答しません。そちらで Hearth Desktop はまだ動いていますか？</string>
 
     <!-- the approval card -->
     <string name="nm_risk_desc_on_computer">この端末ではなく、コンピューター「%1$s」で実行されます。</string>
@@ -625,11 +625,11 @@
     <string name="nm_welcome_email">サインイン（無料）</string>
     <string name="nm_welcome_fine_print">1 つのアカウントでデバイスがつながり、無料のモデル利用も付いてきます。料金はかかりません。自分の API キーはすぐあとで追加できます。</string>
     <string name="nm_setup_source_title">どのモデルが答えますか？</string>
-    <string name="nm_setup_source_sub">アカウントにはすでにモデルが付いています。自分の API キーも追加でき、いつでも切り替えられます。</string>
-    <string name="nm_setup_source_cloud">nanoMuse Cloud のモデルを使う</string>
-    <string name="nm_setup_source_cloud_sub">チャットは DeepSeek、ハンズは Qwen。開発者が負担する無料枠がアカウントごとに付きます。設定は不要です。</string>
+    <string name="nm_setup_source_sub">どちらもこの端末のツールを使えます。あとで設定 → モデルから変えられます。</string>
+    <string name="nm_setup_source_cloud">Hearth 中継</string>
+    <string name="nm_setup_source_cloud_sub">この家の中継にあるモデル。貼り付けるものはありません。</string>
     <string name="nm_setup_source_own_sub">OpenAI、Anthropic、DeepSeek、百煉、その他の OpenAI 互換エンドポイント。キーはこの端末に残ります。</string>
-    <string name="nm_setup_source_fine_print">両者は競合しません: Cloud のモデルはそのまま使え、モデルグループごとに選べます。</string>
+    <string name="nm_setup_source_fine_print">始めるほうを一つ選ぶ。もう一方はあとから足せます。</string>
     <string name="nm_setup_password_title">パスワードを設定</string>
     <string name="nm_setup_password_sub">アカウントの準備ができました。パスワードがあれば、コンピューターやほかのスマートフォンでもコードを待たずにすぐサインインできます。</string>
     <string name="nm_setup_password_set">パスワードを設定する</string>
@@ -639,21 +639,21 @@
     <string name="nm_welcome_feat_hands">ハンズ: スマートフォンを使います</string>
     <string name="nm_welcome_feat_hands_sub">列車の予約、食事の注文、アプリ内での調べもの。あなたは見守り、いつでも止められます</string>
     <string name="nm_welcome_feat_reach">リーチ: ここからコンピューターへ</string>
-    <string name="nm_welcome_feat_reach_sub">Mac、Windows、Linux のマシンに nanoMuse Desktop を入れて同じアカウントでサインインすれば、スマートフォンから仕事を任せられます</string>
-    <string name="nm_welcome_notice">nanoMuse は非営利のオープンソースコミュニティプロジェクトです：ずっと無料です。モデルには開発者が負担する無料枠が付き、その後は自分のキーを使います。何も売りません。リレーが保持するものはプライバシーポリシーに書かれ、設定 → データ管理はあなたのものです。</string>
+    <string name="nm_welcome_feat_reach_sub">Mac、Windows、Linux のマシンに Hearth Desktop を入れて同じアカウントでサインインすれば、スマートフォンから仕事を任せられます</string>
+    <string name="nm_welcome_notice">Hearth は非営利のオープンソースコミュニティプロジェクトです：ずっと無料です。モデルには開発者が負担する無料枠が付き、その後は自分のキーを使います。何も売りません。リレーが保持するものはプライバシーポリシーに書かれ、設定 → データ管理はあなたのものです。</string>
     <string name="nm_welcome_hands_title">スマートフォンを使わせる</string>
     <string name="nm_welcome_hands_sub">2 つの権限で、アプリを開き、タップし、入力を代わりに行えます。各ステップと停止ボタンの付いたカプセルが画面に残ります。ログイン、パスワード、コードは常にあなたのものです。</string>
     <string name="nm_welcome_hands_turn_on">オンにする</string>
     <string name="nm_welcome_skip">今はスキップ</string>
     <string name="nm_welcome_hands_fine_print">これらがなくてもほかの機能はすべて使えます。必要になったら設定 → ハンズにあります。</string>
     <string name="nm_welcome_meet_fine_print">取り消せない操作（削除、送信、支払い）の前には、立ち止まってまずあなたに確認します。</string>
-    <string name="nm_cloud_signin_title">nanoMuse Cloud で始める</string>
-    <string name="nm_cloud_signin_subtitle">スマートフォンかメールにコードを送ります。パスワードを設定済みならそれでも。</string>
+    <string name="nm_cloud_signin_title">Hearth にログイン</string>
+    <string name="nm_cloud_signin_subtitle">メールアドレスのあと、ワンタイムコード。この中継はコードを自分のログに書きます。</string>
     <string name="nm_cloud_mode_code">コードで</string>
     <string name="nm_cloud_mode_password">パスワードで</string>
     <string name="nm_cloud_password">パスワード</string>
     <string name="nm_cloud_forgot_password">パスワードを忘れた場合はコードでサインイン</string>
-    <string name="nm_cloud_identifier">中国本土の電話番号またはメールアドレス</string>
+    <string name="nm_cloud_identifier">メール</string>
     <string name="nm_cloud_identifier_hint">you@example.com</string>
     <string name="nm_cloud_code">コード</string>
     <string name="nm_cloud_send_code">コードを送信</string>
@@ -662,7 +662,7 @@
     <string name="nm_cloud_verify">サインイン</string>
 
     <!-- Your own relay (0.1.38): the sign-in screen's server form and the account page's row -->
-    <string name="nm_cloud_other_server">別のサーバーを使う</string>
+    <string name="nm_cloud_other_server">詳細: 別のサーバー</string>
     <string name="nm_cloud_server_url">リレーのアドレス</string>
     <string name="nm_cloud_server_check">確認</string>
     <string name="nm_cloud_server_use">このサーバーを使う</string>
@@ -672,7 +672,7 @@
     <string name="nm_cloud_server_https">自分のネットワークの外にあるサーバーには https を使ってください。プライベートアドレス（10.x、192.168.x、172.16-31.x、localhost、.local や .ts.net の名前）なら http でかまいません。</string>
     <string name="nm_lan_only_https">暗号化なしの http:// は自分のネットワーク内のアドレス（10.x、172.16-31.x、192.168.x、.local 名）にだけ使えます。%1$s には https:// を使ってください。</string>
     <string name="nm_cloud_server_unreachable">%1$s からリレーの応答がありません。アドレスと、リレーが動いているかを確認してください。</string>
-    <string name="nm_cloud_server_default">nanoMuse Cloud に戻す</string>
+    <string name="nm_cloud_server_default">Hearth に戻す</string>
     <string name="nm_cloud_server_row">サーバー</string>
     <string name="nm_cloud_server_change">変更</string>
     <string name="nm_cloud_server_change_confirm">この端末のキーは今のサーバーのものです。まずここでサインアウトし、サインイン画面から別のサーバーにサインインしてください。</string>
@@ -693,11 +693,11 @@
     <string name="nm_cloud_used_today_open">今日 %1$s</string>
     <string name="nm_cloud_refresh">残高を更新</string>
     <string name="nm_cloud_refreshing">更新中…</string>
-    <string name="nm_cloud_how_it_works">nanoMuse Cloud はこのアプリでは普通のプロバイダの 1 つです: そのモデルはプロバイダに一覧され、モデルグループで自分のものと混ぜて使えます。</string>
+    <string name="nm_cloud_how_it_works">Hearth はこのアプリでは普通のプロバイダの 1 つです: そのモデルはプロバイダに一覧され、モデルグループで自分のものと混ぜて使えます。</string>
     <string name="nm_cloud_open_provider">プロバイダ設定</string>
     <string name="nm_cloud_sign_out">サインアウト</string>
     <string name="nm_cloud_sign_out_sub">この端末のキーは失効し、Cloud プロバイダは削除されます。無料枠はアカウントに残ります。</string>
-    <string name="nm_cloud_sign_out_confirm">nanoMuse Cloud プロバイダとそのモデルがこの端末から削除されます。</string>
+    <string name="nm_cloud_sign_out_confirm">Hearth プロバイダとそのモデルがこの端末から削除されます。</string>
     <string name="nm_cloud_row_remaining">残り %1$s</string>
     <string name="nm_cloud_row_sign_in">サインイン</string>
     <string name="nm_cloud_err_bad_identifier">メールアドレスの形式ではないようです。</string>
@@ -715,7 +715,7 @@
     <string name="nm_cloud_err_allowance_abroad">無料枠を使い切りました。友だちを招待する（お互いに +¥%1$s）か、設定 → プロバイダで自分のキーを追加してください。OpenRouter が手早い方法です: 1 つのアカウント、1 つのキー、従量課金。</string>
     <string name="nm_cloud_warn_line">無料枠が残りわずかです: ¥%2$s 中 ¥%1$s が残っています。友だちを招待する（お互いに +¥%3$s）か、自分のキーを追加してください、どちらもアカウントにあります。</string>
     <string name="nm_cloud_err_rate_limited">一度に多くのリクエストが集中しています。少しお待ちください。</string>
-    <string name="nm_cloud_err_unreachable">nanoMuse Cloud に接続できません。接続を確認してください。</string>
+    <string name="nm_cloud_err_unreachable">Hearth に接続できません。接続を確認してください。</string>
     <string name="nm_cloud_err_generic">問題が起きました。</string>
     <string name="nm_cloud_err_bad_credentials">メールアドレスまたはパスワードが違います。</string>
     <string name="nm_cloud_err_no_password">このアカウントにはまだパスワードがありません。コードでサインインしてから、アカウントで設定してください。</string>
@@ -731,10 +731,10 @@
     <string name="nm_cloud_err_content_rejected">モデル提供元のコンテンツ審査がこのリクエストを通しませんでした。言い方を変えてみてください。続くようなら新しいチャットを始めてください。問題とされた言葉は会話のもっと前にあることもあります。</string>
     <string name="nm_cloud_err_provider_busy">モデル提供元が混み合っています。少ししてからもう一度お試しください。</string>
     <string name="nm_cloud_err_provider_busy_wait">モデル提供元が混み合っています。%1$s 後にもう一度お試しください。</string>
-    <string name="nm_cloud_err_model_not_offered">nanoMuse Cloud ではそのモデルの提供を終了しました。設定 → nanoMuse Cloud で別のモデルを選んでください。</string>
-    <string name="nm_cloud_err_relay_down">nanoMuse Cloud から応答がありませんでした。少ししてからもう一度お試しください。</string>
-    <string name="nm_cloud_err_allowance_paused">このリレーでは無料枠を一時停止しているだけで、使い切ったわけではありません。設定 → nanoMuse Cloud で自分のキーを追加するか、すでに契約しているプランでサインインしてください。サインイン、デバイス、残りの枠はそのまま残ります。</string>
-    <string name="nm_cloud_err_service_paused">nanoMuse Cloud は運営者により一時停止中です。サインインとデータは保持されます。後でもう一度お試しください。</string>
+    <string name="nm_cloud_err_model_not_offered">Hearth ではそのモデルの提供を終了しました。設定 → Hearth で別のモデルを選んでください。</string>
+    <string name="nm_cloud_err_relay_down">Hearth から応答がありませんでした。少ししてからもう一度お試しください。</string>
+    <string name="nm_cloud_err_allowance_paused">このリレーでは無料枠を一時停止しているだけで、使い切ったわけではありません。設定 → Hearth で自分のキーを追加するか、すでに契約しているプランでサインインしてください。サインイン、デバイス、残りの枠はそのまま残ります。</string>
+    <string name="nm_cloud_err_service_paused">Hearth は運営者により一時停止中です。サインインとデータは保持されます。後でもう一度お試しください。</string>
     <string name="nm_cloud_err_sync_paused">このリレーでは会話の同期を一時停止しています。保存済みの内容は残り、各デバイスは単独で動き続けます。</string>
     <string name="nm_cloud_err_hub_paused">このリレーではデバイス間の連携を一時停止しています。各デバイスは単独で動き続けます。</string>
     <string name="nm_refusal_relay_says">リレーからの説明: %1$s</string>
@@ -778,7 +778,7 @@
     <string name="nm_cloud_invite_share">リンクを共有</string>
     <string name="nm_cloud_invite_copy">コピー</string>
     <string name="nm_cloud_invite_copied">コピーしました</string>
-    <string name="nm_cloud_invite_share_text">一緒に nanoMuse を試しませんか：完全オープンソースのパーソナルエージェントで、無料で使えます。私のコード %1$s で登録してください: %2$s</string>
+    <string name="nm_cloud_invite_share_text">一緒に Hearth を試しませんか：完全オープンソースのパーソナルエージェントで、無料で使えます。私のコード %1$s で登録してください: %2$s</string>
     <string name="nm_cloud_invite_count">%1$d 人の友だちが参加</string>
     <string name="nm_cloud_invite_earned">招待で ¥%1$s 追加</string>
     <string name="nm_cloud_invite_have">招待コードをお持ちですか？</string>
@@ -819,8 +819,8 @@
     <string name="nm_cloud_ev_contribute_deleted">データ管理: 保持していた会話を削除しました</string>
     <string name="nm_cloud_ev_contribute_default">データ管理: 新規アカウントではオン</string>
     <string name="nm_data_title">データ管理</string>
-    <string name="nm_data_improve">nanoMuse の AI モデルの改善に協力する</string>
-    <string name="nm_data_why">オンの間、nanoMuse Cloud のモデルとのチャットのテキスト（あなたが書いたこと、モデルの答え、モデルが呼ぶことにしたツール）がリレーに保持され、コミュニティ自身のオープンモデルの学習に使われます。メモリや SOUL（システムプロンプト）、ツールが返した内容、画像は含まれず、あなたが誰かと結び付けられることもありません。自分の API キーがリレーを通ることはありません。</string>
+    <string name="nm_data_improve">Hearth の AI モデルの改善に協力する</string>
+    <string name="nm_data_why">オンの間、Hearth のモデルとのチャットのテキスト（あなたが書いたこと、モデルの答え、モデルが呼ぶことにしたツール）がリレーに保持され、コミュニティ自身のオープンモデルの学習に使われます。メモリや SOUL（システムプロンプト）、ツールが返した内容、画像は含まれず、あなたが誰かと結び付けられることもありません。自分の API キーがリレーを通ることはありません。</string>
     <string name="nm_data_default_on">新規アカウントではオンで始まります。</string>
     <string name="nm_data_default_off">新規アカウントではオフで始まります。</string>
     <string name="nm_data_kept">これまでに %1$d ターンを保持。</string>
@@ -830,7 +830,7 @@
     <string name="nm_data_delete_sub">スイッチのオン・オフにかかわらず、このアカウントから保持したすべてのターンを削除します。スイッチをオフにしても、ここで削除するまで保持済みのものは残ります。</string>
     <string name="nm_data_delete_confirm">保持している会話がサーバーから削除されます。元に戻せません。</string>
     <string name="nm_data_deleted">%1$d ターンを削除しました。</string>
-    <string name="nm_data_sign_in">使うには nanoMuse Cloud にサインインしてください。</string>
+    <string name="nm_data_sign_in">使うには Hearth にサインインしてください。</string>
     <string name="nm_data_privacy">プライバシーポリシー</string>
     <string name="nm_data_status_on">オン</string>
     <string name="nm_data_status_off">オフ</string>
@@ -878,7 +878,7 @@
     <!-- 0.1.20: the coding agents on the account's computers -->
     <string name="nm_coding_title">コーディングエージェント</string>
     <string name="nm_coding_intro">コンピューター上の Cursor、Codex、Claude Code: それらのセッション、最後の返信、そしてどれかへのメッセージをここから。それらのものがスマートフォンにコピーされることはありません。</string>
-    <string name="nm_coding_no_computer">コーディングエージェントのあるコンピューターがオンラインではありません。Cursor、Codex、Claude Code がインストールされているコンピューターで、このアカウントでサインインして nanoMuse を実行してください。</string>
+    <string name="nm_coding_no_computer">コーディングエージェントのあるコンピューターがオンラインではありません。Cursor、Codex、Claude Code がインストールされているコンピューターで、このアカウントでサインインして Hearth を実行してください。</string>
     <string name="nm_coding_account_hint">この端末は %1$s としてサインインしています。コンピューターも同じアカウントを使う必要があります。</string>
     <string name="nm_coding_refresh">更新</string>
     <string name="nm_coding_all">すべて</string>
@@ -912,13 +912,13 @@
     <string name="nm_cloud_tokens_line">累計 %1$s トークン · 今日 %2$s</string>
     <string name="nm_cloud_notice_title">無料、オープンソース、非営利</string>
     <string name="nm_cloud_notice_closing">バグを見つけた、機能がほしい、パッチがある？GitHub のリポジトリへどうぞ。</string>
-    <string name="nm_cloud_notice">nanoMuse は非営利のオープンソースコミュニティプロジェクトです：ずっと無料です。モデルには開発者が負担する無料枠が付き、その後は自分のキーを使います。何も売りません。リレーが保持するものはプライバシーポリシーに書かれ、設定 → データ管理はあなたのものです。アカウントはいつでも削除できます。</string>
+    <string name="nm_cloud_notice">Hearth は非営利のオープンソースコミュニティプロジェクトです：ずっと無料です。モデルには開発者が負担する無料枠が付き、その後は自分のキーを使います。何も売りません。リレーが保持するものはプライバシーポリシーに書かれ、設定 → データ管理はあなたのものです。アカウントはいつでも削除できます。</string>
 
     <!-- nanoMuse: devices on the hub -->
     <string name="nm_hub_channel">デバイスからのメッセージ</string>
     <string name="nm_hub_service_channel">デバイスと接続中</string>
-    <string name="nm_hub_service_title">nanoMuse · デバイスから到達可能</string>
-    <string name="nm_hub_service_connecting">nanoMuse Cloud に接続しています…</string>
+    <string name="nm_hub_service_title">Hearth · デバイスから到達可能</string>
+    <string name="nm_hub_service_connecting">Hearth に接続しています…</string>
     <string name="nm_hub_service_alone">今はほかにオンラインのデバイスがありません</string>
     <plurals name="nm_hub_service_devices">
         <item quantity="other">%d 台のデバイスがオンライン</item>
@@ -938,7 +938,7 @@
     <string name="nm_devices_connected">接続済み</string>
     <string name="nm_devices_connecting">接続中…</string>
     <string name="nm_devices_off">オフ</string>
-    <string name="nm_devices_none">ほかのデバイスはまだありません。コンピューターに nanoMuse Desktop をインストールして同じアカウントでサインインすると、数秒でここに表示されます。</string>
+    <string name="nm_devices_none">ほかのデバイスはまだありません。コンピューターに Hearth Desktop をインストールして同じアカウントでサインインすると、数秒でここに表示されます。</string>
     <string name="nm_devices_online">オンライン</string>
     <string name="nm_devices_offline">オフライン</string>
     <string name="nm_devices_web">ウェブコンソール</string>
@@ -957,7 +957,7 @@
     <string name="nm_hub_err_not_controllable">そのデバイスには用事を頼めません。</string>
     <string name="nm_hub_err_unknown_agent">そのコーディングエージェントはコンピューターにありません。</string>
     <string name="nm_hub_err_no_session">そのセッションはもうコンピューターにありません。</string>
-    <string name="nm_hub_err_unknown_action">コンピューターの nanoMuse が古く、この操作を知りません。</string>
+    <string name="nm_hub_err_unknown_action">コンピューターの Hearth が古く、この操作を知りません。</string>
     <string name="nm_hub_err_bad_key">リレーでサインアウトされました。もう一度サインインしてください。</string>
     <string name="nm_hub_err_generic">コンピューターで実行できませんでした。</string>
     <string name="nm_devices_refused">リレーに拒否されました。もう一度サインインしてください</string>
@@ -976,7 +976,7 @@
     <string name="nm_connectors_sign_in">サインイン</string>
     <string name="nm_connectors_disconnect">接続を解除</string>
     <string name="nm_connectors_docs">このサーバーについてのベンダーのページ</string>
-    <string name="nm_connectors_how_oauth">ブラウザーで %1$s のアカウントにサインインします。nanoMuse が自分でサービスに登録するので、入力するものはありません。トークンはこの端末に残ります。</string>
+    <string name="nm_connectors_how_oauth">ブラウザーで %1$s のアカウントにサインインします。Hearth が自分でサービスに登録するので、入力するものはありません。トークンはこの端末に残ります。</string>
     <string name="nm_connectors_how_key">サービスからのキーが必要です: %1$s。この端末の MCP 項目にだけ保存されます。</string>
     <string name="nm_connectors_how_none">誰でも使えます。サインインは不要です。</string>
     <string name="nm_connectors_how_auto">サーバーに何が必要かをまず確認します: 不要、サインイン、またはキー。</string>
@@ -1020,13 +1020,13 @@
 
     <!-- Conversation sync between the account's devices (contract C7) -->
     <string name="nm_sync_title">デバイス間で会話を同期</string>
-    <string name="nm_sync_caption">チャットのテキストを nanoMuse Cloud に保持し、すべてのデバイスで同じ会話を表示します。ファイルと画像は作られたデバイスに残ります。</string>
+    <string name="nm_sync_caption">チャットのテキストを Hearth に保持し、すべてのデバイスで同じ会話を表示します。ファイルと画像は作られたデバイスに残ります。</string>
     <string name="nm_sync_sign_in">同期するにはサインイン</string>
     <string name="nm_sync_on_toast">オンにしました。この端末の会話を送信しています。</string>
     <string name="nm_sync_off_toast">オフにしました。保持されていたものは削除されました。</string>
     <string name="nm_sync_delete">同期した会話を削除</string>
-    <string name="nm_sync_delete_sub">会話のテキストを nanoMuse Cloud から削除します。各デバイスはすでに持っているものを保持し、同期はオンのままです。</string>
-    <string name="nm_sync_delete_confirm">nanoMuse Cloud に保持されている会話が削除されます。デバイス上のチャットはそのまま残ります。</string>
+    <string name="nm_sync_delete_sub">会話のテキストを Hearth から削除します。各デバイスはすでに持っているものを保持し、同期はオンのままです。</string>
+    <string name="nm_sync_delete_confirm">Hearth に保持されている会話が削除されます。デバイス上のチャットはそのまま残ります。</string>
     <string name="nm_sync_deleted">同期した会話を削除しました。</string>
     <string name="nm_sync_from">%1$s から</string>
     <string name="nm_sync_attachment_note">[添付 %1$s、作られたデバイスに残ります]</string>
@@ -1039,7 +1039,7 @@
     <string name="nm_devices_ask_hint">オンラインのデバイスをタップすると、チャットからそのデバイスに書けます: メッセージは @ とその名前で始まり、そのデバイスが作業します。</string>
     <string name="nm_reach_the_provider">プロバイダー</string>
     <string name="nm_reach_unreachable_title">このネットワークから %1$s に到達できません</string>
-    <string name="nm_reach_unreachable_body">%1$s から応答がありませんでした。この電話からプロバイダーまでの経路の問題で、nanoMuse 自身のサーバーは関係ありません。</string>
+    <string name="nm_reach_unreachable_body">%1$s から応答がありませんでした。この電話からプロバイダーまでの経路の問題で、Hearth 自身のサーバーは関係ありません。</string>
     <string name="nm_reach_region_title">OpenAI はこの地域でサービスを提供していません</string>
     <string name="nm_reach_region_body">リクエストは OpenAI に届きましたが、この接続の発信元ではサービスを提供していないとの応答でした。</string>
     <string name="nm_reach_signed_out_title">ChatGPT のサインインが無効になりました</string>
@@ -1082,7 +1082,7 @@
     <string name="nm_network_test_fail">プロキシ経由で %1$s に到達できませんでした：%2$s</string>
     <string name="nm_network_test_status">HTTP %1$d</string>
     <string name="nm_network_invalid">ホストと 1〜65535 のポートを入力してください。</string>
-    <string name="nm_network_proxy_caption">自分のキーで追加したプロバイダーと ChatGPT プランへのリクエストだけがプロキシを通ります。nanoMuse Cloud、あなたのコンピューター、ローカルネットワークは通りません。この電話にだけ保存されます。</string>
+    <string name="nm_network_proxy_caption">自分のキーで追加したプロバイダーと ChatGPT プランへのリクエストだけがプロキシを通ります。Hearth、あなたのコンピューター、ローカルネットワークは通りません。この電話にだけ保存されます。</string>
     <string name="nm_network_hosts_caption">プロキシを通るホスト：%1$s</string>
     <string name="nm_ways_title_day">今日の分の無料枠を使い切りました。</string>
     <string name="nm_ways_day_sub">日付が変わると戻ります。下の方法は今すぐ使えます。</string>
@@ -1093,7 +1093,7 @@
     <string name="nm_ways_devices">デバイス</string>
     <!-- 0.1.41 Choice: Settings → Models, the "Use it for" card, one turn on the Cloud -->
     <string name="nm_models_title">モデル</string>
-    <string name="nm_models_intro">どのモデルが何を担当するか。各行を開くと選択画面になり、nanoMuse Cloud と追加したプロバイダーが、合うモデルとともに並びます。</string>
+    <string name="nm_models_intro">どのモデルが何を担当するか。各行を開くと選択画面になり、Hearth と追加したプロバイダーが、合うモデルとともに並びます。</string>
     <string name="nm_models_chat_title">チャット</string>
     <string name="nm_models_chat_sub">あなたと話すモデル。</string>
     <string name="nm_models_hands_title">画面の操作</string>
@@ -1105,20 +1105,20 @@
     <string name="nm_models_chat_applies">メインチャットと新しいチャットに適用されます。サイドチャットは各自のモデルを保ちます。</string>
     <string name="nm_models_media_more">画像と動画のその他のオプション</string>
     <string name="nm_models_media_more_sub">モデル名を入力する、各モデルがないと何が止まるかを見る、キーで使える動画モデルを再確認する。</string>
-    <string name="nm_models_cloud_switch">nanoMuse Cloud のモデルを使う</string>
-    <string name="nm_models_cloud_on_sub">nanoMuse Cloud は下の各行の提供元のひとつで、そこで動いた分は利用枠から差し引かれます。</string>
-    <string name="nm_models_cloud_off_sub">オフにすると「今回は nanoMuse Cloud を使う」をタップしない限り、nanoMuse Cloud では何も動きません。同期と端末のためにサインインは保たれます。</string>
-    <string name="nm_models_cloud_off_refused">先に自分のプロバイダーを追加してください。nanoMuse Cloud をオフにすると、ほかに答えられるものがありません。</string>
+    <string name="nm_models_cloud_switch">Hearth のモデルを使う</string>
+    <string name="nm_models_cloud_on_sub">Hearth は下の各行の提供元のひとつで、そこで動いた分は利用枠から差し引かれます。</string>
+    <string name="nm_models_cloud_off_sub">オフにすると「今回は Hearth を使う」をタップしない限り、Hearth では何も動きません。同期と端末のためにサインインは保たれます。</string>
+    <string name="nm_models_cloud_off_refused">先に自分のプロバイダーを追加してください。Hearth をオフにすると、ほかに答えられるものがありません。</string>
     <string name="nm_chat_no_model">いま答えられるモデルがありません。設定 › モデルで一つ選んでください。</string>
-    <string name="nm_cloud_provider_no_delete">このプロバイダーは nanoMuse Cloud のアカウントそのものです。モデルを使わないようにするには上のスイッチをオフにし、サインアウトするには「設定 › nanoMuse Cloud」を開いてください。</string>
+    <string name="nm_cloud_provider_no_delete">このプロバイダーは Hearth のアカウントそのものです。モデルを使わないようにするには上のスイッチをオフにし、サインアウトするには「設定 › Hearth」を開いてください。</string>
     <string name="nm_welcome_own_key">自分の API キーを使う</string>
     <string name="nm_useit_title">何に使うか</string>
-    <string name="nm_useit_body">このキーに任せることを選んでください。残りは引き続き nanoMuse Cloud が担当します。</string>
+    <string name="nm_useit_body">このキーに任せることを選んでください。残りは引き続き Hearth が担当します。</string>
     <string name="nm_useit_body_signed_out">このキーに任せることを選んでください。</string>
     <string name="nm_useit_use">使う</string>
     <string name="nm_useit_not_now">今はしない</string>
     <string name="nm_useit_footnote">設定 › モデル からいつでも変更できます。</string>
-    <string name="nm_retry_on_cloud">今回は nanoMuse Cloud を使う</string>
+    <string name="nm_retry_on_cloud">今回は Hearth を使う</string>
     <string name="nm_hands_why_chat_provider">チャットのプロバイダーでのハンズの既定</string>
     <string name="nm_models_auto">自動</string>
     <string name="nm_models_auto_currently">現在は %1$s</string>
@@ -1153,4 +1153,25 @@
     <string name="nm_font_scale_medium">中</string>
     <string name="nm_font_scale_large">大きい</string>
     <string name="nm_font_scale_extra_large">とても大きい</string>
+    <string name="nm_setup_source_grok">自分の Grok アカウント</string>
+    <string name="nm_setup_source_grok_sub">この端末で xAI にログインします。同期とデバイス用に、中継へのログインは残ります。</string>
+    <string name="nm_panic">緊急</string>
+    <string name="nm_panic_confirm">もう一度タップで送信</string>
+    <string name="nm_panic_sending">送信中</string>
+    <string name="nm_panic_delivered">届きました。</string>
+    <string name="nm_panic_not_delivered">届いていません。相手の端末がつながっていません。</string>
+    <string name="nm_panic_not_linked">届いていません。このアカウントは別のアカウントと結ばれていません。</string>
+    <string name="nm_panic_not_connected">届いていません。この端末がつながっていません。</string>
+    <string name="nm_panic_alert_title">緊急</string>
+    <string name="nm_panic_from">%1$s があなたを必要としています。</string>
+    <string name="nm_panic_dismiss">ここにいる</string>
+    <string name="nm_panic_close">閉じる</string>
+    <string name="nm_panic_channel">緊急</string>
+    <string name="nm_panic_channel_sub">この家のもう一台からの緊急通知</string>
+    <string name="nm_todos_title">やること</string>
+    <string name="nm_todos_empty">リストは空です。</string>
+    <string name="nm_todos_hint">やること</string>
+    <string name="nm_todos_add">追加</string>
+    <string name="nm_todos_delete">削除</string>
+    <string name="nm_menu_todos">やること</string>
 </resources>

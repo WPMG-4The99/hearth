@@ -462,6 +462,15 @@ addresses sign in; everyone else gets `not_invited` before any code is sent.
 The trial deployments ran this way. With sign-up open, the same list names
 the members who have no daily cap; the admin page can add more.
 
+`HOUSEHOLDS=alice@example.com|bob@example.com` links those accounts so one
+phone can send the other a panic or an alert, and nothing else. Several
+households are separated by commas. There is no self-service linking. With
+`CODE_SENDER=log` the one-time code is written to the relay log instead of
+being mailed. To serve one xAI model from the relay, set `UPSTREAM_BASE` to
+`https://api.x.ai/v1`, put the operator's key in `UPSTREAM_KEY`, and set
+`CLOUD_MODELS` to that model (see `.env.example`). The key is not part of
+this repository.
+
 For an app store's review, `REVIEW_ADDRESSES` and `REVIEW_CODE` give the
 reviewer a way in: a code request for one of those e-mail addresses sends
 nothing and answers as if it had, and the six-digit `REVIEW_CODE` signs in,

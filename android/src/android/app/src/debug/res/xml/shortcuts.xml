@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
   Debug overlay of src/main/res/xml/shortcuts.xml.
-  applicationIdSuffix makes this install io.github.nanomuse.app.hearth, so the
+  applicationIdSuffix makes this install media.wyldephyremg.hearth.debug, so the
   long-press shortcuts must target that package. Release keeps the unsuffixed id.
 -->
 <shortcuts xmlns:android="http://schemas.android.com/apk/res/android">
@@ -13,7 +13,7 @@
         android:shortcutLongLabel="@string/shortcut_new_chat_long">
         <intent
             android:action="android.intent.action.VIEW"
-            android:targetPackage="io.github.nanomuse.app.hearth"
+            android:targetPackage="media.wyldephyremg.hearth.debug"
             android:targetClass="com.openminis.app.MainActivity"
             android:data="minis://action/new_chat" />
         <categories android:name="android.shortcut.conversation" />
@@ -26,7 +26,7 @@
         android:shortcutLongLabel="@string/shortcut_voice_chat_long">
         <intent
             android:action="android.intent.action.VIEW"
-            android:targetPackage="io.github.nanomuse.app.hearth"
+            android:targetPackage="media.wyldephyremg.hearth.debug"
             android:targetClass="com.openminis.app.MainActivity"
             android:data="minis://action/voice_chat" />
         <categories android:name="android.shortcut.conversation" />
@@ -39,7 +39,7 @@
         android:shortcutLongLabel="@string/shortcut_camera_chat_long">
         <intent
             android:action="android.intent.action.VIEW"
-            android:targetPackage="io.github.nanomuse.app.hearth"
+            android:targetPackage="media.wyldephyremg.hearth.debug"
             android:targetClass="com.openminis.app.MainActivity"
             android:data="minis://action/camera_chat" />
         <categories android:name="android.shortcut.conversation" />

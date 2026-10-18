@@ -4,10 +4,10 @@
 <resources>
     <string name="nm_about_build">Ang build na ito</string>
     <string name="nm_about_license">Lisensya</string>
-    <string name="nm_about_upstream">Batay sa OpenMinis 1.13</string>
-    <string name="nm_about_upstream_detail">GPL-3.0 · binago mula 2026-09-24 · source sa GitHub</string>
+    <string name="nm_about_upstream">Credits</string>
+    <string name="nm_about_upstream_detail">Ang Hearth ay fork ng nanoMuse (github.com/nano-muse/nanoMuse), GPL-3.0</string>
     <string name="nm_about_trademark">Walang kaugnayan sa Meta</string>
-    <string name="nm_about_trademark_detail">Ang Muse ay trademark ng Meta Platforms, Inc. Ang nanoMuse ay isang independiyenteng proyektong libreng software.</string>
+    <string name="nm_about_trademark_detail">Ang Muse ay trademark ng Meta Platforms, Inc. Ang Hearth ay isang independiyenteng proyektong libreng software.</string>
 
     <!-- Chat header -->
     <string name="nm_avatar_content_description">Ang agent mo. I-tap para palitan ang pangalan, icon o istilo nito.</string>
@@ -22,28 +22,28 @@
     <string name="nm_star_action">Mag-star sa GitHub</string>
     <string name="nm_star_later">Hindi ngayon</string>
     <string name="nm_star_done">Nabigyan ko na ng star</string>
-    <string name="nm_star_signed_in">Maligayang pagdating. Libre, open source at non-profit ang nanoMuse: isang personal na agent para sa sinumang magpapatakbo nito. Kung may halaga ito sa iyo, ang star sa GitHub ang paraan para mahanap ito ng susunod na tao.</string>
+    <string name="nm_star_signed_in">Maligayang pagdating. Libre, open source at non-profit ang Hearth: isang personal na agent para sa sinumang magpapatakbo nito. Kung may halaga ito sa iyo, ang star sa GitHub ang paraan para mahanap ito ng susunod na tao.</string>
     <plurals name="nm_star_tasks">
-        <item quantity="one">Isang gawain ang tapos na. Kung nakatulong ang nanoMuse, sinasabi ng star sa GitHub sa mga gumagawa nito na nakatulong nga ito.</item>
-        <item quantity="other">%1$d gawain ang tapos na. Kung kapaki-pakinabang ang nanoMuse, nakakatulong ang star sa GitHub para mahanap ito ng susunod na tao.</item>
+        <item quantity="one">Isang gawain ang tapos na. Kung nakatulong ang Hearth, sinasabi ng star sa GitHub sa mga gumagawa nito na nakatulong nga ito.</item>
+        <item quantity="other">%1$d gawain ang tapos na. Kung kapaki-pakinabang ang Hearth, nakakatulong ang star sa GitHub para mahanap ito ng susunod na tao.</item>
     </plurals>
-    <string name="nm_star_days_used_week">Isang linggo na kasama ang nanoMuse. Kung may lugar na ito sa araw mo, nakakatulong ang star sa GitHub para mahanap ito ng susunod na tao.</string>
-    <string name="nm_star_days_used_month">Isang buwan na kasama ang nanoMuse. Kung bahagi na ito ng routine mo, sinasabi ng star sa GitHub sa iba na sulit itong subukan.</string>
+    <string name="nm_star_days_used_week">Isang linggo na kasama ang Hearth. Kung may lugar na ito sa araw mo, nakakatulong ang star sa GitHub para mahanap ito ng susunod na tao.</string>
+    <string name="nm_star_days_used_month">Isang buwan na kasama ang Hearth. Kung bahagi na ito ng routine mo, sinasabi ng star sa GitHub sa iba na sulit itong subukan.</string>
     <plurals name="nm_star_days_used">
-        <item quantity="one">Isang araw kasama ang nanoMuse. Kung nakatulong ito, nakakatulong ang star sa GitHub para mahanap ito ng susunod na tao.</item>
-        <item quantity="other">%1$d araw na kasama ang nanoMuse. Kung may lugar na ito sa araw mo, nakakatulong ang star sa GitHub para mahanap ito ng susunod na tao.</item>
+        <item quantity="one">Isang araw kasama ang Hearth. Kung nakatulong ito, nakakatulong ang star sa GitHub para mahanap ito ng susunod na tao.</item>
+        <item quantity="other">%1$d araw na kasama ang Hearth. Kung may lugar na ito sa araw mo, nakakatulong ang star sa GitHub para mahanap ito ng susunod na tao.</item>
     </plurals>
-    <string name="nm_star_goal_done">Naabot ang layunin. Kung nakatulong ang nanoMuse para marating mo ito, sinasabi iyon ng star sa GitHub sa mga gumagawa nito.</string>
-    <string name="nm_star_new_look">Isang bagong mukha, iginuhit para sa iyo. Kung gusto mo ang tinatahak ng nanoMuse, nakakatulong ang star sa GitHub para mas marami ang makahanap nito.</string>
-    <string name="nm_star_exhausted">Naubos na ang libreng allowance. Salamat sa pagdating hanggang dito. Kung karapat-dapat ang nanoMuse, pinapanatili ng star sa GitHub ang proyekto sa paningin ng susunod na tao.</string>
+    <string name="nm_star_goal_done">Naabot ang layunin. Kung nakatulong ang Hearth para marating mo ito, sinasabi iyon ng star sa GitHub sa mga gumagawa nito.</string>
+    <string name="nm_star_new_look">Isang bagong mukha, iginuhit para sa iyo. Kung gusto mo ang tinatahak ng Hearth, nakakatulong ang star sa GitHub para mas marami ang makahanap nito.</string>
+    <string name="nm_star_exhausted">Naubos na ang libreng allowance. Salamat sa pagdating hanggang dito. Kung karapat-dapat ang Hearth, pinapanatili ng star sa GitHub ang proyekto sa paningin ng susunod na tao.</string>
     <string name="nm_chat_menu_rename">Palitan ang pangalan ng chat</string>
 
     <!-- Foreground-service notification title while no tool is running -->
     <string name="nm_notif_working">Gumagawa si %1$s</string>
 
     <!-- First conversation: the scripted opening (see io.github.nanomuse.onboarding) -->
-    <string name="nm_intro_hello">Hi, ako si nanoMuse, ang assistant na nakatira sa telepono mo. Hayaan mong bawasan ko ang mga inaasikaso mo.</string>
-    <string name="nm_intro_how_i_work">Kaunti tungkol sa kung paano ako gumagana:\n\n- May sarili akong computer (isang Linux sandbox at isang browser), kaya kaya kong magpatakbo ng mga command, magbukas ng mga website at magpuno ng mga form.\n- Kaya kong basahin at ayusin ang mga file at larawang imo-mount mo para sa akin, at asikasuhin ang mga paalala at naka-iskedyul na gawain.\n- Bago ang anumang mahalagang hakbang, magtatanong muna ako sa iyo.\n- Lahat ay tumatakbo sa teleponong ito. Ang mga mensahe mo ay napupunta sa modelong itinakda mo; kapag naka-sign in sa nanoMuse Cloud, sumusunod din ang usapang ito sa iba mo pang device; maaari itong patayin sa Mga kontrol sa data.</string>
+    <string name="nm_intro_hello">Kumusta, ako si Nix. Nandito ako sa teleponong ito at kaya kong kunin ang ilang gawain mo.</string>
+    <string name="nm_intro_how_i_work">Kaunti tungkol sa kung paano ako gumagana:\n\n- May sarili akong computer (isang Linux sandbox at isang browser), kaya kaya kong magpatakbo ng mga command, magbukas ng mga website at magpuno ng mga form.\n- Kaya kong basahin at ayusin ang mga file at larawang imo-mount mo para sa akin, at asikasuhin ang mga paalala at naka-iskedyul na gawain.\n- Bago ang anumang mahalagang hakbang, magtatanong muna ako sa iyo.\n- Lahat ay tumatakbo sa teleponong ito. Ang mga mensahe mo ay napupunta sa modelong itinakda mo; kapag naka-sign in sa Hearth, sumusunod din ang usapang ito sa iba mo pang device; maaari itong patayin sa Mga kontrol sa data.</string>
     <string name="nm_intro_ask_name">Bago tayo magsimula, ano ang itatawag ko sa iyo?</string>
 
     <!-- First conversation: the name chooser -->
@@ -196,7 +196,7 @@
     <string name="nm_risk_class_outbound">Ipadala</string>
     <string name="nm_risk_class_money">Magbayad</string>
     <string name="nm_risk_class_install">I-install</string>
-    <string name="nm_grants_header">Mga naalalang pag-apruba ng nanoMuse</string>
+    <string name="nm_grants_header">Mga naalalang pag-apruba ng Hearth</string>
     <string name="nm_grants_empty">Wala pang naaalala</string>
     <string name="nm_grants_revoke">Bawiin</string>
     <string name="nm_grants_revoke_confirm">Bawiin ang pag-aprubang ito? Sa susunod na lumabas ito, tatanungin ka ulit.</string>
@@ -204,7 +204,7 @@
     <string name="nm_risk_remember_money_note">Kinukumpirma gamit ang screen lock mo. Tatakbo na ang mga pagbabayad sa iisang app o site na ito nang walang card; nakalista ito sa unahan sa Mga setting → Mga pahintulot, kung saan mababawi mo ito anumang oras.</string>
     <string name="nm_risk_remember_money_needs_lock">Para matandaan ang mga pagbabayad, magtakda muna ng screen lock (Mga setting → Seguridad): doon kinukumpirma ang pagtanda sa isa.</string>
     <string name="nm_risk_lock_title">Kumpirmahing ikaw nga ito</string>
-    <string name="nm_risk_lock_subtitle">Tatandaan ng nanoMuse ang mga pag-apruba ng pagbabayad para sa %1$s at patatakbuhin ang mga ito nang hindi nagtatanong.</string>
+    <string name="nm_risk_lock_subtitle">Tatandaan ng Hearth ang mga pag-apruba ng pagbabayad para sa %1$s at patatakbuhin ang mga ito nang hindi nagtatanong.</string>
     <string name="nm_risk_remembered_toast">Natandaan · tingnan ang Mga setting → Mga pahintulot para bawiin</string>
     <string name="nm_risk_tier_highest">Tumatakbo nang hindi nagtatanong · mga pagbabayad</string>
     <string name="nm_risk_tier_confirm">Natandaan mula sa card · pagbura at pagpapadala</string>
@@ -275,7 +275,7 @@
     <string name="nm_sysfiles_open_memory">Buksan ang memorya</string>
     <string name="nm_sysfiles_footer">Sa agent ang mga file na ito: kung sino ito, ano ang alam nito tungkol sa iyo, ano ang naaalala nito, ano ang isinusulat nito para sa iyo at kailan ito gumigising. Nakatago ang mga ito sa storage ng telepono mo; binabasa at ine-edit ng agent ang mga ito mula sa shell nito sa ilalim ng /var/minis/memory, at maaari mong i-edit ang kahit ano dito.</string>
     <string name="nm_sysfile_about_lead">Tungkol sa file na ito.</string>
-    <string name="nm_sysfile_about_soul">Ito ang persona ng agent: ang mga pinahahalagahan at gawi na sinisikap nitong panghawakan sa bawat usapan, ang pangalan nito, at ang istilo ng pagsagot nito. Nagsisimula ito mula sa template na kasama ng nanoMuse; maaaring pinuhin ito ng agent sa paglipas ng panahon at sasabihin nito sa iyo kapag ginawa iyon. Maaari mo itong i-edit anumang oras. Hindi bahagi ng file ang talang ito.</string>
+    <string name="nm_sysfile_about_soul">Ito ang persona ng agent: ang mga pinahahalagahan at gawi na sinisikap nitong panghawakan sa bawat usapan, ang pangalan nito, at ang istilo ng pagsagot nito. Nagsisimula ito mula sa template na kasama ng Hearth; maaaring pinuhin ito ng agent sa paglipas ng panahon at sasabihin nito sa iyo kapag ginawa iyon. Maaari mo itong i-edit anumang oras. Hindi bahagi ng file ang talang ito.</string>
     <string name="nm_sysfile_about_user">Itinatago ng agent ang file na ito bilang mga working note nito tungkol sa iyo: ang pangalan mo, kung paano mo gustong tawagin ka, ang timezone mo, at ang kontekstong kailangan nito para maging kapaki-pakinabang, tulad ng pinagkakaabalahan mo. Pinupunan ito nito sa paglipas ng panahon mula sa mga usapan ninyo at binabasa ito sa simula ng bawat isa. Sumasalamin ito sa kasalukuyang pagkaunawa ng agent, kaya maaari itong kulang o luma na. Maaari mong i-edit ang kahit ano dito, at susundin ng agent ang isinulat mo. Hindi bahagi ng file ang talang ito.</string>
     <string name="nm_sysfile_about_memory">Mga pangmatagalang tala na iniingatan ng agent sa kabila ng mga usapan: ang mga bagay na sulit tandaan, sa sarili nitong mga salita, kasama ang anumang na-import mo mula sa ibang assistant. Ang pang-araw-araw na diary ay nasa tabi nito sa memory folder. Binabasa sa simula ng bawat usapan kapag naka-on ang memorya. Hindi bahagi ng file ang talang ito.</string>
     <string name="nm_sysfile_about_feed">Isang talata na gumagabay sa feed: ano ang gusto mong madagdagan, ano ang lalaktawan, gaano dapat kahaba ang mga post. Binabasa ito ng araw-araw na feed routine bago sumulat. Hindi bahagi ng file ang talang ito.</string>
@@ -356,7 +356,7 @@
     <string name="nm_own_clip_title">Ang sarili mong clip</string>
     <string name="nm_own_clip_body">Isang maikling video mo ang tumutugtog bilang mukha kapag nakapahinga, at ginagamit din ito ng ibang mood. MP4 o MOV na may H.264 na video, hanggang 15 segundo at 30 MB; naka-mute at paulit-ulit itong tumutugtog.</string>
     <string name="nm_own_clip_on">Naka-on ang clip mo at tumutugtog ito sa bawat mood; kung saan ipinapakita ang isang still, ginagamit pa rin ang mga iginuhit na larawan. Inaalis ito ng “Default na mukha”.</string>
-    <string name="nm_own_clip_local">Nananatili ang clip sa teleponong ito. Hindi ito ina-upload sa nanoMuse Cloud o sini-sync sa iba mong device.</string>
+    <string name="nm_own_clip_local">Nananatili ang clip sa teleponong ito. Hindi ito ina-upload sa Hearth o sini-sync sa iba mong device.</string>
     <string name="nm_own_clip_choose">Pumili ng clip</string>
     <string name="nm_own_clip_replace">Palitan ang clip</string>
     <string name="nm_own_clip_default">Default na mukha</string>
@@ -374,7 +374,7 @@
     <string name="nm_a11y_own_clip_preview">Preview ng clip mo</string>
 
     <!-- First run (Muse-style welcome; the steps are OpenMinis' provider and model screens) -->
-    <string name="nm_setup_title">Maligayang pagdating sa nanoMuse</string>
+    <string name="nm_setup_title">Maligayang pagdating sa Hearth</string>
     <string name="nm_setup_step_models">Pumili ng mga modelo</string>
     <string name="nm_setup_step_models_sub">Nakalista para sa iyo ang mga modelong inihahain ng provider mo; pumili ng hanggang tatlo</string>
     <string name="nm_setup_step_start">Kilalanin si %1$s</string>
@@ -390,7 +390,7 @@
     <string name="nm_settings_no_model">Wala pang modelo</string>
     <string name="nm_settings_no_model_sub">Magdagdag ng provider at piliin ang mga modelo nito</string>
     <string name="nm_settings_change_model">Palitan</string>
-    <string name="nm_settings_version">nanoMuse %1$s (%2$d)</string>
+    <string name="nm_settings_version">Hearth %1$s (%2$d)</string>
     <string name="nm_version_title">Bersyon</string>
     <string name="nm_version_checking">Sinusuri ang pinakabagong release…</string>
     <string name="nm_version_have">Pinakabago ang %1$s, nasa iyo na ito</string>
@@ -470,7 +470,7 @@
     <string name="nm_avatar_share_title">Ibahagi ang avatar ko</string>
     <string name="nm_avatar_share_subtitle">Pumili ng card. Ipapadala ito sa pamamagitan ng share sheet ng system.</string>
     <string name="nm_avatar_share_system">Ibahagi</string>
-    <string name="nm_avatar_share_bubble">Hi, ako si %1$s, isang personal na AI agent. Kilalanin ang nanoMuse: open source, tumatakbo sa telepono mo.</string>
+    <string name="nm_avatar_share_bubble">Hi, ako si %1$s, isang personal na AI agent. Kilalanin ang Hearth: open source, tumatakbo sa telepono mo.</string>
     <string name="nm_avatar_share_tagline">Ang personal mong AI agent, open source · github.com/WPMG-4The99/hearth</string>
 
     <!-- 0.1.10 · Motion -->
@@ -522,7 +522,7 @@
     <string name="nm_hands_section_needs">Ano ang kailangan nito</string>
     <string name="nm_hands_needs_footer">Kinukuha ng accessibility service ang screenshot at ginagawa ang mga gesture; hindi nito binabasa ang nilalaman ng screen. Ang pagguhit sa ibabaw ng ibang app ay para sa capsule.</string>
     <string name="nm_hands_need_a11y">Serbisyo ng accessibility</string>
-    <string name="nm_hands_need_a11y_fix">I-on ang nanoMuse sa ilalim ng Mga naka-install na app sa mga setting ng accessibility</string>
+    <string name="nm_hands_need_a11y_fix">I-on ang Hearth sa ilalim ng Mga naka-install na app sa mga setting ng accessibility</string>
     <string name="nm_hands_need_overlay">Ipakita sa ibabaw ng ibang app</string>
     <string name="nm_hands_need_overlay_fix">Payagan ito, para maipakita ang capsule na may Itigil</string>
     <string name="nm_hands_need_model">Isang modelong nakakakita ng larawan</string>
@@ -539,7 +539,7 @@
     <string name="nm_hands_why_default">ang default ng mga kamay sa ilalim ng sarili mong key</string>
     <string name="nm_hands_why_chat">ang chat model na pinili mo</string>
     <string name="nm_hands_why_group">una sa default mong grupo na nakakakita</string>
-    <string name="nm_hands_why_menu">ang screen model ng nanoMuse Cloud</string>
+    <string name="nm_hands_why_menu">ang screen model ng Hearth</string>
     <string name="nm_hands_why_vision_group">ang Vision Group mo</string>
     <string name="nm_hands_why_any">ang tanging naka-enable na modelong nakakakita</string>
     <string name="nm_hands_section_rules">Paano ito kumikilos</string>
@@ -560,7 +560,7 @@
     <string name="nm_hands_protected_screen">Protektado ang screen na ito at hindi mababasa. Tapusin mo mismo ang bahaging ito, saka i-tap ang Magpatuloy.</string>
     <string name="nm_hands_secret_field">Isang field ng password o code: pakipunan mo mismo, saka i-tap ang Magpatuloy.</string>
     <string name="nm_hands_approval_title">Naghihintay ng pag-apruba mo</string>
-    <string name="nm_hands_approval_detail">I-tap ang “%1$s”: kumpirmahin sa nanoMuse (hihingin nito ang screen lock mo).</string>
+    <string name="nm_hands_approval_detail">I-tap ang “%1$s”: kumpirmahin sa Hearth (hihingin nito ang screen lock mo).</string>
     <string name="nm_hands_approval_here">I-tap ang “%1$s”?</string>
     <string name="nm_hands_allow_once">Payagan</string>
     <string name="nm_hands_deny">Tanggihan</string>
@@ -591,10 +591,10 @@
     <!-- Reach (0.1.13): the phone drives your computer -->
     <string name="nm_pc_title">Mga computer</string>
     <string name="nm_pc_none_short">Wala</string>
-    <string name="nm_pc_intro">Sabihin dito, gagawin sa computer mo: isang command, isang file, isang pahina sa browser nito, isang tingin sa screen nito, o isang buong gawain para sa nanoMuse doon. Ang telepono ang nagpapatakbo sa computer, hindi kailanman kabaligtaran; bawat pag-apruba ay dito muna pinagpapasyahan.</string>
-    <string name="nm_pc_hub_title">Ang madaling paraan: nanoMuse Desktop, parehong account</string>
-    <string name="nm_pc_hub_body">I-install ang nanoMuse Desktop sa computer at mag-sign in gamit ang account ng teleponong ito; lalabas ito sa ilalim ng Account → Mga device sa loob ng ilang segundo.</string>
-    <string name="nm_pc_hub_download">Kunin ang nanoMuse Desktop</string>
+    <string name="nm_pc_intro">Sabihin dito, gagawin sa computer mo: isang command, isang file, isang pahina sa browser nito, isang tingin sa screen nito, o isang buong gawain para sa Hearth doon. Ang telepono ang nagpapatakbo sa computer, hindi kailanman kabaligtaran; bawat pag-apruba ay dito muna pinagpapasyahan.</string>
+    <string name="nm_pc_hub_title">Ang madaling paraan: Hearth Desktop, parehong account</string>
+    <string name="nm_pc_hub_body">I-install ang Hearth Desktop sa computer at mag-sign in gamit ang account ng teleponong ito; lalabas ito sa ilalim ng Account → Mga device sa loob ng ilang segundo.</string>
+    <string name="nm_pc_hub_download">Kunin ang Hearth Desktop</string>
     <string name="nm_pc_hub_account">Account at mga device</string>
     <string name="nm_pc_section_paired">Mga computer sa account na ito</string>
     <string name="nm_pc_none">Wala pang computer</string>
@@ -603,11 +603,11 @@
     <string name="nm_pc_last_seen">nakita %1$s</string>
     <string name="nm_pc_offline">offline</string>
     <string name="nm_pc_online">online</string>
-    <string name="nm_pc_account_none">Hindi pa naka-sign in sa nanoMuse Cloud ang teleponong ito; mag-sign in muna, saka ang computer gamit ang parehong account.</string>
+    <string name="nm_pc_account_none">Hindi pa naka-sign in sa Hearth ang teleponong ito; mag-sign in muna, saka ang computer gamit ang parehong account.</string>
     <string name="nm_pc_account_hint">Naka-sign in ang teleponong ito bilang %1$s; dapat mag-sign in ang computer gamit ang parehong account.</string>
     <string name="nm_pc_checking">Sinusuri…</string>
     <string name="nm_pc_answering">Sumasagot ang %1$s</string>
-    <string name="nm_pc_not_answering">Hindi sumasagot ang %1$s. Tumatakbo pa ba doon ang nanoMuse Desktop?</string>
+    <string name="nm_pc_not_answering">Hindi sumasagot ang %1$s. Tumatakbo pa ba doon ang Hearth Desktop?</string>
 
     <!-- the approval card -->
     <string name="nm_risk_desc_on_computer">Sa computer na “%1$s”, hindi sa teleponong ito.</string>
@@ -628,11 +628,11 @@
     <string name="nm_welcome_email">Mag-sign in (libre)</string>
     <string name="nm_welcome_fine_print">Isang account ang nagsasama-sama sa mga device mo at nagdadala ng libreng paggamit ng modelo; walang sinisingil. Maidaragdag ang sarili mong API key kaagad pagkatapos.</string>
     <string name="nm_setup_source_title">Aling modelo ang sasagot?</string>
-    <string name="nm_setup_source_sub">May dala nang isa ang account mo. Maaari ka ring magdagdag ng sarili mong API key at lumipat anumang oras.</string>
-    <string name="nm_setup_source_cloud">Gamitin ang modelo ng nanoMuse Cloud</string>
-    <string name="nm_setup_source_cloud_sub">DeepSeek para sa chat at Qwen para sa mga kamay, na may libreng allowance bawat account na binabayaran ng developer. Walang iko-configure.</string>
+    <string name="nm_setup_source_sub">Parehong magagamit ang mga tool ng telepono. Mabago ito sa Settings, Models.</string>
+    <string name="nm_setup_source_cloud">Hearth relay</string>
+    <string name="nm_setup_source_cloud_sub">Ang modelo sa relay ng bahay na ito. Walang ididikit.</string>
     <string name="nm_setup_source_own_sub">OpenAI, Anthropic, DeepSeek, Bailian at iba pang OpenAI-compatible na endpoint. Nananatili sa teleponong ito ang key.</string>
-    <string name="nm_setup_source_fine_print">Hindi nagtutunggali ang dalawa: nananatiling available ang modelo ng Cloud, at bawat grupo ng modelo ay pumipili ng sarili nito.</string>
+    <string name="nm_setup_source_fine_print">Pumili ng isa para magsimula. Maidaragdag ang isa pa mamaya.</string>
     <string name="nm_setup_password_title">Magtakda ng password</string>
     <string name="nm_setup_password_sub">Nakapasok na ang account mo. Sa pamamagitan ng password, agad na makakapag-sign in ang mga computer at iba mong telepono, nang hindi naghihintay ng code.</string>
     <string name="nm_setup_password_set">Itakda ang password</string>
@@ -642,21 +642,21 @@
     <string name="nm_welcome_feat_hands">Mga kamay: ginagamit nito ang telepono mo</string>
     <string name="nm_welcome_feat_hands_sub">Nagbu-book ng tren, umoorder ng pagkain, naghahanap ng isang bagay sa isang app; nanonood ka, at maaari mo itong itigil anumang oras</string>
     <string name="nm_welcome_feat_reach">Abot: ang mga computer mo, mula rito</string>
-    <string name="nm_welcome_feat_reach_sub">I-install ang nanoMuse Desktop sa isang Mac, Windows o Linux machine, mag-sign in gamit ang parehong account, at bigyan ito ng trabaho mula sa telepono</string>
-    <string name="nm_welcome_notice">Ang nanoMuse ay isang non-profit na open-source na proyekto ng komunidad: libre, habang-buhay. May kasamang libreng allowance ang modelo na binabayaran ng developer; pagkatapos niyon, ang sarili mong key. Walang ibinebenta; nasa patakaran sa privacy kung ano ang itinatago ng relay, at sa iyo ang Mga setting → Mga kontrol sa data.</string>
+    <string name="nm_welcome_feat_reach_sub">I-install ang Hearth Desktop sa isang Mac, Windows o Linux machine, mag-sign in gamit ang parehong account, at bigyan ito ng trabaho mula sa telepono</string>
+    <string name="nm_welcome_notice">Ang Hearth ay isang non-profit na open-source na proyekto ng komunidad: libre, habang-buhay. May kasamang libreng allowance ang modelo na binabayaran ng developer; pagkatapos niyon, ang sarili mong key. Walang ibinebenta; nasa patakaran sa privacy kung ano ang itinatago ng relay, at sa iyo ang Mga setting → Mga kontrol sa data.</string>
     <string name="nm_welcome_hands_title">Hayaan itong gamitin ang telepono mo</string>
     <string name="nm_welcome_hands_sub">Sa dalawang pahintulot, kaya nitong magbukas ng mga app, mag-tap at mag-type para sa iyo. Nananatili sa screen ang isang capsule na may bawat hakbang at isang button na Itigil; laging sa iyo ang mga login, password at code.</string>
     <string name="nm_welcome_hands_turn_on">I-on</string>
     <string name="nm_welcome_skip">Laktawan muna</string>
     <string name="nm_welcome_hands_fine_print">Gumagana ang lahat ng iba pa kahit wala ang mga ito. Nasa Mga setting → Mga kamay ang mga ito kapag gusto mo.</string>
     <string name="nm_welcome_meet_fine_print">Bago ang anumang hindi na nito mababawi (pagbura, pagpapadala, pagbabayad) humihinto ito at nagtatanong muna sa iyo.</string>
-    <string name="nm_cloud_signin_title">Magsimula sa nanoMuse Cloud</string>
-    <string name="nm_cloud_signin_subtitle">Isang code sa telepono o inbox mo, o ang password mo, kapag nakapagtakda ka na.</string>
+    <string name="nm_cloud_signin_title">Mag-sign in sa Hearth</string>
+    <string name="nm_cloud_signin_subtitle">Email muna, tapos ang isang-beses na code. Isinusulat ng relay na ito ang code sa sarili nitong log.</string>
     <string name="nm_cloud_mode_code">Gamit ang code</string>
     <string name="nm_cloud_mode_password">Gamit ang password</string>
     <string name="nm_cloud_password">Password</string>
     <string name="nm_cloud_forgot_password">Nakalimutan ang password? Mag-sign in gamit ang code</string>
-    <string name="nm_cloud_identifier">Numero ng telepono sa mainland China o e-mail</string>
+    <string name="nm_cloud_identifier">Email</string>
     <string name="nm_cloud_identifier_hint">you@example.com</string>
     <string name="nm_cloud_code">Code</string>
     <string name="nm_cloud_send_code">Ipadala ang code</string>
@@ -665,7 +665,7 @@
     <string name="nm_cloud_verify">Mag-sign in</string>
 
     <!-- Your own relay (0.1.38): the sign-in screen's server form and the account page's row -->
-    <string name="nm_cloud_other_server">Gumamit ng ibang server</string>
+    <string name="nm_cloud_other_server">Advanced: ibang server</string>
     <string name="nm_cloud_server_url">Address ng relay</string>
     <string name="nm_cloud_server_check">Suriin</string>
     <string name="nm_cloud_server_use">Gamitin ang server na ito</string>
@@ -675,7 +675,7 @@
     <string name="nm_cloud_server_https">Gumamit ng https para sa server na nasa labas ng sarili mong network. Puwede ang http para sa pribadong address (10.x, 192.168.x, 172.16-31.x, localhost, isang .local o .ts.net na pangalan).</string>
     <string name="nm_lan_only_https">Gumagana lang ang plain http:// para sa mga address sa sarili mong network (10.x, 172.16-31.x, 192.168.x, mga .local na pangalan); gamitin ang https:// para sa %1$s.</string>
     <string name="nm_cloud_server_unreachable">Walang relay na sumagot sa %1$s. Suriin ang address at kung tumatakbo ang relay.</string>
-    <string name="nm_cloud_server_default">Bumalik sa nanoMuse Cloud</string>
+    <string name="nm_cloud_server_default">Bumalik sa Hearth</string>
     <string name="nm_cloud_server_row">Server</string>
     <string name="nm_cloud_server_change">Palitan</string>
     <string name="nm_cloud_server_change_confirm">Ang key ng teleponong ito ay para sa kasalukuyang server. Mag-sign out muna rito, saka mag-sign in sa ibang server mula sa sign-in screen.</string>
@@ -696,11 +696,11 @@
     <string name="nm_cloud_used_today_open">Ngayong araw %1$s</string>
     <string name="nm_cloud_refresh">I-refresh ang balanse</string>
     <string name="nm_cloud_refreshing">Nire-refresh…</string>
-    <string name="nm_cloud_how_it_works">Isang karaniwang provider sa app na ito ang nanoMuse Cloud: nakalista ang mga modelo nito sa ilalim ng Mga provider at maaaring ihalo sa sarili mo sa isang grupo ng modelo.</string>
+    <string name="nm_cloud_how_it_works">Isang karaniwang provider sa app na ito ang Hearth: nakalista ang mga modelo nito sa ilalim ng Mga provider at maaaring ihalo sa sarili mo sa isang grupo ng modelo.</string>
     <string name="nm_cloud_open_provider">Mga setting ng provider</string>
     <string name="nm_cloud_sign_out">Mag-sign out</string>
     <string name="nm_cloud_sign_out_sub">Babawiin ang key ng teleponong ito at aalisin ang Cloud provider; mananatili ang allowance sa account mo.</string>
-    <string name="nm_cloud_sign_out_confirm">Aalisin sa teleponong ito ang nanoMuse Cloud provider at ang mga modelo nito.</string>
+    <string name="nm_cloud_sign_out_confirm">Aalisin sa teleponong ito ang Hearth provider at ang mga modelo nito.</string>
     <string name="nm_cloud_row_remaining">%1$s ang natitira</string>
     <string name="nm_cloud_row_sign_in">Mag-sign in</string>
     <string name="nm_cloud_err_bad_identifier">Hindi mukhang e-mail address iyan.</string>
@@ -718,7 +718,7 @@
     <string name="nm_cloud_err_allowance_abroad">Naubos na ang libreng allowance. Mag-imbita ng kaibigan (+¥%1$s para sa inyong dalawa) o magdagdag ng sarili mong key sa ilalim ng Mga setting → Mga provider; ang OpenRouter ang mabilis na paraan: isang account, isang key, bayad ayon sa gamit.</string>
     <string name="nm_cloud_warn_line">Malapit nang maubos ang libreng allowance: ¥%1$s sa ¥%2$s ang natitira. Mag-imbita ng kaibigan (+¥%3$s para sa inyong dalawa) o magdagdag ng sarili mong key, pareho sa ilalim ng Account.</string>
     <string name="nm_cloud_err_rate_limited">Masyadong maraming request nang sabay-sabay. Sandali lang.</string>
-    <string name="nm_cloud_err_unreachable">Hindi maabot ang nanoMuse Cloud. Suriin ang koneksyon.</string>
+    <string name="nm_cloud_err_unreachable">Hindi maabot ang Hearth. Suriin ang koneksyon.</string>
     <string name="nm_cloud_err_generic">May nagkamali.</string>
     <string name="nm_cloud_err_bad_credentials">Maling e-mail o password.</string>
     <string name="nm_cloud_err_no_password">Wala pang password ang account na ito. Mag-sign in gamit ang code, saka magtakda ng isa sa ilalim ng Account.</string>
@@ -734,10 +734,10 @@
     <string name="nm_cloud_err_content_rejected">Tinanggihan ng content check ng model provider ang kahilingang ito. Subukan ang ibang mga salita, o magsimula ng bagong chat kung paulit-ulit itong nangyayari: ang mga salitang tinutulan nito ay maaaring nasa mas maagang bahagi ng usapan.</string>
     <string name="nm_cloud_err_provider_busy">Abala ngayon ang provider ng model. Subukan muli maya-maya.</string>
     <string name="nm_cloud_err_provider_busy_wait">Abala ngayon ang provider ng model. Subukan muli pagkalipas ng %1$s.</string>
-    <string name="nm_cloud_err_model_not_offered">Hindi na inaalok ng nanoMuse Cloud ang model na iyan. Pumili ng iba sa Settings → nanoMuse Cloud.</string>
-    <string name="nm_cloud_err_relay_down">Hindi sumagot ang nanoMuse Cloud. Subukan muli maya-maya.</string>
-    <string name="nm_cloud_err_allowance_paused">Naka-pause muna ang libreng allowance sa relay na ito, hindi ito naubos. Magdagdag ng sarili mong key o mag-sign in gamit ang plan na binabayaran mo na, sa Settings → nanoMuse Cloud. Mananatili ang sign-in mo, ang mga device mo at ang natitira.</string>
-    <string name="nm_cloud_err_service_paused">Naka-pause muna ang nanoMuse Cloud ng operator nito; nakatago ang sign-in at data mo. Subukan muli mamaya.</string>
+    <string name="nm_cloud_err_model_not_offered">Hindi na inaalok ng Hearth ang model na iyan. Pumili ng iba sa Settings → Hearth.</string>
+    <string name="nm_cloud_err_relay_down">Hindi sumagot ang Hearth. Subukan muli maya-maya.</string>
+    <string name="nm_cloud_err_allowance_paused">Naka-pause muna ang libreng allowance sa relay na ito, hindi ito naubos. Magdagdag ng sarili mong key o mag-sign in gamit ang plan na binabayaran mo na, sa Settings → Hearth. Mananatili ang sign-in mo, ang mga device mo at ang natitira.</string>
+    <string name="nm_cloud_err_service_paused">Naka-pause muna ang Hearth ng operator nito; nakatago ang sign-in at data mo. Subukan muli mamaya.</string>
     <string name="nm_cloud_err_sync_paused">Naka-pause muna ang pag-sync ng mga usapan sa relay na ito; nananatili ang nakatago, at gumagana pa rin ang mga device mo nang mag-isa.</string>
     <string name="nm_cloud_err_hub_paused">Naka-pause muna ang ugnayan ng mga device sa relay na ito; gumagana pa rin ang bawat device nang mag-isa.</string>
     <string name="nm_refusal_relay_says">Sabi ng relay: %1$s</string>
@@ -781,7 +781,7 @@
     <string name="nm_cloud_invite_share">Ibahagi ang link</string>
     <string name="nm_cloud_invite_copy">Kopyahin</string>
     <string name="nm_cloud_invite_copied">Nakopya</string>
-    <string name="nm_cloud_invite_share_text">Subukan ang nanoMuse kasama ko: isang ganap na open-source na personal na agent, libreng gamitin. Mag-sign up gamit ang code kong %1$s: %2$s</string>
+    <string name="nm_cloud_invite_share_text">Subukan ang Hearth kasama ko: isang ganap na open-source na personal na agent, libreng gamitin. Mag-sign up gamit ang code kong %1$s: %2$s</string>
     <string name="nm_cloud_invite_count">%1$d kaibigan ang sumali</string>
     <string name="nm_cloud_invite_earned">¥%1$s ang naidagdag mula sa mga imbitasyon</string>
     <string name="nm_cloud_invite_have">May invite code ka?</string>
@@ -822,8 +822,8 @@
     <string name="nm_cloud_ev_contribute_deleted">Mga kontrol sa data: binura ang mga itinagong usapan</string>
     <string name="nm_cloud_ev_contribute_default">Mga kontrol sa data: naka-on para sa mga bagong account</string>
     <string name="nm_data_title">Mga kontrol sa data</string>
-    <string name="nm_data_improve">Tumulong na pagbutihin ang mga AI model ng nanoMuse</string>
-    <string name="nm_data_why">Habang naka-on ito, ang teksto ng mga chat mo sa mga modelo ng nanoMuse Cloud (ang isinulat mo, ang isinagot nito at ang mga tool na pinili nitong tawagin) ay itinatago sa relay para sanayin ang sariling open model ng komunidad. Hindi ang memorya o SOUL mo (ang system prompt), hindi ang ibinalik ng mga tool, hindi ang mga larawan, at hindi kailanman katabi ng kung sino ka. Hindi kailanman dumadaan sa relay ang sarili mong API key.</string>
+    <string name="nm_data_improve">Tumulong na pagbutihin ang mga AI model ng Hearth</string>
+    <string name="nm_data_why">Habang naka-on ito, ang teksto ng mga chat mo sa mga modelo ng Hearth (ang isinulat mo, ang isinagot nito at ang mga tool na pinili nitong tawagin) ay itinatago sa relay para sanayin ang sariling open model ng komunidad. Hindi ang memorya o SOUL mo (ang system prompt), hindi ang ibinalik ng mga tool, hindi ang mga larawan, at hindi kailanman katabi ng kung sino ka. Hindi kailanman dumadaan sa relay ang sarili mong API key.</string>
     <string name="nm_data_default_on">Nagsisimulang naka-on ito sa mga bagong account.</string>
     <string name="nm_data_default_off">Nagsisimulang naka-off ito sa mga bagong account.</string>
     <string name="nm_data_kept">%1$d turn na ang naitago.</string>
@@ -833,7 +833,7 @@
     <string name="nm_data_delete_sub">Inaalis ang bawat turn na itinago mula sa account na ito, naka-on man o naka-off ang switch ngayon. Ang pag-off ng switch ay nagpapanatili ng naitago na hanggang burahin mo ito dito.</string>
     <string name="nm_data_delete_confirm">Aalisin sa server ang mga itinagong usapan. Hindi na ito maibabalik.</string>
     <string name="nm_data_deleted">%1$d turn ang nabura.</string>
-    <string name="nm_data_sign_in">Mag-sign in sa nanoMuse Cloud para gamitin ito.</string>
+    <string name="nm_data_sign_in">Mag-sign in sa Hearth para gamitin ito.</string>
     <string name="nm_data_privacy">Patakaran sa privacy</string>
     <string name="nm_data_status_on">Naka-on</string>
     <string name="nm_data_status_off">Naka-off</string>
@@ -881,7 +881,7 @@
     <!-- 0.1.20: the coding agents on the account's computers -->
     <string name="nm_coding_title">Mga coding agent</string>
     <string name="nm_coding_intro">Cursor, Codex at Claude Code sa mga computer mo: ang mga session nila, ang huling sagot nila, at isang mensahe sa alinman sa kanila, mula rito. Walang kinokopya mula sa kanila papunta sa telepono.</string>
-    <string name="nm_coding_no_computer">Walang online na computer na may coding agent. Patakbuhin ang nanoMuse sa computer kung saan naka-install ang Cursor, Codex o Claude Code, naka-sign in gamit ang account na ito.</string>
+    <string name="nm_coding_no_computer">Walang online na computer na may coding agent. Patakbuhin ang Hearth sa computer kung saan naka-install ang Cursor, Codex o Claude Code, naka-sign in gamit ang account na ito.</string>
     <string name="nm_coding_account_hint">Naka-sign in ang teleponong ito bilang %1$s; dapat gamitin ng computer ang parehong account.</string>
     <string name="nm_coding_refresh">I-refresh</string>
     <string name="nm_coding_all">Lahat</string>
@@ -915,13 +915,13 @@
     <string name="nm_cloud_tokens_line">%1$s token sa kabuuan · %2$s ngayong araw</string>
     <string name="nm_cloud_notice_title">Libre, open source, non-profit</string>
     <string name="nm_cloud_notice_closing">May nakitang bug, gustong feature, may patch? Ang GitHub repository ang lugar para doon.</string>
-    <string name="nm_cloud_notice">Ang nanoMuse ay isang non-profit na open-source na proyekto ng komunidad: libre, habang-buhay. May kasamang libreng allowance ang modelo na binabayaran ng developer; pagkatapos niyon, ang sarili mong key. Walang ibinebenta; nasa patakaran sa privacy kung ano ang itinatago ng relay, at sa iyo ang Mga setting → Mga kontrol sa data. Burahin ang account kailan mo man gusto.</string>
+    <string name="nm_cloud_notice">Ang Hearth ay isang non-profit na open-source na proyekto ng komunidad: libre, habang-buhay. May kasamang libreng allowance ang modelo na binabayaran ng developer; pagkatapos niyon, ang sarili mong key. Walang ibinebenta; nasa patakaran sa privacy kung ano ang itinatago ng relay, at sa iyo ang Mga setting → Mga kontrol sa data. Burahin ang account kailan mo man gusto.</string>
 
     <!-- nanoMuse: devices on the hub -->
     <string name="nm_hub_channel">Mga mensahe mula sa mga device mo</string>
     <string name="nm_hub_service_channel">Konektado sa mga device mo</string>
-    <string name="nm_hub_service_title">nanoMuse · maaabot mula sa mga device mo</string>
-    <string name="nm_hub_service_connecting">Kumokonekta sa nanoMuse Cloud…</string>
+    <string name="nm_hub_service_title">Hearth · maaabot mula sa mga device mo</string>
+    <string name="nm_hub_service_connecting">Kumokonekta sa Hearth…</string>
     <string name="nm_hub_service_alone">Walang ibang device na online ngayon</string>
     <plurals name="nm_hub_service_devices">
         <item quantity="one">%d device ang online</item>
@@ -942,7 +942,7 @@
     <string name="nm_devices_connected">Konektado</string>
     <string name="nm_devices_connecting">Kumokonekta…</string>
     <string name="nm_devices_off">Naka-off</string>
-    <string name="nm_devices_none">Wala pang ibang device. Sa computer mo, i-install ang nanoMuse Desktop at mag-sign in gamit ang parehong account; lalabas ito dito sa loob ng ilang segundo.</string>
+    <string name="nm_devices_none">Wala pang ibang device. Sa computer mo, i-install ang Hearth Desktop at mag-sign in gamit ang parehong account; lalabas ito dito sa loob ng ilang segundo.</string>
     <string name="nm_devices_online">online</string>
     <string name="nm_devices_offline">offline</string>
     <string name="nm_devices_web">Web console</string>
@@ -961,7 +961,7 @@
     <string name="nm_hub_err_not_controllable">Hindi mahihilingan ng mga gawain ang device na iyon.</string>
     <string name="nm_hub_err_unknown_agent">Wala sa computer ang coding agent na iyon.</string>
     <string name="nm_hub_err_no_session">Wala na sa computer ang session na iyon.</string>
-    <string name="nm_hub_err_unknown_action">Mas lumang nanoMuse ang tumatakbo sa computer na hindi nakakakilala sa aksyong ito.</string>
+    <string name="nm_hub_err_unknown_action">Mas lumang Hearth ang tumatakbo sa computer na hindi nakakakilala sa aksyong ito.</string>
     <string name="nm_hub_err_bad_key">Na-sign out sa relay; mag-sign in ulit.</string>
     <string name="nm_hub_err_generic">Hindi ito nagawa ng computer.</string>
     <string name="nm_devices_refused">Tinanggihan ng relay; mag-sign in ulit</string>
@@ -980,7 +980,7 @@
     <string name="nm_connectors_sign_in">Mag-sign in</string>
     <string name="nm_connectors_disconnect">Idiskonekta</string>
     <string name="nm_connectors_docs">Ang pahina ng vendor tungkol sa server na ito</string>
-    <string name="nm_connectors_how_oauth">Nagsa-sign in gamit ang %1$s account mo sa browser; nagrerehistro ang nanoMuse ng sarili nito sa serbisyo, kaya walang ita-type. Nananatili sa teleponong ito ang token.</string>
+    <string name="nm_connectors_how_oauth">Nagsa-sign in gamit ang %1$s account mo sa browser; nagrerehistro ang Hearth ng sarili nito sa serbisyo, kaya walang ita-type. Nananatili sa teleponong ito ang token.</string>
     <string name="nm_connectors_how_key">Nangangailangan ng key mula sa serbisyo: %1$s. Itinatago lang ito sa MCP entry sa teleponong ito.</string>
     <string name="nm_connectors_how_none">Bukas sa lahat; hindi kailangang mag-sign in.</string>
     <string name="nm_connectors_how_auto">Sinusuri muna kung ano ang kailangan ng server: wala, isang sign-in, o isang key.</string>
@@ -1024,13 +1024,13 @@
 
     <!-- Conversation sync between the account's devices (contract C7) -->
     <string name="nm_sync_title">I-sync ang mga usapan sa pagitan ng mga device ko</string>
-    <string name="nm_sync_caption">Itinatago sa nanoMuse Cloud ang teksto ng mga chat mo para ipakita ng bawat device ang parehong mga usapan. Nananatili ang mga file at larawan sa device kung saan ginawa ang mga ito.</string>
+    <string name="nm_sync_caption">Itinatago sa Hearth ang teksto ng mga chat mo para ipakita ng bawat device ang parehong mga usapan. Nananatili ang mga file at larawan sa device kung saan ginawa ang mga ito.</string>
     <string name="nm_sync_sign_in">Mag-sign in para mag-sync</string>
     <string name="nm_sync_on_toast">Naka-on. Ipinapadala na ang mga usapan ng teleponong ito.</string>
     <string name="nm_sync_off_toast">Naka-off. Nabura na ang naitago.</string>
     <string name="nm_sync_delete">Burahin ang mga na-sync na usapan</string>
-    <string name="nm_sync_delete_sub">Inaalis sa nanoMuse Cloud ang teksto ng mga usapan mo. Pinapanatili ng bawat device ang mayroon na ito; nananatiling naka-on ang sync.</string>
-    <string name="nm_sync_delete_confirm">Aalisin ang mga usapang itinago sa nanoMuse Cloud. Mananatili kung ano ang mga chat sa mga device mo.</string>
+    <string name="nm_sync_delete_sub">Inaalis sa Hearth ang teksto ng mga usapan mo. Pinapanatili ng bawat device ang mayroon na ito; nananatiling naka-on ang sync.</string>
+    <string name="nm_sync_delete_confirm">Aalisin ang mga usapang itinago sa Hearth. Mananatili kung ano ang mga chat sa mga device mo.</string>
     <string name="nm_sync_deleted">Nabura ang mga na-sync na usapan.</string>
     <string name="nm_sync_from">Mula sa %1$s</string>
     <string name="nm_sync_attachment_note">[Attachment %1$s, nananatili sa device kung saan ito ginawa]</string>
@@ -1043,7 +1043,7 @@
     <string name="nm_devices_ask_hint">I-tap ang isang device na online para sulatan ito mula sa chat: magsisimula ang mensahe sa @ at pangalan nito, at ang device na iyon ang gagawa ng trabaho.</string>
     <string name="nm_reach_the_provider">ang provider</string>
     <string name="nm_reach_unreachable_title">Hindi maabot ang %1$s mula sa network na ito</string>
-    <string name="nm_reach_unreachable_body">Walang sumagot sa %1$s. Tungkol ito sa daan mula sa teleponong ito papunta sa provider; hindi kasali ang mga server ng nanoMuse.</string>
+    <string name="nm_reach_unreachable_body">Walang sumagot sa %1$s. Tungkol ito sa daan mula sa teleponong ito papunta sa provider; hindi kasali ang mga server ng Hearth.</string>
     <string name="nm_reach_region_title">Hindi nagbibigay ng serbisyo ang OpenAI sa rehiyong ito</string>
     <string name="nm_reach_region_body">Umabot ang kahilingan sa OpenAI, na sumagot na hindi nito inaalok ang serbisyo sa pinagmulan ng koneksyong ito.</string>
     <string name="nm_reach_signed_out_title">Hindi na balido ang pag-sign in sa ChatGPT</string>
@@ -1086,7 +1086,7 @@
     <string name="nm_network_test_fail">Hindi maabot ang %1$s sa pamamagitan ng proxy: %2$s</string>
     <string name="nm_network_test_status">HTTP %1$d</string>
     <string name="nm_network_invalid">Maglagay ng host at port na nasa pagitan ng 1 at 65535.</string>
-    <string name="nm_network_proxy_caption">Tanging ang mga kahilingan sa mga provider na idinagdag mo gamit ang sariling key, at sa ChatGPT plan, ang dumadaan dito. Hindi kailanman ang nanoMuse Cloud, ang iyong mga computer at ang lokal na network. Nakatago lang sa teleponong ito.</string>
+    <string name="nm_network_proxy_caption">Tanging ang mga kahilingan sa mga provider na idinagdag mo gamit ang sariling key, at sa ChatGPT plan, ang dumadaan dito. Hindi kailanman ang Hearth, ang iyong mga computer at ang lokal na network. Nakatago lang sa teleponong ito.</string>
     <string name="nm_network_hosts_caption">Dumadaan sa proxy: %1$s</string>
     <string name="nm_ways_title_day">Ubos na ang bahagi ngayong araw ng libreng allowance.</string>
     <string name="nm_ways_day_sub">Babalik ito sa bagong araw; gumagana na ngayon ang mga paraan sa ibaba.</string>
@@ -1097,7 +1097,7 @@
     <string name="nm_ways_devices">Mga device</string>
     <!-- 0.1.41 Choice: Settings → Models, the "Use it for" card, one turn on the Cloud -->
     <string name="nm_models_title">Mga modelo</string>
-    <string name="nm_models_intro">Aling modelo ang gumagawa ng ano. Bawat hilera ay nagbubukas ng pipilian; lalabas doon ang nanoMuse Cloud at ang mga provider na idinagdag mo, kasama ang mga modelong akma.</string>
+    <string name="nm_models_intro">Aling modelo ang gumagawa ng ano. Bawat hilera ay nagbubukas ng pipilian; lalabas doon ang Hearth at ang mga provider na idinagdag mo, kasama ang mga modelong akma.</string>
     <string name="nm_models_chat_title">Chat</string>
     <string name="nm_models_chat_sub">Ang modelong kumakausap sa iyo.</string>
     <string name="nm_models_hands_title">Paggamit ng screen</string>
@@ -1109,20 +1109,20 @@
     <string name="nm_models_chat_applies">Para sa pangunahing chat at sa mga bagong chat; pinapanatili ng side chat ang sarili nitong model.</string>
     <string name="nm_models_media_more">Higit pang opsyon sa larawan at clip</string>
     <string name="nm_models_media_more_sub">Mag-type ng pangalan ng modelo, tingnan kung ano ang hihinto kung wala ang bawat modelo, o suriin muli kung aling mga video model ang magagamit ng isang key.</string>
-    <string name="nm_models_cloud_switch">Gamitin ang mga modelo ng nanoMuse Cloud</string>
-    <string name="nm_models_cloud_on_sub">Isa ang nanoMuse Cloud sa mga pinagmumulan ng mga row sa ibaba; ang tumatakbo dito ay ibinabawas sa iyong allowance.</string>
-    <string name="nm_models_cloud_off_sub">Naka-off: walang tatakbo sa nanoMuse Cloud maliban kung i-tap mo ang \"Gamitin ang nanoMuse Cloud ngayon\". Mananatili kang naka-sign in para sa sync at sa iyong mga device.</string>
-    <string name="nm_models_cloud_off_refused">Magdagdag muna ng sarili mong provider; kapag naka-off ang nanoMuse Cloud, wala nang ibang makakasagot.</string>
+    <string name="nm_models_cloud_switch">Gamitin ang mga modelo ng Hearth</string>
+    <string name="nm_models_cloud_on_sub">Isa ang Hearth sa mga pinagmumulan ng mga row sa ibaba; ang tumatakbo dito ay ibinabawas sa iyong allowance.</string>
+    <string name="nm_models_cloud_off_sub">Naka-off: walang tatakbo sa Hearth maliban kung i-tap mo ang \"Gamitin ang Hearth ngayon\". Mananatili kang naka-sign in para sa sync at sa iyong mga device.</string>
+    <string name="nm_models_cloud_off_refused">Magdagdag muna ng sarili mong provider; kapag naka-off ang Hearth, wala nang ibang makakasagot.</string>
     <string name="nm_chat_no_model">Walang modelong makakasagot ngayon. Pumili ng isa sa Mga Setting › Mga Modelo.</string>
-    <string name="nm_cloud_provider_no_delete">Ang provider na ito ay ang iyong nanoMuse Cloud account. I-off ito sa itaas para hindi na gamitin ang mga modelo nito; para mag-sign out, buksan ang Mga Setting › nanoMuse Cloud.</string>
+    <string name="nm_cloud_provider_no_delete">Ang provider na ito ay ang iyong Hearth account. I-off ito sa itaas para hindi na gamitin ang mga modelo nito; para mag-sign out, buksan ang Mga Setting › Hearth.</string>
     <string name="nm_welcome_own_key">Gamitin na lang ang sariling API key</string>
     <string name="nm_useit_title">Gamitin ito para sa</string>
-    <string name="nm_useit_body">Piliin kung ano ang dapat asikasuhin ng key na ito. Ang iba ay nasa nanoMuse Cloud pa rin.</string>
+    <string name="nm_useit_body">Piliin kung ano ang dapat asikasuhin ng key na ito. Ang iba ay nasa Hearth pa rin.</string>
     <string name="nm_useit_body_signed_out">Piliin kung ano ang dapat asikasuhin ng key na ito.</string>
     <string name="nm_useit_use">Gamitin</string>
     <string name="nm_useit_not_now">Hindi muna</string>
     <string name="nm_useit_footnote">Puwede mo itong baguhin anumang oras sa Mga setting › Mga modelo.</string>
-    <string name="nm_retry_on_cloud">Gamitin ang nanoMuse Cloud sa pagkakataong ito</string>
+    <string name="nm_retry_on_cloud">Gamitin ang Hearth sa pagkakataong ito</string>
     <string name="nm_hands_why_chat_provider">ang default ng mga kamay ng iyong chat provider</string>
     <string name="nm_models_auto">Awtomatiko</string>
     <string name="nm_models_auto_currently">Kasalukuyan: %1$s</string>
@@ -1157,4 +1157,25 @@
     <string name="nm_font_scale_medium">Katamtaman</string>
     <string name="nm_font_scale_large">Malaki</string>
     <string name="nm_font_scale_extra_large">Napakalaki</string>
+    <string name="nm_setup_source_grok">Aking Grok account</string>
+    <string name="nm_setup_source_grok_sub">Mag-sign in sa xAI sa teleponong ito. Naka-sign in pa rin ang relay para sa sync at mga device.</string>
+    <string name="nm_panic">EMERGENCY</string>
+    <string name="nm_panic_confirm">I-tap muli para ipadala</string>
+    <string name="nm_panic_sending">Ipinapadala</string>
+    <string name="nm_panic_delivered">Naihatid.</string>
+    <string name="nm_panic_not_delivered">Hindi naihatid. Hindi konektado ang telepono nila.</string>
+    <string name="nm_panic_not_linked">Hindi naihatid. Hindi naka-link ang account na ito sa iba.</string>
+    <string name="nm_panic_not_connected">Hindi naihatid. Hindi konektado ang teleponong ito.</string>
+    <string name="nm_panic_alert_title">Emergency</string>
+    <string name="nm_panic_from">Kailangan ka ni %1$s.</string>
+    <string name="nm_panic_dismiss">Nandito ako</string>
+    <string name="nm_panic_close">Isara</string>
+    <string name="nm_panic_channel">Emergency</string>
+    <string name="nm_panic_channel_sub">Alerto mula sa kabilang telepono sa bahay na ito</string>
+    <string name="nm_todos_title">Mga gawain</string>
+    <string name="nm_todos_empty">Walang laman ang listahan.</string>
+    <string name="nm_todos_hint">Ang kailangang gawin</string>
+    <string name="nm_todos_add">Idagdag</string>
+    <string name="nm_todos_delete">Burahin</string>
+    <string name="nm_menu_todos">Mga gawain</string>
 </resources>

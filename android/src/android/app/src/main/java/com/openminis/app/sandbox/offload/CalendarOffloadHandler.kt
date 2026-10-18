@@ -105,7 +105,7 @@ class CalendarOffloadHandler(private val context: Context) : NativeOffloadHandle
                     OffloadPermissionManager.SettingsGateRequest(
                         id = settingsId,
                         title = "Calendar permission needed",
-                        message = "nanoMuse needs $humanLabel permission to $humanLabel your calendar. Open Settings to allow it.",
+                        message = "Hearth needs $humanLabel permission to $humanLabel your calendar. Open Settings to allow it.", // nanoMuse: Hearth product name.
                         settingsAction = android.provider.Settings.ACTION_APPLICATION_DETAILS_SETTINGS,
                         requiresPackageUri = true,
                         positiveLabel = "Open Settings",

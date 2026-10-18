@@ -750,7 +750,7 @@ class ToolOverlayController(private val context: Context) {
      * show the tool kind ("Shell", "Browser", …).
      */
     private fun toolDisplayLabel(toolName: String?): String = when (toolName) {
-        null -> "nanoMuse"
+        null -> "Hearth" // nanoMuse: Hearth product name.
         "shell_execute" -> "Shell"
         "file_read" -> "File"
         "file_write" -> "Editor"

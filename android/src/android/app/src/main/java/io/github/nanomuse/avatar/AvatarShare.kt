@@ -115,7 +115,7 @@ object AvatarShare {
             typeface = Typeface.create(Typeface.SANS_SERIF, Typeface.BOLD)
             letterSpacing = 0.02f
         }
-        c.drawText("nanoMuse", 72f * s, h - 96f * s, brand)
+        c.drawText("Hearth", 72f * s, h - 96f * s, brand)
         val tag = TextPaint(Paint.ANTI_ALIAS_FLAG).apply {
             color = 0x99000000.toInt()
             textSize = 28f * s

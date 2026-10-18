@@ -3,10 +3,10 @@
 <resources>
     <string name="nm_about_build">这个版本</string>
     <string name="nm_about_license">许可证</string>
-    <string name="nm_about_upstream">基于 OpenMinis 1.13</string>
-    <string name="nm_about_upstream_detail">GPL-3.0 · 自 2026-09-24 起修改 · 源码在 GitHub</string>
+    <string name="nm_about_upstream">致谢</string>
+    <string name="nm_about_upstream_detail">Hearth 衍生自 nanoMuse（github.com/nano-muse/nanoMuse），采用 GPL-3.0</string>
     <string name="nm_about_trademark">与 Meta 无关</string>
-    <string name="nm_about_trademark_detail">Muse 是 Meta Platforms, Inc. 的商标。nanoMuse 是独立的自由软件项目。</string>
+    <string name="nm_about_trademark_detail">Muse 是 Meta Platforms, Inc. 的商标。Hearth 是独立的自由软件项目。</string>
 
     <!-- 聊天页头部 -->
     <string name="nm_avatar_content_description">你的助理。点一下可以改名字、图标和风格。</string>
@@ -21,26 +21,26 @@
     <string name="nm_star_action">去 GitHub 点亮 Star</string>
     <string name="nm_star_later">以后再说</string>
     <string name="nm_star_done">已经点过了</string>
-    <string name="nm_star_signed_in">欢迎加入。nanoMuse 免费、开源、非营利，做的是一个属于每个人的个人智能体。如果你认同，GitHub 上的一颗 Star 能让下一个人也找到这里。</string>
+    <string name="nm_star_signed_in">欢迎加入。Hearth 免费、开源、非营利，做的是一个属于每个人的个人智能体。如果你认同，GitHub 上的一颗 Star 能让下一个人也找到这里。</string>
     <plurals name="nm_star_tasks">
-        <item quantity="other">已经一起完成 %1$d 个任务。如果 nanoMuse 帮上了忙，到 GitHub 点一颗 Star，下一个人也能找到它。</item>
+        <item quantity="other">已经一起完成 %1$d 个任务。如果 Hearth 帮上了忙，到 GitHub 点一颗 Star，下一个人也能找到它。</item>
     </plurals>
-    <string name="nm_star_days_used_week">和 nanoMuse 一起过了一周。如果它在你的日常里有了位置，到 GitHub 点一颗 Star，下一个人也能找到它。</string>
-    <string name="nm_star_days_used_month">和 nanoMuse 一起过了一个月。如果它成了你习惯的一部分，一颗 Star 会让更多人愿意试一试。</string>
+    <string name="nm_star_days_used_week">和 Hearth 一起过了一周。如果它在你的日常里有了位置，到 GitHub 点一颗 Star，下一个人也能找到它。</string>
+    <string name="nm_star_days_used_month">和 Hearth 一起过了一个月。如果它成了你习惯的一部分，一颗 Star 会让更多人愿意试一试。</string>
     <plurals name="nm_star_days_used">
-        <item quantity="other">和 nanoMuse 一起过了 %1$d 天。如果它在你的日常里有了位置，到 GitHub 点一颗 Star，下一个人也能找到它。</item>
+        <item quantity="other">和 Hearth 一起过了 %1$d 天。如果它在你的日常里有了位置，到 GitHub 点一颗 Star，下一个人也能找到它。</item>
     </plurals>
-    <string name="nm_star_goal_done">目标达成了。如果 nanoMuse 帮你走到了这一步，到 GitHub 点一颗 Star，做它的人就知道了。</string>
-    <string name="nm_star_new_look">一张为你画的新面孔。如果你喜欢 nanoMuse 现在的样子，到 GitHub 点一颗 Star，更多人就能遇见它。</string>
-    <string name="nm_star_exhausted">免费额度用完了，谢谢你一路用到这里。如果 nanoMuse 值得，到 GitHub 点一颗 Star，下一个人也能找到它。</string>
+    <string name="nm_star_goal_done">目标达成了。如果 Hearth 帮你走到了这一步，到 GitHub 点一颗 Star，做它的人就知道了。</string>
+    <string name="nm_star_new_look">一张为你画的新面孔。如果你喜欢 Hearth 现在的样子，到 GitHub 点一颗 Star，更多人就能遇见它。</string>
+    <string name="nm_star_exhausted">免费额度用完了，谢谢你一路用到这里。如果 Hearth 值得，到 GitHub 点一颗 Star，下一个人也能找到它。</string>
     <string name="nm_chat_menu_rename">重命名对话</string>
 
     <!-- 前台服务通知标题（没有工具在跑时） -->
     <string name="nm_notif_working">%1$s 正在工作</string>
 
     <!-- 第一次对话：开场白 -->
-    <string name="nm_intro_hello">你好，我是 nanoMuse，住在你手机里的私人助理。让我替你分担几件事。</string>
-    <string name="nm_intro_how_i_work">先说说我怎么工作：\n\n- 我有自己的电脑，一个 Linux 沙盒和一个浏览器，能跑命令、打开网页、填表单。\n- 你挂载给我的文件和相册，我能读、能整理；提醒和定时任务也可以交给我。\n- 关键的一步之前，我会先问你。\n- 一切都在这台手机上跑。对话发给你自己配置的模型；登录 nanoMuse Cloud 后，这段对话也会同步到你的其他设备，可以在「数据控制」里关掉。</string>
+    <string name="nm_intro_hello">你好，我是 Nix。我在这部手机上，可以帮你分担一些事。</string>
+    <string name="nm_intro_how_i_work">先说说我怎么工作：\n\n- 我有自己的电脑，一个 Linux 沙盒和一个浏览器，能跑命令、打开网页、填表单。\n- 你挂载给我的文件和相册，我能读、能整理；提醒和定时任务也可以交给我。\n- 关键的一步之前，我会先问你。\n- 一切都在这台手机上跑。对话发给你自己配置的模型；登录 Hearth 后，这段对话也会同步到你的其他设备，可以在「数据控制」里关掉。</string>
     <string name="nm_intro_ask_name">开始之前，我该怎么称呼你？</string>
 
     <!-- 第一次对话：起名卡 -->
@@ -192,7 +192,7 @@
     <string name="nm_risk_class_outbound">发送</string>
     <string name="nm_risk_class_money">付款</string>
     <string name="nm_risk_class_install">安装</string>
-    <string name="nm_grants_header">nanoMuse 记住的授权</string>
+    <string name="nm_grants_header">Hearth 记住的授权</string>
     <string name="nm_grants_empty">还没有记住任何授权</string>
     <string name="nm_grants_revoke">撤销</string>
     <string name="nm_grants_revoke_confirm">撤销这条授权？下次遇到会重新问你。</string>
@@ -200,7 +200,7 @@
     <string name="nm_risk_remember_money_note">需要验证锁屏。之后只在这一个应用或网站里的付款不再弹卡片；它会排在「设置 → 权限」的最前面，随时可以撤销。</string>
     <string name="nm_risk_remember_money_needs_lock">要记住付款，请先给手机设置锁屏（设置 → 安全）：记住时会用它来确认。</string>
     <string name="nm_risk_lock_title">确认是你本人</string>
-    <string name="nm_risk_lock_subtitle">nanoMuse 将记住 %1$s 里的付款许可，之后不再逐次询问。</string>
+    <string name="nm_risk_lock_subtitle">Hearth 将记住 %1$s 里的付款许可，之后不再逐次询问。</string>
     <string name="nm_risk_remembered_toast">已记住 · 可在「设置 → 权限」里撤销</string>
     <string name="nm_risk_tier_highest">不再询问 · 付款</string>
     <string name="nm_risk_tier_confirm">卡片上记住的 · 删除与发送</string>
@@ -265,7 +265,7 @@
     <string name="nm_sysfiles_open_memory">打开记忆</string>
     <string name="nm_sysfiles_footer">这些文件属于智能体：它是谁、它对你的了解、它记住的事、它为你写的东西、它什么时候自己醒来。都存在你手机里；智能体在它的 shell 里通过 /var/minis/memory 读写，你也可以在这里直接改。</string>
     <string name="nm_sysfile_about_lead">关于此文件。</string>
-    <string name="nm_sysfile_about_soul">这是智能体的人格：它在每次对话里努力守住的价值和习惯、它的名字、它回答时的风格。从 nanoMuse 自带的模板开始，智能体可能会随着时间打磨它，并在改动时告诉你。你随时可以编辑。这段说明不是文件的一部分。</string>
+    <string name="nm_sysfile_about_soul">这是智能体的人格：它在每次对话里努力守住的价值和习惯、它的名字、它回答时的风格。从 Hearth 自带的模板开始，智能体可能会随着时间打磨它，并在改动时告诉你。你随时可以编辑。这段说明不是文件的一部分。</string>
     <string name="nm_sysfile_about_user">智能体把这个文件当作关于你的工作笔记：你的名字、你喜欢的称呼、你的时区，以及它要派上用场所需要的背景，比如你正在做的事。它会从你们的对话里逐渐填进来，并在每次对话开始时读一遍。它反映的是智能体当前的理解，可能不完整或过时。这里的任何内容你都可以改，智能体会照你写的来。这段说明不是文件的一部分。</string>
     <string name="nm_sysfile_about_memory">智能体跨对话保留的长期记录：值得记住的事，用它自己的话写下，加上你从别的助手导入的内容。逐日的日记放在同一个记忆文件夹里。开着记忆时，每次对话开始都会读。这段说明不是文件的一部分。</string>
     <string name="nm_sysfile_about_feed">一段话决定动态怎么写：你想多看什么、少看什么、每条多长。每天写动态的例程动笔前会先读它。这段说明不是文件的一部分。</string>
@@ -346,7 +346,7 @@
     <string name="nm_own_clip_title">你自己的视频</string>
     <string name="nm_own_clip_body">一段你自己的短视频会作为待机时的形象播放，其他状态也沿用它。MP4 或 MOV，H.264 视频，最长 15 秒、最大 30 MB；静音循环播放。</string>
     <string name="nm_own_clip_on">你的视频已启用，所有状态都播放它；需要静态图的地方仍用画好的图片。「默认形象」可移除它。</string>
-    <string name="nm_own_clip_local">视频只保存在这台手机上，不会上传到 nanoMuse Cloud，也不会同步到你的其他设备。</string>
+    <string name="nm_own_clip_local">视频只保存在这台手机上，不会上传到 Hearth，也不会同步到你的其他设备。</string>
     <string name="nm_own_clip_choose">选择视频</string>
     <string name="nm_own_clip_replace">更换视频</string>
     <string name="nm_own_clip_default">默认形象</string>
@@ -364,7 +364,7 @@
     <string name="nm_a11y_own_clip_preview">你的视频预览</string>
 
     <!-- 首次运行 -->
-    <string name="nm_setup_title">欢迎使用 nanoMuse</string>
+    <string name="nm_setup_title">欢迎使用 Hearth</string>
     <string name="nm_setup_step_models">选择模型</string>
     <string name="nm_setup_step_models_sub">自动列出服务商提供的模型，最多选三个</string>
     <string name="nm_setup_step_start">认识 %1$s</string>
@@ -380,7 +380,7 @@
     <string name="nm_settings_no_model">还没有模型</string>
     <string name="nm_settings_no_model_sub">添加服务商并选择它的模型</string>
     <string name="nm_settings_change_model">更换</string>
-    <string name="nm_settings_version">nanoMuse %1$s (%2$d)</string>
+    <string name="nm_settings_version">Hearth %1$s (%2$d)</string>
     <string name="nm_version_title">版本</string>
     <string name="nm_version_checking">正在查看最新版本…</string>
     <string name="nm_version_have">最新 %1$s，你用的就是它</string>
@@ -458,7 +458,7 @@
     <string name="nm_avatar_share_title">分享我的虚拟形象</string>
     <string name="nm_avatar_share_subtitle">选一张卡片，用系统分享发出去。</string>
     <string name="nm_avatar_share_system">分享</string>
-    <string name="nm_avatar_share_bubble">你好，我是你的个人 AI 智能体%1$s。nanoMuse：开源、在手机上本地运行。</string>
+    <string name="nm_avatar_share_bubble">你好，我是你的个人 AI 智能体%1$s。Hearth：开源、在手机上本地运行。</string>
     <string name="nm_avatar_share_tagline">你的个人 AI 智能体，开源 · github.com/WPMG-4The99/hearth</string>
     <!-- 0.1.10 · Motion -->
     <string name="nm_media_title">图像与视频模型</string>
@@ -509,7 +509,7 @@
     <string name="nm_hands_section_needs">需要什么</string>
     <string name="nm_hands_needs_footer">无障碍服务只负责截图和手势，不读取屏幕内容。悬浮窗权限用来显示胶囊。</string>
     <string name="nm_hands_need_a11y">无障碍服务</string>
-    <string name="nm_hands_need_a11y_fix">到无障碍设置里「已安装的应用」中打开 nanoMuse</string>
+    <string name="nm_hands_need_a11y_fix">到无障碍设置里「已安装的应用」中打开 Hearth</string>
     <string name="nm_hands_need_overlay">显示在其他应用上层</string>
     <string name="nm_hands_need_overlay_fix">允许后才能显示带「停止」按钮的胶囊</string>
     <string name="nm_hands_need_model">能看图的模型</string>
@@ -526,7 +526,7 @@
     <string name="nm_hands_why_default">你自己 key 下的动手默认模型</string>
     <string name="nm_hands_why_chat">你选的对话模型</string>
     <string name="nm_hands_why_group">默认模型组里第一个能看图的</string>
-    <string name="nm_hands_why_menu">nanoMuse Cloud 的看屏模型</string>
+    <string name="nm_hands_why_menu">Hearth 的看屏模型</string>
     <string name="nm_hands_why_vision_group">你的视觉模型组</string>
     <string name="nm_hands_why_any">唯一一个启用了、又能看图的模型</string>
     <string name="nm_hands_section_rules">它会怎么做</string>
@@ -546,7 +546,7 @@
     <string name="nm_hands_protected_screen">这个页面受保护，读不到内容。请你自己完成这一步，然后点「继续」。</string>
     <string name="nm_hands_secret_field">这是密码或验证码输入框，请你自己填好，然后点「继续」。</string>
     <string name="nm_hands_approval_title">等你确认</string>
-    <string name="nm_hands_approval_detail">要点「%1$s」：请回 nanoMuse 确认（会要求验证锁屏）。</string>
+    <string name="nm_hands_approval_detail">要点「%1$s」：请回 Hearth 确认（会要求验证锁屏）。</string>
     <string name="nm_hands_approval_here">要点「%1$s」，可以吗？</string>
     <string name="nm_hands_allow_once">允许</string>
     <string name="nm_hands_deny">拒绝</string>
@@ -575,10 +575,10 @@
     <!-- Reach (0.1.13): the phone drives your computer -->
     <string name="nm_pc_title">电脑</string>
     <string name="nm_pc_none_short">无</string>
-    <string name="nm_pc_intro">手机上说一句，电脑上就做：一条命令、一个文件、浏览器里的一个页面、看一眼它的屏幕，或者把整件事交给那边的 nanoMuse。只有手机操作电脑，反过来不行；每一次审批都先在这里决定。</string>
+    <string name="nm_pc_intro">手机上说一句，电脑上就做：一条命令、一个文件、浏览器里的一个页面、看一眼它的屏幕，或者把整件事交给那边的 Hearth。只有手机操作电脑，反过来不行；每一次审批都先在这里决定。</string>
     <string name="nm_pc_hub_title">最简单的办法：装桌面版，登同一个账号</string>
-    <string name="nm_pc_hub_body">在电脑上安装 nanoMuse 桌面版，用这台手机的账号登录；几秒钟后它就出现在「账号 → 设备」里。</string>
-    <string name="nm_pc_hub_download">获取 nanoMuse 桌面版</string>
+    <string name="nm_pc_hub_body">在电脑上安装 Hearth 桌面版，用这台手机的账号登录；几秒钟后它就出现在「账号 → 设备」里。</string>
+    <string name="nm_pc_hub_download">获取 Hearth 桌面版</string>
     <string name="nm_pc_hub_account">账号与设备</string>
     <string name="nm_pc_section_paired">这个账号下的电脑</string>
     <string name="nm_pc_none">还没有电脑</string>
@@ -587,11 +587,11 @@
     <string name="nm_pc_last_seen">上次 %1$s</string>
     <string name="nm_pc_offline">离线</string>
     <string name="nm_pc_online">在线</string>
-    <string name="nm_pc_account_none">这台手机还没登录 nanoMuse Cloud；先登录，电脑上再登同一个账号。</string>
+    <string name="nm_pc_account_none">这台手机还没登录 Hearth；先登录，电脑上再登同一个账号。</string>
     <string name="nm_pc_account_hint">这台手机登录的是 %1$s，电脑上要登同一个账号。</string>
     <string name="nm_pc_checking">正在检查…</string>
     <string name="nm_pc_answering">%1$s 在线</string>
-    <string name="nm_pc_not_answering">%1$s 没有响应。电脑上的 nanoMuse 桌面版还开着吗？</string>
+    <string name="nm_pc_not_answering">%1$s 没有响应。电脑上的 Hearth 桌面版还开着吗？</string>
     <!-- the approval card -->
     <string name="nm_risk_desc_on_computer">在电脑「%1$s」上，不是在这台手机上。</string>
     <string name="nm_risk_preview_computer">电脑上的命令</string>
@@ -609,12 +609,12 @@
     <string name="nm_welcome_tagline">一个开源的个人智能体，装在你的每一台设备上。</string>
     <string name="nm_welcome_email">登录，免费开始</string>
     <string name="nm_welcome_fine_print">一个账号连起你的几台设备，也承载免费的模型额度；不收费。登录之后随时可以改用自己的 API key。</string>
-    <string name="nm_setup_source_title">让哪个模型来回答？</string>
-    <string name="nm_setup_source_sub">你的账号已经自带了一个。也可以加上自己的 API key，随时切换。</string>
-    <string name="nm_setup_source_cloud">用 nanoMuse Cloud 的模型</string>
-    <string name="nm_setup_source_cloud_sub">对话用 DeepSeek，动手用 Qwen；每个账号都有一份由开发者承担的免费额度，不用配置。</string>
+    <string name="nm_setup_source_title">哪个模型来回答？</string>
+    <string name="nm_setup_source_sub">两种都能用手机上的工具。之后可以在设置 → 模型里改。</string>
+    <string name="nm_setup_source_cloud">Hearth 中继</string>
+    <string name="nm_setup_source_cloud_sub">用这台中继上的模型。不用粘贴密钥。</string>
     <string name="nm_setup_source_own_sub">OpenAI、Anthropic、DeepSeek、百炼等兼容 OpenAI 接口的服务。key 只留在这台手机上。</string>
-    <string name="nm_setup_source_fine_print">两种方式不冲突：Cloud 模型始终可用，每个模型组各选各的。</string>
+    <string name="nm_setup_source_fine_print">先选一个。另一个以后还能加上。</string>
     <string name="nm_setup_password_title">设一个密码</string>
     <string name="nm_setup_password_sub">账号已登录。设了密码，电脑和其他手机就能直接登录，不用再等验证码。</string>
     <string name="nm_setup_password_set">设置密码</string>
@@ -624,21 +624,21 @@
     <string name="nm_welcome_feat_hands">Hands：替你操作手机</string>
     <string name="nm_welcome_feat_hands_sub">订车票、点外卖、在应用里查东西；你全程看着，随时可以停</string>
     <string name="nm_welcome_feat_reach">Reach：从手机使用你的电脑</string>
-    <string name="nm_welcome_feat_reach_sub">在 Mac、Windows 或 Linux 电脑上装好 nanoMuse 桌面版，用同一个账号登录，就能在手机上派活给它</string>
-    <string name="nm_welcome_notice">nanoMuse 是非营利的开源社区项目，永久免费。模型自带一份由开发者承担的免费额度，用完换自己的 key。数据不会出售；服务器保存什么写在隐私政策里，「设置 → 数据控制」由你决定。</string>
+    <string name="nm_welcome_feat_reach_sub">在 Mac、Windows 或 Linux 电脑上装好 Hearth 桌面版，用同一个账号登录，就能在手机上派活给它</string>
+    <string name="nm_welcome_notice">Hearth 是非营利的开源社区项目，永久免费。模型自带一份由开发者承担的免费额度，用完换自己的 key。数据不会出售；服务器保存什么写在隐私政策里，「设置 → 数据控制」由你决定。</string>
     <string name="nm_welcome_hands_title">让它替你操作手机</string>
     <string name="nm_welcome_hands_sub">开启两项权限后，它就能替你打开应用、点按和输入。屏幕上始终有显示当前步骤和「停止」的胶囊；登录、密码和验证码永远由你自己来。</string>
     <string name="nm_welcome_hands_turn_on">去开启</string>
     <string name="nm_welcome_skip">暂时跳过</string>
     <string name="nm_welcome_hands_fine_print">不开也不影响其他功能。之后随时可以在「设置 → Hands」里开启。</string>
     <string name="nm_welcome_meet_fine_print">凡是无法撤回的事（删除、发送、付款）它都会先停下来问你。</string>
-    <string name="nm_cloud_signin_title">用 nanoMuse Cloud 开始</string>
-    <string name="nm_cloud_signin_subtitle">手机号或邮箱收一个验证码；设过密码的话也可以直接用密码。</string>
+    <string name="nm_cloud_signin_title">登录 Hearth</string>
+    <string name="nm_cloud_signin_subtitle">先填邮箱，再填一次性验证码。这台中继把验证码写在自己的日志里。</string>
     <string name="nm_cloud_mode_code">验证码登录</string>
     <string name="nm_cloud_mode_password">密码登录</string>
     <string name="nm_cloud_password">密码</string>
     <string name="nm_cloud_forgot_password">忘了密码？用验证码登录</string>
-    <string name="nm_cloud_identifier">中国大陆手机号或邮箱</string>
+    <string name="nm_cloud_identifier">邮箱</string>
     <string name="nm_cloud_identifier_hint">you@example.com</string>
     <string name="nm_cloud_code">验证码</string>
     <string name="nm_cloud_send_code">发送验证码</string>
@@ -646,7 +646,7 @@
     <string name="nm_cloud_resend_in">%1$d 秒后可重发</string>
     <string name="nm_cloud_verify">登录</string>
     <!-- 自建中继服务器（0.1.38）：登录页的服务器表单与账号页的那一行 -->
-    <string name="nm_cloud_other_server">使用其他服务器</string>
+    <string name="nm_cloud_other_server">高级：换一台服务器</string>
     <string name="nm_cloud_server_url">服务器地址</string>
     <string name="nm_cloud_server_check">检查</string>
     <string name="nm_cloud_server_use">使用这个服务器</string>
@@ -656,7 +656,7 @@
     <string name="nm_cloud_server_https">本机网络之外的服务器请用 https。内网地址（10.x、192.168.x、172.16-31.x、localhost、.local 或 .ts.net 域名）可以用 http。</string>
     <string name="nm_lan_only_https">明文 http:// 只能用于你自己网络里的地址（10.x、172.16-31.x、192.168.x、.local 名字）；%1$s 请用 https://。</string>
     <string name="nm_cloud_server_unreachable">%1$s 没有中继服务响应。请检查地址，并确认服务已经在运行。</string>
-    <string name="nm_cloud_server_default">改回 nanoMuse Cloud</string>
+    <string name="nm_cloud_server_default">改回 Hearth</string>
     <string name="nm_cloud_server_row">服务器</string>
     <string name="nm_cloud_server_change">更换</string>
     <string name="nm_cloud_server_change_confirm">这台手机的密钥属于当前服务器。请先在这里退出登录，再到登录页登录另一个服务器。</string>
@@ -676,11 +676,11 @@
     <string name="nm_cloud_used_today_open">今天已用 %1$s</string>
     <string name="nm_cloud_refresh">刷新余额</string>
     <string name="nm_cloud_refreshing">正在刷新…</string>
-    <string name="nm_cloud_how_it_works">nanoMuse Cloud 在这个应用里就是一个普通的服务商：它的模型列在「服务商」里，也可以和你自己的模型放进同一个模型组。</string>
+    <string name="nm_cloud_how_it_works">Hearth 在这个应用里就是一个普通的服务商：它的模型列在「服务商」里，也可以和你自己的模型放进同一个模型组。</string>
     <string name="nm_cloud_open_provider">服务商设置</string>
     <string name="nm_cloud_sign_out">退出登录</string>
     <string name="nm_cloud_sign_out_sub">作废这台手机的 key 并移除这个服务商；额度跟着账号，下次登录还在。</string>
-    <string name="nm_cloud_sign_out_confirm">会从这台手机上移除 nanoMuse Cloud 这个服务商和它的模型。</string>
+    <string name="nm_cloud_sign_out_confirm">会从这台手机上移除 Hearth 这个服务商和它的模型。</string>
     <string name="nm_cloud_row_remaining">剩余 %1$s</string>
     <string name="nm_cloud_row_sign_in">登录</string>
     <string name="nm_cloud_err_bad_identifier">这看起来不是邮箱地址。</string>
@@ -698,7 +698,7 @@
     <string name="nm_cloud_err_allowance_abroad">免费额度已用完。邀请一位新用户（你和对方各 +¥%1$s），或在 设置 → 服务商 里添加自己的 key，海外推荐 OpenRouter：一个账号一把 key，按量付费。</string>
     <string name="nm_cloud_warn_line">免费额度快用完了：还剩 ¥%1$s（共 ¥%2$s）。邀请一位新用户（你和对方各 +¥%3$s），或换成自己的 key，都在「账号」里。</string>
     <string name="nm_cloud_err_rate_limited">请求太快了，稍等一下。</string>
-    <string name="nm_cloud_err_unreachable">连不上 nanoMuse Cloud，请检查网络。</string>
+    <string name="nm_cloud_err_unreachable">连不上 Hearth，请检查网络。</string>
     <string name="nm_cloud_err_generic">出了点问题。</string>
     <string name="nm_cloud_err_bad_credentials">邮箱或密码不对。</string>
     <string name="nm_cloud_err_no_password">这个账号还没有设置密码。先用验证码登录，再到「账号」里设置。</string>
@@ -714,10 +714,10 @@
     <string name="nm_cloud_err_content_rejected">模型服务商的内容审核没有放行这次请求。换个说法试试；如果反复出现，就新开一个对话，被拦下的可能是对话里更早的内容。</string>
     <string name="nm_cloud_err_provider_busy">模型服务商现在很忙，稍后再试。</string>
     <string name="nm_cloud_err_provider_busy_wait">模型服务商现在很忙，请在 %1$s 后再试。</string>
-    <string name="nm_cloud_err_model_not_offered">nanoMuse Cloud 不再提供这个模型。到「设置 → nanoMuse Cloud」换一个。</string>
-    <string name="nm_cloud_err_relay_down">nanoMuse Cloud 没有响应，稍后再试。</string>
-    <string name="nm_cloud_err_allowance_paused">这台中继暂时停发了免费额度，不是用完了。到「设置 → nanoMuse Cloud」添加自己的密钥，或用已付费的订阅登录。登录、多设备和剩余额度都原样保留。</string>
-    <string name="nm_cloud_err_service_paused">nanoMuse Cloud 被运营者暂停了，登录和数据都保留着。稍后再试。</string>
+    <string name="nm_cloud_err_model_not_offered">Hearth 不再提供这个模型。到「设置 → Hearth」换一个。</string>
+    <string name="nm_cloud_err_relay_down">Hearth 没有响应，稍后再试。</string>
+    <string name="nm_cloud_err_allowance_paused">这台中继暂时停发了免费额度，不是用完了。到「设置 → Hearth」添加自己的密钥，或用已付费的订阅登录。登录、多设备和剩余额度都原样保留。</string>
+    <string name="nm_cloud_err_service_paused">Hearth 被运营者暂停了，登录和数据都保留着。稍后再试。</string>
     <string name="nm_cloud_err_sync_paused">这台中继暂时停了对话同步，已存的内容保留，各设备可以各自继续用。</string>
     <string name="nm_cloud_err_hub_paused">这台中继暂时停了设备互联，各设备可以各自继续用。</string>
     <string name="nm_refusal_relay_says">中继说：%1$s</string>
@@ -760,7 +760,7 @@
     <string name="nm_cloud_invite_share">分享链接</string>
     <string name="nm_cloud_invite_copy">复制</string>
     <string name="nm_cloud_invite_copied">已复制</string>
-    <string name="nm_cloud_invite_share_text">来和我一起用 nanoMuse：完全开源的个人智能体，免费使用。用我的邀请码 %1$s 注册：%2$s</string>
+    <string name="nm_cloud_invite_share_text">来和我一起用 Hearth：完全开源的个人智能体，免费使用。用我的邀请码 %1$s 注册：%2$s</string>
     <string name="nm_cloud_invite_count">已邀请 %1$d 位</string>
     <string name="nm_cloud_invite_earned">邀请带来 ¥%1$s</string>
     <string name="nm_cloud_invite_have">有邀请码？</string>
@@ -782,8 +782,8 @@
     <string name="nm_cloud_ev_contribute_deleted">数据控制：已删除保存的对话</string>
     <string name="nm_cloud_ev_contribute_default">数据控制：新账号默认开启</string>
     <string name="nm_data_title">数据控制</string>
-    <string name="nm_data_improve">帮助改进 nanoMuse 的 AI 模型</string>
-    <string name="nm_data_why">开启后，你与 nanoMuse Cloud 模型对话的文字（你写的、它回答的，以及它选择调用的工具）会保存在中继上，用来训练社区自己的开源模型。不保存你的记忆和 SOUL（系统提示）、工具返回的内容和图片，也不和你的身份放在一起。用自己的 API key 时，对话不经过中继。</string>
+    <string name="nm_data_improve">帮助改进 Hearth 的 AI 模型</string>
+    <string name="nm_data_why">开启后，你与 Hearth 模型对话的文字（你写的、它回答的，以及它选择调用的工具）会保存在中继上，用来训练社区自己的开源模型。不保存你的记忆和 SOUL（系统提示）、工具返回的内容和图片，也不和你的身份放在一起。用自己的 API key 时，对话不经过中继。</string>
     <string name="nm_data_default_on">新账号默认开启。</string>
     <string name="nm_data_default_off">新账号默认关闭。</string>
     <string name="nm_data_kept">已保存 %1$d 轮对话。</string>
@@ -793,7 +793,7 @@
     <string name="nm_data_delete_sub">删除这个账号已保存的全部对话，不管开关现在是开是关。只关掉开关不会删除已保存的内容，要在这里删。</string>
     <string name="nm_data_delete_confirm">已保存的对话会从服务器上删除，不可恢复。</string>
     <string name="nm_data_deleted">已删除 %1$d 轮。</string>
-    <string name="nm_data_sign_in">登录 nanoMuse Cloud 后可用。</string>
+    <string name="nm_data_sign_in">登录 Hearth 后可用。</string>
     <string name="nm_data_privacy">隐私政策</string>
     <string name="nm_data_status_on">开</string>
     <string name="nm_data_status_off">关</string>
@@ -840,7 +840,7 @@
     <!-- 0.1.20: the 编程助手s on the account's computers -->
     <string name="nm_coding_title">编程助手</string>
     <string name="nm_coding_intro">你电脑上的 Cursor、Codex、Claude Code：在这里看它们的会话和最近的回复，直接给任何一个发消息。它们的内容不会复制到手机上。</string>
-    <string name="nm_coding_no_computer">没有在线的电脑带编程助手。请在装了 Cursor、Codex 或 Claude Code 的电脑上运行 nanoMuse，并用同一个账号登录。</string>
+    <string name="nm_coding_no_computer">没有在线的电脑带编程助手。请在装了 Cursor、Codex 或 Claude Code 的电脑上运行 Hearth，并用同一个账号登录。</string>
     <string name="nm_coding_account_hint">这台手机登录的是 %1$s，电脑上要登同一个账号。</string>
     <string name="nm_coding_refresh">刷新</string>
     <string name="nm_coding_all">全部</string>
@@ -873,12 +873,12 @@
     <string name="nm_cloud_tokens_line">累计 %1$s tokens · 今天 %2$s</string>
     <string name="nm_cloud_notice_title">免费 · 开源 · 非营利</string>
     <string name="nm_cloud_notice_closing">发现问题、想要新功能、愿意改代码，都欢迎到 GitHub 上提。</string>
-    <string name="nm_cloud_notice">nanoMuse 是非营利的开源社区项目，永久免费。模型自带一份由开发者承担的免费额度，用完换自己的 key。数据不会出售；服务器保存什么写在隐私政策里，「设置 → 数据控制」由你决定；随时可以删除账号。</string>
+    <string name="nm_cloud_notice">Hearth 是非营利的开源社区项目，永久免费。模型自带一份由开发者承担的免费额度，用完换自己的 key。数据不会出售；服务器保存什么写在隐私政策里，「设置 → 数据控制」由你决定；随时可以删除账号。</string>
     <!-- nanoMuse: devices on the hub -->
     <string name="nm_hub_channel">来自你其他设备的消息</string>
     <string name="nm_hub_service_channel">与你的设备保持连接</string>
-    <string name="nm_hub_service_title">nanoMuse · 你的其他设备可以找到这台手机</string>
-    <string name="nm_hub_service_connecting">正在连接 nanoMuse Cloud…</string>
+    <string name="nm_hub_service_title">Hearth · 你的其他设备可以找到这台手机</string>
+    <string name="nm_hub_service_connecting">正在连接 Hearth…</string>
     <string name="nm_hub_service_alone">目前没有其他设备在线</string>
     <plurals name="nm_hub_service_devices">
         <item quantity="other">%d 台设备在线</item>
@@ -899,7 +899,7 @@
     <string name="nm_devices_connected">已连接</string>
     <string name="nm_devices_connecting">连接中…</string>
     <string name="nm_devices_off">已关闭</string>
-    <string name="nm_devices_none">还没有其他设备。在电脑上安装 nanoMuse 桌面版并用同一账号登录，几秒后就会出现在这里。</string>
+    <string name="nm_devices_none">还没有其他设备。在电脑上安装 Hearth 桌面版并用同一账号登录，几秒后就会出现在这里。</string>
     <string name="nm_devices_online">在线</string>
     <string name="nm_devices_offline">离线</string>
     <string name="nm_devices_web">网页控制台</string>
@@ -917,7 +917,7 @@
     <string name="nm_hub_err_not_controllable">那个设备不能接受操作。</string>
     <string name="nm_hub_err_unknown_agent">电脑上没有这个编程助手。</string>
     <string name="nm_hub_err_no_session">这个会话已经不在电脑上了。</string>
-    <string name="nm_hub_err_unknown_action">电脑上的 nanoMuse 版本较旧，不认识这个操作。</string>
+    <string name="nm_hub_err_unknown_action">电脑上的 Hearth 版本较旧，不认识这个操作。</string>
     <string name="nm_hub_err_bad_key">中继上已退出登录，请重新登录。</string>
     <string name="nm_hub_err_generic">电脑没能完成。</string>
     <string name="nm_devices_refused">中继拒绝了连接；重新登录一下</string>
@@ -935,7 +935,7 @@
     <string name="nm_connectors_sign_in">登录</string>
     <string name="nm_connectors_disconnect">断开</string>
     <string name="nm_connectors_docs">服务商关于此服务器的说明</string>
-    <string name="nm_connectors_how_oauth">在浏览器里用你的 %1$s 账号登录；nanoMuse 会自动向该服务注册，不用填任何东西。令牌只保存在这台手机上。</string>
+    <string name="nm_connectors_how_oauth">在浏览器里用你的 %1$s 账号登录；Hearth 会自动向该服务注册，不用填任何东西。令牌只保存在这台手机上。</string>
     <string name="nm_connectors_how_key">需要该服务的密钥：%1$s。它只保存在这台手机的 MCP 记录里。</string>
     <string name="nm_connectors_how_none">对所有人开放，不需要登录。</string>
     <string name="nm_connectors_how_auto">先探测服务器需要什么：不需要、登录，还是密钥。</string>
@@ -977,13 +977,13 @@
 
     <!-- 账号各设备之间的对话同步（契约 C7） -->
     <string name="nm_sync_title">在我的设备之间同步对话</string>
-    <string name="nm_sync_caption">对话文字会保存在 nanoMuse Cloud，让每台设备看到同样的对话。文件和图片只留在产生它们的设备上。</string>
+    <string name="nm_sync_caption">对话文字会保存在 Hearth，让每台设备看到同样的对话。文件和图片只留在产生它们的设备上。</string>
     <string name="nm_sync_sign_in">登录后可同步</string>
     <string name="nm_sync_on_toast">已开启。正在发送这台手机上的对话。</string>
     <string name="nm_sync_off_toast">已关闭。云端保存的内容已删除。</string>
     <string name="nm_sync_delete">删除已同步的对话</string>
-    <string name="nm_sync_delete_sub">从 nanoMuse Cloud 删除对话文字。各设备上已有的对话保留，同步保持开启。</string>
-    <string name="nm_sync_delete_confirm">保存在 nanoMuse Cloud 的对话会被删除。各设备上的聊天保持原样。</string>
+    <string name="nm_sync_delete_sub">从 Hearth 删除对话文字。各设备上已有的对话保留，同步保持开启。</string>
+    <string name="nm_sync_delete_confirm">保存在 Hearth 的对话会被删除。各设备上的聊天保持原样。</string>
     <string name="nm_sync_deleted">已删除同步的对话。</string>
     <string name="nm_sync_from">来自 %1$s</string>
     <string name="nm_sync_attachment_note">[附件 %1$s，只留在产生它的设备上]</string>
@@ -1016,7 +1016,7 @@
     <string name="nm_cap_chat_unavailable">对话需要有对话模型的提供方：添加一把 key，或登录。</string>
     <string name="nm_reach_the_provider">提供方</string>
     <string name="nm_reach_unreachable_title">这个网络连不上 %1$s</string>
-    <string name="nm_reach_unreachable_body">%1$s 没有任何回应。问题出在这台手机到提供方的线路上，与 nanoMuse 自己的服务器无关。</string>
+    <string name="nm_reach_unreachable_body">%1$s 没有任何回应。问题出在这台手机到提供方的线路上，与 Hearth 自己的服务器无关。</string>
     <string name="nm_reach_region_title">OpenAI 不向这个地区提供服务</string>
     <string name="nm_reach_region_body">请求到达了 OpenAI，它回答说不在这条连接所在的地区提供服务。</string>
     <string name="nm_reach_signed_out_title">ChatGPT 登录已失效</string>
@@ -1059,7 +1059,7 @@
     <string name="nm_network_test_fail">通过代理连不上 %1$s：%2$s</string>
     <string name="nm_network_test_status">HTTP %1$d</string>
     <string name="nm_network_invalid">请填写主机和 1 到 65535 之间的端口。</string>
-    <string name="nm_network_proxy_caption">只有发往你用自己 key 添加的提供方和 ChatGPT 套餐的请求走代理。nanoMuse Cloud、你的电脑和局域网从不经过它。只保存在这台手机上。</string>
+    <string name="nm_network_proxy_caption">只有发往你用自己 key 添加的提供方和 ChatGPT 套餐的请求走代理。Hearth、你的电脑和局域网从不经过它。只保存在这台手机上。</string>
     <string name="nm_network_hosts_caption">走代理的主机：%1$s</string>
     <string name="nm_ways_title_day">今天这份免费额度已用完。</string>
     <string name="nm_ways_day_sub">新的一天会恢复；下面这些办法现在就能用。</string>
@@ -1070,7 +1070,7 @@
     <string name="nm_ways_devices">设备</string>
     <!-- 0.1.41 Choice: Settings → Models, the "Use it for" card, one turn on the Cloud -->
     <string name="nm_models_title">模型</string>
-    <string name="nm_models_intro">哪个模型做哪件事。每一行都会打开一个选择页；nanoMuse Cloud 和你添加的服务商会连同合适的模型一起列在那里。</string>
+    <string name="nm_models_intro">哪个模型做哪件事。每一行都会打开一个选择页；Hearth 和你添加的服务商会连同合适的模型一起列在那里。</string>
     <string name="nm_models_chat_title">对话</string>
     <string name="nm_models_chat_sub">和你说话的模型。</string>
     <string name="nm_models_hands_title">操作屏幕</string>
@@ -1082,20 +1082,20 @@
     <string name="nm_models_chat_applies">对主要聊天和新对话生效；旁聊保留自己的模型。</string>
     <string name="nm_models_media_more">更多图片和视频选项</string>
     <string name="nm_models_media_more_sub">手动输入模型名、查看缺了哪个模型会停下什么，或重新检查一把 key 能用哪些视频模型。</string>
-    <string name="nm_models_cloud_switch">使用 nanoMuse Cloud 模型</string>
-    <string name="nm_models_cloud_on_sub">nanoMuse Cloud 是下面各项的来源之一，在它上面运行的内容计入你的额度。</string>
-    <string name="nm_models_cloud_off_sub">关闭后，除非你点「这次改用 nanoMuse Cloud」，否则不会有任何内容在 nanoMuse Cloud 上运行。账号保持登录，用于同步和你的设备。</string>
-    <string name="nm_models_cloud_off_refused">先添加一个自己的服务商；关掉 nanoMuse Cloud 后没有别的模型能回答。</string>
+    <string name="nm_models_cloud_switch">使用 Hearth 模型</string>
+    <string name="nm_models_cloud_on_sub">Hearth 是下面各项的来源之一，在它上面运行的内容计入你的额度。</string>
+    <string name="nm_models_cloud_off_sub">关闭后，除非你点「这次改用 Hearth」，否则不会有任何内容在 Hearth 上运行。账号保持登录，用于同步和你的设备。</string>
+    <string name="nm_models_cloud_off_refused">先添加一个自己的服务商；关掉 Hearth 后没有别的模型能回答。</string>
     <string name="nm_chat_no_model">现在没有能回答的模型。请在「设置 › 模型」里选一个。</string>
-    <string name="nm_cloud_provider_no_delete">这个服务商就是你的 nanoMuse Cloud 账号。要停用它的模型，请在上面关闭开关；要退出登录，请打开「设置 › nanoMuse Cloud」。</string>
+    <string name="nm_cloud_provider_no_delete">这个服务商就是你的 Hearth 账号。要停用它的模型，请在上面关闭开关；要退出登录，请打开「设置 › Hearth」。</string>
     <string name="nm_welcome_own_key">改用自己的 API key</string>
     <string name="nm_useit_title">用它来做什么</string>
-    <string name="nm_useit_body">选这把 key 负责哪些事，其余仍由 nanoMuse Cloud 负责。</string>
+    <string name="nm_useit_body">选这把 key 负责哪些事，其余仍由 Hearth 负责。</string>
     <string name="nm_useit_body_signed_out">选这把 key 负责哪些事。</string>
     <string name="nm_useit_use">就这样</string>
     <string name="nm_useit_not_now">暂不</string>
     <string name="nm_useit_footnote">以后可以在 设置 › 模型 里改。</string>
-    <string name="nm_retry_on_cloud">这次改用 nanoMuse Cloud</string>
+    <string name="nm_retry_on_cloud">这次改用 Hearth</string>
     <string name="nm_hands_why_chat_provider">你对话服务商的动手默认模型</string>
     <string name="nm_models_auto">自动</string>
     <string name="nm_models_auto_currently">当前为 %1$s</string>
@@ -1130,4 +1130,25 @@
     <string name="nm_font_scale_medium">中</string>
     <string name="nm_font_scale_large">大</string>
     <string name="nm_font_scale_extra_large">特大</string>
+    <string name="nm_setup_source_grok">我的 Grok 账号</string>
+    <string name="nm_setup_source_grok_sub">在这部手机上登录 xAI。中继的登录还在，用来同步和连接设备。</string>
+    <string name="nm_panic">紧急</string>
+    <string name="nm_panic_confirm">再点一次才会发出</string>
+    <string name="nm_panic_sending">正在发送</string>
+    <string name="nm_panic_delivered">已送达。</string>
+    <string name="nm_panic_not_delivered">没有送达。对方的手机没有连上。</string>
+    <string name="nm_panic_not_linked">没有送达。这个账号没有和另一个账号连在一起。</string>
+    <string name="nm_panic_not_connected">没有送达。这部手机没有连上。</string>
+    <string name="nm_panic_alert_title">紧急</string>
+    <string name="nm_panic_from">%1$s 需要你。</string>
+    <string name="nm_panic_dismiss">我在</string>
+    <string name="nm_panic_close">关闭</string>
+    <string name="nm_panic_channel">紧急</string>
+    <string name="nm_panic_channel_sub">家里另一部手机发来的紧急提醒</string>
+    <string name="nm_todos_title">待办</string>
+    <string name="nm_todos_empty">列表是空的。</string>
+    <string name="nm_todos_hint">要做的事</string>
+    <string name="nm_todos_add">添加</string>
+    <string name="nm_todos_delete">删除</string>
+    <string name="nm_menu_todos">待办</string>
 </resources>
