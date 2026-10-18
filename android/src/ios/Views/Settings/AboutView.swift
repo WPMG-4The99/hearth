@@ -64,7 +64,8 @@ struct AboutView: View {
 
             // MARK: - Links
             Section("Links") {
-                Link(destination: URL(string: "https://github.com/nano-muse/nanoMuse")!) {
+                // nanoMuse: this build's repository.
+                Link(destination: URL(string: "https://github.com/WPMG-4The99/hearth")!) {
                     Label {
                         HStack {
                             Text("GitHub Repository")
@@ -78,7 +79,8 @@ struct AboutView: View {
                         Image(systemName: "link.circle.fill")
                     }
                 }
-                Link(destination: URL(string: "https://github.com/nano-muse/nanoMuse/issues")!) {
+                // nanoMuse: issues for this build.
+                Link(destination: URL(string: "https://github.com/WPMG-4The99/hearth/issues")!) {
                     Label {
                         HStack {
                             Text("Report an Issue")

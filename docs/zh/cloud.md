@@ -116,7 +116,7 @@ docker compose up -d    # Caddy fetches the TLS certificate
 
 中继也是账号各设备的会合点：`/v1/hub` 的 **hub** 和 `/app` 的网页控制台；见 [hub.md](hub.md)。`HUB_ENABLED` 可以关掉它，`HUB_FRAME_LIMIT` 限制单帧大小（文件和截图在帧里传，默认 16 MB）。
 
-各端默认连 `https://cloud.nanomuse.cn`。手机登录表单下面的「使用其他服务器」可以填你自己跑的中继地址（[android.md](android.md)、[ios.md](ios.md)）；桌面端从插件的 `config.baseURL` 读（[desktop.md](desktop.md)）；网页控制台就是在 `/app` 提供它的那台中继。
+各端默认连 `https://hearth-cloud-the99.zocomputer.io`。手机登录表单下面的「使用其他服务器」可以填你自己跑的中继地址（[android.md](android.md)、[ios.md](ios.md)）；桌面端从插件的 `config.baseURL` 读（[desktop.md](desktop.md)）；网页控制台就是在 `/app` 提供它的那台中继。
 
 ## 协议 {#protocol}
 

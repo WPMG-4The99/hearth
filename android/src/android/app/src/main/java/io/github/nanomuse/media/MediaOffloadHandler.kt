@@ -114,7 +114,7 @@ class MediaOffloadHandler(private val context: Context) : NativeOffloadHandler {
         JSONObject()
             .put("ok", false)
             .put("error", "no_${kind}_model")
-            .put("message", "No $kind model is configured. nanoMuse uses the user's own providers for this (Muse has it built in). " +
+            .put("message", "No $kind model is configured. Hearth uses the user's own providers for this (Muse has it built in). " +
                 (if (kind == "image") "Alibaba Cloud Model Studio's qwen-image-3.0 or any OpenAI-compatible images endpoint works." else "Alibaba Cloud Model Studio's wan2.2-i2v-flash or MiniMax/MiniMax-H3 works (activated in their console)."))
             .put("tell_user", "Explain this in a sentence and give the link [Image & video models](${MediaModels.DEEP_LINK}); do not invent a result.")
             .toString(2) + "\n",

@@ -4,10 +4,10 @@
 <resources>
     <string name="nm_about_build">Această versiune</string>
     <string name="nm_about_license">Licență</string>
-    <string name="nm_about_upstream">Bazat pe OpenMinis 1.13</string>
-    <string name="nm_about_upstream_detail">GPL-3.0 · modificat de la 2026-09-24 · sursa pe GitHub</string>
+    <string name="nm_about_upstream">Credite</string>
+    <string name="nm_about_upstream_detail">Hearth este o bifurcație a nanoMuse (github.com/nano-muse/nanoMuse), GPL-3.0</string>
     <string name="nm_about_trademark">Fără legătură cu Meta</string>
-    <string name="nm_about_trademark_detail">Muse este o marcă înregistrată a Meta Platforms, Inc. nanoMuse este un proiect independent de software liber.</string>
+    <string name="nm_about_trademark_detail">Muse este o marcă înregistrată a Meta Platforms, Inc. Hearth este un proiect independent de software liber.</string>
 
     <!-- Chat header -->
     <string name="nm_avatar_content_description">Agentul tău. Atinge pentru a-i schimba numele, pictograma sau stilul.</string>
@@ -22,30 +22,30 @@
     <string name="nm_star_action">Dă o stea pe GitHub</string>
     <string name="nm_star_later">Nu acum</string>
     <string name="nm_star_done">Am dat deja steaua</string>
-    <string name="nm_star_signed_in">Bine ai venit. nanoMuse este gratuit, open source și nonprofit: un agent personal pentru oricine îl rulează. Dacă asta înseamnă ceva pentru tine, o stea pe GitHub este felul în care următoarea persoană îl găsește.</string>
+    <string name="nm_star_signed_in">Bine ai venit. Hearth este gratuit, open source și nonprofit: un agent personal pentru oricine îl rulează. Dacă asta înseamnă ceva pentru tine, o stea pe GitHub este felul în care următoarea persoană îl găsește.</string>
     <plurals name="nm_star_tasks">
-        <item quantity="one">O sarcină încheiată. Dacă nanoMuse a ajutat, o stea pe GitHub le spune celor care îl construiesc că a făcut-o.</item>
-        <item quantity="few">%1$d sarcini încheiate. Dacă nanoMuse e util, o stea pe GitHub ajută următoarea persoană să-l găsească.</item>
-        <item quantity="other">%1$d de sarcini încheiate. Dacă nanoMuse e util, o stea pe GitHub ajută următoarea persoană să-l găsească.</item>
+        <item quantity="one">O sarcină încheiată. Dacă Hearth a ajutat, o stea pe GitHub le spune celor care îl construiesc că a făcut-o.</item>
+        <item quantity="few">%1$d sarcini încheiate. Dacă Hearth e util, o stea pe GitHub ajută următoarea persoană să-l găsească.</item>
+        <item quantity="other">%1$d de sarcini încheiate. Dacă Hearth e util, o stea pe GitHub ajută următoarea persoană să-l găsească.</item>
     </plurals>
-    <string name="nm_star_days_used_week">O săptămână cu nanoMuse. Dacă și-a câștigat un loc în ziua ta, o stea pe GitHub ajută următoarea persoană să-l găsească.</string>
-    <string name="nm_star_days_used_month">O lună cu nanoMuse. Dacă a devenit parte din rutina ta, o stea pe GitHub le spune altora că merită încercat.</string>
+    <string name="nm_star_days_used_week">O săptămână cu Hearth. Dacă și-a câștigat un loc în ziua ta, o stea pe GitHub ajută următoarea persoană să-l găsească.</string>
+    <string name="nm_star_days_used_month">O lună cu Hearth. Dacă a devenit parte din rutina ta, o stea pe GitHub le spune altora că merită încercat.</string>
     <plurals name="nm_star_days_used">
-        <item quantity="one">O zi cu nanoMuse. Dacă a ajutat, o stea pe GitHub ajută următoarea persoană să-l găsească.</item>
-        <item quantity="few">%1$d zile cu nanoMuse. Dacă și-a câștigat un loc în ziua ta, o stea pe GitHub ajută următoarea persoană să-l găsească.</item>
-        <item quantity="other">%1$d de zile cu nanoMuse. Dacă și-a câștigat un loc în ziua ta, o stea pe GitHub ajută următoarea persoană să-l găsească.</item>
+        <item quantity="one">O zi cu Hearth. Dacă a ajutat, o stea pe GitHub ajută următoarea persoană să-l găsească.</item>
+        <item quantity="few">%1$d zile cu Hearth. Dacă și-a câștigat un loc în ziua ta, o stea pe GitHub ajută următoarea persoană să-l găsească.</item>
+        <item quantity="other">%1$d de zile cu Hearth. Dacă și-a câștigat un loc în ziua ta, o stea pe GitHub ajută următoarea persoană să-l găsească.</item>
     </plurals>
-    <string name="nm_star_goal_done">Obiectiv atins. Dacă nanoMuse te-a ajutat să ajungi aici, o stea pe GitHub le spune celor care îl construiesc.</string>
-    <string name="nm_star_new_look">O față nouă, desenată pentru tine. Dacă îți place direcția în care merge nanoMuse, o stea pe GitHub ajută mai mulți oameni să-l găsească.</string>
-    <string name="nm_star_exhausted">Creditul gratuit s-a epuizat. Mulțumim că ai ajuns până aici. Dacă nanoMuse a meritat-o, o stea pe GitHub ține proiectul la vedere pentru următoarea persoană.</string>
+    <string name="nm_star_goal_done">Obiectiv atins. Dacă Hearth te-a ajutat să ajungi aici, o stea pe GitHub le spune celor care îl construiesc.</string>
+    <string name="nm_star_new_look">O față nouă, desenată pentru tine. Dacă îți place direcția în care merge Hearth, o stea pe GitHub ajută mai mulți oameni să-l găsească.</string>
+    <string name="nm_star_exhausted">Creditul gratuit s-a epuizat. Mulțumim că ai ajuns până aici. Dacă Hearth a meritat-o, o stea pe GitHub ține proiectul la vedere pentru următoarea persoană.</string>
     <string name="nm_chat_menu_rename">Redenumește chatul</string>
 
     <!-- Foreground-service notification title while no tool is running -->
     <string name="nm_notif_working">%1$s lucrează</string>
 
     <!-- First conversation: the scripted opening (see io.github.nanomuse.onboarding) -->
-    <string name="nm_intro_hello">Bună, sunt nanoMuse, asistentul care trăiește pe telefonul tău. Lasă-mă să-ți iau câteva lucruri de pe cap.</string>
-    <string name="nm_intro_how_i_work">Câteva lucruri despre cum lucrez:\n\n- Am propriul computer (un sandbox Linux și un browser), așa că pot rula comenzi, deschide site-uri și completa formulare.\n- Pot citi și organiza fișierele și fotografiile pe care mi le pui la dispoziție și pot avea grijă de mementouri și de sarcinile programate.\n- Înainte de orice pas care contează, te întreb mai întâi.\n- Totul rulează pe acest telefon. Mesajele tale ajung la modelul pe care l-ai configurat; cu nanoMuse Cloud, această conversație te urmează și pe celelalte dispozitive; se poate opri din Controlul datelor.</string>
+    <string name="nm_intro_hello">Bună, sunt Nix. Locuiesc pe acest telefon și pot lua câteva lucruri de pe umerii tăi.</string>
+    <string name="nm_intro_how_i_work">Câteva lucruri despre cum lucrez:\n\n- Am propriul computer (un sandbox Linux și un browser), așa că pot rula comenzi, deschide site-uri și completa formulare.\n- Pot citi și organiza fișierele și fotografiile pe care mi le pui la dispoziție și pot avea grijă de mementouri și de sarcinile programate.\n- Înainte de orice pas care contează, te întreb mai întâi.\n- Totul rulează pe acest telefon. Mesajele tale ajung la modelul pe care l-ai configurat; cu Hearth, această conversație te urmează și pe celelalte dispozitive; se poate opri din Controlul datelor.</string>
     <string name="nm_intro_ask_name">Înainte să începem, cum să-ți spun?</string>
 
     <!-- First conversation: the name chooser -->
@@ -199,7 +199,7 @@
     <string name="nm_risk_class_outbound">Trimitere</string>
     <string name="nm_risk_class_money">Plată</string>
     <string name="nm_risk_class_install">Instalare</string>
-    <string name="nm_grants_header">Aprobări memorate de nanoMuse</string>
+    <string name="nm_grants_header">Aprobări memorate de Hearth</string>
     <string name="nm_grants_empty">Nimic memorat încă</string>
     <string name="nm_grants_revoke">Revocă</string>
     <string name="nm_grants_revoke_confirm">Revoci această aprobare? Data viitoare când apare, vei fi întrebat din nou.</string>
@@ -207,7 +207,7 @@
     <string name="nm_risk_remember_money_note">Confirmat cu blocarea ecranului. Plățile din această aplicație sau de pe acest site vor rula apoi fără card de aprobare; apar primele sub Setări → Permisiuni, de unde le poți revoca oricând.</string>
     <string name="nm_risk_remember_money_needs_lock">Ca să memorezi plăți, setează mai întâi o blocare a ecranului (Setări → Securitate): memorarea uneia se confirmă cu ea.</string>
     <string name="nm_risk_lock_title">Confirmă că ești tu</string>
-    <string name="nm_risk_lock_subtitle">nanoMuse va memora aprobările de plată pentru %1$s și le va rula fără să întrebe.</string>
+    <string name="nm_risk_lock_subtitle">Hearth va memora aprobările de plată pentru %1$s și le va rula fără să întrebe.</string>
     <string name="nm_risk_remembered_toast">Memorat · vezi Setări → Permisiuni pentru a revoca</string>
     <string name="nm_risk_tier_highest">Rulează fără să întrebe · plăți</string>
     <string name="nm_risk_tier_confirm">Memorate de pe card · ștergere și trimitere</string>
@@ -278,7 +278,7 @@
     <string name="nm_sysfiles_open_memory">Deschide memoria</string>
     <string name="nm_sysfiles_footer">Aceste fișiere sunt ale agentului: cine este, ce știe despre tine, ce își amintește, ce scrie pentru tine și când se trezește. Stau în memoria telefonului; agentul le citește și le editează din shell-ul lui sub /var/minis/memory, iar tu poți edita orice aici.</string>
     <string name="nm_sysfile_about_lead">Despre acest fișier.</string>
-    <string name="nm_sysfile_about_soul">Aceasta este persona agentului: valorile și obiceiurile pe care încearcă să le respecte în fiecare conversație, numele lui și stilul în care răspunde. Pornește de la un șablon livrat cu nanoMuse; agentul îl poate rafina în timp și îți spune când o face. Îl poți edita oricând. Această notă nu face parte din fișier.</string>
+    <string name="nm_sysfile_about_soul">Aceasta este persona agentului: valorile și obiceiurile pe care încearcă să le respecte în fiecare conversație, numele lui și stilul în care răspunde. Pornește de la un șablon livrat cu Hearth; agentul îl poate rafina în timp și îți spune când o face. Îl poți edita oricând. Această notă nu face parte din fișier.</string>
     <string name="nm_sysfile_about_user">Agentul ține acest fișier ca notițe de lucru despre tine: numele tău, cum vrei să ți se adreseze, fusul tău orar și contextul de care are nevoie ca să fie util, de exemplu la ce lucrezi. Îl completează în timp din conversațiile voastre și îl citește la începutul fiecăreia. Reflectă înțelegerea actuală a agentului, așa că poate fi incomplet sau depășit. Poți edita orice aici, iar agentul va urma ce scrii. Această notă nu face parte din fișier.</string>
     <string name="nm_sysfile_about_memory">Notițe durabile pe care agentul le păstrează de la o conversație la alta: lucrurile care merită reținute, cu cuvintele lui, plus tot ce ai importat de la alt asistent. Jurnalul zi cu zi stă alături, în dosarul de memorie. Citit la începutul fiecărei conversații când memoria e pornită. Această notă nu face parte din fișier.</string>
     <string name="nm_sysfile_about_feed">Un paragraf care ghidează fluxul: ce vrei mai mult, ce să sară, cât de lungi să fie postările. Rutina zilnică a fluxului îl citește înainte de a scrie. Această notă nu face parte din fișier.</string>
@@ -359,7 +359,7 @@
     <string name="nm_own_clip_title">Clipul tău</string>
     <string name="nm_own_clip_body">Un videoclip scurt al tău rulează ca față în repaus, iar celelalte stări îl folosesc și ele. MP4 sau MOV cu video H.264, cel mult 15 secunde și 30 MB; rulează fără sunet, în buclă.</string>
     <string name="nm_own_clip_on">Clipul tău este activ și rulează pentru fiecare stare; acolo unde se arată o imagine statică rămân imaginile desenate. „Fața implicită” îl elimină.</string>
-    <string name="nm_own_clip_local">Clipul rămâne pe acest telefon. Nu este încărcat în nanoMuse Cloud și nu este sincronizat cu celelalte dispozitive ale tale.</string>
+    <string name="nm_own_clip_local">Clipul rămâne pe acest telefon. Nu este încărcat în Hearth și nu este sincronizat cu celelalte dispozitive ale tale.</string>
     <string name="nm_own_clip_choose">Alege un clip</string>
     <string name="nm_own_clip_replace">Înlocuiește clipul</string>
     <string name="nm_own_clip_default">Fața implicită</string>
@@ -377,7 +377,7 @@
     <string name="nm_a11y_own_clip_preview">Previzualizarea clipului tău</string>
 
     <!-- First run (Muse-style welcome; the steps are OpenMinis' provider and model screens) -->
-    <string name="nm_setup_title">Bine ai venit la nanoMuse</string>
+    <string name="nm_setup_title">Bine ai venit la Hearth</string>
     <string name="nm_setup_step_models">Alege modelele</string>
     <string name="nm_setup_step_models_sub">Modelele oferite de furnizorul tău sunt listate pentru tine; alege până la trei</string>
     <string name="nm_setup_step_start">Fă cunoștință cu %1$s</string>
@@ -393,7 +393,7 @@
     <string name="nm_settings_no_model">Niciun model încă</string>
     <string name="nm_settings_no_model_sub">Adaugă un furnizor și alege-i modelele</string>
     <string name="nm_settings_change_model">Schimbă</string>
-    <string name="nm_settings_version">nanoMuse %1$s (%2$d)</string>
+    <string name="nm_settings_version">Hearth %1$s (%2$d)</string>
     <string name="nm_version_title">Versiune</string>
     <string name="nm_version_checking">Se caută cea mai nouă versiune…</string>
     <string name="nm_version_have">Cea mai nouă e %1$s, o ai deja</string>
@@ -473,8 +473,8 @@
     <string name="nm_avatar_share_title">Partajează avatarul meu</string>
     <string name="nm_avatar_share_subtitle">Alege un card. Pleacă prin fereastra de partajare a sistemului.</string>
     <string name="nm_avatar_share_system">Partajează</string>
-    <string name="nm_avatar_share_bubble">Bună, sunt %1$s, un agent AI personal. Fă cunoștință cu nanoMuse: open source, rulează pe telefonul tău.</string>
-    <string name="nm_avatar_share_tagline">Agentul tău AI personal, open source · github.com/nano-muse/nanoMuse</string>
+    <string name="nm_avatar_share_bubble">Bună, sunt %1$s, un agent AI personal. Fă cunoștință cu Hearth: open source, rulează pe telefonul tău.</string>
+    <string name="nm_avatar_share_tagline">Agentul tău AI personal, open source · github.com/WPMG-4The99/hearth</string>
 
     <!-- 0.1.10 · Motion -->
     <string name="nm_media_title">Modele de imagine și video</string>
@@ -525,7 +525,7 @@
     <string name="nm_hands_section_needs">De ce are nevoie</string>
     <string name="nm_hands_needs_footer">Serviciul de accesibilitate face captura de ecran și execută gesturile; nu citește conținutul ecranului. Afișarea peste alte aplicații e pentru capsulă.</string>
     <string name="nm_hands_need_a11y">Serviciu de accesibilitate</string>
-    <string name="nm_hands_need_a11y_fix">Pornește nanoMuse sub Aplicații instalate în setările de accesibilitate</string>
+    <string name="nm_hands_need_a11y_fix">Pornește Hearth sub Aplicații instalate în setările de accesibilitate</string>
     <string name="nm_hands_need_overlay">Afișare peste alte aplicații</string>
     <string name="nm_hands_need_overlay_fix">Permite-o, ca să poată fi afișată capsula cu Stop</string>
     <string name="nm_hands_need_model">Un model care vede imagini</string>
@@ -542,7 +542,7 @@
     <string name="nm_hands_why_default">implicitul mâinilor sub propria ta cheie</string>
     <string name="nm_hands_why_chat">modelul de chat ales de tine</string>
     <string name="nm_hands_why_group">primul din grupul tău implicit care poate vedea</string>
-    <string name="nm_hands_why_menu">modelul de ecran al nanoMuse Cloud</string>
+    <string name="nm_hands_why_menu">modelul de ecran al Hearth</string>
     <string name="nm_hands_why_vision_group">Grupul tău de viziune</string>
     <string name="nm_hands_why_any">singurul model activat care poate vedea</string>
     <string name="nm_hands_section_rules">Cum se comportă</string>
@@ -563,7 +563,7 @@
     <string name="nm_hands_protected_screen">Acest ecran e protejat și nu poate fi citit. Termină tu această parte, apoi atinge Continuă.</string>
     <string name="nm_hands_secret_field">Un câmp de parolă sau de cod: te rog completează-l tu, apoi atinge Continuă.</string>
     <string name="nm_hands_approval_title">Așteaptă aprobarea ta</string>
-    <string name="nm_hands_approval_detail">Atinge „%1$s”: confirmă în nanoMuse (cere blocarea ecranului).</string>
+    <string name="nm_hands_approval_detail">Atinge „%1$s”: confirmă în Hearth (cere blocarea ecranului).</string>
     <string name="nm_hands_approval_here">Atingi „%1$s”?</string>
     <string name="nm_hands_allow_once">Permite</string>
     <string name="nm_hands_deny">Refuză</string>
@@ -594,10 +594,10 @@
     <!-- Reach (0.1.13): the phone drives your computer -->
     <string name="nm_pc_title">Computere</string>
     <string name="nm_pc_none_short">Niciunul</string>
-    <string name="nm_pc_intro">Spui aici, se face pe computerul tău: o comandă, un fișier, o pagină în browserul lui, o privire pe ecranul lui sau o sarcină întreagă pentru nanoMuse de acolo. Telefonul conduce computerul, niciodată invers; fiecare aprobare se decide mai întâi aici.</string>
-    <string name="nm_pc_hub_title">Calea simplă: nanoMuse Desktop, același cont</string>
-    <string name="nm_pc_hub_body">Instalează nanoMuse Desktop pe computer și conectează-te cu contul acestui telefon; apare sub Cont → Dispozitive în câteva secunde.</string>
-    <string name="nm_pc_hub_download">Descarcă nanoMuse Desktop</string>
+    <string name="nm_pc_intro">Spui aici, se face pe computerul tău: o comandă, un fișier, o pagină în browserul lui, o privire pe ecranul lui sau o sarcină întreagă pentru Hearth de acolo. Telefonul conduce computerul, niciodată invers; fiecare aprobare se decide mai întâi aici.</string>
+    <string name="nm_pc_hub_title">Calea simplă: Hearth Desktop, același cont</string>
+    <string name="nm_pc_hub_body">Instalează Hearth Desktop pe computer și conectează-te cu contul acestui telefon; apare sub Cont → Dispozitive în câteva secunde.</string>
+    <string name="nm_pc_hub_download">Descarcă Hearth Desktop</string>
     <string name="nm_pc_hub_account">Cont și dispozitive</string>
     <string name="nm_pc_section_paired">Computere pe acest cont</string>
     <string name="nm_pc_none">Niciun computer încă</string>
@@ -606,11 +606,11 @@
     <string name="nm_pc_last_seen">văzut %1$s</string>
     <string name="nm_pc_offline">offline</string>
     <string name="nm_pc_online">online</string>
-    <string name="nm_pc_account_none">Acest telefon nu e conectat încă la nanoMuse Cloud; conectează-te mai întâi, apoi computerul cu același cont.</string>
+    <string name="nm_pc_account_none">Acest telefon nu e conectat încă la Hearth; conectează-te mai întâi, apoi computerul cu același cont.</string>
     <string name="nm_pc_account_hint">Acest telefon e conectat ca %1$s; computerul trebuie să se conecteze cu același cont.</string>
     <string name="nm_pc_checking">Se verifică…</string>
     <string name="nm_pc_answering">%1$s răspunde</string>
-    <string name="nm_pc_not_answering">%1$s nu răspunde. Mai rulează nanoMuse Desktop acolo?</string>
+    <string name="nm_pc_not_answering">%1$s nu răspunde. Mai rulează Hearth Desktop acolo?</string>
 
     <!-- the approval card -->
     <string name="nm_risk_desc_on_computer">Pe computerul „%1$s”, nu pe acest telefon.</string>
@@ -631,11 +631,11 @@
     <string name="nm_welcome_email">Conectează-te (gratuit)</string>
     <string name="nm_welcome_fine_print">Un singur cont îți ține dispozitivele împreună și poartă utilizarea gratuită a modelului; nu se percepe nimic. Propria cheie API poate fi adăugată imediat după.</string>
     <string name="nm_setup_source_title">Care model răspunde?</string>
-    <string name="nm_setup_source_sub">Contul tău aduce deja unul. Poți adăuga și propria cheie API și poți comuta oricând.</string>
-    <string name="nm_setup_source_cloud">Folosește modelul nanoMuse Cloud</string>
-    <string name="nm_setup_source_cloud_sub">DeepSeek pentru chat și Qwen pentru mâini, cu un credit gratuit per cont plătit de dezvoltator. Nimic de configurat.</string>
+    <string name="nm_setup_source_sub">Ambele pot folosi uneltele telefonului. Mai târziu se schimbă în Setări, Modele.</string>
+    <string name="nm_setup_source_cloud">Releul Hearth</string>
+    <string name="nm_setup_source_cloud_sub">Modelul de pe releul acestei case. Nimic de lipit.</string>
     <string name="nm_setup_source_own_sub">OpenAI, Anthropic, DeepSeek, Bailian și alte endpointuri compatibile OpenAI. Cheia rămâne pe acest telefon.</string>
-    <string name="nm_setup_source_fine_print">Cele două nu concurează: modelul Cloud rămâne disponibil, iar fiecare grup de modele își alege propriul.</string>
+    <string name="nm_setup_source_fine_print">Alege unul ca să începi. Celălalt se poate adăuga mai târziu.</string>
     <string name="nm_setup_password_title">Setează o parolă</string>
     <string name="nm_setup_password_sub">Contul tău e activ. Cu o parolă, computerele și celelalte telefoane ale tale se conectează imediat, fără să aștepte un cod.</string>
     <string name="nm_setup_password_set">Setează parola</string>
@@ -645,21 +645,21 @@
     <string name="nm_welcome_feat_hands">Mâini: îți folosește telefonul</string>
     <string name="nm_welcome_feat_hands_sub">Rezervă trenul, comandă masa, caută ceva într-o aplicație; tu privești și îl poți opri oricând</string>
     <string name="nm_welcome_feat_reach">Acces: computerele tale, de aici</string>
-    <string name="nm_welcome_feat_reach_sub">Instalează nanoMuse Desktop pe un Mac, un Windows sau un Linux, conectează-te cu același cont și dă-i de lucru de pe telefon</string>
-    <string name="nm_welcome_notice">nanoMuse este un proiect comunitar open source, nonprofit: gratuit, pentru totdeauna. Modelul vine cu un credit gratuit plătit de dezvoltator; după aceea, propria ta cheie. Nimic nu se vinde; ce păstrează relay-ul e în politica de confidențialitate, iar Setări → Controlul datelor e al tău.</string>
+    <string name="nm_welcome_feat_reach_sub">Instalează Hearth Desktop pe un Mac, un Windows sau un Linux, conectează-te cu același cont și dă-i de lucru de pe telefon</string>
+    <string name="nm_welcome_notice">Hearth este un proiect comunitar open source, nonprofit: gratuit, pentru totdeauna. Modelul vine cu un credit gratuit plătit de dezvoltator; după aceea, propria ta cheie. Nimic nu se vinde; ce păstrează relay-ul e în politica de confidențialitate, iar Setări → Controlul datelor e al tău.</string>
     <string name="nm_welcome_hands_title">Lasă-l să-ți folosească telefonul</string>
     <string name="nm_welcome_hands_sub">Cu două permisiuni poate deschide aplicații, atinge și tasta pentru tine. O capsulă cu fiecare pas și un buton Stop rămâne pe ecran; autentificările, parolele și codurile sunt întotdeauna ale tale.</string>
     <string name="nm_welcome_hands_turn_on">Pornește</string>
     <string name="nm_welcome_skip">Sari peste deocamdată</string>
     <string name="nm_welcome_hands_fine_print">Tot restul merge și fără ele. Le găsești sub Setări → Mâini oricând le vrei.</string>
     <string name="nm_welcome_meet_fine_print">Înainte de orice nu poate fi anulat (ștergere, trimitere, plată) se oprește și te întreabă mai întâi.</string>
-    <string name="nm_cloud_signin_title">Începe cu nanoMuse Cloud</string>
-    <string name="nm_cloud_signin_subtitle">Un cod pe telefon sau în inbox, sau parola ta, odată ce ai setat una.</string>
+    <string name="nm_cloud_signin_title">Intră în Hearth</string>
+    <string name="nm_cloud_signin_subtitle">Întâi e-mailul, apoi codul de unică folosință. Acest releu scrie codul în jurnalul lui.</string>
     <string name="nm_cloud_mode_code">Cu un cod</string>
     <string name="nm_cloud_mode_password">Cu o parolă</string>
     <string name="nm_cloud_password">Parolă</string>
     <string name="nm_cloud_forgot_password">Ai uitat parola? Conectează-te cu un cod</string>
-    <string name="nm_cloud_identifier">Număr de telefon din China continentală sau e-mail</string>
+    <string name="nm_cloud_identifier">E-mail</string>
     <string name="nm_cloud_identifier_hint">tu@example.com</string>
     <string name="nm_cloud_code">Cod</string>
     <string name="nm_cloud_send_code">Trimite codul</string>
@@ -668,7 +668,7 @@
     <string name="nm_cloud_verify">Conectează-te</string>
 
     <!-- Your own relay (0.1.38): the sign-in screen's server form and the account page's row -->
-    <string name="nm_cloud_other_server">Folosește alt server</string>
+    <string name="nm_cloud_other_server">Avansat: alt server</string>
     <string name="nm_cloud_server_url">Adresa relay-ului</string>
     <string name="nm_cloud_server_check">Verifică</string>
     <string name="nm_cloud_server_use">Folosește acest server</string>
@@ -678,7 +678,7 @@
     <string name="nm_cloud_server_https">Folosește https pentru un server din afara propriei rețele. http e în regulă pentru o adresă privată (10.x, 192.168.x, 172.16-31.x, localhost, un nume .local sau .ts.net).</string>
     <string name="nm_lan_only_https">http:// necriptat funcționează doar pentru adrese din propria rețea (10.x, 172.16-31.x, 192.168.x, nume .local); folosește https:// pentru %1$s.</string>
     <string name="nm_cloud_server_unreachable">Niciun relay nu a răspuns la %1$s. Verifică adresa și dacă relay-ul rulează.</string>
-    <string name="nm_cloud_server_default">Înapoi la nanoMuse Cloud</string>
+    <string name="nm_cloud_server_default">Înapoi la Hearth</string>
     <string name="nm_cloud_server_row">Server</string>
     <string name="nm_cloud_server_change">Schimbă</string>
     <string name="nm_cloud_server_change_confirm">Cheia acestui telefon aparține serverului actual. Deconectează-te mai întâi aici, apoi conectează-te la celălalt server din ecranul de conectare.</string>
@@ -699,11 +699,11 @@
     <string name="nm_cloud_used_today_open">Azi %1$s</string>
     <string name="nm_cloud_refresh">Actualizează soldul</string>
     <string name="nm_cloud_refreshing">Se actualizează…</string>
-    <string name="nm_cloud_how_it_works">nanoMuse Cloud e un furnizor obișnuit în această aplicație: modelele lui sunt listate sub Furnizori și pot fi combinate cu ale tale într-un grup de modele.</string>
+    <string name="nm_cloud_how_it_works">Hearth e un furnizor obișnuit în această aplicație: modelele lui sunt listate sub Furnizori și pot fi combinate cu ale tale într-un grup de modele.</string>
     <string name="nm_cloud_open_provider">Setările furnizorului</string>
     <string name="nm_cloud_sign_out">Deconectează-te</string>
     <string name="nm_cloud_sign_out_sub">Cheia acestui telefon e revocată și furnizorul Cloud e eliminat; creditul rămâne la contul tău.</string>
-    <string name="nm_cloud_sign_out_confirm">Furnizorul nanoMuse Cloud și modelele lui vor fi eliminate de pe acest telefon.</string>
+    <string name="nm_cloud_sign_out_confirm">Furnizorul Hearth și modelele lui vor fi eliminate de pe acest telefon.</string>
     <string name="nm_cloud_row_remaining">%1$s rămase</string>
     <string name="nm_cloud_row_sign_in">Conectează-te</string>
     <string name="nm_cloud_err_bad_identifier">Nu pare o adresă de e-mail.</string>
@@ -721,7 +721,7 @@
     <string name="nm_cloud_err_allowance_abroad">Creditul gratuit s-a epuizat. Invită un prieten (+¥%1$s pentru fiecare dintre voi) sau adaugă propria cheie sub Setări → Furnizori; OpenRouter e varianta rapidă: un cont, o cheie, plată după consum.</string>
     <string name="nm_cloud_warn_line">Creditul gratuit e aproape epuizat: ¥%1$s din ¥%2$s rămași. Invită un prieten (+¥%3$s pentru fiecare dintre voi) sau adaugă propria cheie, ambele sub Cont.</string>
     <string name="nm_cloud_err_rate_limited">Prea multe cereri deodată. O clipă, te rog.</string>
-    <string name="nm_cloud_err_unreachable">Nu s-a putut contacta nanoMuse Cloud. Verifică conexiunea.</string>
+    <string name="nm_cloud_err_unreachable">Nu s-a putut contacta Hearth. Verifică conexiunea.</string>
     <string name="nm_cloud_err_generic">Ceva n-a mers.</string>
     <string name="nm_cloud_err_bad_credentials">E-mail sau parolă greșită.</string>
     <string name="nm_cloud_err_no_password">Acest cont nu are încă parolă. Conectează-te cu un cod, apoi setează una sub Cont.</string>
@@ -737,10 +737,10 @@
     <string name="nm_cloud_err_content_rejected">Verificarea de conținut a furnizorului modelului a respins această cerere. Încearcă alte cuvinte sau, dacă se repetă, începe o conversație nouă: cuvintele respinse pot fi mai devreme în conversație.</string>
     <string name="nm_cloud_err_provider_busy">Furnizorul modelului e ocupat acum. Reîncearcă peste puțin timp.</string>
     <string name="nm_cloud_err_provider_busy_wait">Furnizorul modelului e ocupat acum. Reîncearcă peste %1$s.</string>
-    <string name="nm_cloud_err_model_not_offered">nanoMuse Cloud nu mai oferă acest model. Alege altul din Setări → nanoMuse Cloud.</string>
-    <string name="nm_cloud_err_relay_down">nanoMuse Cloud nu a răspuns. Reîncearcă peste puțin timp.</string>
-    <string name="nm_cloud_err_allowance_paused">Creditul gratuit e oprit pe acest relay deocamdată, nu epuizat. Adaugă o cheie proprie sau conectează-te cu un abonament pe care îl plătești deja, din Setări → nanoMuse Cloud. Conectarea, dispozitivele și ce a rămas stau așa cum sunt.</string>
-    <string name="nm_cloud_err_service_paused">nanoMuse Cloud e oprit de operator deocamdată; conectarea și datele tale sunt păstrate. Reîncearcă mai târziu.</string>
+    <string name="nm_cloud_err_model_not_offered">Hearth nu mai oferă acest model. Alege altul din Setări → Hearth.</string>
+    <string name="nm_cloud_err_relay_down">Hearth nu a răspuns. Reîncearcă peste puțin timp.</string>
+    <string name="nm_cloud_err_allowance_paused">Creditul gratuit e oprit pe acest relay deocamdată, nu epuizat. Adaugă o cheie proprie sau conectează-te cu un abonament pe care îl plătești deja, din Setări → Hearth. Conectarea, dispozitivele și ce a rămas stau așa cum sunt.</string>
+    <string name="nm_cloud_err_service_paused">Hearth e oprit de operator deocamdată; conectarea și datele tale sunt păstrate. Reîncearcă mai târziu.</string>
     <string name="nm_cloud_err_sync_paused">Sincronizarea conversațiilor e oprită pe acest relay deocamdată; ce e stocat se păstrează, iar dispozitivele tale merg mai departe pe cont propriu.</string>
     <string name="nm_cloud_err_hub_paused">Legătura între dispozitive e oprită pe acest relay deocamdată; fiecare dispozitiv merge mai departe pe cont propriu.</string>
     <string name="nm_refusal_relay_says">Relay-ul spune: %1$s</string>
@@ -784,7 +784,7 @@
     <string name="nm_cloud_invite_share">Partajează linkul</string>
     <string name="nm_cloud_invite_copy">Copiază</string>
     <string name="nm_cloud_invite_copied">Copiat</string>
-    <string name="nm_cloud_invite_share_text">Încearcă nanoMuse împreună cu mine: un agent personal complet open source, gratuit. Înscrie-te cu codul meu %1$s: %2$s</string>
+    <string name="nm_cloud_invite_share_text">Încearcă Hearth împreună cu mine: un agent personal complet open source, gratuit. Înscrie-te cu codul meu %1$s: %2$s</string>
     <string name="nm_cloud_invite_count">%1$d prieteni s-au alăturat</string>
     <string name="nm_cloud_invite_earned">¥%1$s adăugați prin invitații</string>
     <string name="nm_cloud_invite_have">Ai un cod de invitație?</string>
@@ -825,8 +825,8 @@
     <string name="nm_cloud_ev_contribute_deleted">Controlul datelor: conversațiile păstrate au fost șterse</string>
     <string name="nm_cloud_ev_contribute_default">Controlul datelor: pornit pentru conturile noi</string>
     <string name="nm_data_title">Controlul datelor</string>
-    <string name="nm_data_improve">Ajută la îmbunătățirea modelelor AI nanoMuse</string>
-    <string name="nm_data_why">Cât e pornit, textul conversațiilor tale cu modelele nanoMuse Cloud (ce ai scris, ce a răspuns și uneltele pe care a ales să le apeleze) e păstrat pe relay pentru a antrena modelul deschis al comunității. Nu memoria sau SOUL (promptul de sistem), nu ce au returnat uneltele, nu imaginile, și niciodată alături de cine ești. Propria ta cheie API nu trece niciodată prin relay.</string>
+    <string name="nm_data_improve">Ajută la îmbunătățirea modelelor AI Hearth</string>
+    <string name="nm_data_why">Cât e pornit, textul conversațiilor tale cu modelele Hearth (ce ai scris, ce a răspuns și uneltele pe care a ales să le apeleze) e păstrat pe relay pentru a antrena modelul deschis al comunității. Nu memoria sau SOUL (promptul de sistem), nu ce au returnat uneltele, nu imaginile, și niciodată alături de cine ești. Propria ta cheie API nu trece niciodată prin relay.</string>
     <string name="nm_data_default_on">Conturile noi pornesc cu el activat.</string>
     <string name="nm_data_default_off">Conturile noi pornesc cu el dezactivat.</string>
     <string name="nm_data_kept">%1$d schimburi păstrate până acum.</string>
@@ -836,7 +836,7 @@
     <string name="nm_data_delete_sub">Elimină fiecare schimb păstrat din acest cont, indiferent dacă acum comutatorul e pornit sau oprit. Oprirea comutatorului păstrează ce era deja păstrat până ștergi aici.</string>
     <string name="nm_data_delete_confirm">Conversațiile păstrate sunt eliminate de pe server. Nu se poate anula.</string>
     <string name="nm_data_deleted">%1$d schimburi șterse.</string>
-    <string name="nm_data_sign_in">Conectează-te la nanoMuse Cloud pentru a-l folosi.</string>
+    <string name="nm_data_sign_in">Conectează-te la Hearth pentru a-l folosi.</string>
     <string name="nm_data_privacy">Politica de confidențialitate</string>
     <string name="nm_data_status_on">Pornit</string>
     <string name="nm_data_status_off">Oprit</string>
@@ -884,7 +884,7 @@
     <!-- 0.1.20: the coding agents on the account's computers -->
     <string name="nm_coding_title">Agenți de programare</string>
     <string name="nm_coding_intro">Cursor, Codex și Claude Code de pe computerele tale: sesiunile lor, ultimul lor răspuns și un mesaj către oricare dintre ei, de aici. Nimic de-al lor nu e copiat pe telefon.</string>
-    <string name="nm_coding_no_computer">Niciun computer cu un agent de programare nu e online. Rulează nanoMuse pe computerul unde e instalat Cursor, Codex sau Claude Code, conectat cu acest cont.</string>
+    <string name="nm_coding_no_computer">Niciun computer cu un agent de programare nu e online. Rulează Hearth pe computerul unde e instalat Cursor, Codex sau Claude Code, conectat cu acest cont.</string>
     <string name="nm_coding_account_hint">Acest telefon e conectat ca %1$s; computerul trebuie să folosească același cont.</string>
     <string name="nm_coding_refresh">Reîmprospătează</string>
     <string name="nm_coding_all">Toate</string>
@@ -918,13 +918,13 @@
     <string name="nm_cloud_tokens_line">%1$s tokenuri în total · %2$s azi</string>
     <string name="nm_cloud_notice_title">Gratuit, open source, nonprofit</string>
     <string name="nm_cloud_notice_closing">Ai găsit o eroare, vrei o funcție, ai un patch? Depozitul GitHub e locul potrivit.</string>
-    <string name="nm_cloud_notice">nanoMuse este un proiect comunitar open source, nonprofit: gratuit, pentru totdeauna. Modelul vine cu un credit gratuit plătit de dezvoltator; după aceea, propria ta cheie. Nimic nu se vinde; ce păstrează relay-ul e în politica de confidențialitate, iar Setări → Controlul datelor e al tău. Șterge contul oricând vrei.</string>
+    <string name="nm_cloud_notice">Hearth este un proiect comunitar open source, nonprofit: gratuit, pentru totdeauna. Modelul vine cu un credit gratuit plătit de dezvoltator; după aceea, propria ta cheie. Nimic nu se vinde; ce păstrează relay-ul e în politica de confidențialitate, iar Setări → Controlul datelor e al tău. Șterge contul oricând vrei.</string>
 
     <!-- nanoMuse: devices on the hub -->
     <string name="nm_hub_channel">Mesaje de la dispozitivele tale</string>
     <string name="nm_hub_service_channel">Conectat la dispozitivele tale</string>
-    <string name="nm_hub_service_title">nanoMuse · accesibil de pe dispozitivele tale</string>
-    <string name="nm_hub_service_connecting">Se conectează la nanoMuse Cloud…</string>
+    <string name="nm_hub_service_title">Hearth · accesibil de pe dispozitivele tale</string>
+    <string name="nm_hub_service_connecting">Se conectează la Hearth…</string>
     <string name="nm_hub_service_alone">Niciun alt dispozitiv nu e online acum</string>
     <plurals name="nm_hub_service_devices">
         <item quantity="one">%d dispozitiv online</item>
@@ -946,7 +946,7 @@
     <string name="nm_devices_connected">Conectat</string>
     <string name="nm_devices_connecting">Se conectează…</string>
     <string name="nm_devices_off">Oprit</string>
-    <string name="nm_devices_none">Niciun alt dispozitiv încă. Pe computer, instalează nanoMuse Desktop și conectează-te cu același cont; apare aici în câteva secunde.</string>
+    <string name="nm_devices_none">Niciun alt dispozitiv încă. Pe computer, instalează Hearth Desktop și conectează-te cu același cont; apare aici în câteva secunde.</string>
     <string name="nm_devices_online">online</string>
     <string name="nm_devices_offline">offline</string>
     <string name="nm_devices_web">Consola web</string>
@@ -965,7 +965,7 @@
     <string name="nm_hub_err_not_controllable">Acelui dispozitiv nu i se pot cere lucruri.</string>
     <string name="nm_hub_err_unknown_agent">Acel agent de programare nu e pe computer.</string>
     <string name="nm_hub_err_no_session">Acea sesiune nu mai e pe computer.</string>
-    <string name="nm_hub_err_unknown_action">Computerul rulează un nanoMuse mai vechi, care nu cunoaște această acțiune.</string>
+    <string name="nm_hub_err_unknown_action">Computerul rulează un Hearth mai vechi, care nu cunoaște această acțiune.</string>
     <string name="nm_hub_err_bad_key">Deconectat pe relay; conectează-te din nou.</string>
     <string name="nm_hub_err_generic">Computerul nu a putut face asta.</string>
     <string name="nm_devices_refused">Refuzat de relay; conectează-te din nou</string>
@@ -984,7 +984,7 @@
     <string name="nm_connectors_sign_in">Conectează-te</string>
     <string name="nm_connectors_disconnect">Deconectează</string>
     <string name="nm_connectors_docs">Pagina furnizorului despre acest server</string>
-    <string name="nm_connectors_how_oauth">Se conectează cu contul tău %1$s în browser; nanoMuse se înregistrează singur la serviciu, așa că nu e nimic de tastat. Tokenul rămâne pe acest telefon.</string>
+    <string name="nm_connectors_how_oauth">Se conectează cu contul tău %1$s în browser; Hearth se înregistrează singur la serviciu, așa că nu e nimic de tastat. Tokenul rămâne pe acest telefon.</string>
     <string name="nm_connectors_how_key">Are nevoie de o cheie de la serviciu: %1$s. E păstrată doar în intrarea MCP de pe acest telefon.</string>
     <string name="nm_connectors_how_none">Deschis tuturor; nu e nevoie de conectare.</string>
     <string name="nm_connectors_how_auto">Verifică mai întâi de ce are nevoie serverul: nimic, o conectare sau o cheie.</string>
@@ -1028,13 +1028,13 @@
 
     <!-- Conversation sync between the account's devices (contract C7) -->
     <string name="nm_sync_title">Sincronizează conversațiile între dispozitivele mele</string>
-    <string name="nm_sync_caption">Textul conversațiilor tale e păstrat pe nanoMuse Cloud, ca fiecare dispozitiv să arate aceleași conversații. Fișierele și imaginile rămân pe dispozitivul pe care au fost create.</string>
+    <string name="nm_sync_caption">Textul conversațiilor tale e păstrat pe Hearth, ca fiecare dispozitiv să arate aceleași conversații. Fișierele și imaginile rămân pe dispozitivul pe care au fost create.</string>
     <string name="nm_sync_sign_in">Conectează-te pentru a sincroniza</string>
     <string name="nm_sync_on_toast">Pornit. Conversațiile acestui telefon se trimit.</string>
     <string name="nm_sync_off_toast">Oprit. Ce era păstrat a fost șters.</string>
     <string name="nm_sync_delete">Șterge conversațiile sincronizate</string>
-    <string name="nm_sync_delete_sub">Elimină textul conversațiilor tale de pe nanoMuse Cloud. Fiecare dispozitiv păstrează ce are deja; sincronizarea rămâne pornită.</string>
-    <string name="nm_sync_delete_confirm">Conversațiile păstrate pe nanoMuse Cloud sunt eliminate. Conversațiile de pe dispozitivele tale rămân așa cum sunt.</string>
+    <string name="nm_sync_delete_sub">Elimină textul conversațiilor tale de pe Hearth. Fiecare dispozitiv păstrează ce are deja; sincronizarea rămâne pornită.</string>
+    <string name="nm_sync_delete_confirm">Conversațiile păstrate pe Hearth sunt eliminate. Conversațiile de pe dispozitivele tale rămân așa cum sunt.</string>
     <string name="nm_sync_deleted">Conversațiile sincronizate au fost șterse.</string>
     <string name="nm_sync_from">De la %1$s</string>
     <string name="nm_sync_attachment_note">[Atașament %1$s, rămâne pe dispozitivul pe care a fost creat]</string>
@@ -1047,7 +1047,7 @@
     <string name="nm_devices_ask_hint">Atinge un dispozitiv care e online ca să-i scrii din conversație: mesajul începe cu @ și numele lui, iar acel dispozitiv face treaba.</string>
     <string name="nm_reach_the_provider">furnizorul</string>
     <string name="nm_reach_unreachable_title">%1$s nu poate fi atins din această rețea</string>
-    <string name="nm_reach_unreachable_body">Nimic nu a răspuns la %1$s. Este vorba de drumul de la acest telefon la furnizor; serverele nanoMuse nu sunt implicate.</string>
+    <string name="nm_reach_unreachable_body">Nimic nu a răspuns la %1$s. Este vorba de drumul de la acest telefon la furnizor; serverele Hearth nu sunt implicate.</string>
     <string name="nm_reach_region_title">OpenAI nu deservește această regiune</string>
     <string name="nm_reach_region_body">Cererea a ajuns la OpenAI, care a răspuns că nu oferă serviciul acolo de unde vine această conexiune.</string>
     <string name="nm_reach_signed_out_title">Autentificarea ChatGPT nu mai este valabilă</string>
@@ -1090,7 +1090,7 @@
     <string name="nm_network_test_fail">%1$s nu a putut fi atins prin proxy: %2$s</string>
     <string name="nm_network_test_status">HTTP %1$d</string>
     <string name="nm_network_invalid">Introdu o gazdă și un port între 1 și 65535.</string>
-    <string name="nm_network_proxy_caption">Doar cererile către furnizorii adăugați cu cheia ta și către planul ChatGPT trec prin el. nanoMuse Cloud, computerele tale și rețeaua locală, niciodată. Păstrat doar pe acest telefon.</string>
+    <string name="nm_network_proxy_caption">Doar cererile către furnizorii adăugați cu cheia ta și către planul ChatGPT trec prin el. Hearth, computerele tale și rețeaua locală, niciodată. Păstrat doar pe acest telefon.</string>
     <string name="nm_network_hosts_caption">Trece prin proxy: %1$s</string>
     <string name="nm_ways_title_day">Partea de azi a creditului gratuit s-a epuizat.</string>
     <string name="nm_ways_day_sub">Revine cu ziua nouă; căile de mai jos funcționează acum.</string>
@@ -1101,7 +1101,7 @@
     <string name="nm_ways_devices">Dispozitive</string>
     <!-- 0.1.41 Choice: Settings → Models, the "Use it for" card, one turn on the Cloud -->
     <string name="nm_models_title">Modele</string>
-    <string name="nm_models_intro">Care model face ce. Fiecare rând deschide o listă de alegere; acolo apar nanoMuse Cloud și furnizorii adăugați de tine, cu modelele potrivite.</string>
+    <string name="nm_models_intro">Care model face ce. Fiecare rând deschide o listă de alegere; acolo apar Hearth și furnizorii adăugați de tine, cu modelele potrivite.</string>
     <string name="nm_models_chat_title">Chat</string>
     <string name="nm_models_chat_sub">Modelul care vorbește cu tine.</string>
     <string name="nm_models_hands_title">Operarea ecranului</string>
@@ -1113,20 +1113,20 @@
     <string name="nm_models_chat_applies">Se aplică la chatul principal și la chaturile noi; un chat secundar își păstrează modelul.</string>
     <string name="nm_models_media_more">Mai multe opțiuni pentru imagini și clipuri</string>
     <string name="nm_models_media_more_sub">Scrie numele unui model, vezi ce se oprește fără fiecare model sau verifică din nou ce modele video poate folosi o cheie.</string>
-    <string name="nm_models_cloud_switch">Folosește modelele nanoMuse Cloud</string>
-    <string name="nm_models_cloud_on_sub">nanoMuse Cloud este una dintre sursele rândurilor de mai jos; ce rulează pe el se scade din cota ta.</string>
-    <string name="nm_models_cloud_off_sub">Oprit: nimic nu rulează pe nanoMuse Cloud decât dacă atingi \"Folosește nanoMuse Cloud de data asta\". Rămâi conectat pentru sincronizare și dispozitivele tale.</string>
-    <string name="nm_models_cloud_off_refused">Adaugă mai întâi un furnizor al tău; cu nanoMuse Cloud oprit, nimic altceva nu ar putea răspunde.</string>
+    <string name="nm_models_cloud_switch">Folosește modelele Hearth</string>
+    <string name="nm_models_cloud_on_sub">Hearth este una dintre sursele rândurilor de mai jos; ce rulează pe el se scade din cota ta.</string>
+    <string name="nm_models_cloud_off_sub">Oprit: nimic nu rulează pe Hearth decât dacă atingi \"Folosește Hearth de data asta\". Rămâi conectat pentru sincronizare și dispozitivele tale.</string>
+    <string name="nm_models_cloud_off_refused">Adaugă mai întâi un furnizor al tău; cu Hearth oprit, nimic altceva nu ar putea răspunde.</string>
     <string name="nm_chat_no_model">Niciun model nu poate răspunde acum. Alege unul în Setări › Modele.</string>
-    <string name="nm_cloud_provider_no_delete">Acest furnizor este contul tău nanoMuse Cloud. Oprește-l mai sus ca să nu-i mai folosești modelele; pentru deconectare, deschide Setări › nanoMuse Cloud.</string>
+    <string name="nm_cloud_provider_no_delete">Acest furnizor este contul tău Hearth. Oprește-l mai sus ca să nu-i mai folosești modelele; pentru deconectare, deschide Setări › Hearth.</string>
     <string name="nm_welcome_own_key">Folosește propria cheie API</string>
     <string name="nm_useit_title">La ce să o folosești</string>
-    <string name="nm_useit_body">Alege de ce să se ocupe această cheie. De restul se ocupă în continuare nanoMuse Cloud.</string>
+    <string name="nm_useit_body">Alege de ce să se ocupe această cheie. De restul se ocupă în continuare Hearth.</string>
     <string name="nm_useit_body_signed_out">Alege de ce să se ocupe această cheie.</string>
     <string name="nm_useit_use">Folosește</string>
     <string name="nm_useit_not_now">Nu acum</string>
     <string name="nm_useit_footnote">Poți schimba asta oricând din Setări › Modele.</string>
-    <string name="nm_retry_on_cloud">Folosește nanoMuse Cloud de data aceasta</string>
+    <string name="nm_retry_on_cloud">Folosește Hearth de data aceasta</string>
     <string name="nm_hands_why_chat_provider">implicitul mâinilor de la furnizorul tău de chat</string>
     <string name="nm_models_auto">Automat</string>
     <string name="nm_models_auto_currently">În prezent %1$s</string>
@@ -1161,4 +1161,25 @@
     <string name="nm_font_scale_medium">Mediu</string>
     <string name="nm_font_scale_large">Mare</string>
     <string name="nm_font_scale_extra_large">Foarte mare</string>
+    <string name="nm_setup_source_grok">Contul meu Grok</string>
+    <string name="nm_setup_source_grok_sub">Intră cu xAI pe acest telefon. Releul rămâne conectat pentru sincronizare și dispozitive.</string>
+    <string name="nm_panic">ALARMĂ</string>
+    <string name="nm_panic_confirm">Atinge din nou ca să trimiți</string>
+    <string name="nm_panic_sending">Se trimite</string>
+    <string name="nm_panic_delivered">Livrat.</string>
+    <string name="nm_panic_not_delivered">Nelivrat. Telefonul lor nu este conectat.</string>
+    <string name="nm_panic_not_linked">Nelivrat. Acest cont nu este legat de altul.</string>
+    <string name="nm_panic_not_connected">Nelivrat. Acest telefon nu este conectat.</string>
+    <string name="nm_panic_alert_title">Alarmă</string>
+    <string name="nm_panic_from">%1$s are nevoie de tine.</string>
+    <string name="nm_panic_dismiss">Sunt aici</string>
+    <string name="nm_panic_close">Închide</string>
+    <string name="nm_panic_channel">Alarmă</string>
+    <string name="nm_panic_channel_sub">O alarmă de la celălalt telefon din această casă</string>
+    <string name="nm_todos_title">De făcut</string>
+    <string name="nm_todos_empty">Lista este goală.</string>
+    <string name="nm_todos_hint">Ce e de făcut</string>
+    <string name="nm_todos_add">Adaugă</string>
+    <string name="nm_todos_delete">Șterge</string>
+    <string name="nm_menu_todos">De făcut</string>
 </resources>

@@ -1,13 +1,11 @@
-"""Is there a newer nanoMuse? The download mirror's index first, GitHub Releases second,
-kept for a day, a failed check for an hour (contract C2: every client shows the installed
-and the latest version).
+"""Is there a newer release? GitHub Releases for WPMG-4The99/hearth, kept for a day, a
+failed check for an hour (contract C2: every client shows the installed and the latest
+version).
 
-Nothing is downloaded and nothing about the install is sent: the requests are the ones a
-browser makes when it opens the download page. ``https://nanomuse.cn/dl/index.json``
-(``{"repo", "releases": [{"tag", "name", "published_at", "assets"}]}``, newest first) is
-asked first with a short timeout, then ``api.github.com/.../releases/latest``. The check
+Nothing is downloaded and nothing about the install is sent: the request is the one a
+browser makes for ``api.github.com/repos/WPMG-4The99/hearth/releases/latest``. The check
 is off when ``server.update_check`` is false, when ``NANOMUSE_NO_UPDATE_CHECK`` is set,
-and in a hosted web session (the operator updates those, not the person using them —
+and in a hosted web session (the operator updates those, not the person using them:
 those runtimes are the ones handed a ``NANOMUSE_CLOUD_KEY``). The desktop app and the
 Android app have checks of their own; this one is for ``pipx`` / Docker installs, which
 show it under *Settings → About* with a "Check now" when the answer is stale or failed.
@@ -26,15 +24,12 @@ import httpx
 from nanomuse import __version__
 from nanomuse.logger import logger
 
-INDEX_URL = "https://nanomuse.cn/dl/index.json"
-DOWNLOAD_PAGE = "https://nanomuse.cn/dl/"
-RELEASES_API = "https://api.github.com/repos/nano-muse/nanoMuse/releases/latest"
-RELEASES_PAGE = "https://github.com/nano-muse/nanoMuse/releases/latest"
-RELEASE_TAG_PAGE = "https://github.com/nano-muse/nanoMuse/releases/tag/{tag}"
+DOWNLOAD_PAGE = "https://github.com/WPMG-4The99/hearth/releases"
+RELEASES_API = "https://api.github.com/repos/WPMG-4The99/hearth/releases/latest"
+RELEASES_PAGE = "https://github.com/WPMG-4The99/hearth/releases/latest"
 CACHE_S = 24 * 3600
 # a check that failed (the runtime came up before the network did) is tried again sooner
 RETRY_S = 3600
-INDEX_TIMEOUT_S = 5.0
 TIMEOUT_S = 6.0
 
 
@@ -59,19 +54,6 @@ def enabled(setting: bool) -> bool:
     ):
         return False
     return not os.environ.get("NANOMUSE_CLOUD_KEY")
-
-
-def latest_from_index(data: Any) -> str:
-    """The newest tag in the mirror's index (``releases`` newest first; the highest one is
-    taken anyway in case the order slipped); ``""`` when the shape is not the index."""
-    if not isinstance(data, dict) or not isinstance(data.get("releases"), list):
-        return ""
-    best = ""
-    for rel in data["releases"]:
-        tag = str(rel.get("tag") or "") if isinstance(rel, dict) else ""
-        if parse_version(tag) and (not best or newer_than(tag, best)):
-            best = tag
-    return best
 
 
 class UpdateCheck:
@@ -127,28 +109,13 @@ class UpdateCheck:
     async def _check(self) -> None:
         self.checked_at = time.monotonic()
         self.checked_wall = datetime.now(UTC).isoformat(timespec="seconds")
-        headers = {"User-Agent": f"nanoMuse/{self.current}"}
-        errors: list[str] = []
-        async with httpx.AsyncClient(follow_redirects=True) as client:
-            # 1. the download mirror's index (short timeout: it is the quick way, not the only one)
-            try:
-                r = await client.get(INDEX_URL, headers=headers, timeout=INDEX_TIMEOUT_S)
-                r.raise_for_status()
-                tag = latest_from_index(r.json())
-                if not tag:
-                    raise ValueError("no release in the index")
-                self._found(tag, RELEASE_TAG_PAGE.format(tag=tag), "nanomuse.cn")
-                return
-            except Exception as exc:  # noqa: BLE001 — the mirror is one of two ways
-                errors.append(exc.__class__.__name__)
-                logger.debug("update check (index) failed: {}", exc)
-            # 2. GitHub Releases
-            try:
-                r = await client.get(
-                    RELEASES_API,
-                    headers={**headers, "Accept": "application/vnd.github+json"},
-                    timeout=TIMEOUT_S,
-                )
+        headers = {
+            "User-Agent": f"nanoMuse/{self.current}",
+            "Accept": "application/vnd.github+json",
+        }
+        try:
+            async with httpx.AsyncClient(follow_redirects=True) as client:
+                r = await client.get(RELEASES_API, headers=headers, timeout=TIMEOUT_S)
                 r.raise_for_status()
                 data = r.json()
                 tag = str(data.get("tag_name") or "")
@@ -156,10 +123,9 @@ class UpdateCheck:
                     raise ValueError(f"unexpected tag {tag!r}")
                 self._found(tag, str(data.get("html_url") or RELEASES_PAGE), "github")
                 return
-            except Exception as exc:  # noqa: BLE001 — the answer is "could not check", never a failure of the app
-                errors.append(exc.__class__.__name__)
-                logger.debug("update check (github) failed: {}", exc)
-        self.error = " / ".join(dict.fromkeys(errors)) or "failed"
+        except Exception as exc:  # noqa: BLE001 — the answer is "could not check", never a failure of the app
+            logger.debug("update check (github) failed: {}", exc)
+            self.error = exc.__class__.__name__
 
     def _found(self, tag: str, url: str, source: str) -> None:
         self.latest = tag.lstrip("v")

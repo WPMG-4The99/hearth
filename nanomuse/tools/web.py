@@ -21,7 +21,7 @@ from nanomuse.tools.base import BaseTool, CallAssessment, int_arg
 
 USER_AGENT = (
     f"Mozilla/5.0 (X11; Linux x86_64) nanoMuse/{__version__} "
-    "(+https://github.com/nano-muse/nanoMuse)"
+    "(+https://github.com/WPMG-4The99/hearth)"
 )
 
 

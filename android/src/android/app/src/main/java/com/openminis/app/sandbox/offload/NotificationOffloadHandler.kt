@@ -136,7 +136,7 @@ class NotificationOffloadHandler(private val context: Context) : NativeOffloadHa
                         OffloadPermissionManager.SettingsGateRequest(
                             id = Manifest.permission.POST_NOTIFICATIONS,
                             title = "Notifications are off",
-                            message = "nanoMuse needs notification permission to send notifications. Open Settings to allow it.",
+                            message = "Hearth needs notification permission to send notifications. Open Settings to allow it.", // nanoMuse: Hearth product name.
                             settingsAction = Settings.ACTION_APPLICATION_DETAILS_SETTINGS,
                             requiresPackageUri = true,
                             positiveLabel = "Open Settings",
@@ -222,7 +222,7 @@ class NotificationOffloadHandler(private val context: Context) : NativeOffloadHa
         }
         AppLogger.info(TAG, "send (immediate): id=$id title='$title'")
         val oemHint = if (OsCompat.isHuawei || OsCompat.isXiaomi) {
-            "On ${OsCompat.oemLabel()}, banner notifications may be disabled by default — the user can enable them in Settings → Notifications for nanoMuse."
+            "On ${OsCompat.oemLabel()}, banner notifications may be disabled by default — the user can enable them in Settings → Notifications for Hearth." // nanoMuse: Hearth product name.
         } else null
         val data = JSONObject()
             .put("id", id)
@@ -455,7 +455,7 @@ class NotificationOffloadHandler(private val context: Context) : NativeOffloadHa
                     OffloadPermissionManager.SettingsGateRequest(
                         id = "notification_access",
                         title = "Notification access needed",
-                        message = "nanoMuse needs Notification access to read the status-bar notifications. Open Settings and enable \"nanoMuse\" under Notification access.",
+                        message = "Hearth needs Notification access to read the status-bar notifications. Open Settings and enable \"Hearth\" under Notification access.", // nanoMuse: Hearth product name.
                         settingsAction = MinisNotificationListenerService.SETTINGS_ACTION,
                         requiresPackageUri = false,
                         positiveLabel = "Open Settings",
@@ -580,7 +580,7 @@ Notes:
     fire reliably even in Doze. Requires SCHEDULE_EXACT_ALARM on
     Android 14+ (settings reports schedule_exact_allowed).
   - list needs Notification access (Settings → Apps → Special app
-    access → Notification access → nanoMuse). First list call opens it.
+    access → Notification access → Hearth). First list call opens it.
 """
     }
 }

@@ -14,7 +14,7 @@ object BrowserGuard {
     private const val TAG = "BrowserGuard"
 
     /** Prefix on a refusal so the chat layer knows to bring the browser sheet forward. */
-    const val HANDOFF_PREFIX = "[nanoMuse handoff]"
+    const val HANDOFF_PREFIX = "[Hearth handoff]"
 
     sealed class Verdict {
         object Proceed : Verdict()

@@ -12,6 +12,6 @@ export const DEVICES_PANEL = 'nanomuse-devices'
 export const ROOM_PANELS = [FEED_PANEL, IDEAS_PANEL, GOALS_PANEL, LIBRARY_PANEL, DEVICES_PANEL] as const
 
 /** Where a problem with nanoMuse is reported. */
-export const REPO_URL = 'https://github.com/nano-muse/nanoMuse'
-export const ISSUES_URL = 'https://github.com/nano-muse/nanoMuse/issues'
-export const DOCS_URL = 'https://nanomuse.cn/docs/desktop'
+export const REPO_URL = 'https://github.com/WPMG-4The99/hearth'
+export const ISSUES_URL = 'https://github.com/WPMG-4The99/hearth/issues'
+export const DOCS_URL = 'https://github.com/WPMG-4The99/hearth/blob/main/docs/desktop.md'

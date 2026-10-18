@@ -207,6 +207,7 @@ fun NanoMuseHome(
     val signedIn by io.github.nanomuse.cloud.NanoMuseCloud.signedIn(context).collectAsState()
     val phase = when {
         !configLoaded || sessions == null || signedIn == null -> HomePhase.LOADING
+        signedIn != true -> HomePhase.SIGNIN
         FirstRunSetup.needed(signedIn == true, hasProviders, sessions!!.isNotEmpty(), setupDone) -> HomePhase.SETUP
         else -> HomePhase.HOME
     }
@@ -526,13 +527,18 @@ fun NanoMuseHome(
     ) { current ->
         when (current) {
             HomePhase.LOADING -> Surface(color = MuseTones.surface, modifier = Modifier.fillMaxSize()) {}
+            HomePhase.SIGNIN -> io.github.nanomuse.ui.cloud.CloudSignInScreen(
+                onBack = {},
+                onSignedIn = {},
+                wall = true,
+            )
             HomePhase.SETUP -> FirstRunSetupScreen(
                 agentName = agentName,
                 signedIn = signedIn == true,
                 hasGroups = hasGroups,
                 hasProviders = hasProviders,
                 onSignIn = { navController.safeNavigate(io.github.nanomuse.ui.cloud.ROUTE_CLOUD_SIGN_IN) },
-                onAddProvider = { navController.safeNavigate(Routes.ADD_PROVIDER) },
+                onAddProvider = { navController.safeNavigate(Routes.addProvider("xai:oauth")) },
                 onSelectModels = { navController.safeNavigate(Routes.ONBOARDING_MODELS) },
                 onStart = { FirstRunSetup.markDone(context); setupDone = true },
                 onSettings = { navController.safeNavigate(Routes.SETTINGS) },
@@ -542,7 +548,7 @@ fun NanoMuseHome(
     }
 }
 
-private enum class HomePhase { LOADING, SETUP, HOME }
+private enum class HomePhase { LOADING, SIGNIN, SETUP, HOME }
 
 /** The big-face header on the four pages, with Muse's round hamburger and "•••" (sliders on the feed). */
 @Composable
@@ -578,7 +584,8 @@ private fun TabHeader(
                     contentDescription = stringResource(R.string.nm_feed_settings_title),
                     onClick = { FeedUi.settingsOpen.value = true },
                 )
-            } else Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+            } else Row(horizontalArrangement = Arrangement.spacedBy(8.dp), verticalAlignment = androidx.compose.ui.Alignment.CenterVertically) {
+                if (tab == HomeTab.CHAT) io.github.nanomuse.panic.PanicButton()
                 Box {
                 MuseRoundButton(
                     icon = Icons.Filled.MoreHoriz,
@@ -587,6 +594,10 @@ private fun TabHeader(
                 )
                 DropdownMenu(expanded = menu, onDismissRequest = { menu = false }) {
                     if (tab == HomeTab.CHAT) {
+                        DropdownMenuItem(
+                            text = { Text(stringResource(R.string.nm_menu_todos)) },
+                            onClick = { menu = false; navController.safeNavigate(io.github.nanomuse.todos.ROUTE_TODOS) },
+                        )
                         DropdownMenuItem(
                             text = { Text(stringResource(R.string.nm_coding_title)) },
                             onClick = { menu = false; navController.safeNavigate(io.github.nanomuse.ui.coding.ROUTE_CODING) },

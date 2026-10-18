@@ -55,7 +55,7 @@ import java.util.Locale
  */
 object StarPrompt {
     /** The repository the star goes to (the policy may point elsewhere; see [url]). */
-    const val REPO_URL = "https://github.com/nano-muse/nanoMuse"
+    const val REPO_URL = "https://github.com/WPMG-4The99/hearth"
 
     private const val PREFS = "nm.star"
     private const val KEY_STARRED = "starred"

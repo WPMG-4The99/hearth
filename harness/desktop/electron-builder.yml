@@ -79,11 +79,11 @@ win:
   # is uploaded from the build: the workflow attaches the three files to the GitHub release,
   # from which the download mirror picks them up.
   # The generic provider only shapes the metadata: the file URLs in latest.yml are relative
-  # names, so the same pair serves from GitHub and from nanomuse.cn/dl/win alike. Never a
+  # names, so the same pair serves from the GitHub release. Never a
   # publisher certificate (docs/desktop.md): the SHA-512 is the installer's own integrity.
   publish:
     provider: generic
-    url: "https://nanomuse.cn/dl/win/"
+    url: "https://github.com/WPMG-4The99/hearth/releases/latest/download/"
 nsis:
   oneClick: false
   perMachine: false

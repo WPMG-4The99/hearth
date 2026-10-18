@@ -76,8 +76,8 @@ nanomuse-browser = "nanomuse.bridge.cli:browser_main"
 nanomuse-open = "nanomuse.bridge.cli:open_main"
 
 [project.urls]
-Homepage = "https://nanomuse.cn"
-Documentation = "https://nanomuse.cn/docs/"
+Homepage = "https://github.com/WPMG-4The99/hearth"
+Documentation = "https://github.com/WPMG-4The99/hearth/tree/main/docs"
 Repository = "https://github.com/nano-muse/nanoMuse"
 Issues = "https://github.com/nano-muse/nanoMuse/issues"
 Changelog = "https://github.com/nano-muse/nanoMuse/blob/main/CHANGELOG.md"

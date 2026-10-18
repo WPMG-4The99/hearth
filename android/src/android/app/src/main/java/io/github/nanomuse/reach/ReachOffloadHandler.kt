@@ -49,8 +49,8 @@ class ReachOffloadHandler(private val context: Context) : NativeOffloadHandler {
                 "no_computer",
                 when {
                     Computers.all(context).isEmpty() && !io.github.nanomuse.hub.Hub.isConnected ->
-                        "No other device is connected. Computers join by running nanoMuse Desktop signed in to the same nanoMuse Cloud account; this phone is not signed in to nanoMuse Cloud yet."
-                    Computers.all(context).isEmpty() -> "No other device is online right now. Computers join by running nanoMuse Desktop signed in to the same nanoMuse Cloud account."
+                        "No other device is connected. Computers join by running Hearth Desktop signed in to the same Hearth account; this phone is not signed in to Hearth yet."
+                    Computers.all(context).isEmpty() -> "No other device is online right now. Computers join by running Hearth Desktop signed in to the same Hearth account."
                     else -> "No connected device matches “${args.get("on")}”. Connected: " + Computers.all(context).joinToString(", ") { it.name } + "."
                 },
             )
@@ -70,7 +70,7 @@ class ReachOffloadHandler(private val context: Context) : NativeOffloadHandler {
             failed(sub, computer, "${computer.name} answered ${e.code}: ${e.message}")
         } catch (e: java.io.IOException) {
             AppLogger.warning(TAG, "$sub on ${computer.name}: ${e.message}")
-            failed(sub, computer, "${computer.name} does not answer: ${e.message ?: e.javaClass.simpleName}. Is nanoMuse still running there?")
+            failed(sub, computer, "${computer.name} does not answer: ${e.message ?: e.javaClass.simpleName}. Is Hearth still running there?")
         }
     }
 
@@ -284,7 +284,7 @@ Usage:
   nanomuse-pc task "<what to do, in words>" --on <device>   the Muse on that device does it and answers
 
 Commands are judged like the phone's own shell and wait for the approval card on this phone before they are sent;
-a task's own approvals show here too. Devices join by signing in to the same nanoMuse Cloud account (any network).
+a task's own approvals show here too. Devices join by signing in to the same Hearth account (any network).
 Exit codes: 0 ok · 1 failed · 2 usage · 3 no device / refused · 4 the user said no.
 """
     }

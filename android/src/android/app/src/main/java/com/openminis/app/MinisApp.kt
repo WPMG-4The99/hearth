@@ -535,6 +535,8 @@ class MinisApp : Application(), ImageLoaderFactory {
         // reachable even before any shell session is launched.
         NativeOffloadServer.register("android-alarm", AlarmOffloadHandler(this))
         NativeOffloadServer.register("android-calendar", CalendarOffloadHandler(this))
+        // nanoMuse: hearth-todos — this account's to-do list, for the assistant and the To-dos screen.
+        NativeOffloadServer.register("hearth-todos", io.github.nanomuse.todos.TodosOffloadHandler(this))
         NativeOffloadServer.register("android-clipboard", ClipboardOffloadHandler(this))
         NativeOffloadServer.register("android-contacts", ContactsOffloadHandler(this))
         NativeOffloadServer.register("android-device", DeviceOffloadHandler(this))

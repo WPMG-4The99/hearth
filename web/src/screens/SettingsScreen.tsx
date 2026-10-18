@@ -97,7 +97,7 @@ export function SettingsScreen() {
     if (!s) void refreshSettings();
   }, [s, refreshSettings]);
 
-  // the runtime asks nanomuse.cn/dl (then GitHub) at most once a day; "Check now" asks again
+  // the runtime asks GitHub releases for WPMG-4The99/hearth at most once a day; "Check now" asks again
   const checkRelease = useCallback(async (refresh = false) => {
     setChecking(true);
     try {
@@ -451,11 +451,11 @@ export function SettingsScreen() {
                 {t("Runtime:")} {window.location.origin} · <span className="text-fg/70">{t("the token is in the server_token file in the data folder")}</span>
               </div>
               <div>
-                <a href="https://github.com/nano-muse/nanoMuse/blob/main/docs/cli.md" target="_blank" rel="noreferrer" className="text-accent underline-offset-2 hover:underline">
+                <a href="https://github.com/WPMG-4The99/hearth/blob/main/docs/cli.md" target="_blank" rel="noreferrer" className="text-accent underline-offset-2 hover:underline">
                   {t("The command line and the API")}
                 </a>
                 {" · "}
-                <a href="https://github.com/nano-muse/nanoMuse/blob/main/docs/harness.md" target="_blank" rel="noreferrer" className="text-accent underline-offset-2 hover:underline">
+                <a href="https://github.com/WPMG-4The99/hearth/blob/main/docs/harness.md" target="_blank" rel="noreferrer" className="text-accent underline-offset-2 hover:underline">
                   {t("nanoMuse on DeepSeek Harness")}
                 </a>
               </div>
@@ -502,7 +502,7 @@ const SECTION_IDS: SectionId[] = ["who", "sentinel", "proactivity", "notificatio
 
 /**
  * The Version card (contract C2): the installed release, and the latest one as the runtime
- * found it on nanomuse.cn/dl or GitHub — "you have it", "x is out" with Update, or "could
+ * found it on GitHub releases for WPMG-4The99/hearth: "you have it", "x is out" with Update, or "could
  * not check" with a try again. Permanent: both lines are there whatever the answer. A phone
  * shell checks on its own, so the latest line says so instead.
  */
@@ -656,7 +656,7 @@ function SettingsHome({ release, onOpen }: { release: UpdateView | null; onOpen:
           <MuseDivider />
           <MuseRow icon={<Hand size={22} />} label={t("Privacy policy")} onClick={() => window.open(PRIVACY_URL, "_blank", "noopener")} external />
           <MuseDivider />
-          <MuseRow icon={<MessageSquareWarning size={22} />} label={t("Feedback")} onClick={() => window.open("https://github.com/nano-muse/nanoMuse/issues/new/choose", "_blank", "noopener")} external />
+          <MuseRow icon={<MessageSquareWarning size={22} />} label={t("Feedback")} onClick={() => window.open("https://github.com/WPMG-4The99/hearth/issues/new/choose", "_blank", "noopener")} external />
         </MuseCard>
         <MuseCaption>nanoMuse {state.version}</MuseCaption>
       </div>

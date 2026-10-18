@@ -20,11 +20,11 @@ import { openStar } from './AccountPage.tsx'
 import { DOCS_URL, ISSUES_URL, REPO_URL } from './panels.ts'
 import { setPrefs, usePrefs } from './prefs.ts'
 
-const SITE_URL = 'https://nanomuse.cn/'
-const DISCUSS_URL = 'https://github.com/nano-muse/nanoMuse/discussions'
+const SITE_URL = 'https://github.com/WPMG-4The99/hearth'
+const DISCUSS_URL = 'https://github.com/WPMG-4The99/hearth/discussions'
 /** The privacy policy as every client links it (the relay, the web console and the phones agree). */
-const PRIVACY_URL = 'https://nanomuse.cn/privacy/'
-const LICENSE_URL = 'https://github.com/nano-muse/nanoMuse/blob/main/LICENSE'
+const PRIVACY_URL = 'https://github.com/WPMG-4The99/hearth/blob/main/docs/privacy.md'
+const LICENSE_URL = 'https://github.com/WPMG-4The99/hearth/blob/main/LICENSE'
 
 function Switch({ checked, onChange, label, disabled }: { checked: boolean; onChange(next: boolean): void; label: string; disabled?: boolean }): ReactNode {
   return h('button', { type: 'button', role: 'switch', className: 'nm-switch', 'aria-checked': checked, 'aria-label': label, disabled, onClick: () => onChange(!checked) })
@@ -118,7 +118,7 @@ export function makeHelpSection(t: Translate, version: string) {
         // going to GitHub from here counts as the star being done: the asks stop (C1)
         h(LinkRow, { icon: h(IconHeart, { size: 18 }), title: t('helpStar'), sub: t('helpStarSub'), onClick: () => openStar(REPO_URL) }),
         h(LinkRow, { icon: h(IconFile, { size: 18 }), title: t('helpDocs'), onClick: () => openLink(DOCS_URL) }),
-        h(LinkRow, { icon: h(IconLink, { size: 18 }), title: t('helpSite'), sub: 'nanomuse.cn', onClick: () => openLink(SITE_URL) }),
+        h(LinkRow, { icon: h(IconLink, { size: 18 }), title: t('helpSite'), sub: 'github.com/WPMG-4The99/hearth', onClick: () => openLink(SITE_URL) }),
         h(LinkRow, { icon: h(IconLink, { size: 18 }), title: t('helpDiscuss'), onClick: () => openLink(DISCUSS_URL) }),
         h(LinkRow, { icon: h(IconBug, { size: 18 }), title: t('helpIssue'), onClick: () => openLink(ISSUES_URL) })),
       h('div', { className: 'nm-card' },

@@ -4,10 +4,10 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <string name="nm_about_build">Esta versão</string>
     <string name="nm_about_license">Licença</string>
-    <string name="nm_about_upstream">Baseado no OpenMinis 1.13</string>
-    <string name="nm_about_upstream_detail">GPL-3.0 · modificado desde 2026-09-24 · código-fonte no GitHub</string>
+    <string name="nm_about_upstream">Créditos</string>
+    <string name="nm_about_upstream_detail">Hearth é uma bifurcação do nanoMuse (github.com/nano-muse/nanoMuse), GPL-3.0</string>
     <string name="nm_about_trademark">Sem vínculo com a Meta</string>
-    <string name="nm_about_trademark_detail">Muse é uma marca registrada da Meta Platforms, Inc. O nanoMuse é um projeto independente de software livre.</string>
+    <string name="nm_about_trademark_detail">Muse é uma marca registrada da Meta Platforms, Inc. O Hearth é um projeto independente de software livre.</string>
 
     <!-- Chat header -->
     <string name="nm_avatar_content_description">Seu agente. Toque para mudar o nome, o ícone ou o estilo.</string>
@@ -22,28 +22,28 @@
     <string name="nm_star_action">Dar estrela no GitHub</string>
     <string name="nm_star_later">Agora não</string>
     <string name="nm_star_done">Já dei a estrela</string>
-    <string name="nm_star_signed_in">Bem-vindo. O nanoMuse é gratuito, de código aberto e sem fins lucrativos: um agente pessoal para quem quiser rodá-lo. Se isso vale algo para você, uma estrela no GitHub é como a próxima pessoa vai encontrá-lo.</string>
+    <string name="nm_star_signed_in">Bem-vindo. O Hearth é gratuito, de código aberto e sem fins lucrativos: um agente pessoal para quem quiser rodá-lo. Se isso vale algo para você, uma estrela no GitHub é como a próxima pessoa vai encontrá-lo.</string>
     <plurals name="nm_star_tasks">
-        <item quantity="one">%1$d tarefa concluída. Se o nanoMuse ajudou, uma estrela no GitHub diz isso a quem o constrói.</item>
-        <item quantity="other">%1$d tarefas concluídas. Se o nanoMuse é útil, uma estrela no GitHub ajuda a próxima pessoa a encontrá-lo.</item>
+        <item quantity="one">%1$d tarefa concluída. Se o Hearth ajudou, uma estrela no GitHub diz isso a quem o constrói.</item>
+        <item quantity="other">%1$d tarefas concluídas. Se o Hearth é útil, uma estrela no GitHub ajuda a próxima pessoa a encontrá-lo.</item>
     </plurals>
-    <string name="nm_star_days_used_week">Uma semana com o nanoMuse. Se ele conquistou um lugar no seu dia, uma estrela no GitHub ajuda a próxima pessoa a encontrá-lo.</string>
-    <string name="nm_star_days_used_month">Um mês com o nanoMuse. Se ele já faz parte da sua rotina, uma estrela no GitHub diz aos outros que vale a pena experimentar.</string>
+    <string name="nm_star_days_used_week">Uma semana com o Hearth. Se ele conquistou um lugar no seu dia, uma estrela no GitHub ajuda a próxima pessoa a encontrá-lo.</string>
+    <string name="nm_star_days_used_month">Um mês com o Hearth. Se ele já faz parte da sua rotina, uma estrela no GitHub diz aos outros que vale a pena experimentar.</string>
     <plurals name="nm_star_days_used">
-        <item quantity="one">%1$d dia com o nanoMuse. Se ele ajudou, uma estrela no GitHub ajuda a próxima pessoa a encontrá-lo.</item>
-        <item quantity="other">%1$d dias com o nanoMuse. Se ele conquistou um lugar no seu dia, uma estrela no GitHub ajuda a próxima pessoa a encontrá-lo.</item>
+        <item quantity="one">%1$d dia com o Hearth. Se ele ajudou, uma estrela no GitHub ajuda a próxima pessoa a encontrá-lo.</item>
+        <item quantity="other">%1$d dias com o Hearth. Se ele conquistou um lugar no seu dia, uma estrela no GitHub ajuda a próxima pessoa a encontrá-lo.</item>
     </plurals>
-    <string name="nm_star_goal_done">Meta alcançada. Se o nanoMuse ajudou você a chegar lá, uma estrela no GitHub diz isso a quem o constrói.</string>
-    <string name="nm_star_new_look">Um rosto novo, desenhado para você. Se gosta do rumo do nanoMuse, uma estrela no GitHub ajuda mais pessoas a encontrá-lo.</string>
-    <string name="nm_star_exhausted">A cota gratuita acabou. Obrigado por chegar até aqui. Se o nanoMuse mereceu, uma estrela no GitHub mantém o projeto à vista para a próxima pessoa.</string>
+    <string name="nm_star_goal_done">Meta alcançada. Se o Hearth ajudou você a chegar lá, uma estrela no GitHub diz isso a quem o constrói.</string>
+    <string name="nm_star_new_look">Um rosto novo, desenhado para você. Se gosta do rumo do Hearth, uma estrela no GitHub ajuda mais pessoas a encontrá-lo.</string>
+    <string name="nm_star_exhausted">A cota gratuita acabou. Obrigado por chegar até aqui. Se o Hearth mereceu, uma estrela no GitHub mantém o projeto à vista para a próxima pessoa.</string>
     <string name="nm_chat_menu_rename">Renomear conversa</string>
 
     <!-- Foreground-service notification title while no tool is running -->
     <string name="nm_notif_working">%1$s está trabalhando</string>
 
     <!-- First conversation: the scripted opening (see io.github.nanomuse.onboarding) -->
-    <string name="nm_intro_hello">Oi, eu sou o nanoMuse, o assistente que mora no seu celular. Deixe comigo algumas das suas tarefas.</string>
-    <string name="nm_intro_how_i_work">Um pouco sobre como eu trabalho:\n\n- Tenho meu próprio computador (um sandbox Linux e um navegador), então posso rodar comandos, abrir sites e preencher formulários.\n- Posso ler e organizar os arquivos e fotos que você montar para mim, e cuidar de lembretes e tarefas agendadas.\n- Antes de qualquer passo que importe, eu pergunto a você primeiro.\n- Tudo roda neste celular. Suas mensagens vão para o modelo que você configurou; com o nanoMuse Cloud, esta conversa também acompanha você nos seus outros aparelhos; em Controles de dados dá para desligar isso.</string>
+    <string name="nm_intro_hello">Oi, eu sou a Nix. Moro neste telefone e posso tirar algumas coisas da sua frente.</string>
+    <string name="nm_intro_how_i_work">Um pouco sobre como eu trabalho:\n\n- Tenho meu próprio computador (um sandbox Linux e um navegador), então posso rodar comandos, abrir sites e preencher formulários.\n- Posso ler e organizar os arquivos e fotos que você montar para mim, e cuidar de lembretes e tarefas agendadas.\n- Antes de qualquer passo que importe, eu pergunto a você primeiro.\n- Tudo roda neste celular. Suas mensagens vão para o modelo que você configurou; com o Hearth, esta conversa também acompanha você nos seus outros aparelhos; em Controles de dados dá para desligar isso.</string>
     <string name="nm_intro_ask_name">Antes de começar, como devo chamar você?</string>
 
     <!-- First conversation: the name chooser -->
@@ -197,7 +197,7 @@
     <string name="nm_risk_class_outbound">Enviar</string>
     <string name="nm_risk_class_money">Pagar</string>
     <string name="nm_risk_class_install">Instalar</string>
-    <string name="nm_grants_header">Aprovações lembradas pelo nanoMuse</string>
+    <string name="nm_grants_header">Aprovações lembradas pelo Hearth</string>
     <string name="nm_grants_empty">Nada lembrado ainda</string>
     <string name="nm_grants_revoke">Revogar</string>
     <string name="nm_grants_revoke_confirm">Revogar esta aprovação? Na próxima vez que surgir, você será perguntado de novo.</string>
@@ -205,7 +205,7 @@
     <string name="nm_risk_remember_money_note">Confirmado com o bloqueio de tela. Pagamentos neste app ou site passam então a rodar sem cartão; aparecem primeiro em Configurações → Permissões, onde você pode revogar a qualquer momento.</string>
     <string name="nm_risk_remember_money_needs_lock">Para lembrar pagamentos, defina antes um bloqueio de tela (Configurações → Segurança): lembrar um pagamento é confirmado com ele.</string>
     <string name="nm_risk_lock_title">Confirme que é você</string>
-    <string name="nm_risk_lock_subtitle">O nanoMuse vai lembrar as aprovações de pagamento em %1$s e executá-las sem perguntar.</string>
+    <string name="nm_risk_lock_subtitle">O Hearth vai lembrar as aprovações de pagamento em %1$s e executá-las sem perguntar.</string>
     <string name="nm_risk_remembered_toast">Lembrado · veja Configurações → Permissões para revogar</string>
     <string name="nm_risk_tier_highest">Roda sem perguntar · pagamentos</string>
     <string name="nm_risk_tier_confirm">Lembrado pelo cartão · excluir e enviar</string>
@@ -276,7 +276,7 @@
     <string name="nm_sysfiles_open_memory">Abrir memória</string>
     <string name="nm_sysfiles_footer">Estes arquivos são do agente: quem ele é, o que sabe sobre você, o que lembra, o que escreve para você e quando acorda. Ficam no armazenamento do seu celular; o agente os lê e edita pelo shell em /var/minis/memory, e você pode editar qualquer coisa aqui.</string>
     <string name="nm_sysfile_about_lead">Sobre este arquivo.</string>
-    <string name="nm_sysfile_about_soul">Esta é a persona do agente: os valores e hábitos que ele tenta manter em toda conversa, seu nome e o estilo em que responde. Começa de um modelo que vem com o nanoMuse; o agente pode refiná-la com o tempo e avisa quando o faz. Você pode editá-la a qualquer momento. Esta nota não faz parte do arquivo.</string>
+    <string name="nm_sysfile_about_soul">Esta é a persona do agente: os valores e hábitos que ele tenta manter em toda conversa, seu nome e o estilo em que responde. Começa de um modelo que vem com o Hearth; o agente pode refiná-la com o tempo e avisa quando o faz. Você pode editá-la a qualquer momento. Esta nota não faz parte do arquivo.</string>
     <string name="nm_sysfile_about_user">O agente mantém este arquivo como suas anotações de trabalho sobre você: seu nome, como prefere ser chamado, seu fuso horário e o contexto de que ele precisa para ser útil, como aquilo em que você está trabalhando. Ele o preenche com o tempo a partir das suas conversas e o lê no início de cada uma. Reflete o entendimento atual do agente, então pode estar incompleto ou desatualizado. Você pode editar qualquer coisa aqui, e o agente seguirá o que você escrever. Esta nota não faz parte do arquivo.</string>
     <string name="nm_sysfile_about_memory">Notas duradouras que o agente guarda entre conversas: o que vale lembrar, nas palavras dele, mais o que você importou de outro assistente. O diário dia a dia fica ao lado, na pasta de memória. Lido no início de toda conversa quando a memória está ligada. Esta nota não faz parte do arquivo.</string>
     <string name="nm_sysfile_about_feed">Um parágrafo que orienta o feed: do que você quer mais, o que pular, que tamanho os posts devem ter. A rotina diária do feed o lê antes de escrever. Esta nota não faz parte do arquivo.</string>
@@ -357,7 +357,7 @@
     <string name="nm_own_clip_title">Seu próprio clipe</string>
     <string name="nm_own_clip_body">Um vídeo curto seu toca como o rosto em repouso, e os outros humores recorrem a ele. MP4 ou MOV com vídeo H.264, de até 15 segundos e 30 MB; toca sem som, em repetição.</string>
     <string name="nm_own_clip_on">Seu clipe está ativo e toca em todos os humores; onde uma imagem parada é mostrada, as desenhadas continuam em uso. “Rosto padrão” o remove.</string>
-    <string name="nm_own_clip_local">O clipe fica neste telefone. Não é enviado ao nanoMuse Cloud nem sincronizado com seus outros dispositivos.</string>
+    <string name="nm_own_clip_local">O clipe fica neste telefone. Não é enviado ao Hearth nem sincronizado com seus outros dispositivos.</string>
     <string name="nm_own_clip_choose">Escolher um clipe</string>
     <string name="nm_own_clip_replace">Substituir o clipe</string>
     <string name="nm_own_clip_default">Rosto padrão</string>
@@ -375,7 +375,7 @@
     <string name="nm_a11y_own_clip_preview">Prévia do seu clipe</string>
 
     <!-- First run (Muse-style welcome; the steps are OpenMinis' provider and model screens) -->
-    <string name="nm_setup_title">Bem-vindo ao nanoMuse</string>
+    <string name="nm_setup_title">Bem-vindo ao Hearth</string>
     <string name="nm_setup_step_models">Escolher modelos</string>
     <string name="nm_setup_step_models_sub">Os modelos que seu provedor oferece são listados para você; escolha até três</string>
     <string name="nm_setup_step_start">Conheça %1$s</string>
@@ -391,7 +391,7 @@
     <string name="nm_settings_no_model">Nenhum modelo ainda</string>
     <string name="nm_settings_no_model_sub">Adicione um provedor e escolha os modelos dele</string>
     <string name="nm_settings_change_model">Mudar</string>
-    <string name="nm_settings_version">nanoMuse %1$s (%2$d)</string>
+    <string name="nm_settings_version">Hearth %1$s (%2$d)</string>
     <string name="nm_version_title">Versão</string>
     <string name="nm_version_checking">Verificando a versão mais recente…</string>
     <string name="nm_version_have">Mais recente %1$s, você já tem</string>
@@ -471,8 +471,8 @@
     <string name="nm_avatar_share_title">Compartilhar meu avatar</string>
     <string name="nm_avatar_share_subtitle">Escolha um cartão. Ele sai pela tela de compartilhamento do sistema.</string>
     <string name="nm_avatar_share_system">Compartilhar</string>
-    <string name="nm_avatar_share_bubble">Oi, eu sou %1$s, um agente pessoal de IA. Conheça o nanoMuse: código aberto, roda no seu celular.</string>
-    <string name="nm_avatar_share_tagline">Seu agente pessoal de IA, código aberto · github.com/nano-muse/nanoMuse</string>
+    <string name="nm_avatar_share_bubble">Oi, eu sou %1$s, um agente pessoal de IA. Conheça o Hearth: código aberto, roda no seu celular.</string>
+    <string name="nm_avatar_share_tagline">Seu agente pessoal de IA, código aberto · github.com/WPMG-4The99/hearth</string>
 
     <!-- 0.1.10 · Motion -->
     <string name="nm_media_title">Modelos de imagem e vídeo</string>
@@ -523,7 +523,7 @@
     <string name="nm_hands_section_needs">Do que ele precisa</string>
     <string name="nm_hands_needs_footer">O serviço de acessibilidade tira a captura de tela e executa os gestos; ele não lê o conteúdo da tela. Sobrepor a outros apps é para a cápsula.</string>
     <string name="nm_hands_need_a11y">Serviço de acessibilidade</string>
-    <string name="nm_hands_need_a11y_fix">Ative o nanoMuse em Apps instalados nas configurações de acessibilidade</string>
+    <string name="nm_hands_need_a11y_fix">Ative o Hearth em Apps instalados nas configurações de acessibilidade</string>
     <string name="nm_hands_need_overlay">Sobrepor a outros apps</string>
     <string name="nm_hands_need_overlay_fix">Permita, para que a cápsula com Parar possa aparecer</string>
     <string name="nm_hands_need_model">Um modelo que enxerga imagens</string>
@@ -540,7 +540,7 @@
     <string name="nm_hands_why_default">o padrão das mãos com sua própria chave</string>
     <string name="nm_hands_why_chat">o modelo de chat que você escolheu</string>
     <string name="nm_hands_why_group">o primeiro do seu grupo padrão que enxerga</string>
-    <string name="nm_hands_why_menu">o modelo de tela do nanoMuse Cloud</string>
+    <string name="nm_hands_why_menu">o modelo de tela do Hearth</string>
     <string name="nm_hands_why_vision_group">seu Grupo de Visão</string>
     <string name="nm_hands_why_any">o único modelo ativo que enxerga</string>
     <string name="nm_hands_section_rules">Como ele se comporta</string>
@@ -561,7 +561,7 @@
     <string name="nm_hands_protected_screen">Esta tela é protegida e não pode ser lida. Termine esta parte você mesmo e depois toque em Continuar.</string>
     <string name="nm_hands_secret_field">Um campo de senha ou código: preencha você mesmo e depois toque em Continuar.</string>
     <string name="nm_hands_approval_title">Esperando sua aprovação</string>
-    <string name="nm_hands_approval_detail">Tocar em “%1$s”: confirme no nanoMuse (ele pede seu bloqueio de tela).</string>
+    <string name="nm_hands_approval_detail">Tocar em “%1$s”: confirme no Hearth (ele pede seu bloqueio de tela).</string>
     <string name="nm_hands_approval_here">Tocar em “%1$s”?</string>
     <string name="nm_hands_allow_once">Permitir</string>
     <string name="nm_hands_deny">Negar</string>
@@ -592,10 +592,10 @@
     <!-- Reach (0.1.13): the phone drives your computer -->
     <string name="nm_pc_title">Computadores</string>
     <string name="nm_pc_none_short">Nenhum</string>
-    <string name="nm_pc_intro">Diga aqui, feito no seu computador: um comando, um arquivo, uma página no navegador dele, uma olhada na tela dele, ou uma tarefa inteira para o nanoMuse de lá. O celular comanda o computador, nunca o contrário; toda aprovação é decidida aqui primeiro.</string>
-    <string name="nm_pc_hub_title">O jeito fácil: nanoMuse Desktop, mesma conta</string>
-    <string name="nm_pc_hub_body">Instale o nanoMuse Desktop no computador e entre com a conta deste celular; ele aparece em Conta → Dispositivos em segundos.</string>
-    <string name="nm_pc_hub_download">Baixar o nanoMuse Desktop</string>
+    <string name="nm_pc_intro">Diga aqui, feito no seu computador: um comando, um arquivo, uma página no navegador dele, uma olhada na tela dele, ou uma tarefa inteira para o Hearth de lá. O celular comanda o computador, nunca o contrário; toda aprovação é decidida aqui primeiro.</string>
+    <string name="nm_pc_hub_title">O jeito fácil: Hearth Desktop, mesma conta</string>
+    <string name="nm_pc_hub_body">Instale o Hearth Desktop no computador e entre com a conta deste celular; ele aparece em Conta → Dispositivos em segundos.</string>
+    <string name="nm_pc_hub_download">Baixar o Hearth Desktop</string>
     <string name="nm_pc_hub_account">Conta e dispositivos</string>
     <string name="nm_pc_section_paired">Computadores nesta conta</string>
     <string name="nm_pc_none">Nenhum computador ainda</string>
@@ -604,11 +604,11 @@
     <string name="nm_pc_last_seen">visto %1$s</string>
     <string name="nm_pc_offline">offline</string>
     <string name="nm_pc_online">online</string>
-    <string name="nm_pc_account_none">Este celular ainda não entrou no nanoMuse Cloud; entre primeiro, e depois o computador com a mesma conta.</string>
+    <string name="nm_pc_account_none">Este celular ainda não entrou no Hearth; entre primeiro, e depois o computador com a mesma conta.</string>
     <string name="nm_pc_account_hint">Este celular está conectado como %1$s; o computador precisa entrar com a mesma conta.</string>
     <string name="nm_pc_checking">Verificando…</string>
     <string name="nm_pc_answering">%1$s responde</string>
-    <string name="nm_pc_not_answering">%1$s não responde. O nanoMuse Desktop ainda está rodando lá?</string>
+    <string name="nm_pc_not_answering">%1$s não responde. O Hearth Desktop ainda está rodando lá?</string>
 
     <!-- the approval card -->
     <string name="nm_risk_desc_on_computer">No computador “%1$s”, não neste celular.</string>
@@ -629,11 +629,11 @@
     <string name="nm_welcome_email">Entrar (grátis)</string>
     <string name="nm_welcome_fine_print">Uma conta mantém seus dispositivos juntos e traz o uso gratuito do modelo; nada é cobrado. Sua própria chave de API pode ser adicionada logo depois.</string>
     <string name="nm_setup_source_title">Qual modelo responde?</string>
-    <string name="nm_setup_source_sub">Sua conta já traz um. Você também pode adicionar sua própria chave de API e trocar a qualquer momento.</string>
-    <string name="nm_setup_source_cloud">Usar o modelo do nanoMuse Cloud</string>
-    <string name="nm_setup_source_cloud_sub">DeepSeek para o chat e Qwen para as mãos, com uma cota gratuita por conta paga pelo desenvolvedor. Nada a configurar.</string>
+    <string name="nm_setup_source_sub">Os dois podem usar as ferramentas do telefone. Dá para mudar depois em Ajustes, Modelos.</string>
+    <string name="nm_setup_source_cloud">Relay do Hearth</string>
+    <string name="nm_setup_source_cloud_sub">O modelo do relay desta casa. Nada para colar.</string>
     <string name="nm_setup_source_own_sub">OpenAI, Anthropic, DeepSeek, Bailian e outros endpoints compatíveis com OpenAI. A chave fica neste celular.</string>
-    <string name="nm_setup_source_fine_print">Os dois não competem: o modelo do Cloud continua disponível, e cada grupo de modelos escolhe o seu.</string>
+    <string name="nm_setup_source_fine_print">Escolha um para começar. O outro pode ser acrescentado depois.</string>
     <string name="nm_setup_password_title">Defina uma senha</string>
     <string name="nm_setup_password_sub">Sua conta está pronta. Com uma senha, seus computadores e seus outros celulares entram de imediato, sem esperar um código.</string>
     <string name="nm_setup_password_set">Definir a senha</string>
@@ -643,21 +643,21 @@
     <string name="nm_welcome_feat_hands">Mãos: ele usa seu celular</string>
     <string name="nm_welcome_feat_hands_sub">Reserva o trem, pede a comida, procura algo em um app; você acompanha e pode parar a qualquer momento</string>
     <string name="nm_welcome_feat_reach">Alcance: seus computadores, daqui</string>
-    <string name="nm_welcome_feat_reach_sub">Instale o nanoMuse Desktop em um Mac, Windows ou Linux, entre com a mesma conta e passe trabalho a ele pelo celular</string>
-    <string name="nm_welcome_notice">O nanoMuse é um projeto comunitário de código aberto, sem fins lucrativos: gratuito, para sempre. O modelo vem com uma cota gratuita paga pelo desenvolvedor; depois dela, sua própria chave. Nada é vendido; o que o relay guarda está na política de privacidade, e Configurações → Controles de dados é seu.</string>
+    <string name="nm_welcome_feat_reach_sub">Instale o Hearth Desktop em um Mac, Windows ou Linux, entre com a mesma conta e passe trabalho a ele pelo celular</string>
+    <string name="nm_welcome_notice">O Hearth é um projeto comunitário de código aberto, sem fins lucrativos: gratuito, para sempre. O modelo vem com uma cota gratuita paga pelo desenvolvedor; depois dela, sua própria chave. Nada é vendido; o que o relay guarda está na política de privacidade, e Configurações → Controles de dados é seu.</string>
     <string name="nm_welcome_hands_title">Deixe-o usar seu celular</string>
     <string name="nm_welcome_hands_sub">Com duas permissões ele pode abrir apps, tocar e digitar por você. Uma cápsula com cada passo e um botão Parar fica na tela; logins, senhas e códigos são sempre seus.</string>
     <string name="nm_welcome_hands_turn_on">Ligar</string>
     <string name="nm_welcome_skip">Pular por enquanto</string>
     <string name="nm_welcome_hands_fine_print">Todo o resto funciona sem isso. Elas ficam em Configurações → Mãos quando você quiser.</string>
     <string name="nm_welcome_meet_fine_print">Antes de qualquer coisa que não dê para desfazer (excluir, enviar, pagar) ele para e pergunta a você primeiro.</string>
-    <string name="nm_cloud_signin_title">Comece com o nanoMuse Cloud</string>
-    <string name="nm_cloud_signin_subtitle">Um código no seu celular ou e-mail, ou sua senha, depois de definir uma.</string>
+    <string name="nm_cloud_signin_title">Entrar no Hearth</string>
+    <string name="nm_cloud_signin_subtitle">Seu e-mail e depois o código de uso único. Este relay grava o código no próprio registro.</string>
     <string name="nm_cloud_mode_code">Com um código</string>
     <string name="nm_cloud_mode_password">Com uma senha</string>
     <string name="nm_cloud_password">Senha</string>
     <string name="nm_cloud_forgot_password">Esqueceu a senha? Entre com um código</string>
-    <string name="nm_cloud_identifier">Número de celular da China continental ou e-mail</string>
+    <string name="nm_cloud_identifier">E-mail</string>
     <string name="nm_cloud_identifier_hint">voce@example.com</string>
     <string name="nm_cloud_code">Código</string>
     <string name="nm_cloud_send_code">Enviar código</string>
@@ -666,7 +666,7 @@
     <string name="nm_cloud_verify">Entrar</string>
 
     <!-- Your own relay (0.1.38): the sign-in screen's server form and the account page's row -->
-    <string name="nm_cloud_other_server">Usar outro servidor</string>
+    <string name="nm_cloud_other_server">Avançado: outro servidor</string>
     <string name="nm_cloud_server_url">Endereço do relay</string>
     <string name="nm_cloud_server_check">Verificar</string>
     <string name="nm_cloud_server_use">Usar este servidor</string>
@@ -676,7 +676,7 @@
     <string name="nm_cloud_server_https">Use https para um servidor fora da sua própria rede. http serve para um endereço privado (10.x, 192.168.x, 172.16-31.x, localhost, um nome .local ou .ts.net).</string>
     <string name="nm_lan_only_https">http:// sem criptografia só funciona para endereços da sua própria rede (10.x, 172.16-31.x, 192.168.x, nomes .local); use https:// para %1$s.</string>
     <string name="nm_cloud_server_unreachable">Nenhum relay respondeu em %1$s. Confira o endereço e se o relay está rodando.</string>
-    <string name="nm_cloud_server_default">Voltar ao nanoMuse Cloud</string>
+    <string name="nm_cloud_server_default">Voltar ao Hearth</string>
     <string name="nm_cloud_server_row">Servidor</string>
     <string name="nm_cloud_server_change">Trocar</string>
     <string name="nm_cloud_server_change_confirm">A chave deste telefone pertence ao servidor atual. Saia aqui primeiro e depois entre no outro servidor pela tela de login.</string>
@@ -697,11 +697,11 @@
     <string name="nm_cloud_used_today_open">Hoje %1$s</string>
     <string name="nm_cloud_refresh">Atualizar saldo</string>
     <string name="nm_cloud_refreshing">Atualizando…</string>
-    <string name="nm_cloud_how_it_works">O nanoMuse Cloud é um provedor comum neste app: seus modelos aparecem em Provedores e podem ser misturados aos seus em um grupo de modelos.</string>
+    <string name="nm_cloud_how_it_works">O Hearth é um provedor comum neste app: seus modelos aparecem em Provedores e podem ser misturados aos seus em um grupo de modelos.</string>
     <string name="nm_cloud_open_provider">Configurações do provedor</string>
     <string name="nm_cloud_sign_out">Sair</string>
     <string name="nm_cloud_sign_out_sub">A chave deste celular é revogada e o provedor Cloud é removido; a cota continua na sua conta.</string>
-    <string name="nm_cloud_sign_out_confirm">O provedor nanoMuse Cloud e seus modelos serão removidos deste celular.</string>
+    <string name="nm_cloud_sign_out_confirm">O provedor Hearth e seus modelos serão removidos deste celular.</string>
     <string name="nm_cloud_row_remaining">%1$s restantes</string>
     <string name="nm_cloud_row_sign_in">Entrar</string>
     <string name="nm_cloud_err_bad_identifier">Isso não parece um endereço de e-mail.</string>
@@ -719,7 +719,7 @@
     <string name="nm_cloud_err_allowance_abroad">A cota gratuita acabou. Convide um amigo (+¥%1$s para cada um de vocês) ou adicione sua própria chave em Configurações → Provedores; o OpenRouter é o caminho rápido: uma conta, uma chave, pague pelo uso.</string>
     <string name="nm_cloud_warn_line">A cota gratuita está quase no fim: restam ¥%1$s de ¥%2$s. Convide um amigo (+¥%3$s para cada um de vocês) ou adicione sua própria chave, ambos em Conta.</string>
     <string name="nm_cloud_err_rate_limited">Pedidos demais de uma vez. Um momento, por favor.</string>
-    <string name="nm_cloud_err_unreachable">Não foi possível alcançar o nanoMuse Cloud. Confira a conexão.</string>
+    <string name="nm_cloud_err_unreachable">Não foi possível alcançar o Hearth. Confira a conexão.</string>
     <string name="nm_cloud_err_generic">Algo deu errado.</string>
     <string name="nm_cloud_err_bad_credentials">E-mail ou senha errados.</string>
     <string name="nm_cloud_err_no_password">Esta conta ainda não tem senha. Entre com um código e depois defina uma em Conta.</string>
@@ -735,10 +735,10 @@
     <string name="nm_cloud_err_content_rejected">A verificação de conteúdo do provedor do modelo recusou esta solicitação. Tente outras palavras ou, se continuar acontecendo, comece uma nova conversa: as palavras recusadas podem estar mais acima na conversa.</string>
     <string name="nm_cloud_err_provider_busy">O provedor do modelo está ocupado agora. Tente de novo em instantes.</string>
     <string name="nm_cloud_err_provider_busy_wait">O provedor do modelo está ocupado agora. Tente de novo em %1$s.</string>
-    <string name="nm_cloud_err_model_not_offered">O nanoMuse Cloud não oferece mais esse modelo. Escolha outro em Ajustes → nanoMuse Cloud.</string>
-    <string name="nm_cloud_err_relay_down">O nanoMuse Cloud não respondeu. Tente de novo em instantes.</string>
-    <string name="nm_cloud_err_allowance_paused">O saldo gratuito está pausado neste relay por enquanto, não acabou. Adicione uma chave sua ou entre com um plano que você já paga, em Ajustes → nanoMuse Cloud. Seu login, seus dispositivos e o que resta continuam como estão.</string>
-    <string name="nm_cloud_err_service_paused">O nanoMuse Cloud está pausado pelo operador por enquanto; seu login e seus dados ficam guardados. Tente de novo mais tarde.</string>
+    <string name="nm_cloud_err_model_not_offered">O Hearth não oferece mais esse modelo. Escolha outro em Ajustes → Hearth.</string>
+    <string name="nm_cloud_err_relay_down">O Hearth não respondeu. Tente de novo em instantes.</string>
+    <string name="nm_cloud_err_allowance_paused">O saldo gratuito está pausado neste relay por enquanto, não acabou. Adicione uma chave sua ou entre com um plano que você já paga, em Ajustes → Hearth. Seu login, seus dispositivos e o que resta continuam como estão.</string>
+    <string name="nm_cloud_err_service_paused">O Hearth está pausado pelo operador por enquanto; seu login e seus dados ficam guardados. Tente de novo mais tarde.</string>
     <string name="nm_cloud_err_sync_paused">A sincronização de conversas está pausada neste relay por enquanto; o que está salvo fica guardado, e seus dispositivos continuam funcionando por conta própria.</string>
     <string name="nm_cloud_err_hub_paused">A ligação entre dispositivos está pausada neste relay por enquanto; cada dispositivo continua funcionando por conta própria.</string>
     <string name="nm_refusal_relay_says">O relay diz: %1$s</string>
@@ -782,7 +782,7 @@
     <string name="nm_cloud_invite_share">Compartilhar o link</string>
     <string name="nm_cloud_invite_copy">Copiar</string>
     <string name="nm_cloud_invite_copied">Copiado</string>
-    <string name="nm_cloud_invite_share_text">Experimente o nanoMuse comigo: um agente pessoal totalmente de código aberto, gratuito. Cadastre-se com meu código %1$s: %2$s</string>
+    <string name="nm_cloud_invite_share_text">Experimente o Hearth comigo: um agente pessoal totalmente de código aberto, gratuito. Cadastre-se com meu código %1$s: %2$s</string>
     <string name="nm_cloud_invite_count">%1$d amigos entraram</string>
     <string name="nm_cloud_invite_earned">¥%1$s somados por convites</string>
     <string name="nm_cloud_invite_have">Tem um código de convite?</string>
@@ -823,8 +823,8 @@
     <string name="nm_cloud_ev_contribute_deleted">Controles de dados: conversas guardadas excluídas</string>
     <string name="nm_cloud_ev_contribute_default">Controles de dados: ligado para contas novas</string>
     <string name="nm_data_title">Controles de dados</string>
-    <string name="nm_data_improve">Ajudar a melhorar os modelos de IA do nanoMuse</string>
-    <string name="nm_data_why">Enquanto isto está ligado, o texto das suas conversas com os modelos do nanoMuse Cloud (o que você escreveu, o que ele respondeu e as ferramentas que escolheu chamar) fica guardado no relay para treinar o modelo aberto da própria comunidade. Não a sua memória nem o SOUL (o prompt de sistema), não o que as ferramentas retornaram, não imagens, e nunca junto de quem você é. Sua própria chave de API nunca passa pelo relay.</string>
+    <string name="nm_data_improve">Ajudar a melhorar os modelos de IA do Hearth</string>
+    <string name="nm_data_why">Enquanto isto está ligado, o texto das suas conversas com os modelos do Hearth (o que você escreveu, o que ele respondeu e as ferramentas que escolheu chamar) fica guardado no relay para treinar o modelo aberto da própria comunidade. Não a sua memória nem o SOUL (o prompt de sistema), não o que as ferramentas retornaram, não imagens, e nunca junto de quem você é. Sua própria chave de API nunca passa pelo relay.</string>
     <string name="nm_data_default_on">Contas novas começam com isto ligado.</string>
     <string name="nm_data_default_off">Contas novas começam com isto desligado.</string>
     <string name="nm_data_kept">%1$d turnos guardados até agora.</string>
@@ -834,7 +834,7 @@
     <string name="nm_data_delete_sub">Remove todos os turnos guardados desta conta, esteja a chave ligada ou desligada agora. Desligar a chave mantém o que foi guardado até você excluir aqui.</string>
     <string name="nm_data_delete_confirm">As conversas guardadas são removidas do servidor. Isso não pode ser desfeito.</string>
     <string name="nm_data_deleted">%1$d turnos excluídos.</string>
-    <string name="nm_data_sign_in">Entre no nanoMuse Cloud para usar isto.</string>
+    <string name="nm_data_sign_in">Entre no Hearth para usar isto.</string>
     <string name="nm_data_privacy">Política de privacidade</string>
     <string name="nm_data_status_on">Ligado</string>
     <string name="nm_data_status_off">Desligado</string>
@@ -882,7 +882,7 @@
     <!-- 0.1.20: the coding agents on the account's computers -->
     <string name="nm_coding_title">Agentes de código</string>
     <string name="nm_coding_intro">Cursor, Codex e Claude Code nos seus computadores: as sessões deles, a última resposta e uma mensagem para qualquer um, daqui. Nada deles é copiado para o celular.</string>
-    <string name="nm_coding_no_computer">Nenhum computador com um agente de código está online. Rode o nanoMuse no computador onde o Cursor, o Codex ou o Claude Code está instalado, conectado com esta conta.</string>
+    <string name="nm_coding_no_computer">Nenhum computador com um agente de código está online. Rode o Hearth no computador onde o Cursor, o Codex ou o Claude Code está instalado, conectado com esta conta.</string>
     <string name="nm_coding_account_hint">Este celular está conectado como %1$s; o computador precisa usar a mesma conta.</string>
     <string name="nm_coding_refresh">Atualizar</string>
     <string name="nm_coding_all">Todos</string>
@@ -916,13 +916,13 @@
     <string name="nm_cloud_tokens_line">%1$s tokens no total · %2$s hoje</string>
     <string name="nm_cloud_notice_title">Gratuito, código aberto, sem fins lucrativos</string>
     <string name="nm_cloud_notice_closing">Achou um erro, quer um recurso, tem um patch? O repositório no GitHub é o lugar.</string>
-    <string name="nm_cloud_notice">O nanoMuse é um projeto comunitário de código aberto, sem fins lucrativos: gratuito, para sempre. O modelo vem com uma cota gratuita paga pelo desenvolvedor; depois dela, sua própria chave. Nada é vendido; o que o relay guarda está na política de privacidade, e Configurações → Controles de dados é seu. Exclua a conta quando quiser.</string>
+    <string name="nm_cloud_notice">O Hearth é um projeto comunitário de código aberto, sem fins lucrativos: gratuito, para sempre. O modelo vem com uma cota gratuita paga pelo desenvolvedor; depois dela, sua própria chave. Nada é vendido; o que o relay guarda está na política de privacidade, e Configurações → Controles de dados é seu. Exclua a conta quando quiser.</string>
 
     <!-- nanoMuse: devices on the hub -->
     <string name="nm_hub_channel">Mensagens dos seus dispositivos</string>
     <string name="nm_hub_service_channel">Conectado aos seus dispositivos</string>
-    <string name="nm_hub_service_title">nanoMuse · acessível pelos seus dispositivos</string>
-    <string name="nm_hub_service_connecting">Conectando ao nanoMuse Cloud…</string>
+    <string name="nm_hub_service_title">Hearth · acessível pelos seus dispositivos</string>
+    <string name="nm_hub_service_connecting">Conectando ao Hearth…</string>
     <string name="nm_hub_service_alone">Nenhum outro dispositivo está online agora</string>
     <plurals name="nm_hub_service_devices">
         <item quantity="one">%d dispositivo online</item>
@@ -943,7 +943,7 @@
     <string name="nm_devices_connected">Conectado</string>
     <string name="nm_devices_connecting">Conectando…</string>
     <string name="nm_devices_off">Desligado</string>
-    <string name="nm_devices_none">Nenhum outro dispositivo ainda. No seu computador, instale o nanoMuse Desktop e entre com a mesma conta; ele aparece aqui em segundos.</string>
+    <string name="nm_devices_none">Nenhum outro dispositivo ainda. No seu computador, instale o Hearth Desktop e entre com a mesma conta; ele aparece aqui em segundos.</string>
     <string name="nm_devices_online">online</string>
     <string name="nm_devices_offline">offline</string>
     <string name="nm_devices_web">Console web</string>
@@ -962,7 +962,7 @@
     <string name="nm_hub_err_not_controllable">Não é possível pedir coisas a esse dispositivo.</string>
     <string name="nm_hub_err_unknown_agent">Esse agente de código não está no computador.</string>
     <string name="nm_hub_err_no_session">Essa sessão não está mais no computador.</string>
-    <string name="nm_hub_err_unknown_action">O computador roda um nanoMuse mais antigo que não conhece esta ação.</string>
+    <string name="nm_hub_err_unknown_action">O computador roda um Hearth mais antigo que não conhece esta ação.</string>
     <string name="nm_hub_err_bad_key">Desconectado no relay; entre de novo.</string>
     <string name="nm_hub_err_generic">O computador não conseguiu fazer isso.</string>
     <string name="nm_devices_refused">Recusado pelo relay; entre de novo</string>
@@ -981,7 +981,7 @@
     <string name="nm_connectors_sign_in">Entrar</string>
     <string name="nm_connectors_disconnect">Desconectar</string>
     <string name="nm_connectors_docs">A página do fornecedor sobre este servidor</string>
-    <string name="nm_connectors_how_oauth">Entra com sua conta %1$s no navegador; o nanoMuse se registra sozinho no serviço, então não há nada para digitar. O token fica neste celular.</string>
+    <string name="nm_connectors_how_oauth">Entra com sua conta %1$s no navegador; o Hearth se registra sozinho no serviço, então não há nada para digitar. O token fica neste celular.</string>
     <string name="nm_connectors_how_key">Precisa de uma chave do serviço: %1$s. Ela fica só na entrada MCP deste celular.</string>
     <string name="nm_connectors_how_none">Aberto a todos; não precisa entrar.</string>
     <string name="nm_connectors_how_auto">Verifica antes do que o servidor precisa: nada, um login ou uma chave.</string>
@@ -1025,13 +1025,13 @@
 
     <!-- Conversation sync between the account's devices (contract C7) -->
     <string name="nm_sync_title">Sincronizar conversas entre meus dispositivos</string>
-    <string name="nm_sync_caption">O texto das suas conversas fica no nanoMuse Cloud para que todo dispositivo mostre as mesmas conversas. Arquivos e imagens ficam no dispositivo em que foram criados.</string>
+    <string name="nm_sync_caption">O texto das suas conversas fica no Hearth para que todo dispositivo mostre as mesmas conversas. Arquivos e imagens ficam no dispositivo em que foram criados.</string>
     <string name="nm_sync_sign_in">Entrar para sincronizar</string>
     <string name="nm_sync_on_toast">Ligado. As conversas deste celular estão sendo enviadas.</string>
     <string name="nm_sync_off_toast">Desligado. O que estava guardado foi excluído.</string>
     <string name="nm_sync_delete">Excluir conversas sincronizadas</string>
-    <string name="nm_sync_delete_sub">Remove o texto das suas conversas do nanoMuse Cloud. Cada dispositivo mantém o que já tem; a sincronização continua ligada.</string>
-    <string name="nm_sync_delete_confirm">As conversas guardadas no nanoMuse Cloud são removidas. As conversas nos seus dispositivos ficam como estão.</string>
+    <string name="nm_sync_delete_sub">Remove o texto das suas conversas do Hearth. Cada dispositivo mantém o que já tem; a sincronização continua ligada.</string>
+    <string name="nm_sync_delete_confirm">As conversas guardadas no Hearth são removidas. As conversas nos seus dispositivos ficam como estão.</string>
     <string name="nm_sync_deleted">Conversas sincronizadas excluídas.</string>
     <string name="nm_sync_from">De %1$s</string>
     <string name="nm_sync_attachment_note">[Anexo %1$s, fica no dispositivo em que foi criado]</string>
@@ -1044,7 +1044,7 @@
     <string name="nm_devices_ask_hint">Toque em um dispositivo online para escrever a ele pela conversa: a mensagem começa com @ e o nome dele, e esse dispositivo faz o trabalho.</string>
     <string name="nm_reach_the_provider">o provedor</string>
     <string name="nm_reach_unreachable_title">Não dá para alcançar %1$s nesta rede</string>
-    <string name="nm_reach_unreachable_body">Nada respondeu em %1$s. É o caminho deste telefone até o provedor; os servidores do nanoMuse não participam.</string>
+    <string name="nm_reach_unreachable_body">Nada respondeu em %1$s. É o caminho deste telefone até o provedor; os servidores do Hearth não participam.</string>
     <string name="nm_reach_region_title">A OpenAI não atende esta região</string>
     <string name="nm_reach_region_body">O pedido chegou à OpenAI, que respondeu que não oferece o serviço de onde vem esta conexão.</string>
     <string name="nm_reach_signed_out_title">O login do ChatGPT não vale mais</string>
@@ -1087,7 +1087,7 @@
     <string name="nm_network_test_fail">Não deu para alcançar %1$s pelo proxy: %2$s</string>
     <string name="nm_network_test_status">HTTP %1$d</string>
     <string name="nm_network_invalid">Informe um host e uma porta entre 1 e 65535.</string>
-    <string name="nm_network_proxy_caption">Só passam por ele os pedidos aos provedores que você adicionou com a própria chave e ao plano do ChatGPT. nanoMuse Cloud, seus computadores e a rede local, nunca. Fica só neste telefone.</string>
+    <string name="nm_network_proxy_caption">Só passam por ele os pedidos aos provedores que você adicionou com a própria chave e ao plano do ChatGPT. Hearth, seus computadores e a rede local, nunca. Fica só neste telefone.</string>
     <string name="nm_network_hosts_caption">Passa pelo proxy: %1$s</string>
     <string name="nm_ways_title_day">A parte de hoje da cota gratuita acabou.</string>
     <string name="nm_ways_day_sub">Ela volta com o novo dia; os caminhos abaixo funcionam agora.</string>
@@ -1098,7 +1098,7 @@
     <string name="nm_ways_devices">Dispositivos</string>
     <!-- 0.1.41 Choice: Settings → Models, the "Use it for" card, one turn on the Cloud -->
     <string name="nm_models_title">Modelos</string>
-    <string name="nm_models_intro">Qual modelo faz o quê. Cada linha abre um seletor; ali aparecem o nanoMuse Cloud e os provedores que você adicionou, com os modelos que servem.</string>
+    <string name="nm_models_intro">Qual modelo faz o quê. Cada linha abre um seletor; ali aparecem o Hearth e os provedores que você adicionou, com os modelos que servem.</string>
     <string name="nm_models_chat_title">Chat</string>
     <string name="nm_models_chat_sub">O modelo que conversa com você.</string>
     <string name="nm_models_hands_title">Operar a tela</string>
@@ -1110,20 +1110,20 @@
     <string name="nm_models_chat_applies">Vale para o chat principal e para novos chats; um chat paralelo mantém o próprio modelo.</string>
     <string name="nm_models_media_more">Mais opções de imagens e clipes</string>
     <string name="nm_models_media_more_sub">Digite o nome de um modelo, veja o que para sem cada modelo ou confira de novo quais modelos de vídeo uma chave pode usar.</string>
-    <string name="nm_models_cloud_switch">Usar modelos do nanoMuse Cloud</string>
-    <string name="nm_models_cloud_on_sub">O nanoMuse Cloud é uma das fontes das linhas abaixo; o que roda nele sai da sua cota.</string>
-    <string name="nm_models_cloud_off_sub">Desligado: nada roda no nanoMuse Cloud a menos que você toque em \"Usar o nanoMuse Cloud desta vez\". Você continua conectado para a sincronização e seus dispositivos.</string>
-    <string name="nm_models_cloud_off_refused">Adicione primeiro um provedor seu; com o nanoMuse Cloud desligado, nada mais poderia responder.</string>
+    <string name="nm_models_cloud_switch">Usar modelos do Hearth</string>
+    <string name="nm_models_cloud_on_sub">O Hearth é uma das fontes das linhas abaixo; o que roda nele sai da sua cota.</string>
+    <string name="nm_models_cloud_off_sub">Desligado: nada roda no Hearth a menos que você toque em \"Usar o Hearth desta vez\". Você continua conectado para a sincronização e seus dispositivos.</string>
+    <string name="nm_models_cloud_off_refused">Adicione primeiro um provedor seu; com o Hearth desligado, nada mais poderia responder.</string>
     <string name="nm_chat_no_model">Nenhum modelo pode responder agora. Escolha um em Configurações › Modelos.</string>
-    <string name="nm_cloud_provider_no_delete">Este provedor é a sua conta do nanoMuse Cloud. Desligue-o acima para parar de usar seus modelos; para sair, abra Ajustes › nanoMuse Cloud.</string>
+    <string name="nm_cloud_provider_no_delete">Este provedor é a sua conta do Hearth. Desligue-o acima para parar de usar seus modelos; para sair, abra Ajustes › Hearth.</string>
     <string name="nm_welcome_own_key">Usar minha própria chave de API</string>
     <string name="nm_useit_title">Usar para</string>
-    <string name="nm_useit_body">Escolha do que esta chave deve cuidar. O nanoMuse Cloud continua com o resto.</string>
+    <string name="nm_useit_body">Escolha do que esta chave deve cuidar. O Hearth continua com o resto.</string>
     <string name="nm_useit_body_signed_out">Escolha do que esta chave deve cuidar.</string>
     <string name="nm_useit_use">Usar</string>
     <string name="nm_useit_not_now">Agora não</string>
     <string name="nm_useit_footnote">Você pode mudar isso a qualquer momento em Configurações › Modelos.</string>
-    <string name="nm_retry_on_cloud">Usar o nanoMuse Cloud desta vez</string>
+    <string name="nm_retry_on_cloud">Usar o Hearth desta vez</string>
     <string name="nm_hands_why_chat_provider">o padrão das mãos do seu provedor de chat</string>
     <string name="nm_models_auto">Automático</string>
     <string name="nm_models_auto_currently">Atualmente %1$s</string>
@@ -1158,4 +1158,25 @@
     <string name="nm_font_scale_medium">Médio</string>
     <string name="nm_font_scale_large">Grande</string>
     <string name="nm_font_scale_extra_large">Muito grande</string>
+    <string name="nm_setup_source_grok">Minha conta Grok</string>
+    <string name="nm_setup_source_grok_sub">Entre com a xAI neste telefone. O relay continua conectado para a sincronização e os aparelhos.</string>
+    <string name="nm_panic">PÂNICO</string>
+    <string name="nm_panic_confirm">Toque de novo para enviar</string>
+    <string name="nm_panic_sending">Enviando</string>
+    <string name="nm_panic_delivered">Entregue.</string>
+    <string name="nm_panic_not_delivered">Não entregue. O telefone da outra pessoa não está conectado.</string>
+    <string name="nm_panic_not_linked">Não entregue. Esta conta não está ligada a outra.</string>
+    <string name="nm_panic_not_connected">Não entregue. Este telefone não está conectado.</string>
+    <string name="nm_panic_alert_title">Pânico</string>
+    <string name="nm_panic_from">%1$s precisa de você.</string>
+    <string name="nm_panic_dismiss">Estou aqui</string>
+    <string name="nm_panic_close">Fechar</string>
+    <string name="nm_panic_channel">Pânico</string>
+    <string name="nm_panic_channel_sub">Um alerta de pânico do outro telefone desta casa</string>
+    <string name="nm_todos_title">Tarefas</string>
+    <string name="nm_todos_empty">A lista está vazia.</string>
+    <string name="nm_todos_hint">O que precisa ser feito</string>
+    <string name="nm_todos_add">Adicionar</string>
+    <string name="nm_todos_delete">Apagar</string>
+    <string name="nm_menu_todos">Tarefas</string>
 </resources>

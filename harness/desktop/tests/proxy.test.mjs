@@ -28,7 +28,7 @@ test("the screen never shows the password", () => {
 
 test("NO_PROXY is loopback, the default relay and the plugin's relays, each once", () => {
   assert.deepEqual(noProxyList([]), ["localhost", "127.0.0.1", "::1", DEFAULT_RELAY_HOST]);
-  assert.deepEqual(noProxyList(["https://cloud.nanomuse.cn", "https://Relay.Example:8790/", "relay.example", "", "not a host at all??"]), ["localhost", "127.0.0.1", "::1", "cloud.nanomuse.cn", "relay.example"]);
+  assert.deepEqual(noProxyList(["https://other.example", "https://Relay.Example:8790/", "relay.example", "", "not a host at all??"]), ["localhost", "127.0.0.1", "::1", DEFAULT_RELAY_HOST, "other.example", "relay.example"]);
   // a bare 127.0.0.1:8790 (a self-hosted relay next to the app) adds nothing: loopback is there already
   assert.deepEqual(noProxyList(["http://127.0.0.1:8790"]), ["localhost", "127.0.0.1", "::1", DEFAULT_RELAY_HOST]);
 });
@@ -46,7 +46,7 @@ test("an HTTP proxy sets the two variables, NO_PROXY and the Node switch", () =>
   assert.deepEqual(env, {
     HTTP_PROXY: "http://proxy.example:8080",
     HTTPS_PROXY: "http://proxy.example:8080",
-    NO_PROXY: "localhost,127.0.0.1,::1,cloud.nanomuse.cn,relay.example",
+    NO_PROXY: `localhost,127.0.0.1,::1,${DEFAULT_RELAY_HOST},relay.example`,
     NODE_USE_ENV_PROXY: "1",
   });
   assert.equal("ALL_PROXY" in env, false, "ALL_PROXY is for SOCKS only");
@@ -57,6 +57,6 @@ test("a SOCKS proxy sets ALL_PROXY as well, for the runtime's httpx", () => {
   assert.equal(env.HTTP_PROXY, "socks5h://127.0.0.1:1080");
   assert.equal(env.HTTPS_PROXY, "socks5h://127.0.0.1:1080");
   assert.equal(env.ALL_PROXY, "socks5h://127.0.0.1:1080");
-  assert.equal(env.NO_PROXY, "localhost,127.0.0.1,::1,cloud.nanomuse.cn");
+  assert.equal(env.NO_PROXY, `localhost,127.0.0.1,::1,${DEFAULT_RELAY_HOST}`);
   assert.equal(env.NODE_USE_ENV_PROXY, "1");
 });

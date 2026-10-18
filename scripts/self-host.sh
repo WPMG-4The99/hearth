@@ -185,8 +185,13 @@ fi
 # CLOUD_SECRET keys the hashes every account is stored under; it is generated once and never
 # rotated by this script (rotating it would orphan every account).
 [ -z "$(get CLOUD_SECRET)" ] && set_kv CLOUD_SECRET "$(random_hex)"
-# A private relay for a few people: say so in INVITE_URL so invitations point here.
-[ "$(get INVITE_URL)" = "https://nanomuse.cn/web/?invite=" ] && set_kv INVITE_URL "$BASE/app/?invite="
+# A private relay for a few people: invitations point here, not at a copied example
+# (the old public cloud, or the Hearth relay this tree ships as the default).
+case "$(get INVITE_URL)" in
+  "https://nanomuse.cn/web/?invite=" | "https://hearth-cloud-the99.zocomputer.io/app/?invite=")
+    set_kv INVITE_URL "$BASE/app/?invite="
+    ;;
+esac
 
 say
 say "Wrote $ENV_FILE (mode 600). Back it up together with cloud/data/; see docs/self-hosting.md."

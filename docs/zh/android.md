@@ -1,15 +1,15 @@
 # Android App
 
-`android/` 是手机上的 nanoMuse：[OpenMinis](https://github.com/OpenMinis/OpenMinis)
-1.13（GPL-3.0）：一个原生 App，智能体**在手机上**运行，Linux shell、浏览器、MCP 服务器、
-技能和定时任务都装在 APK 里，再加上 nanoMuse 自己的身份、设计和功能。属于 nanoMuse 的一切
-都在 `io.github.nanomuse.*` 下；OpenMinis 文件里的改动用 `// nanoMuse:` 标出。应用 id 是
-`io.github.nanomuse.app`，系统认得这个 App 的 URL scheme 是 `nanomuse://`，这样同一部手机上也装了
-OpenMinis 时，不会有两个 App 抢同一个 scheme；App 内部的链接仍是 `minis://…`（上游的词汇，沙箱、
-系统提示词和模型都用它），从系统进来的 `nanomuse://` 链接按它的 `minis://` 形式读，App 自己打开
+`android/` 是手机上的 Hearth，GPL-3.0，衍生自 [nanoMuse](https://github.com/nano-muse/nanoMuse)，
+而 nanoMuse 基于 [OpenMinis](https://github.com/OpenMinis/OpenMinis) 1.13：一个原生 App，智能体**在手机上**运行，Linux shell、浏览器、MCP 服务器、
+技能和定时任务都装在 APK 里。Hearth 自己的代码在 `io.github.nanomuse.*` 下（Kotlin 包名保持不变）；OpenMinis 文件里的改动用 `// nanoMuse:` 标出。应用 id 是
+`media.wyldephyremg.hearth`，系统认得这个 App 的 URL scheme 是 `hearth://`。同一部手机上如果还装着
+nanoMuse 或 OpenMinis，不会和它们抢同一个 scheme。App 内部的链接仍是 `minis://…`（上游的词汇，沙箱、
+系统提示词和模型都用它）。从系统进来的 `hearth://`，以及旧构建留下的 `nanomuse://`，都按 `minis://` 来读。
+这个 App 不注册 `nanomuse://`，原来的 nanoMuse 继续用它。App 自己打开
 自己的链接时一律按名字指向 `MainActivity`，不交给系统去解析
 （`io.github.nanomuse.deeplink.OwnScheme`）。沙箱的 offload 套接字（proot 和 App 之间通信的
-抽象套接字）也是 App 自己的：叫 `io.github.nanomuse.app.native-offload`，不用上游的
+抽象套接字）跟着应用 id 走：`media.wyldephyremg.hearth.native-offload`，不用上游的
 `native-offload`，因为抽象套接字在整台设备上只有一个命名空间，两个 App 用同一个名字，后启动的那个
 会在启动时直接死掉；如果连这个名字都还被我们自己上一个进程占着，服务端就改绑一个带进程号的名字，
 并把它告诉 proot（`io.github.nanomuse.sandbox.OffloadSocketName`）。这个选择的来龙去脉
@@ -17,23 +17,22 @@ OpenMinis 时，不会有两个 App 抢同一个 scheme；App 内部的链接仍
 作为设计记录保留在 [archive/android-python-line.md](../archive/android-python-line.md)，不是你今天
 下载到的东西。
 
+Debug 构建会加上后缀 `.debug`，id 是 `media.wyldephyremg.hearth.debug`，可以和 Hearth 的正式版装在同一部手机上。两种构建的桌面名称都是 Hearth。文件共享、闹钟权限和沙箱套接字都跟着当前这个构建的 id 走。外部链接用 `hearth://`。
+
 一个 APK，一种架构：`nanoMuse-<version>-arm64.apk`（arm64-v8a，Android 8.0 / API 26 及以上，
 `targetSdk` 35）。每个版本都用同一把签名密钥，所以新 APK 直接覆盖旧的，数据保留。没有上架
-Play 商店：「设置 → 版本」把已安装的构建和最新版本并排显示（先查 `nanomuse.cn/dl/index.json`，
-再查这个仓库的 GitHub Releases：「最新 0.1.x，你用的就是它」/「0.1.x 已发布，点此更新」），
-并提供下载。
+Play 商店：「设置 → 版本」把已安装的构建和 `WPMG-4The99/hearth` 的最新 GitHub Release 并排显示
+（「最新 0.1.x，你用的就是它」/「0.1.x 已发布，点此更新」），并提供下载。
 
 ## 安装 {#install}
 
-1. 从[最新版本](https://github.com/nano-muse/nanoMuse/releases/latest)下载
+1. 从[最新版本](https://github.com/WPMG-4The99/hearth/releases/latest)下载
    `nanoMuse-<version>-arm64.apk`。想核对的话，运行
    `sha256sum -c nanoMuse-<version>-arm64.apk.sha256`。
 2. 打开它。Android 会问一次，是否允许从你的浏览器或文件管理器安装。
-3. **登录。** 第一屏就是账号：手机号或邮箱，一个验证码，设过密码之后也可以用密码。账号让
-   你的设备能连成一体（[hub.md](hub.md)），也带来一个起步用的模型（[cloud.md](cloud.md)：每个
-   账号一份免费额度（写这页时是 ¥10），每邀请一位朋友，等对方发出第一次请求后，你和对方都再得一些；App 会显示中继
-   当前的数字；之后可以[换自己的 key](own-key.md)）。然后选哪个模型来回答：账号自带的，或者
-   你自己的 key（任何 OpenAI 兼容端点，或 App 内置的那几种 OAuth 登录）。设的是四个模型，
+3. **登录。** 第一屏就是这个构建里写死的中继账号：先填邮箱，再填一次性验证码（这台中继把验证码写在日志里）。「高级：换一台服务器」留给测试用的中继。账号让
+   你的设备能连成一体（[hub.md](hub.md)），也带来一个起步用的模型（[cloud.md](cloud.md)）。然后选哪个模型来回答：**Hearth 中继**（默认），或者**我的 Grok 账号**（在这部手机上登录 xAI）。
+   两种都能用手机上的工具，包括日历和待办。设的是四个模型，
    不是一个，都在同一页「**设置 → 模型**」里（设置顶部那张卡片打开它）：**对话**，和你说话
    的模型（账号的菜单默认停在 `deepseek-v4.1-flash`）；**操作屏幕**，看屏幕的那个
    （`qwen3.8-27b`，账号的，或者你自己 key 下的同一个模型）；**生成图片**和**生成视频**。每一行

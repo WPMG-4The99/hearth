@@ -19,7 +19,7 @@ import { IconDevices, IconGlobe, IconLaptop, IconPencil, IconPhone, IconRefresh 
 import { useLive, type LiveDevice } from './live.ts'
 import { MoreButton } from './ui.tsx'
 
-const DOWNLOAD_URL = 'https://nanomuse.cn/dl/'
+const DOWNLOAD_URL = 'https://github.com/WPMG-4The99/hearth/releases'
 
 function ago(t: Translate, seconds: number): string {
   if (!seconds) return ''

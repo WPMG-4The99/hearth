@@ -34,7 +34,7 @@ enum NanoMuseVideoGen {
     struct Endpoint: Equatable, Sendable {
         var instanceId: String
         var label: String
-        /// `https://dashscope.aliyuncs.com` or `https://cloud.nanomuse.cn`, without the API path.
+        /// `https://dashscope.aliyuncs.com` or the relay base, without the API path.
         var host: String
         var apiKey: String
         var model: String

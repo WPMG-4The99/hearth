@@ -7693,7 +7693,8 @@ private struct SettingsSheet: View {
                                 .background(.indigo, in: Circle())
                         }
                     }
-                    Link(destination: URL(string: "https://github.com/nano-muse/nanoMuse/blob/main/docs/privacy.md")!) {
+                    // nanoMuse: this build's privacy page.
+                    Link(destination: URL(string: "https://github.com/WPMG-4The99/hearth/blob/main/docs/privacy.md")!) {
                         Label {
                             Text("Privacy Policy")
                         } icon: {
@@ -7966,7 +7967,8 @@ private struct SettingsSheet: View {
 
         """
 
-        var components = URLComponents(string: "https://github.com/nano-muse/nanoMuse/issues/new")
+        // nanoMuse: bug reports for this build.
+        var components = URLComponents(string: "https://github.com/WPMG-4The99/hearth/issues/new")
         components?.queryItems = [
             URLQueryItem(name: "template", value: "bug_report.md"),
             URLQueryItem(name: "title", value: "[Bug] "),

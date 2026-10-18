@@ -53,7 +53,7 @@ A code goes out every time someone signs in. `CODE_SENDER` says how:
 
 ### Pointing the apps at it
 
-Every app signs in against `https://cloud.nanomuse.cn` unless you tell it otherwise. The devices of one account must all point at the same relay; the hub and the conversations live there.
+Every app signs in against `https://hearth-cloud-the99.zocomputer.io` unless you tell it otherwise. The devices of one account must all point at the same relay; the hub and the conversations live there.
 
 - **Android** (0.1.38). *Use a different server* under the sign-in form takes the relay's address; *Check* asks its `/healthz` and shows the version, *Use this server* keeps the address across launches. `https://` is required outside your own network; plain `http://` is accepted for a private address (`10.x`, `172.16-31.x`, `192.168.x`, `localhost`, a `.local` or `.ts.net` name). Settings → Account shows the server with *Change*, which signs the phone out first ([android.md](android.md)).
 - **iPhone / iPad.** The same link on the sign-in sheet, with the same rules.

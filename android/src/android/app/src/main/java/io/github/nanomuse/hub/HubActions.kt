@@ -70,6 +70,11 @@ object HubActions {
 
     fun handle(context: Context, call: IncomingCall) {
         if (call.action == "info") { call.result(info(context)); return }
+        // nanoMuse: a household panic is not remote control. It shows an alert and nothing else.
+        if (call.action == "panic" || call.action == "alert") {
+            io.github.nanomuse.panic.PanicAlert.show(context, call)
+            return
+        }
         if (!Hub.remoteControl(context)) { call.fail("not_allowed", "${Hub.name(context)} is set not to be operated from other devices"); return }
         AppLogger.info(TAG, "${call.senderName} → ${call.action}")
         if (call.action in GATED && !permitted(context, call)) {
@@ -84,7 +89,7 @@ object HubActions {
                 "file.put" -> call.result(filePut(context, call.args.optString("path"), call.args.optString("data"), call.args.optBoolean("force")))
                 "open" -> call.result(open(context, call.args.optString("url")))
                 "screen" -> call.result(screen())
-                "notify" -> call.result(notify(context, call.args.optString("text"), call.args.optString("title").ifBlank { "nanoMuse" }, call.senderName))
+                "notify" -> call.result(notify(context, call.args.optString("text"), call.args.optString("title").ifBlank { "Hearth" }, call.senderName))
                 "task" -> task(context, call)
                 "approve" -> approve(call)
                 "stop" -> call.result(JSONObject().put("stopped", stop(context, call)))
@@ -122,7 +127,7 @@ object HubActions {
         .put("name", Hub.name(context))
         .put("os", "Android ${Build.VERSION.RELEASE}")
         .put("model", "${Build.MANUFACTURER} ${Build.MODEL}")
-        .put("app", "nanoMuse ${Hub.VERSION}")
+        .put("app", "Hearth ${Hub.VERSION}")
         .put("sandbox", if (PRootKernel.isBooted) "ready" else "not booted")
         .put("screen", MinisAccessibilityService.getInstance() != null)
         .put("actions", JSONArray(Hub.ACTIONS))
@@ -273,13 +278,13 @@ object HubActions {
             (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O &&
                 nm.getNotificationChannel(CHANNEL)?.importance == NotificationManager.IMPORTANCE_NONE)
         if (blocked) {
-            return JSONObject().put("ok", false).put("shown", false).put("message", "notifications are not allowed for nanoMuse on this phone")
+            return JSONObject().put("ok", false).put("shown", false).put("message", "notifications are not allowed for Hearth on this phone")
         }
         return try {
             nm.notify((System.currentTimeMillis() % 100_000).toInt() + 40_000, n)
             JSONObject().put("ok", true).put("shown", true)
         } catch (e: SecurityException) {
-            JSONObject().put("ok", false).put("shown", false).put("message", "notifications are not allowed for nanoMuse on this phone")
+            JSONObject().put("ok", false).put("shown", false).put("message", "notifications are not allowed for Hearth on this phone")
         }
     }
 
@@ -289,11 +294,11 @@ object HubActions {
         val text = call.args.optString("text").trim()
         if (text.isEmpty()) { call.fail("usage", "text is required"); return }
         val app = context.applicationContext as? MinisApp
-        if (app == null || !app.subsystemsReady()) { call.fail("not_ready", "nanoMuse on the phone is still starting"); return }
+        if (app == null || !app.subsystemsReady()) { call.fail("not_ready", "Hearth on the phone is still starting"); return }
         val senderId = call.from.optString("id")
         val conversation = running.conversationKey(senderId, call.args.optString("conversation"))
         val sessionId = runBlocking { sessionFor(app, conversation, call.senderName) }
-        if (sessionId == null) { call.fail("no_model", "the phone has no model to think with; sign in to nanoMuse Cloud there"); return }
+        if (sessionId == null) { call.fail("no_model", "the phone has no model to think with; sign in to Hearth there"); return }
         call.event(JSONObject().put("stage", "thinking").put("session", sessionId))
         AgentForegroundService.startService(app, sessionCount = 1, toolStatus = context.getString(R.string.nm_hub_task_from, call.senderName))
         val prompt = HubTasks.prompt(

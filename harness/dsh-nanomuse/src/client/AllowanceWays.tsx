@@ -52,7 +52,7 @@ export interface AllowanceInfo {
 }
 
 /** Where the guide for one's own key is when the relay did not say. */
-export const OWN_KEY_DOCS = 'https://nanomuse.cn/own-key'
+export const OWN_KEY_DOCS = 'https://github.com/WPMG-4The99/hearth/blob/main/docs/own-key.md'
 
 /** The card's numbers and links out of `/v1/me` (the sheet) with a refusal's figures first, when there is one. */
 export function allowanceInfo(sheet: AccountSheet | undefined, refusal?: AllowanceInfo): AllowanceInfo {

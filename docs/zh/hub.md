@@ -96,6 +96,16 @@ hub 上传递两类请求：
 
 0.1.36 起，**对话**也会跟着走，但走的是另一条路：它们的文本经 REST（`/v1/sync/*`，[cloud.md](cloud.md#conversation-sync)）进入中继的同步存储，hub 只负责捎个信。中继接受了一次推送之后，或者一次删除之后，账号的每一条*其他*套接字都会收到 `sync {what:"conversations", cursor, from}`（`cursor` 是变更后账号的计数器，`from` 是做出变更的设备 id），然后从自己的游标开始拉取新内容。在 `from` 里看到自己 id 的设备忽略这一帧。0.1.38 起（中继 0.20），hub 还带着**谁在回答**：一台设备在某个同步对话里开始或结束一轮时，会 POST `/v1/sync/working`，其他套接字收到 `working {cid, from, device_name, working, at}`；各个 App 在最后一条消息下面显示「kwai 正在处理…」，直到 `working: false` 到来、回复本身到达，或者过了十分钟。中继只在内存里保留这些。默认只同步主要聊天；旁聊只在打开了「同时同步旁聊」的设备之间来往。其他什么都不同步：key、服务商和设置留在输入它们的地方，文件和图片留在生成它们的设备上。各个 App 怎么用它，见 [every-device.md](every-device.md#the-same-conversations-everywhere)。
 
+## 家庭里的紧急提醒 {#a-household-panic}
+
+中继环境变量 `HOUSEHOLDS` 把两个或更多账号连在一起。由运营者设置。账号自己不能建立这种联系。
+
+设备发送 `call`，`to` 为 `household`，`action` 为 `panic` 或 `alert`。中继把这一帧交给已连接账号里最新上线的手机或电脑（浏览器标签页除外），并加上 `from.who`，也就是发件人的名字：邮箱地址里 `@` 前面的那一段。回答会回到发送方。如果对方的手机没有连上，调用方收到 `device_offline`，说明是 `The other phone is not connected`。如果这个账号不在任何一个家庭里，调用方收到 `not_linked`。
+
+发往 `household` 的 `shell`、`files`、`screen`、`task`、`open` 以及其他动作都会得到 `not_allowed`。什么都不会送出去。设备 id 仍然只指向调用方自己的账号：把 shell 指向另一个账号的设备，得到的是 `device_offline`，也不会送出。发给已连接的对方设备 id 的 panic 会送达。发给其他人的设备 id 的 panic 是 `device_offline`，因此不会借此确认那个 id 存在。
+
+手机显示这个提醒时，不需要打开「远程控制」。还没有推送。只有接收方的 hub 连接还在时才能送达。
+
 ## 代码 {#the-code}
 
 各设备的 App 怎样围绕这些帧搭起来（设备页、发给某台设备的旁聊、两端都能回答的审批、电脑自己的手），在 [every-device.md](every-device.md) 里。

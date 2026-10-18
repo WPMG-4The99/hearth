@@ -190,7 +190,7 @@ The account-wide sync switch is in the app (*Data controls → Sync*); this is t
 
 ```toml
 [cloud]
-base_url = "https://cloud.nanomuse.cn"   # a relay you run yourself goes here
+base_url = "https://hearth-cloud-the99.zocomputer.io"   # a relay you run yourself goes here
 required = true
 sync = true
 models = true        # the account's models as a source; the console's "Use nanoMuse Cloud models"
@@ -446,13 +446,13 @@ token            = ""            # empty → generated once, stored in <data_dir
 approval_timeout = 3600          # seconds an approval card waits before counting as "deny"
 cors_origins     = []            # only for the Vite dev server, e.g. ["http://localhost:5173"]
 max_upload_mb    = 25            # largest file the app may attach to a message
-update_check     = true          # Settings → About says when a newer release is out (the download index, then GitHub Releases; once a day)
+update_check     = true          # Settings → About says when a newer release is out (GitHub Releases for WPMG-4The99/hearth; once a day)
 start_grace      = 4             # seconds the services may take before the app answers anyway
 ```
 
-`update_check` asks the download mirror's index (`nanomuse.cn/dl/index.json`) and, when that does
-not answer, `api.github.com`, for the latest release once a day (sooner on *Check now*; a check
-that failed, as when the runtime came up before its network, is tried again after an hour) and shows
+`update_check` asks `api.github.com` for the latest release of WPMG-4The99/hearth once a day
+(sooner on *Check now*; a check that failed, as when the runtime came up before its network, is
+tried again after an hour) and shows
 the version under *Settings → About* with a link to the release page; nothing is downloaded and
 nothing about the install is sent beyond the runtime's version in the request's `User-Agent`. `NANOMUSE_NO_UPDATE_CHECK=1` turns it off too, and a hosted
 web session (a runtime started with `NANOMUSE_CLOUD_KEY`) never checks; its operator updates it.

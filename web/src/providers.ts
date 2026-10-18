@@ -147,7 +147,7 @@ export function unavailableLine(t: (s: string, v?: Record<string, string | numbe
 }
 
 /** The guide every unavailable line links to. */
-export const OWN_KEY_DOCS_URL = "https://nanomuse.cn/own-key";
+export const OWN_KEY_DOCS_URL = "https://github.com/WPMG-4The99/hearth/blob/main/docs/own-key.md";
 
 /**
  * The runtime's view when it has one; else the bundled catalogue with nothing known about

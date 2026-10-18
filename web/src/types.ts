@@ -863,11 +863,11 @@ export interface UpdateView {
   newer: boolean;
   /** The release page of the latest. */
   url: string;
-  /** The download page (nanomuse.cn/dl). */
+  /** The download page (GitHub releases). */
   download_url?: string;
   /** When the runtime last asked (ISO, UTC), or null before the first check. */
   checked_at?: string | null;
-  /** Where the answer came from: `nanomuse.cn`, `github`, or null. */
+  /** Where the answer came from: `github`, or null. */
   source?: string | null;
   error?: string | null;
 }

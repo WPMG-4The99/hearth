@@ -690,6 +690,9 @@ fun AppNavigation(
         }
         // nanoMuse: nanoMuse Cloud — sign in with a phone/e-mail code for a starter allowance,
         // and the account page (balance, sign out) behind Settings.
+        composable(io.github.nanomuse.todos.ROUTE_TODOS) { // nanoMuse: this account's to-do list
+            io.github.nanomuse.todos.TodosScreen(onBack = { navController.safePopBackStack() })
+        }
         composable(io.github.nanomuse.ui.cloud.ROUTE_CLOUD_SIGN_IN) {
             io.github.nanomuse.ui.cloud.CloudSignInScreen(
                 onBack = { navController.safePopBackStack() },

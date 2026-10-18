@@ -621,7 +621,7 @@ struct NanoMuseShareCard: View {
             VStack(alignment: .leading, spacing: 8) {
                 Spacer()
                 Text("nanoMuse").font(.system(size: 40, weight: .bold)).foregroundStyle(palette.accent)
-                Text(AppLocalized("Your personal AI agent, open source · github.com/nano-muse/nanoMuse"))
+                Text(AppLocalized("Your personal AI agent, open source · github.com/WPMG-4The99/hearth"))
                     .font(.system(size: 28)).foregroundStyle(.black.opacity(0.6))
             }
             .frame(maxWidth: .infinity, alignment: .leading)

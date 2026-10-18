@@ -55,7 +55,7 @@ const PKG_VERSION = JSON.parse(readFileSync(new URL('../package.json', import.me
 const PREVIOUS = '0.1.0'
 /** One patch release beyond the version under test. */
 const BEYOND = PKG_VERSION.replace(/(\d+)$/, (n) => String(Number(n) + 1))
-const checkedByPrevious = (latest) => ({ current: PREVIOUS, latest, newer: true, page: 'https://github.com/nano-muse/nanoMuse/releases', assets: [], notes: '', source: 'nanomuse.cn', checkedAt: Date.now() })
+const checkedByPrevious = (latest) => ({ current: PREVIOUS, latest, newer: true, page: 'https://github.com/WPMG-4The99/hearth/releases', assets: [], notes: '', source: 'github', checkedAt: Date.now() })
 
 test('the bundle version the tests run under is the package version, a release, not the fallback', () => {
   assert.equal(BUNDLE_VERSION, PKG_VERSION)
@@ -100,7 +100,7 @@ test('right after installing this version over the previous one, the sidebar is 
 test('a failed check is cached an hour, a successful one a day, and another version\'s never', () => {
   const now = Date.now()
   const good = { ...checkedByPrevious(BEYOND), current: BUNDLE_VERSION, checkedAt: now }
-  const failed = { ...good, latest: '', newer: false, source: 'none', error: 'nanomuse.cn: 503; github: 403' }
+  const failed = { ...good, latest: '', newer: false, source: 'none', error: 'github: 403' }
   assert.equal(updateCacheFresh(good, BUNDLE_VERSION, now + UPDATE_EVERY_MS - 1), true)
   assert.equal(updateCacheFresh(good, BUNDLE_VERSION, now + UPDATE_EVERY_MS), false)
   assert.equal(updateCacheFresh(failed, BUNDLE_VERSION, now + UPDATE_RETRY_MS - 1), true)
@@ -115,17 +115,17 @@ test('a check that read nothing is not kept for the day: the next quiet check as
   const realFetch = globalThis.fetch
   let asked = 0
   let down = true
-  // both sources down first, then the mirror answers; nothing leaves the test
+  // GitHub is down first, then it answers; nothing leaves the test
   globalThis.fetch = async () => {
     asked += 1
     if (down) return { ok: false, status: 503, json: async () => ({}) }
-    return { ok: true, status: 200, json: async () => ({ repo: 'nano-muse/nanoMuse', releases: [{ tag: `v${BUNDLE_VERSION}`, assets: [] }] }) }
+    return { ok: true, status: 200, json: async () => ({ tag_name: `v${BUNDLE_VERSION}`, html_url: 'https://github.com/WPMG-4The99/hearth/releases/latest', assets: [] }) }
   }
   try {
     const failed = await out.svc.update(false)
     assert.equal(failed.source, 'none')
     assert.ok(failed.error)
-    assert.equal(asked, 2, 'the mirror and GitHub, once each')
+    assert.equal(asked, 1, 'GitHub, once')
     // within the hour the failure stands for a quiet check...
     asked = 0
     assert.equal(await out.svc.update(false), failed)
@@ -134,17 +134,17 @@ test('a check that read nothing is not kept for the day: the next quiet check as
     down = false
     const forced = await out.svc.update(true)
     assert.equal(asked, 1)
-    assert.equal(forced.source, 'nanomuse.cn')
+    assert.equal(forced.source, 'github')
     assert.equal(forced.latest, BUNDLE_VERSION)
     // a failure older than an hour is asked again by a quiet check, where a success would still be cached
     down = true
     asked = 0
     out.svc.state.update = { ...failed, checkedAt: Date.now() - UPDATE_RETRY_MS - 1 }
     assert.equal((await out.svc.update(false)).source, 'none')
-    assert.equal(asked, 2)
+    assert.equal(asked, 1)
     asked = 0
     out.svc.state.update = { ...forced, checkedAt: Date.now() - UPDATE_RETRY_MS - 1 }
-    assert.equal((await out.svc.update(false)).source, 'nanomuse.cn')
+    assert.equal((await out.svc.update(false)).source, 'github')
     assert.equal(asked, 0)
   } finally {
     globalThis.fetch = realFetch
@@ -156,15 +156,15 @@ test('update(false) does not answer from a cache another version made; it checks
   const out = await cloudWith(checkedByPrevious(BUNDLE_VERSION))
   const realFetch = globalThis.fetch
   const asked = []
-  // the mirror answers that this very version is the latest; nothing leaves the test
-  globalThis.fetch = async (url) => { asked.push(String(url)); return { ok: true, status: 200, json: async () => ({ repo: 'nano-muse/nanoMuse', releases: [{ tag: `v${BUNDLE_VERSION}`, assets: [] }] }) } }
+  // GitHub answers that this very version is the latest; nothing leaves the test
+  globalThis.fetch = async (url) => { asked.push(String(url)); return { ok: true, status: 200, json: async () => ({ tag_name: `v${BUNDLE_VERSION}`, html_url: 'https://github.com/WPMG-4The99/hearth/releases/latest', assets: [] }) } }
   try {
     // the stale cache, put back in memory as if nothing had normalised it
     const stale = checkedByPrevious(BUNDLE_VERSION)
     out.svc.state.update = stale
     const info = await out.svc.update(false)
     assert.notEqual(info, stale, 'not the stale object')
-    assert.equal(asked.length, 1, 'one request, to the mirror')
+    assert.equal(asked.length, 1, 'one request, to GitHub')
     assert.equal(info.current, BUNDLE_VERSION)
     assert.equal(info.newer, false)
     // a cache this version made within the day is answered without a request

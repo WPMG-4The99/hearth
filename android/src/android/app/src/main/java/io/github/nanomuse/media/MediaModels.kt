@@ -196,7 +196,7 @@ object MediaModels {
         val image = imageEndpoint(context)
         val video = videoEndpoint(context)
         return buildString {
-            append("Media models. Unlike Muse, whose image and video models are built in, nanoMuse runs on three models the user configures: ")
+            append("Media models. Unlike Muse, whose image and video models are built in, Hearth runs on three models the user configures: ")
             append("the chat model (you), an image model (avatar changes, pictures the user asks for) and a video model (the animated avatar, short clips). ")
             append("Image model: ").append(image?.let { "${it.model} via ${it.label}" } ?: "NOT SET").append(". ")
             append("Video model: ").append(video?.let { "${it.model} via ${it.label}" } ?: "NOT SET").append(".\n")
@@ -221,6 +221,6 @@ object MediaModels {
         "The user just asked you to change your avatar, but no image model is configured, so the app could not start the change. " +
             "Answer in the user's language: say that changing your look needs a provider with image models " +
             "(Alibaba Cloud Bailian, OpenAI with an API key, Gemini or OpenRouter — not a ChatGPT plan signed in through Codex, nor DeepSeek, Claude, Kimi or Groq), " +
-            "that nanoMuse ships no image model of its own, so this is something they set up themselves, and give the link [Image & video models]($DEEP_LINK) to open the setting. " +
+            "that Hearth ships no image model of its own, so this is something they set up themselves, and give the link [Image & video models]($DEEP_LINK) to open the setting. " +
             "Keep it to a few sentences and do not describe or invent a new look."
 }

@@ -20,7 +20,7 @@ From the hub:
     {"type":"devices","devices":[…]}                      whenever a device comes or goes
     {"type":"call","id","from":{id,name,kind},"action","args"}
     {"type":"result", …}  {"type":"event", …}             forwarded to the caller
-    {"type":"error","code","message","id"?}               e.g. device_offline, not_controllable
+    {"type":"error","code","message","id"?}               e.g. device_offline, not_controllable, not_allowed, not_linked
     {"type":"pong"}
     {"type":"sync","what":"conversations","cursor","from"}  another device pushed chats; pull (0.19)
     {"type":"working","cid","from","device_name","working","at"}  a turn started or ended there (0.20)
@@ -190,13 +190,21 @@ class Connection:
             log.debug("close %s: %s", self.device_id[:12], e)
 
 
+# `to` for a household panic or alert. Anything else addressed here is refused.
+HOUSEHOLD_TO = "household"
+HOUSEHOLD_ACTIONS = frozenset({"panic", "alert"})
+
+
 @dataclass
 class Pending:
     call_id: str
     caller: str
     target: str
-    account_id: str
+    account_id: str  # the caller's account: that is where the caller socket lives
     started: int = field(default_factory=now)
+    # The account the call was delivered to. Same as account_id for a call inside
+    # one account. A household panic keys `pending` by this, so the answer finds it.
+    target_account: str = ""
 
 
 class Hub:
@@ -486,11 +494,14 @@ class Hub:
             await self.broadcast_devices(conn.account_id)
 
     async def _fail_pending_for(self, gone: Connection) -> None:
-        """A device left: every call it was carrying out is answered `device_offline`; calls it made are dropped."""
+        """A device left: every call it was carrying out is answered `device_offline`; calls it made are dropped.
+
+        A household panic is carried by another account, so the target's account
+        is checked as well as the caller's.
+        """
         for key, p in list(self.pending.items()):
-            if p.account_id != gone.account_id:
-                continue
-            if p.target == gone.device_id:
+            target_account = p.target_account or p.account_id
+            if target_account == gone.account_id and p.target == gone.device_id:
                 del self.pending[key]
                 caller = self.online.get(p.account_id, {}).get(p.caller)
                 if caller:
@@ -502,7 +513,7 @@ class Hub:
                             "message": f"{gone.name} disconnected before answering",
                         }
                     )
-            elif p.caller == gone.device_id:
+            elif p.account_id == gone.account_id and p.caller == gone.device_id:
                 del self.pending[key]
 
     @staticmethod
@@ -551,10 +562,21 @@ class Hub:
         if not call_id or not to or not action:
             await conn.send({"type": "error", "id": call_id, "code": "bad_frame", "message": "call needs id, to and action"})
             return
-        target = self.online.get(conn.account_id, {}).get(to)
-        if target is None or target.closed:
-            await conn.send({"type": "error", "id": call_id, "code": "device_offline", "message": "That device is not connected"})
+        if to == HOUSEHOLD_TO:
+            await self._household_call(conn, call_id, action, frame)
             return
+        target = self.online.get(conn.account_id, {}).get(to)
+        if target is not None and not target.closed:
+            await self._deliver_same(conn, call_id, action, frame, target)
+            return
+        foreign = self._device_elsewhere(to, conn.account_id)
+        if foreign is not None:
+            await self._cross_to_device(conn, call_id, action, frame, foreign)
+            return
+        await conn.send({"type": "error", "id": call_id, "code": "device_offline", "message": "That device is not connected"})
+
+    async def _deliver_same(self, conn: Connection, call_id: str, action: str, frame: dict, target: Connection) -> None:
+        """A call that stays inside one account. The frame on the wire is unchanged."""
         if target.kind == "web":
             await conn.send(
                 {"type": "error", "id": call_id, "code": "not_controllable", "message": "A browser tab cannot be asked to do things"}
@@ -564,9 +586,102 @@ class Hub:
             await conn.send({"type": "error", "id": call_id, "code": "self_call", "message": "That is this device"})
             return
         await self._sweep()
-        self.pending[(conn.account_id, call_id)] = Pending(call_id=call_id, caller=conn.device_id, target=to, account_id=conn.account_id)
+        self.pending[(conn.account_id, call_id)] = Pending(
+            call_id=call_id,
+            caller=conn.device_id,
+            target=target.device_id,
+            account_id=conn.account_id,
+            target_account=conn.account_id,
+        )
         args = frame.get("args") if isinstance(frame.get("args"), dict) else {}
         await target.send({"type": "call", "id": call_id, "from": conn.brief(), "action": action, "args": args})
+
+    async def _household_call(self, conn: Connection, call_id: str, action: str, frame: dict) -> None:
+        """`to` is `household`: a panic or an alert for a linked account, and nothing else."""
+        if action not in HOUSEHOLD_ACTIONS:
+            await self._not_allowed(conn, call_id)
+            return
+        partners = self.cloud.household_partner_ids(conn.account_id)
+        if not partners:
+            await self._not_linked(conn, call_id)
+            return
+        target = self._newest_partner_device(partners)
+        if target is None:
+            await conn.send({"type": "error", "id": call_id, "code": "device_offline", "message": "The other phone is not connected"})
+            return
+        await self._deliver_household(conn, call_id, action, frame, target)
+
+    async def _cross_to_device(self, conn: Connection, call_id: str, action: str, frame: dict, foreign: Connection) -> None:
+        """A device id only addresses the caller's own account.
+
+        The one exception is a panic or an alert to a linked partner's phone.
+        Anything else is answered `device_offline`, the same as a device that is
+        not there, and nothing is delivered: another account's id is not confirmed.
+        """
+        if action not in HOUSEHOLD_ACTIONS or foreign.account_id not in self.cloud.household_partner_ids(conn.account_id):
+            await conn.send({"type": "error", "id": call_id, "code": "device_offline", "message": "That device is not connected"})
+            return
+        if foreign.kind == "web":
+            await conn.send(
+                {"type": "error", "id": call_id, "code": "not_controllable", "message": "A browser tab cannot be asked to do things"}
+            )
+            return
+        await self._deliver_household(conn, call_id, action, frame, foreign)
+
+    async def _deliver_household(self, conn: Connection, call_id: str, action: str, frame: dict, target: Connection) -> None:
+        await self._sweep()
+        self.pending[(target.account_id, call_id)] = Pending(
+            call_id=call_id,
+            caller=conn.device_id,
+            target=target.device_id,
+            account_id=conn.account_id,
+            target_account=target.account_id,
+        )
+        args = frame.get("args") if isinstance(frame.get("args"), dict) else {}
+        sender = conn.brief()
+        who = self.cloud.account_label(conn.account_id)
+        if who:
+            sender["who"] = who
+        await target.send({"type": "call", "id": call_id, "from": sender, "action": action, "args": args})
+
+    def _device_elsewhere(self, device_id: str, caller_account: str) -> Connection | None:
+        for account_id, devices in self.online.items():
+            if account_id == caller_account:
+                continue
+            conn = devices.get(device_id)
+            if conn is not None and not conn.closed:
+                return conn
+        return None
+
+    def _newest_partner_device(self, partner_ids: list[str]) -> Connection | None:
+        best: Connection | None = None
+        for pid in partner_ids:
+            for conn in self.online.get(pid, {}).values():
+                if conn.closed or conn.kind == "web":
+                    continue
+                if best is None or conn.connected_at >= best.connected_at:
+                    best = conn
+        return best
+
+    async def _not_allowed(self, conn: Connection, call_id: str) -> None:
+        await conn.send(
+            {
+                "type": "error",
+                "id": call_id,
+                "code": "not_allowed",
+                "message": "Only a panic or an alert can cross accounts",
+            }
+        )
+
+    async def _not_linked(self, conn: Connection, call_id: str) -> None:
+        await conn.send(
+            {
+                "type": "error",
+                "id": call_id,
+                "code": "not_linked",
+                "message": "This account is not linked to another",
+            }
+        )
 
     async def _answer(self, conn: Connection, frame: dict) -> None:
         call_id = str(frame.get("id") or "")

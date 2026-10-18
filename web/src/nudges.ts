@@ -38,7 +38,7 @@ export const DEFAULT_POLICY: NudgesPolicy = {
   version: 1,
   star: {
     enabled: true,
-    url: "https://github.com/nano-muse/nanoMuse",
+    url: "https://github.com/WPMG-4The99/hearth",
     moments: { signed_in: true, tasks: [3, 10, 30], new_look: true, exhausted: true, days_used: [7, 30], goal_done: true },
     cooldown_days: 7,
     max_asks: 4,

@@ -435,7 +435,7 @@ fun MemoryImportScreen(onBack: () -> Unit) {
                     Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.End) {
                         Surface(
                             onClick = {
-                                clipboard.setPlainText("nanoMuse", prompt)
+                                clipboard.setPlainText("Hearth", prompt)
                                 Toast.makeText(context, R.string.nm_sysfile_copied, Toast.LENGTH_SHORT).show()
                             },
                             shape = CircleShape,

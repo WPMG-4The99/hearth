@@ -142059,61 +142059,61 @@
         }
       }
     },
-    "Your personal AI agent, open source · github.com/nano-muse/nanoMuse" : {
+    "Your personal AI agent, open source · github.com/WPMG-4The99/hearth" : {
       "extractionState" : "manual",
       "localizations" : {
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Dein persönlicher KI-Agent, quelloffen · github.com/nano-muse/nanoMuse"
+            "value" : "Dein persönlicher KI-Agent, quelloffen · github.com/WPMG-4The99/hearth"
           }
         },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Your personal AI agent, open source · github.com/nano-muse/nanoMuse"
+            "value" : "Your personal AI agent, open source · github.com/WPMG-4The99/hearth"
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Tu agente de IA personal, de código abierto · github.com/nano-muse/nanoMuse"
+            "value" : "Tu agente de IA personal, de código abierto · github.com/WPMG-4The99/hearth"
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Votre agent IA personnel, open source · github.com/nano-muse/nanoMuse"
+            "value" : "Votre agent IA personnel, open source · github.com/WPMG-4The99/hearth"
           }
         },
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "あなたのパーソナル AI エージェント、オープンソース · github.com/nano-muse/nanoMuse"
+            "value" : "あなたのパーソナル AI エージェント、オープンソース · github.com/WPMG-4The99/hearth"
           }
         },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "나만의 AI 에이전트, 오픈 소스 · github.com/nano-muse/nanoMuse"
+            "value" : "나만의 AI 에이전트, 오픈 소스 · github.com/WPMG-4The99/hearth"
           }
         },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ваш личный ИИ-агент с открытым кодом · github.com/nano-muse/nanoMuse"
+            "value" : "Ваш личный ИИ-агент с открытым кодом · github.com/WPMG-4The99/hearth"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "你的个人 AI 智能体，开源 · github.com/nano-muse/nanoMuse"
+            "value" : "你的个人 AI 智能体，开源 · github.com/WPMG-4The99/hearth"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "你的個人 AI 智能體，開源 · github.com/nano-muse/nanoMuse"
+            "value" : "你的個人 AI 智能體，開源 · github.com/WPMG-4The99/hearth"
           }
         }
       }

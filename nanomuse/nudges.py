@@ -31,7 +31,7 @@ DEFAULT_NUDGES: dict[str, Any] = {
     "version": 1,
     "star": {
         "enabled": True,
-        "url": "https://github.com/nano-muse/nanoMuse",
+        "url": "https://github.com/WPMG-4The99/hearth",
         "moments": {
             "signed_in": True,
             "tasks": [3, 10, 30],

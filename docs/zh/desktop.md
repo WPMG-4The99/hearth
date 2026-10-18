@@ -17,9 +17,8 @@
 Windows 版本还带着 electron-updater 要读的更新元数据：`latest.yml` 写着安装包的名字和它的
 SHA-512，旁边是安装包的 `.exe.blockmap`。CI 在把它们附上 release 之前，会先让 electron-updater
 亲自检查这一套：它必须能在 `latest.yml` 里找到候选版本、从测试源下载安装包并校验通过，字节对不上
-的会被拒绝（`harness/desktop/scripts/update-feed-check.mjs`）。这套元数据对应的更新源是下载镜像的
-[nanomuse.cn/dl/win/](https://nanomuse.cn/dl/win/)：只有当一个版本的 `latest.yml`、安装包和 `.blockmap`
-三个都到齐、安装包的字节也对得上时，它才切到这个版本；在那之前继续提供上一个版本。
+的会被拒绝（`harness/desktop/scripts/update-feed-check.mjs`）。这套元数据对应的更新源是
+[Hearth 的 GitHub releases](https://github.com/WPMG-4The99/hearth/releases/latest/download/)。
 代码在 [`harness/`](../../harness/) 下：插件包在 `harness/dsh-nanomuse`，Electron 外壳在
 `harness/desktop`；自己怎么构建见 [harness/README.md](../../harness/README.md)。到 0.1.29 为止，
 同名的安装包装的是 Python 运行时和网页版，套在它们自己的 Electron 外壳里（`desktop/app`），
@@ -105,7 +104,7 @@ harness 保留外部下载方式。不带软件内更新能力的版本，需先
   还有手的运行时（`nanomuse mcp` 继承同一组变量）。nanoMuse Cloud（中继、hub 的 WebSocket、同步）和本机回环永远不经过。
   外壳把它存在 `desktop.json` 里（权限 0600，因为地址里可能带密码），和「登录时启动」放在一起，启动 dsh Host 时写进它的环境
   （`HTTP_PROXY`、`HTTPS_PROXY`、SOCKS 时还有 `ALL_PROXY`，`NO_PROXY` 带着
-  `localhost,127.0.0.1,::1`、`cloud.nanomuse.cn` 和插件所连的中继，以及让 Node 的 fetch 读这些
+  `localhost,127.0.0.1,::1`、`hearth-cloud-the99.zocomputer.io` 和插件所连的中继，以及让 Node 的 fetch 读这些
   变量的 `NODE_USE_ENV_PROXY=1`），所以重启后生效；这一行下面的「立即重启」会在窗口不关的
   情况下重启 Host。手机上同样的设置在服务商表单里，网页版在自有 key 表单里，运行时是
   `[llm] proxy`（[own-key.md](own-key.md#when-the-provider-cannot-be-reached)）；

@@ -54,7 +54,7 @@ Groups:
 Output: JSON envelope { ok, data | error: { code, message } }.
 Use --compact to emit on a single line; --quiet to strip the envelope.
 
-First-run: enable "nanoMuse" under Settings → Accessibility, then `service ping`.
+First-run: enable "Hearth" under Settings → Accessibility, then `service ping`.
 """
         private const val SERVICE_HELP = "service status | ping\n"
         private const val UI_HELP = """ui dump | find | info | node | screenshot
@@ -147,12 +147,12 @@ First-run: enable "nanoMuse" under Settings → Accessibility, then `service pin
                         "Android is blocking the accessibility toggle for this install " +
                             "(\"Restricted setting\" — applies to apps installed from a " +
                             "downloaded APK). Allow it via App info → ⋮ → Allow restricted " +
-                            "settings, then enable nanoMuse under Settings → Accessibility. " +
+                            "settings, then enable Hearth under Settings → Accessibility. " + // nanoMuse: Hearth product name.
                             "Settings → Permissions → System Permissions has a one-tap fix " +
                             "when Shizuku is available."
                     } else {
                         "Accessibility permission was revoked (this happens after a force-stop). " +
-                            "Re-enable nanoMuse under Settings → Accessibility, or use Settings → " +
+                            "Re-enable Hearth under Settings → Accessibility, or use Settings → " + // nanoMuse: Hearth product name.
                             "Permissions → Integrations to repair it with Shizuku."
                     },
                     exit = 77,
@@ -189,7 +189,7 @@ First-run: enable "nanoMuse" under Settings → Accessibility, then `service pin
             }
         } catch (e: NotRunning) {
             err(args, "SERVICE_NOT_RUNNING",
-                e.message ?: "Accessibility service is not running. Enable nanoMuse under Settings → Accessibility.",
+                e.message ?: "Accessibility service is not running. Enable Hearth under Settings → Accessibility.", // nanoMuse: Hearth product name.
                 exit = 77)
         } catch (e: Throwable) {
             AppLogger.warning(TAG, "uncaught: ${e.javaClass.simpleName} ${e.message}")
@@ -230,7 +230,7 @@ First-run: enable "nanoMuse" under Settings → Accessibility, then `service pin
                             "Allow it via App info → ⋮ → Allow restricted settings first.\n",
                     )
                 else
-                    NativeOffloadResult(77, "✗ Accessibility service is not running — go to Settings → Accessibility → nanoMuse to enable\n")
+                    NativeOffloadResult(77, "✗ Accessibility service is not running — go to Settings → Accessibility → Hearth to enable\n") // nanoMuse: Hearth product name.
             }
             else -> NativeOffloadResult(2, "$TOOL service: unknown action\n$SERVICE_HELP")
         }
@@ -1116,7 +1116,7 @@ First-run: enable "nanoMuse" under Settings → Accessibility, then `service pin
 
     private fun svcOrThrow(): MinisAccessibilityService =
         MinisAccessibilityService.getInstance()
-            ?: throw NotRunning("Accessibility service is not running. Enable nanoMuse under Settings → Accessibility.")
+            ?: throw NotRunning("Accessibility service is not running. Enable Hearth under Settings → Accessibility.") // nanoMuse: Hearth product name.
 
     private fun ok(args: OffloadArgs, data: Any): NativeOffloadResult {
         val body = JSONObject().put("ok", true).put("data", data).toString()

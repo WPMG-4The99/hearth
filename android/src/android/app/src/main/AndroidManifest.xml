@@ -43,6 +43,9 @@
          can be issued without falling through to the broader settings list. -->
     <uses-permission android:name="android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS" />
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <!-- nanoMuse: a household panic may take the screen while the phone is locked. -->
+    <uses-permission android:name="android.permission.USE_FULL_SCREEN_INTENT" />
+    <uses-permission android:name="android.permission.VIBRATE" />
     <!-- nanoMuse: the alarm receiver must stay exported for BOOT_COMPLETED, but only the
          system and this app (its own AlarmManager PendingIntents) may broadcast to it;
          a signature permission keeps other apps from posting alarm notifications. -->
@@ -179,6 +182,7 @@
          never go to Google's device backup; a reinstall starts empty and the account's chats come
          back through sync at sign-in (docs/sync.md). The two rule files below are kept for the day
          the switch is turned on again. -->
+    <!-- nanoMuse: appLabel is @string/app_name, Hearth in every locale, on both builds. -->
     <application
         android:name=".MinisApp"
         android:allowBackup="false"
@@ -191,7 +195,7 @@
         android:usesCleartextTraffic="true"
         android:extractNativeLibs="true"
         android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
+        android:label="${appLabel}"
         android:localeConfig="@xml/locales_config"
         android:supportsRtl="true"
         android:enableOnBackInvokedCallback="true"
@@ -226,17 +230,25 @@
                  calls keep working because MainActivity is always enabled.
                  The minis:// deep-link filter stays on MainActivity since
                  deep-links never go through the LAUNCHER category. -->
-            <!-- nanoMuse: the scheme the system knows us by is `nanomuse`, not upstream's `minis`,
-                 so a phone with OpenMinis installed too never gets a chooser for either app's links
-                 (io.github.nanomuse.deeplink.OwnScheme reads both; the app's own links go to this
-                 activity by name). -->
+            <!-- nanoMuse: the scheme the system knows us by is `hearth`, not upstream's `minis`.
+                 io.github.nanomuse.deeplink.OwnScheme reads hearth and the old nanomuse name; the
+                 app's own links go to this activity by name. -->
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
-                <data android:scheme="nanomuse" />
+                <data android:scheme="hearth" />
             </intent-filter>
         </activity>
+
+        <!-- nanoMuse: full-screen household panic. Not a launcher entry. -->
+        <activity
+            android:name="io.github.nanomuse.panic.PanicAlertActivity"
+            android:excludeFromRecents="true"
+            android:exported="false"
+            android:showWhenLocked="true"
+            android:turnScreenOn="true"
+            android:theme="@style/Theme.Minis" />
 
         <!-- T-android-dynamic-app-icon: launcher-icon aliases. Exactly
              ONE of these three is enabled at any time; AppIconRepository
@@ -251,7 +263,7 @@
             android:enabled="true"
             android:exported="true"
             android:icon="@mipmap/ic_launcher"
-            android:label="@string/app_name">
+            android:label="${appLabel}">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -273,7 +285,7 @@
             android:enabled="false"
             android:exported="true"
             android:icon="@mipmap/ic_launcher_classic_light"
-            android:label="@string/app_name">
+            android:label="${appLabel}">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -289,7 +301,7 @@
             android:enabled="false"
             android:exported="true"
             android:icon="@mipmap/ic_launcher_classic_dark"
-            android:label="@string/app_name">
+            android:label="${appLabel}">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -527,7 +539,7 @@
         <service
             android:name=".offload.MinisNotificationListenerService"
             android:exported="true"
-            android:label="@string/app_name"
+            android:label="${appLabel}"
             android:permission="android.permission.BIND_NOTIFICATION_LISTENER_SERVICE">
             <intent-filter>
                 <action android:name="android.service.notification.NotificationListenerService" />

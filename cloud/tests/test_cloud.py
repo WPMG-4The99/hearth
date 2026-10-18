@@ -688,12 +688,17 @@ async def test_open_signup_members_unlimited_everyone_else_has_one_allowance():
         # the 0.5 co-creation bonus is gone; the names stay for the apps of the time
         "contribute_bonus_cny": 0,
         "contribute_bonus_available": False,
-        "own_key_docs": "https://nanomuse.cn/own-key",
+        "own_key_docs": "https://github.com/WPMG-4The99/hearth/blob/main/docs/own-key.md",
         "openrouter_url": "https://openrouter.ai/keys",
         # 0.17: a mainland phone account is pointed to Bailian first, then OpenRouter, then an invite;
         # 0.21 adds the catalogue's facts to the two key ways (additive) and the whole card as `guidance`
         "ways": [
-            {"id": "bailian", "url": "https://nanomuse.cn/own-key", "mainland_only": True, **WAY_FACTS["bailian"]},
+            {
+                "id": "bailian",
+                "url": "https://github.com/WPMG-4The99/hearth/blob/main/docs/own-key.md",
+                "mainland_only": True,
+                **WAY_FACTS["bailian"],
+            },
             {"id": "openrouter", "url": "https://openrouter.ai/keys", "mainland_only": False, **WAY_FACTS["openrouter"]},
             {"id": "invite", "url": guest["invite"]["url"], "bonus_cny": 5},
         ],
@@ -741,10 +746,14 @@ async def test_open_signup_members_unlimited_everyone_else_has_one_allowance():
     assert r.status_code == 429
     err = r.json()["error"]
     assert err["code"] == "allowance_exhausted" and "¥0.002" in err["message"] and "keep working" in err["message"]
-    assert err["left"] == 0 and err["grant"] == 0.002 and err["own_key_docs"] == "https://nanomuse.cn/own-key"
     assert (
-        err["invite_url"].startswith("https://nanomuse.cn/web/?invite=")
-        and len(err["invite_url"]) == len("https://nanomuse.cn/web/?invite=") + 8
+        err["left"] == 0
+        and err["grant"] == 0.002
+        and err["own_key_docs"] == "https://github.com/WPMG-4The99/hearth/blob/main/docs/own-key.md"
+    )
+    assert (
+        err["invite_url"].startswith("https://hearth-cloud-the99.zocomputer.io/app/?invite=")
+        and len(err["invite_url"]) == len("https://hearth-cloud-the99.zocomputer.io/app/?invite=") + 8
     )
     assert "co-creation" not in err["message"] and "invite a friend" in err["message"] and "own model key" in err["message"]
     assert err["invite_bonus_cny"] == 5 and err["invitee_bonus_cny"] == 5
@@ -1591,11 +1600,11 @@ def test_code_mail_has_text_and_html_in_both_languages():
     from nanomuse_cloud.senders import compose_code_mail
 
     msg = compose_code_mail("no-reply@mail.nanomuse.cn", "someone@example.com", "123456", 10)
-    assert msg["From"] == "nanoMuse <no-reply@mail.nanomuse.cn>" and msg["To"] == "someone@example.com"
+    assert msg["From"] == "Hearth <no-reply@mail.nanomuse.cn>" and msg["To"] == "someone@example.com"
     assert "123456" in msg["Subject"]
     parts = {p.get_content_type(): p.get_content() for p in msg.iter_parts()}
     assert set(parts) == {"text/plain", "text/html"}
-    assert "验证码是 123456" in parts["text/plain"] and "Your nanoMuse code is 123456" in parts["text/plain"]
+    assert "验证码是 123456" in parts["text/plain"] and "Your Hearth code is 123456" in parts["text/plain"]
     assert "1 2 3 4 5 6" in parts["text/html"] and "10 分钟" in parts["text/html"] and "10 minutes" in parts["text/html"]
     assert "<script" not in parts["text/html"]
 
@@ -1639,7 +1648,10 @@ async def test_data_controls_keep_the_training_view_only_and_are_deletable(stack
     assert r.status_code == 200
     me = (await client.get("/v1/me", headers=headers)).json()
     assert me["contribute"]["on"] is False and me["contribute"]["samples"] == 0 and me["contribute"]["default_on"] is False
-    assert me["contribute"]["privacy_url"] == "https://nanomuse.cn/privacy/" and "what you wrote" in me["contribute"]["keeps"]["kept"]
+    assert (
+        me["contribute"]["privacy_url"] == "https://github.com/WPMG-4The99/hearth/blob/main/docs/privacy.md"
+        and "what you wrote" in me["contribute"]["keeps"]["kept"]
+    )
     assert me["contribute"]["bonus_cny"] == 0 and me["contribute"]["bonus_available"] is False
     assert (await client.get("/v1/admin/samples", headers=admin)).json() == {"samples": [], "total": 0, "places": {}}
 
@@ -2327,7 +2339,7 @@ async def test_me_says_where_the_person_is_and_orders_the_ways_on_by_it(tmp_path
         )
     )
     app, client, sender, up, cloud = make_stack(
-        geoip_db=str(db), catalog_probe=False, allowance_cny=0.002, invite_url="https://nanomuse.cn/web/?invite="
+        geoip_db=str(db), catalog_probe=False, allowance_cny=0.002, invite_url="https://hearth-cloud-the99.zocomputer.io/app/?invite="
     )
     assert app.state.geo.ready
 
@@ -2356,10 +2368,17 @@ async def test_me_says_where_the_person_is_and_orders_the_ways_on_by_it(tmp_path
     # the ways on, in order: the mainland to Bailian, the rest to OpenRouter, the invitation last
     cn_ways = (await client.get("/v1/me", headers=auth(phone, "8.8.8.8"))).json()["spend"]["ways"]
     assert [w["id"] for w in cn_ways] == ["bailian", "openrouter", "invite"]
-    assert cn_ways[0] == {"id": "bailian", "url": "https://nanomuse.cn/own-key", "mainland_only": True, **WAY_FACTS["bailian"]}
+    assert cn_ways[0] == {
+        "id": "bailian",
+        "url": "https://github.com/WPMG-4The99/hearth/blob/main/docs/own-key.md",
+        "mainland_only": True,
+        **WAY_FACTS["bailian"],
+    }
     assert cn_ways[1] == {"id": "openrouter", "url": "https://openrouter.ai/keys", "mainland_only": False, **WAY_FACTS["openrouter"]}
     assert (
-        cn_ways[2]["id"] == "invite" and cn_ways[2]["url"].startswith("https://nanomuse.cn/web/?invite=") and cn_ways[2]["bonus_cny"] == 5
+        cn_ways[2]["id"] == "invite"
+        and cn_ways[2]["url"].startswith("https://hearth-cloud-the99.zocomputer.io/app/?invite=")
+        and cn_ways[2]["bonus_cny"] == 5
     )
     for who, ip in ((us, "8.8.8.8"), (nowhere, "9.9.9.9")):
         ways = (await client.get("/v1/me", headers=auth(who, ip))).json()["spend"]["ways"]
@@ -2385,7 +2404,10 @@ async def test_me_says_where_the_person_is_and_orders_the_ways_on_by_it(tmp_path
     assert "OpenRouter, with one account, one key and pay as you go, or OpenAI first" in err["message"]
     assert "Alibaba Cloud Bailian only signs up accounts from mainland China" in err["message"]
     assert "a plan you already pay for (ChatGPT, Claude or Kimi" in err["message"]
-    assert err["openrouter_url"] == "https://openrouter.ai/keys" and err["own_key_docs"] == "https://nanomuse.cn/own-key"
+    assert (
+        err["openrouter_url"] == "https://openrouter.ai/keys"
+        and err["own_key_docs"] == "https://github.com/WPMG-4The99/hearth/blob/main/docs/own-key.md"
+    )
     assert [p["id"] for p in err["guidance"]["providers"][:2]] == ["openrouter", "openai"]
     err = await exhaust(nowhere, "9.9.9.9")
     assert err["region"] == "unknown" and "OpenRouter or OpenAI outside mainland China, Alibaba Cloud Bailian inside" in err["message"]

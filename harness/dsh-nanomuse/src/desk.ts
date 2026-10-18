@@ -2,7 +2,7 @@
  * The desk behind the hands (0.1.34): the approvals and holds the chat's cards and
  * the capsule answer (shared contracts C1 and C2 of this release), what the account's
  * connectors look like to the other devices (C3), and the update check the
- * About row runs (nanomuse.cn/dl/index.json first, GitHub releases as the fallback).
+ * About row runs (GitHub releases for WPMG-4The99/hearth).
  *
  * No Cordis here: `cloud.ts` owns the wiring, this file owns the shapes and
  * the decisions so the tests can drive them without a host.
@@ -384,9 +384,8 @@ export function readSharedConnectors(raw: unknown): SharedConnector[] {
 
 // ---- the update check (B5) ---------------------------------------------------------
 
-export const RELEASES_API = 'https://api.github.com/repos/nano-muse/nanoMuse/releases/latest'
-export const RELEASES_INDEX = 'https://nanomuse.cn/dl/index.json'
-export const RELEASES_PAGE = 'https://github.com/nano-muse/nanoMuse/releases'
+export const RELEASES_API = 'https://api.github.com/repos/WPMG-4The99/hearth/releases/latest'
+export const RELEASES_PAGE = 'https://github.com/WPMG-4The99/hearth/releases'
 
 export interface ReleaseAsset {
   name: string
@@ -404,7 +403,7 @@ export interface UpdateInfo {
   page: string
   assets: ReleaseAsset[]
   notes: string
-  source: 'github' | 'nanomuse.cn' | 'none'
+  source: 'github' | 'none'
   checkedAt: number
   error?: string
 }
@@ -483,42 +482,22 @@ export function pickAsset(assets: ReleaseAsset[], platform: string, arch: string
 type Fetch = (url: string, init?: { headers?: Record<string, string>; signal?: AbortSignal }) => Promise<{ ok: boolean; status: number; json(): Promise<unknown> }>
 
 /**
- * The latest release, from the mirror's index on nanomuse.cn first (reachable from the
- * mainland, no rate limit), then GitHub's API when the index does not answer. Each
- * request has 5 s (C2). Never throws: a failed check is an `UpdateInfo` with
- * `source: 'none'` and an `error`.
+ * The latest release, from GitHub's API for WPMG-4The99/hearth. The request has 5 s (C2).
+ * Never throws: a failed check is an `UpdateInfo` with `source: 'none'` and an `error`.
  */
 export async function checkForUpdate(current: string, fetchImpl: Fetch = fetch as unknown as Fetch, timeoutMs = 5000): Promise<UpdateInfo> {
   const now = Date.now()
   const base: UpdateInfo = { current, latest: '', newer: false, page: RELEASES_PAGE, assets: [], notes: '', source: 'none', checkedAt: now }
-  const errors: string[] = []
   const get = async (url: string): Promise<unknown> => {
     const ctl = new AbortController()
     const timer = setTimeout(() => ctl.abort(), timeoutMs)
     try {
-      const res = await fetchImpl(url, { headers: { accept: 'application/json', 'user-agent': 'nanoMuse-Desktop' }, signal: ctl.signal })
+      const res = await fetchImpl(url, { headers: { accept: 'application/vnd.github+json', 'user-agent': 'nanoMuse-Desktop' }, signal: ctl.signal })
       if (!res.ok) throw new Error(`${res.status}`)
       return await res.json()
     } finally {
       clearTimeout(timer)
     }
-  }
-  try {
-    const index = (await get(RELEASES_INDEX)) as { repo?: string; releases?: { tag?: string; assets?: { name?: string; size?: number }[] }[] }
-    const rel = (index.releases ?? []).find((r) => r.tag)
-    const latest = String(rel?.tag ?? '').replace(/^v/, '')
-    if (!rel || !latest) throw new Error('no release')
-    const repo = index.repo || 'nano-muse/nanoMuse'
-    return {
-      ...base,
-      latest,
-      newer: compareVersions(latest, current) > 0,
-      page: `https://github.com/${repo}/releases/tag/${rel.tag}`,
-      assets: (rel.assets ?? []).flatMap((a) => (a.name ? [{ name: a.name, url: `https://github.com/${repo}/releases/download/${rel.tag}/${a.name}`, size: Number(a.size ?? 0) || 0 }] : [])),
-      source: 'nanomuse.cn',
-    }
-  } catch (error: unknown) {
-    errors.push(`nanomuse.cn: ${error instanceof Error ? error.message : String(error)}`)
   }
   try {
     const rel = (await get(RELEASES_API)) as { tag_name?: string; html_url?: string; body?: string; assets?: { name?: string; browser_download_url?: string; size?: number }[] }
@@ -534,14 +513,13 @@ export async function checkForUpdate(current: string, fetchImpl: Fetch = fetch a
       source: 'github',
     }
   } catch (error: unknown) {
-    errors.push(`github: ${error instanceof Error ? error.message : String(error)}`)
+    return { ...base, error: `github: ${error instanceof Error ? error.message : String(error)}` }
   }
-  return { ...base, error: errors.join('; ') }
 }
 
 /** One check a day, at most, by itself; the About row may ask any time. */
 export const UPDATE_EVERY_MS = 24 * 60 * 60_000
-/** A check that could not read either source is tried again after an hour, not a day. */
+/** A check that could not read GitHub is tried again after an hour, not a day. */
 export const UPDATE_RETRY_MS = 60 * 60_000
 
 /**

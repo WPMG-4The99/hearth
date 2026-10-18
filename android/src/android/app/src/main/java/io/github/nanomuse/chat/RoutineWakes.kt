@@ -76,7 +76,7 @@ object RoutineWakes {
 
     /** What the model is told for this one turn (not shown to the person; English like the rest of the system prompt). */
     private fun framing(wake: Wake): String = buildString {
-        appendLine("## This turn is a routine's, not a message the person typed (nanoMuse)")
+        appendLine("## This turn is a routine's, not a message the person typed (Hearth)")
         append("The routine \"${wake.label}\" they set up fired at ${wake.time} and sent the next message on their behalf. ")
         append("Do what it asks, then write to them as the one who brings it up: open with the result or the point itself, ")
         append("do not thank them for asking or say \"as requested\", and keep it as short as the task allows. ")

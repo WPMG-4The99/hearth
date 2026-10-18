@@ -1054,7 +1054,7 @@ private fun InviteCard(a: NanoMuseCloud.Account) {
     val clipboard = androidx.compose.ui.platform.LocalClipboard.current
     var copied by remember { mutableStateOf(false) }
     LaunchedEffect(copied) { if (copied) { kotlinx.coroutines.delay(1500); copied = false } }
-    val link = a.inviteUrl.ifBlank { "https://nanomuse.cn/web/?invite=" + a.inviteCode }
+    val link = a.inviteUrl.ifBlank { NanoMuseCloud.inviteFallback(a.inviteCode) }
     MuseCard {
         Column(Modifier.padding(16.dp)) {
             Text(
@@ -1068,7 +1068,7 @@ private fun InviteCard(a: NanoMuseCloud.Account) {
                     Text(stringResource(R.string.nm_cloud_invite_code), style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
                     Text(a.inviteCode, style = MaterialTheme.typography.headlineSmall, fontWeight = FontWeight.SemiBold, letterSpacing = 2.sp)
                 }
-                TextButton(onClick = { clipboard.setPlainText("nanoMuse", a.inviteCode); copied = true }) {
+                TextButton(onClick = { clipboard.setPlainText("Hearth", a.inviteCode); copied = true }) {
                     Icon(Icons.Outlined.ContentCopy, contentDescription = null, modifier = Modifier.size(16.dp))
                     Spacer(Modifier.width(6.dp))
                     Text(stringResource(if (copied) R.string.nm_cloud_invite_copied else R.string.nm_cloud_invite_copy))
@@ -1108,8 +1108,8 @@ private fun InviteCard(a: NanoMuseCloud.Account) {
     }
 }
 
-/** The notice on the site, with the whole story: who pays, what is kept, how to help. */
-const val NOTICE_URL = "https://nanomuse.cn/#open-source"
+/** The project repository: who pays, what is kept, how to help. */
+const val NOTICE_URL = NanoMuseCloud.PROJECT_URL
 
 /**
  * The community notice: nanoMuse is free, open source and non-profit; who pays; what the relay
@@ -1146,12 +1146,12 @@ fun CommunityNoticeCard(inset: Dp = 16.dp) {
             )
             Spacer(Modifier.height(6.dp))
             Row {
-                TextButton(onClick = { openExternalUrl(context, "https://github.com/nano-muse/nanoMuse") }, contentPadding = androidx.compose.foundation.layout.PaddingValues(horizontal = 8.dp)) {
+                TextButton(onClick = { openExternalUrl(context, NanoMuseCloud.PROJECT_URL) }, contentPadding = androidx.compose.foundation.layout.PaddingValues(horizontal = 8.dp)) {
                     Icon(Icons.Outlined.Code, contentDescription = null, modifier = Modifier.size(16.dp))
                     Spacer(Modifier.width(6.dp))
                     Text(stringResource(R.string.nm_notice_github))
                 }
-                TextButton(onClick = { openExternalUrl(context, "https://github.com/nano-muse/nanoMuse/issues/new/choose") }, contentPadding = androidx.compose.foundation.layout.PaddingValues(horizontal = 8.dp)) {
+                TextButton(onClick = { openExternalUrl(context, "${NanoMuseCloud.PROJECT_URL}/issues/new/choose") }, contentPadding = androidx.compose.foundation.layout.PaddingValues(horizontal = 8.dp)) {
                     Icon(Icons.Outlined.BugReport, contentDescription = null, modifier = Modifier.size(16.dp))
                     Spacer(Modifier.width(6.dp))
                     Text(stringResource(R.string.nm_notice_issue))

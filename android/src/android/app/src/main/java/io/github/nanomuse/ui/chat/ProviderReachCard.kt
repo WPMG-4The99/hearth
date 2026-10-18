@@ -259,7 +259,7 @@ fun ProviderReachCard(reach: ProviderReach.Reach, onRetry: () -> Unit, modifier:
                         color = MaterialTheme.colorScheme.onSurfaceVariant,
                         modifier = Modifier
                             .padding(top = 4.dp)
-                            .combinedClickable(onClick = {}, onLongClick = { clipboard.setPlainText("nanoMuse", reach.detail) }),
+                            .combinedClickable(onClick = {}, onLongClick = { clipboard.setPlainText("Hearth", reach.detail) }),
                     )
                 }
             }

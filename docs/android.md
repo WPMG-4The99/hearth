@@ -1,18 +1,18 @@
 # The Android app
 
-`android/` is nanoMuse for the phone: [OpenMinis](https://github.com/OpenMinis/OpenMinis)
-1.13 (GPL-3.0): a native app whose agent runs **on the phone**, with a Linux shell, a
-browser, MCP servers, skills and scheduled tasks inside the APK, with nanoMuse's own
-identity, design and features on top. Everything of nanoMuse's lives in
-`io.github.nanomuse.*`; edits inside OpenMinis files are marked `// nanoMuse:`. The
-application id is `io.github.nanomuse.app` and the URL scheme the system knows the app by is
-`nanomuse://`, so a phone that also has OpenMinis installed never has two apps claiming one
-scheme; inside the app, links stay `minis://…` (upstream's vocabulary, shared with the sandbox,
-the system prompt and the model), a `nanomuse://` link arriving from the system is read as its
-`minis://` form, and every link of the app's own that the app opens itself is addressed to
+`android/` is Hearth for the phone, a GPL-3.0 fork of [nanoMuse](https://github.com/nano-muse/nanoMuse),
+itself [OpenMinis](https://github.com/OpenMinis/OpenMinis) 1.13: a native app whose agent runs **on the phone**, with a Linux shell, a
+browser, MCP servers, skills and scheduled tasks inside the APK. Hearth's own code lives in
+`io.github.nanomuse.*` (the Kotlin packages keep their names); edits inside OpenMinis files are marked `// nanoMuse:`. The
+application id is `media.wyldephyremg.hearth` and the URL scheme the system knows the app by is
+`hearth://`. A phone that also has nanoMuse or OpenMinis installed does not share that scheme.
+Inside the app, links stay `minis://…` (upstream's vocabulary, shared with the sandbox,
+the system prompt and the model). A `hearth://` link, and a `nanomuse://` link from an older build, is read as its
+`minis://` form. The app does not register `nanomuse://`, so stock nanoMuse keeps it.
+Every link of the app's own that the app opens itself is addressed to
 `MainActivity` by name, never resolved by the system
 (`io.github.nanomuse.deeplink.OwnScheme`). The sandbox's offload socket, the abstract socket
-proot talks to the app through, is the app's own too: `io.github.nanomuse.app.native-offload`
+proot talks to the app through, follows the application id: `media.wyldephyremg.hearth.native-offload`
 rather than upstream's `native-offload`, since abstract sockets are one namespace for every
 app on the device and whichever app bound the shared name second would die at start; when
 even that name is still held by a previous process of ours, the server binds a per-process
@@ -22,26 +22,29 @@ around a Python server, two APK flavours) is kept as a design record in
 [archive/android-python-line.md](archive/android-python-line.md) and is not what you
 download today.
 
+A debug build adds the suffix `.debug`, so its id is `media.wyldephyremg.hearth.debug` and it
+installs next to a release build of Hearth. Both builds use the launcher label Hearth. File
+providers, the alarm permission and the sandbox socket follow the id of the build that is
+running. External links use `hearth://` on both.
+
 One APK, one architecture: `nanoMuse-<version>-arm64.apk` (arm64-v8a, Android 8.0 / API 26
 or newer, `targetSdk` 35). Every release is signed with the same key, so a newer APK
 installs over the old one and keeps its data. No Play Store listing: *Settings → Version* shows
-the installed build next to the newest release (`nanomuse.cn/dl/index.json` first, this
-repository's GitHub Releases second: *Latest 0.1.x, you have it* / *0.1.x is out, tap to
-update*) and offers the download.
+the installed build next to the newest GitHub release of `WPMG-4The99/hearth`
+(*Latest 0.1.x, you have it* / *0.1.x is out, tap to update*) and offers the download.
 
 ## Install
 
 1. Download `nanoMuse-<version>-arm64.apk` from the
-   [latest release](https://github.com/nano-muse/nanoMuse/releases/latest). Verify with
+   [latest release](https://github.com/WPMG-4The99/hearth/releases/latest). Verify with
    `sha256sum -c nanoMuse-<version>-arm64.apk.sha256` if you like.
 2. Open it. Android asks once to allow installs from your browser or file manager.
-3. **Sign in.** The first screen is the account: a phone number or an e-mail address,
-   a code, or a password once you have set one. It is what lets your devices work as one
-   ([hub.md](hub.md)) and brings a model to start with ([cloud.md](cloud.md): a free pool per
-   account (¥10 at the time of writing) and more for each friend invited, and for them,
-   once the friend makes a first request; the app prints the relay's current figures; then [your own key](own-key.md)). Then choose which model answers: the account's
-   own, or a key of your own (any OpenAI-compatible endpoint, or the OAuth sign-ins the
-   app ships with). Four models are set, not one, and they live on one page, **Settings →
+3. **Sign in.** The first screen is the account on the relay baked into this build: an e-mail
+   address, then a one-time code (this relay writes the code to its log). *Advanced: different
+   server* is there for a test relay. It is what lets your devices work as one
+   ([hub.md](hub.md)) and brings a model to start with ([cloud.md](cloud.md)). Then choose which
+   model answers: **Hearth relay** (the default) or **My Grok account** (xAI on this phone).
+   Both can use the phone's tools, including the calendar and the to-do list. Four models are set, not one, and they live on one page, **Settings →
    Models** (the card at the top of Settings opens it): **Chat**, the model that talks with
    you (the account's menu opens on `deepseek-v4.1-flash`); **Operating the screen**, the one
    that looks at the screen (`qwen3.8-27b`, the account's or the same model under your own

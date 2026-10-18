@@ -21,8 +21,8 @@ import java.util.concurrent.TimeUnit
  */
 object McpAuthDiscovery {
     private const val TAG = "McpAuthDiscovery"
-    private const val CLIENT_NAME = "nanoMuse"
-    private const val CLIENT_URI = "https://nanomuse.cn"
+    private const val CLIENT_NAME = "Hearth"
+    private const val CLIENT_URI = "https://github.com/WPMG-4The99/hearth"
     private const val PROTOCOL = "2025-06-18"
     private const val TIMEOUT_S = 15L
 
@@ -149,7 +149,7 @@ object McpAuthDiscovery {
             code = again.first
             text = again.second
         }
-        if (code !in 200..299) throw IllegalStateException("The authorization server refused to register nanoMuse ($code): ${text.take(200)}")
+        if (code !in 200..299) throw IllegalStateException("The authorization server refused to register Hearth ($code): ${text.take(200)}")
         val reg = JSONObject(text)
         val clientId = reg.optString("client_id", "").ifBlank { throw IllegalStateException("The authorization server returned no client id") }
         AppLogger.info(TAG, "registered at $endpoint (secret=${reg.has("client_secret")})")

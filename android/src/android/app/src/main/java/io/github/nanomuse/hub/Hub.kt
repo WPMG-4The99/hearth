@@ -29,7 +29,7 @@ object Hub {
     private const val KEY_NAME = "hub.name"
     private const val KEY_REMOTE_CONTROL = "hub.remote_control"
 
-    val ACTIONS = listOf("info", "shell", "files", "file.get", "file.put", "open", "screen", "notify", "task", "approve", "stop")
+    val ACTIONS = listOf("info", "shell", "files", "file.get", "file.put", "open", "screen", "notify", "task", "approve", "stop", "panic", "alert")
 
     private fun prefs(context: Context) = context.getSharedPreferences(PREFS, Context.MODE_PRIVATE)
 
@@ -147,7 +147,7 @@ object Hub {
 
     @Throws(HubException::class)
     fun call(to: String, action: String, args: JSONObject = JSONObject(), timeoutMs: Long = 120_000L, onEvent: ((JSONObject) -> Unit)? = null): JSONObject {
-        val c = client ?: throw HubException("disconnected", "this phone is not on the hub; sign in to nanoMuse Cloud and turn on Devices")
+        val c = client ?: throw HubException("disconnected", "this phone is not on the hub; sign in to Hearth and turn on Devices")
         return c.call(to, action, args, timeoutMs, onEvent)
     }
 

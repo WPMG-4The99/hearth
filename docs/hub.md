@@ -259,6 +259,16 @@ keys, providers and settings stay where they were entered, and files and images
 stay on the device that made them. How the apps use it is in
 [every-device.md](every-device.md#the-same-conversations-everywhere).
 
+## A household panic
+
+`HOUSEHOLDS` in the relay's environment links two or more accounts. The operator sets it. An account cannot link itself.
+
+A device sends `call` with `to` set to `household` and `action` set to `panic` or `alert`. The relay delivers that frame to the newest phone or computer of a linked account (a browser tab is skipped) and adds `from.who`, the sender's name: the part of the e-mail address before `@`. The answer travels back to the sender. If the other phone is not connected, the caller gets `device_offline` and the message `The other phone is not connected`. If the account is not in a household, the caller gets `not_linked`.
+
+`shell`, `files`, `screen`, `task`, `open` and every other action sent to `household` get `not_allowed`. Nothing is delivered. A device id still addresses only the caller's own account: a shell aimed at another account's device is `device_offline` and is not delivered. A panic sent to a linked partner's device id is delivered. A panic sent to anyone else's device id is `device_offline`, so the id is not confirmed.
+
+The phone shows the alert without Remote control turned on. There is no push. Delivery happens only while the receiver's hub socket is open.
+
 ## The code
 
 How the devices' apps are shaped around these frames (the Devices page, a

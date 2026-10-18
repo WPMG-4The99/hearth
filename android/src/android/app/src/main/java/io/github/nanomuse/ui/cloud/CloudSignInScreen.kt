@@ -72,7 +72,7 @@ import kotlinx.coroutines.launch
 const val ROUTE_CLOUD_SIGN_IN = "nanomuse/cloud/sign-in"
 const val ROUTE_CLOUD_ACCOUNT = "nanomuse/cloud/account"
 
-private const val CLOUD_DOC_URL = "https://github.com/nano-muse/nanoMuse/blob/main/docs/cloud.md"
+private const val CLOUD_DOC_URL = "${NanoMuseCloud.PROJECT_URL}/blob/main/docs/cloud.md"
 
 /**
  * Sign in to nanoMuse Cloud: a mainland phone number (the code comes by SMS) or an e-mail
@@ -86,6 +86,8 @@ private const val CLOUD_DOC_URL = "https://github.com/nano-muse/nanoMuse/blob/ma
 fun CloudSignInScreen(
     onBack: () -> Unit,
     onSignedIn: () -> Unit,
+    /** First launch: no back control. The relay address stays under Advanced. */
+    wall: Boolean = false,
 ) {
     val context = LocalContext.current
     val scope = rememberCoroutineScope()
@@ -186,8 +188,10 @@ fun CloudSignInScreen(
             MuseTopAppBar(
                 title = {},
                 navigationIcon = {
-                    IconButton(onClick = onBack) {
-                        Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = stringResource(R.string.settings_back))
+                    if (!wall) {
+                        IconButton(onClick = onBack) {
+                            Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = stringResource(R.string.settings_back))
+                        }
                     }
                 },
             )

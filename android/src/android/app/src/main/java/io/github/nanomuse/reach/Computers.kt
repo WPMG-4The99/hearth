@@ -2,6 +2,7 @@ package io.github.nanomuse.reach
 
 import android.content.Context
 import com.openminis.app.logging.AppLogger
+import io.github.nanomuse.cloud.NanoMuseCloud
 import io.github.nanomuse.hub.Hub
 import io.github.nanomuse.hub.HubException
 import org.json.JSONObject
@@ -157,11 +158,11 @@ object Computers {
         val all = all(context)
         val onHub = Hub.isConnected
         return buildString {
-            append("## Your devices (nanoMuse)\n")
+            append("## Your devices (Hearth)\n")
             if (all.isEmpty()) {
-                append("No other device is connected right now. The way to add a computer: install nanoMuse Desktop there (https://nanomuse.cn/#download) and sign in with the same nanoMuse Cloud account as this phone — it appears under [Devices](${Hub.DEEP_LINK}) within seconds, on any network. ")
+                append("No other device is connected right now. The way to add a computer: install Hearth Desktop there (${NanoMuseCloud.PROJECT_URL}/releases) and sign in with the same Hearth account as this phone. It appears under [Devices](${Hub.DEEP_LINK}) within seconds, on any network. ")
                 append("When the user wants something done on their PC or Mac, say so in one line and point to the desktop app. ")
-                if (!onHub) append("This phone is not on the hub itself; signing in to nanoMuse Cloud puts it there. ")
+                if (!onHub) append("This phone is not on the hub itself; signing in to Hearth puts it there. ")
             } else {
                 append("Connected: ").append(all.joinToString("; ") { "${it.name} (${it.kind}, ${it.os}, via the hub — any network)" }).append(". ")
                 append("`nanomuse-pc run \"<command>\" [--on <device>] [--cwd <dir>] [--timeout <s>]` runs a shell command there and returns exit code, stdout and stderr — the same approval rules as the phone's shell apply, decided on this phone before anything is sent; ")

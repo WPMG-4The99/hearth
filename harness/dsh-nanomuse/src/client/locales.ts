@@ -1127,7 +1127,7 @@ export const en = {
   acShareCopied: 'Copied.',
   acShareFailed: 'That did not work.',
   acShareBubble: 'Hi, I’m {name}, a personal AI agent. Meet nanoMuse: open source, runs on your own devices.',
-  acShareTagline: 'Your personal AI agent, open source · github.com/nano-muse/nanoMuse',
+  acShareTagline: 'Your personal AI agent, open source · github.com/WPMG-4The99/hearth',
   // holds and approvals, on the capsule and in the chat (C1, C2)
   stageYourTurn: 'Your turn',
   stageDoneBtn: 'Done',
@@ -2584,7 +2584,7 @@ export const zh: typeof en = {
   acShareCopied: '已复制。',
   acShareFailed: '没成功。',
   acShareBubble: '你好，我是你的个人 AI 智能体{name}。nanoMuse：开源、在你自己的设备上运行。',
-  acShareTagline: '你的个人 AI 智能体，开源 · github.com/nano-muse/nanoMuse',
+  acShareTagline: '你的个人 AI 智能体，开源 · github.com/WPMG-4The99/hearth',
   // holds and approvals, on the capsule and in the chat (C1, C2)
   stageYourTurn: '该你了',
   stageDoneBtn: '好了',
