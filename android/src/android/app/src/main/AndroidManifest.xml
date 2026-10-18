@@ -179,6 +179,7 @@
          never go to Google's device backup; a reinstall starts empty and the account's chats come
          back through sync at sign-in (docs/sync.md). The two rule files below are kept for the day
          the switch is turned on again. -->
+    <!-- nanoMuse: appLabel is Hearth on debug builds and @string/app_name on release. -->
     <application
         android:name=".MinisApp"
         android:allowBackup="false"
@@ -191,7 +192,7 @@
         android:usesCleartextTraffic="true"
         android:extractNativeLibs="true"
         android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
+        android:label="${appLabel}"
         android:localeConfig="@xml/locales_config"
         android:supportsRtl="true"
         android:enableOnBackInvokedCallback="true"
@@ -251,7 +252,7 @@
             android:enabled="true"
             android:exported="true"
             android:icon="@mipmap/ic_launcher"
-            android:label="@string/app_name">
+            android:label="${appLabel}">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -273,7 +274,7 @@
             android:enabled="false"
             android:exported="true"
             android:icon="@mipmap/ic_launcher_classic_light"
-            android:label="@string/app_name">
+            android:label="${appLabel}">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -289,7 +290,7 @@
             android:enabled="false"
             android:exported="true"
             android:icon="@mipmap/ic_launcher_classic_dark"
-            android:label="@string/app_name">
+            android:label="${appLabel}">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -527,7 +528,7 @@
         <service
             android:name=".offload.MinisNotificationListenerService"
             android:exported="true"
-            android:label="@string/app_name"
+            android:label="${appLabel}"
             android:permission="android.permission.BIND_NOTIFICATION_LISTENER_SERVICE">
             <intent-filter>
                 <action android:name="android.service.notification.NotificationListenerService" />

@@ -76,6 +76,9 @@ android {
             abiFilters += listOf((project.findProperty("nm.abi") as String?) ?: "arm64-v8a")
         }
 
+        // nanoMuse: release keeps @string/app_name. Debug replaces the placeholder with Hearth.
+        manifestPlaceholders["appLabel"] = "@string/app_name"
+
         externalNativeBuild {
             cmake {
                 cppFlags += "-std=c++17"
@@ -92,6 +95,12 @@ android {
     }
 
     buildTypes {
+        // nanoMuse: a debug install can sit beside the release app. The suffix is debug
+        // only; the release applicationId and the Kotlin packages stay as they are.
+        debug {
+            applicationIdSuffix = ".hearth"
+            manifestPlaceholders["appLabel"] = "Hearth"
+        }
         release {
             isMinifyEnabled = true
             proguardFiles(

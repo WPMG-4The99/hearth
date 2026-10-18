@@ -17,6 +17,8 @@ OpenMinis 时，不会有两个 App 抢同一个 scheme；App 内部的链接仍
 作为设计记录保留在 [archive/android-python-line.md](../archive/android-python-line.md)，不是你今天
 下载到的东西。
 
+Debug 构建的应用 id 是 `io.github.nanomuse.app.hearth`，桌面名称是 Hearth，因此可以和正式版装在同一部手机上。正式版的 id 仍是 `io.github.nanomuse.app`，名称仍是 nanoMuse。文件共享、闹钟权限和沙箱套接字都跟着当前这个构建的 id 走。两种构建都响应 `nanomuse://`，从 App 外面点开这种链接时，系统可能会问要打开哪一个。
+
 一个 APK，一种架构：`nanoMuse-<version>-arm64.apk`（arm64-v8a，Android 8.0 / API 26 及以上，
 `targetSdk` 35）。每个版本都用同一把签名密钥，所以新 APK 直接覆盖旧的，数据保留。没有上架
 Play 商店：「设置 → 版本」把已安装的构建和最新版本并排显示（先查 `nanomuse.cn/dl/index.json`，

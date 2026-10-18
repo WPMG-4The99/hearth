@@ -22,6 +22,12 @@ around a Python server, two APK flavours) is kept as a design record in
 [archive/android-python-line.md](archive/android-python-line.md) and is not what you
 download today.
 
+A debug build uses the id `io.github.nanomuse.app.hearth` and the launcher label Hearth, so it
+installs next to a release copy of the same app. The release id stays `io.github.nanomuse.app`
+and the label stays nanoMuse. File providers, the alarm permission and the sandbox socket follow
+the id of the build that is running. Both builds still answer `nanomuse://`, so a link from
+outside the app may ask which copy to open.
+
 One APK, one architecture: `nanoMuse-<version>-arm64.apk` (arm64-v8a, Android 8.0 / API 26
 or newer, `targetSdk` 35). Every release is signed with the same key, so a newer APK
 installs over the old one and keeps its data. No Play Store listing: *Settings → Version* shows
