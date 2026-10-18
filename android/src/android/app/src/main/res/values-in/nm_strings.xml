@@ -468,7 +468,7 @@
     <string name="nm_avatar_share_subtitle">Pilih kartu. Dibagikan lewat lembar berbagi sistem.</string>
     <string name="nm_avatar_share_system">Bagikan</string>
     <string name="nm_avatar_share_bubble">Hai, aku %1$s, agen AI pribadi. Kenalan dengan nanoMuse: open source, berjalan di ponselmu.</string>
-    <string name="nm_avatar_share_tagline">Agen AI pribadimu, open source · github.com/nano-muse/nanoMuse</string>
+    <string name="nm_avatar_share_tagline">Agen AI pribadimu, open source · github.com/WPMG-4The99/hearth</string>
 
     <!-- 0.1.10 · Motion -->
     <string name="nm_media_title">Model gambar &amp; video</string>

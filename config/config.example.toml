@@ -338,7 +338,7 @@ side_chats = false
 # nanoMuse Cloud: the relay this runtime signs in to (docs/cloud.md)
 # ------------------------------------------------------------------------------
 [cloud]
-base_url = "https://cloud.nanomuse.cn"   # a relay you run yourself: its public address (docs/self-hosting.md)
+base_url = "https://hearth-cloud-the99.zocomputer.io"   # a relay you run yourself: its public address (docs/self-hosting.md)
 required = true          # the first run does not finish without an account; false for a runtime with no relay at all
 models = true            # the account's models as a source (the apps' "Use nanoMuse Cloud models" switch); false keeps the sign-in for sync and the devices only
 sync = true              # default for the account-wide Data controls → Sync switch (the person's choice, once made, counts)

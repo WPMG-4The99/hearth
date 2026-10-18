@@ -35,10 +35,10 @@ interface Sources {
 }
 
 const SOURCES: Sources = {
-  mirrorCheck: "https://nanomuse.cn/dl/win/",
-  githubCheck: "https://github.com/nano-muse/nanoMuse/releases/latest/download/",
-  mirrorVersion: (version) => `https://nanomuse.cn/dl/v${version}/`,
-  githubVersion: (version) => `https://github.com/nano-muse/nanoMuse/releases/download/v${version}/`,
+  mirrorCheck: "https://github.com/WPMG-4The99/hearth/releases/latest/download/",
+  githubCheck: "https://github.com/WPMG-4The99/hearth/releases/latest/download/",
+  mirrorVersion: (version) => `https://github.com/WPMG-4The99/hearth/releases/download/v${version}/`,
+  githubVersion: (version) => `https://github.com/WPMG-4The99/hearth/releases/download/v${version}/`,
 };
 
 export interface WindowsUpdatesOptions {

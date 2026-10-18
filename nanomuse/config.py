@@ -549,7 +549,7 @@ class CloudSettings(BaseModel):
     account key lives in the vault (``NANOMUSE_CLOUD_KEY``); ``base_url`` is the relay.
     Signed in, the relay can be the model provider and the hub is reachable."""
 
-    base_url: str = "https://cloud.nanomuse.cn"
+    base_url: str = "https://hearth-cloud-the99.zocomputer.io"
     # Sign-in is part of setting up: the first-run flow does not finish without
     # an account (with it, the relay can be the model and the devices meet).
     # Self-hosters who run without a relay set this to false.

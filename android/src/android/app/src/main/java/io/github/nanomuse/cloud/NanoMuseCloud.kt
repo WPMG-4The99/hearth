@@ -46,7 +46,10 @@ import org.json.JSONObject
  * content is forwarded to the model, not stored. See `docs/cloud.md`.
  */
 object NanoMuseCloud {
-    const val DEFAULT_BASE = "https://cloud.nanomuse.cn"
+    /** Hearth's relay. Every default cloud address in the app is this constant. */
+    const val DEFAULT_BASE = "https://hearth-cloud-the99.zocomputer.io"
+    /** The Hearth repository: docs, releases, and the community links. */
+    const val PROJECT_URL = "https://github.com/WPMG-4The99/hearth"
     const val LABEL = "nanoMuse Cloud"
 
     private const val PREFS = "nanomuse"
@@ -112,7 +115,10 @@ object NanoMuseCloud {
     private const val MODELS_FRESH_MS = 60 * 60 * 1000L
 
     /** Where the privacy policy is when the relay did not name one. */
-    const val PRIVACY_URL = "https://nanomuse.cn/privacy/"
+    const val PRIVACY_URL = "$PROJECT_URL/blob/main/docs/privacy.md"
+
+    /** The invite link when the relay did not name one: the console on [DEFAULT_BASE]. */
+    fun inviteFallback(code: String): String = "$DEFAULT_BASE/app/?invite=$code"
 
     /**
      * A refusal of the relay's: its stable [code], its own sentence, the HTTP [status]; relay

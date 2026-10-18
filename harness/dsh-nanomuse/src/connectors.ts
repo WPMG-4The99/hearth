@@ -45,7 +45,7 @@ const FLOW_TTL_MS = 10 * 60_000
 /** Refresh a token this long before it expires. */
 const REFRESH_SKEW_MS = 60_000
 const CLIENT_NAME = 'nanoMuse'
-const CLIENT_URI = 'https://nanomuse.cn'
+const CLIENT_URI = 'https://github.com/WPMG-4The99/hearth'
 const PROTOCOL = '2025-06-18'
 const REGISTRY = 'https://registry.modelcontextprotocol.io/v0/servers'
 const SERVER_NAME = /^[A-Za-z0-9_-]{1,32}$/

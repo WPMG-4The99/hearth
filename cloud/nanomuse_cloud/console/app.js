@@ -538,7 +538,7 @@
     // without `guidance` still gets the two 0.17 links.
     const keyLinks = (sp, region) => {
       const g = sp.guidance;
-      const docs = h("a", { href: sp.own_key_docs || "https://nanomuse.cn/own-key", target: "_blank", rel: "noopener" }, g ? T.ownKeyGuide : T.ownKey);
+      const docs = h("a", { href: sp.own_key_docs || "https://github.com/WPMG-4The99/hearth/blob/main/docs/own-key.md", target: "_blank", rel: "noopener" }, g ? T.ownKeyGuide : T.ownKey);
       if (!g || !Array.isArray(g.providers) || !g.providers.length) {
         const openrouter = h("a", { href: sp.openrouter_url || "https://openrouter.ai/keys", target: "_blank", rel: "noopener" }, T.openRouterKey);
         return region === "cn" ? [docs, " · ", openrouter] : [openrouter, " · ", docs];
@@ -582,7 +582,7 @@
         h("button", { class: "btn quiet sm", role: "switch", "aria-checked": ct.on ? "true" : "false", onclick: async () => { try { await api("POST", "/v1/me/contribute", { on: !ct.on }, key); } catch (e) { alert(errText(e)); } await loadMe(); drawAccount(body); } }, ct.on ? (zh ? "关闭" : "Turn off") : (zh ? "开启" : "Turn on"))),
       ct.samples ? h("button", { class: "row tap danger", onclick: async () => { if (await ask(T.deleteSamples, T.deleteSamplesConfirm, T.deleteSamples, true)) { try { const r = await api("DELETE", "/v1/me/samples", null, key); alert(T.deleted(r.deleted || 0)); } catch (e) { alert(errText(e)); } await loadMe(); drawAccount(body); } } }, h("span", { class: "tile bad", html: ICON.out }), h("div", { class: "txt" }, h("div", { class: "t" }, T.deleteSamples))) : null,
       h("p", { class: "fine", style: "padding:0 16px 12px" }, T.contributeWhy, " ", T.contributeDefault(!!ct.default_on), " ",
-        h("a", { href: ct.privacy_url || "https://nanomuse.cn/privacy/", target: "_blank", rel: "noopener" }, T.privacy))));
+        h("a", { href: ct.privacy_url || "https://github.com/WPMG-4The99/hearth/blob/main/docs/privacy.md", target: "_blank", rel: "noopener" }, T.privacy))));
     // 0.19: conversation sync between the account's devices — the switch (off deletes), what is stored, the delete
     const sy = me.sync;
     if (sy && sy.counts) {

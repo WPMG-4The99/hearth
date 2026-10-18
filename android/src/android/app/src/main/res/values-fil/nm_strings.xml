@@ -471,7 +471,7 @@
     <string name="nm_avatar_share_subtitle">Pumili ng card. Ipapadala ito sa pamamagitan ng share sheet ng system.</string>
     <string name="nm_avatar_share_system">Ibahagi</string>
     <string name="nm_avatar_share_bubble">Hi, ako si %1$s, isang personal na AI agent. Kilalanin ang nanoMuse: open source, tumatakbo sa telepono mo.</string>
-    <string name="nm_avatar_share_tagline">Ang personal mong AI agent, open source · github.com/nano-muse/nanoMuse</string>
+    <string name="nm_avatar_share_tagline">Ang personal mong AI agent, open source · github.com/WPMG-4The99/hearth</string>
 
     <!-- 0.1.10 · Motion -->
     <string name="nm_media_title">Mga image at video model</string>

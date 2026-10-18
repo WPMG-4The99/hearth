@@ -77,7 +77,8 @@ struct AIDataSharingConsentView: View {
                         }
                     }
 
-                    Link("Read our full Privacy Policy", destination: URL(string: "https://github.com/nano-muse/nanoMuse/blob/main/docs/privacy.md")!)
+                    // nanoMuse: this build's privacy page.
+                    Link("Read our full Privacy Policy", destination: URL(string: "https://github.com/WPMG-4The99/hearth/blob/main/docs/privacy.md")!)
                         .font(.footnote)
 
                     Spacer(minLength: 80)

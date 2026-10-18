@@ -217,10 +217,10 @@ struct NanoMuseSettingsHomeView: View {
 
 /// The project's public pages.
 enum NanoMuseLinks {
-    /// The policy on the site (docs/privacy.md is its source), as Android's PRIVACY_URL.
-    static let privacy = URL(string: "https://nanomuse.cn/privacy/")!
-    /// The own-key guide on the site (docs/own-key.md), when the relay sent no address of its own (Android's OWN_KEY_DOCS).
-    static let ownKeyDocs = "https://nanomuse.cn/own-key"
+    /// The policy in the repository (docs/privacy.md), as Android's PRIVACY_URL.
+    static let privacy = URL(string: "https://github.com/WPMG-4The99/hearth/blob/main/docs/privacy.md")!
+    /// The own-key guide in the repository (docs/own-key.md), when the relay sent no address of its own (Android's OWN_KEY_DOCS).
+    static let ownKeyDocs = "https://github.com/WPMG-4The99/hearth/blob/main/docs/own-key.md"
 
     /// A new GitHub issue with the build and the device filled in (no personal data): the
     /// issue form's fields by id (.github/ISSUE_TEMPLATE/bug_report.yml); a bare `body`
@@ -229,7 +229,7 @@ enum NanoMuseLinks {
         let info = Bundle.main.infoDictionary
         let version = info?["CFBundleShortVersionString"] as? String ?? "?"
         let build = info?["CFBundleVersion"] as? String ?? "?"
-        var components = URLComponents(string: "https://github.com/nano-muse/nanoMuse/issues/new")!
+        var components = URLComponents(string: "https://github.com/WPMG-4The99/hearth/issues/new")!
         components.queryItems = [
             URLQueryItem(name: "template", value: "bug_report.yml"),
             URLQueryItem(name: "labels", value: "bug,ios"),
@@ -237,7 +237,7 @@ enum NanoMuseLinks {
             URLQueryItem(name: "version", value: "\(version) (\(build))"),
             URLQueryItem(name: "os", value: "iOS \(UIDevice.current.systemVersion), \(UIDevice.current.model)"),
         ]
-        return components.url ?? URL(string: "https://github.com/nano-muse/nanoMuse/issues")!
+        return components.url ?? URL(string: "https://github.com/WPMG-4The99/hearth/issues")!
     }
 }
 

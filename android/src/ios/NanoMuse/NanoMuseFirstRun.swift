@@ -167,7 +167,7 @@ struct NanoMuseFirstRunView: View {
             secondaryLabel: AppLocalized("Use your own API key instead"),
             onSecondary: { NanoMuseFirstRun.markSourceChosen(); sourceChosen = true; showOwnKey = true },
             finePrint: AppLocalized("One account keeps your devices together and carries the free model use; nothing is charged. Your own API key can be added right after."),
-            learnMore: URL(string: "https://github.com/nano-muse/nanoMuse/blob/main/docs/cloud.md")
+            learnMore: URL(string: "https://github.com/WPMG-4The99/hearth/blob/main/docs/cloud.md")
         ) {
             NanoMuseFeatureRow(symbol: "bubble.left.and.bubble.right", title: AppLocalized("Chat, pictures, video"), subtitle: AppLocalized("A capable model, image and video generation, tools, skills and memory, on your phone"))
             NanoMuseFeatureRow(symbol: "desktopcomputer", title: AppLocalized("Reach: your computers, from here"), subtitle: AppLocalized("Pair a Mac, Windows or Linux machine and give it work from the phone"))

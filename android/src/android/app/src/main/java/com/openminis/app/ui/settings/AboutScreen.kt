@@ -99,7 +99,8 @@ fun AboutScreen(onBack: () -> Unit) {
                 // LocalInAppBrowserLauncher ambient defaults to a no-op when
                 // no InAppBrowserHost is in the tree above this screen — and
                 // nothing wraps Settings, so the row used to be a dead tap.
-                onClick = { openExternalUrl(context, "https://github.com/nano-muse/nanoMuse") },
+                // nanoMuse: this build's repository. The upstream row below stays on nanoMuse.
+                onClick = { openExternalUrl(context, "https://github.com/WPMG-4The99/hearth") },
                 trailing = { ExternalLinkIcon() },
                 showDivider = false,
             )
@@ -113,7 +114,8 @@ fun AboutScreen(onBack: () -> Unit) {
                 iconColor = tileBlue,
                 title = stringResource(R.string.nm_about_license),
                 subtitle = "GPL-3.0-or-later",
-                onClick = { openExternalUrl(context, "https://github.com/nano-muse/nanoMuse/blob/main/LICENSE") },
+                // nanoMuse: the licence in this repository.
+                onClick = { openExternalUrl(context, "https://github.com/WPMG-4The99/hearth/blob/main/LICENSE") },
                 trailing = { ExternalLinkIcon() },
                 minHeight = 72.dp,
             )

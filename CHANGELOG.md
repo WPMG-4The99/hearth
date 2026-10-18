@@ -4,6 +4,10 @@ All notable changes to nanoMuse. The format follows [Keep a Changelog](https://k
 
 ## [Unreleased]
 
+### Apps
+
+- **The apps and the runtime sign in to the Hearth relay and look for updates on GitHub.** The default relay is `https://hearth-cloud-the99.zocomputer.io`. Update checks ask GitHub releases for `WPMG-4The99/hearth` and no longer ask `nanomuse.cn`. Help improve stays off until a person turns it on.
+
 ### Cloud
 
 - **Gmail dot/plus aliases and disposable mail domains no longer open duplicate free pools, and invite settlement ignores same-IP and tiny probes.** `parse()` now strips `+tag` subaddresses from every e-mail local part and canonicalises `gmail.com` and `googlemail.com` addresses by folding `googlemail.com` to `gmail.com` and removing dots from the local part, while `Database.account_by_hashes` still matches and upgrades existing accounts whose `id_hash` was recorded with dots before canonicalisation. New sign-ups from disposable mail domains (`DEFAULT_SIGNUP_DOMAIN_BLOCK` plus `SIGNUP_DOMAIN_BLOCK`, overridable via `SIGNUP_DOMAIN_ALLOW`) are refused with `429 domain_limited`, and the default `SIGNUP_PER_DOMAIN_DAY` for non-well-known domains is lowered from 20 to 5. Invite bonuses (`settle_invite`) no longer settle when the inviter and invitee share the same non-local `first_ip` or before the invitee either registers a Hub device or spends at least `INVITE_SETTLE_MIN_SPENT_UY` (200 micro-yuan by default).

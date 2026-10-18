@@ -673,7 +673,7 @@ final class NanoMuseLogicTests: XCTestCase {
     }
 
     func testUpdateIndexReadsTheReleasesList() {
-        // The index as nanomuse.cn/dl/index.json is written: releases newest first, each with a tag.
+        // A releases index, newest first, each with a tag. The row itself asks GitHub.
         let index: [String: Any] = [
             "repo": "nano-muse/nanoMuse",
             "releases": [["tag": "v1.0.0", "name": "nanoMuse 1.0.0", "assets": [String]()], ["tag": "v0.1.41"]],

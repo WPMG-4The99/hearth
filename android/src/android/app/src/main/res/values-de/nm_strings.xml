@@ -471,7 +471,7 @@
     <string name="nm_avatar_share_subtitle">Wähle eine Karte. Sie geht über das Teilen-Menü des Systems hinaus.</string>
     <string name="nm_avatar_share_system">Teilen</string>
     <string name="nm_avatar_share_bubble">Hallo, ich bin %1$s, ein persönlicher KI-Agent. Das ist nanoMuse: quelloffen, läuft auf deinem Telefon.</string>
-    <string name="nm_avatar_share_tagline">Dein persönlicher KI-Agent, quelloffen · github.com/nano-muse/nanoMuse</string>
+    <string name="nm_avatar_share_tagline">Dein persönlicher KI-Agent, quelloffen · github.com/WPMG-4The99/hearth</string>
 
     <!-- 0.1.10 · Motion -->
     <string name="nm_media_title">Bild- und Videomodelle</string>

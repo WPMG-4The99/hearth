@@ -18,10 +18,10 @@ import java.util.concurrent.atomic.AtomicBoolean
 
 /**
  * The installed version and the latest one, side by side (shared contract C2). The latest
- * comes from the download index on nanomuse.cn first, then GitHub's latest release; it is
- * looked up at most once a day and the answer kept, with a "check now" for a stale or failed
- * check. Only the two lines of the Version row live on this; the in-app APK download on the
- * About page is the upstream UpdateChecker, untouched.
+ * comes from GitHub releases for WPMG-4The99/hearth. It is looked up at most once a day and
+ * the answer kept, with a "check now" for a stale or failed check. Only the two lines of the
+ * Version row live on this; the in-app APK download on the About page is UpdateChecker,
+ * pointed at the same repository.
  */
 object UpdateCheck {
     private const val TAG = "UpdateCheck"
@@ -30,10 +30,9 @@ object UpdateCheck {
     private const val KEY_CHECKED_AT = "checked_at"
     private const val KEY_FAILED = "failed"
 
-    /** Where "Update" goes on Android: the download page, with the APK and the store links. */
-    const val DOWNLOAD_URL = "https://nanomuse.cn/dl/"
-    const val INDEX_URL = "https://nanomuse.cn/dl/index.json"
-    const val GITHUB_LATEST_URL = "https://api.github.com/repos/nano-muse/nanoMuse/releases/latest"
+    /** Where "Update" goes on Android: the Hearth releases page. */
+    const val DOWNLOAD_URL = "https://github.com/WPMG-4The99/hearth/releases"
+    const val GITHUB_LATEST_URL = "https://api.github.com/repos/WPMG-4The99/hearth/releases/latest"
 
     /** A check is repeated at most this often on its own. */
     const val FRESH_MS = 24L * 60 * 60 * 1000
@@ -109,11 +108,8 @@ object UpdateCheck {
         }
     }
 
-    /** The index on nanomuse.cn, then GitHub; null when neither answered with a version. */
-    internal fun fetchLatest(): String? {
-        get(INDEX_URL)?.let { parseIndex(it) }?.let { return it }
-        return get(GITHUB_LATEST_URL)?.let { parseGitHubLatest(it) }
-    }
+    /** GitHub's latest release; null when it did not answer with a version. */
+    internal fun fetchLatest(): String? = get(GITHUB_LATEST_URL)?.let { parseGitHubLatest(it) }
 
     private fun get(url: String): String? = try {
         val req = Request.Builder().url(url).get()

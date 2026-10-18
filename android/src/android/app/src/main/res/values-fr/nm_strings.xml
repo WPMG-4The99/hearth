@@ -472,7 +472,7 @@
     <string name="nm_avatar_share_subtitle">Choisissez une carte. Elle part par la feuille de partage du système.</string>
     <string name="nm_avatar_share_system">Partager</string>
     <string name="nm_avatar_share_bubble">Bonjour, je suis %1$s, un agent IA personnel. Voici nanoMuse : open source, il tourne sur votre téléphone.</string>
-    <string name="nm_avatar_share_tagline">Votre agent IA personnel, open source · github.com/nano-muse/nanoMuse</string>
+    <string name="nm_avatar_share_tagline">Votre agent IA personnel, open source · github.com/WPMG-4The99/hearth</string>
 
     <!-- 0.1.10 · Motion -->
     <string name="nm_media_title">Modèles d’image et vidéo</string>

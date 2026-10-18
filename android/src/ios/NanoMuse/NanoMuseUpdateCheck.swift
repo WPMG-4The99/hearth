@@ -3,11 +3,11 @@
 //  nanoMuse
 //
 //  The version row in Settings (contract C2): what is installed, what the latest
-//  release is, and a link to it when it is newer. The download index on nanomuse.cn
-//  answers first; GitHub's latest release is the fallback. Checked at most once a
-//  day on its own, or on demand from the row; the answer is kept in UserDefaults so
-//  the row has something to show straight away. Never loud: a failed check leaves
-//  "latest" empty and the row says only what is installed.
+//  release is, and a link to it when it is newer. GitHub releases for
+//  WPMG-4The99/hearth answer. Checked at most once a day on its own, or on demand
+//  from the row; the answer is kept in UserDefaults so the row has something to
+//  show straight away. Never loud: a failed check leaves "latest" empty and the
+//  row says only what is installed.
 //
 
 import Combine
@@ -17,11 +17,10 @@ import Foundation
 final class NanoMuseUpdateCheck: ObservableObject {
     static let shared = NanoMuseUpdateCheck()
 
-    nonisolated static let indexURL = "https://nanomuse.cn/dl/index.json"
-    nonisolated static let githubURL = "https://api.github.com/repos/nano-muse/nanoMuse/releases/latest"
-    nonisolated static let fallbackReleasePage = "https://github.com/nano-muse/nanoMuse/releases/latest"
-    /// The download page on nanomuse.cn, where a release found through the index leads (Android's `DOWNLOAD_URL`).
-    nonisolated static let downloadPage = "https://nanomuse.cn/dl/"
+    nonisolated static let githubURL = "https://api.github.com/repos/WPMG-4The99/hearth/releases/latest"
+    nonisolated static let fallbackReleasePage = "https://github.com/WPMG-4The99/hearth/releases/latest"
+    /// The releases page, where a tap on a newer version leads (Android's `DOWNLOAD_URL`).
+    nonisolated static let downloadPage = "https://github.com/WPMG-4The99/hearth/releases"
 
     private enum Keys {
         static let latest = "nm.update.latest"
@@ -115,11 +114,8 @@ final class NanoMuseUpdateCheck: ObservableObject {
         var page: String?
     }
 
-    /// The download index first, GitHub second. Nil when neither answered usefully.
+    /// GitHub's latest release. Nil when it did not answer usefully.
     private static func fetchLatest() async -> Found? {
-        if let json = await fetchJSON(indexURL), let found = parseIndex(json) {
-            return found
-        }
         if let json = await fetchJSON(githubURL), let found = parseGitHubLatest(json) {
             return found
         }

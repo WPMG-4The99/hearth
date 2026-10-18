@@ -474,7 +474,7 @@
     <string name="nm_avatar_share_subtitle">Alege un card. Pleacă prin fereastra de partajare a sistemului.</string>
     <string name="nm_avatar_share_system">Partajează</string>
     <string name="nm_avatar_share_bubble">Bună, sunt %1$s, un agent AI personal. Fă cunoștință cu nanoMuse: open source, rulează pe telefonul tău.</string>
-    <string name="nm_avatar_share_tagline">Agentul tău AI personal, open source · github.com/nano-muse/nanoMuse</string>
+    <string name="nm_avatar_share_tagline">Agentul tău AI personal, open source · github.com/WPMG-4The99/hearth</string>
 
     <!-- 0.1.10 · Motion -->
     <string name="nm_media_title">Modele de imagine și video</string>

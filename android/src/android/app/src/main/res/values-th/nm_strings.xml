@@ -468,7 +468,7 @@
     <string name="nm_avatar_share_subtitle">เลือกการ์ดหนึ่งใบ จะส่งผ่านหน้าแชร์ของระบบ</string>
     <string name="nm_avatar_share_system">แชร์</string>
     <string name="nm_avatar_share_bubble">สวัสดี ฉันคือ %1$s เอเจนต์ AI ส่วนตัว มาทำความรู้จัก nanoMuse โอเพนซอร์ส ทำงานบนโทรศัพท์ของคุณ</string>
-    <string name="nm_avatar_share_tagline">เอเจนต์ AI ส่วนตัวของคุณ โอเพนซอร์ส · github.com/nano-muse/nanoMuse</string>
+    <string name="nm_avatar_share_tagline">เอเจนต์ AI ส่วนตัวของคุณ โอเพนซอร์ส · github.com/WPMG-4The99/hearth</string>
 
     <!-- 0.1.10 · Motion -->
     <string name="nm_media_title">โมเดลภาพและวิดีโอ</string>

@@ -8,7 +8,7 @@ import { cx } from "../util";
 import { MuseCaption, MuseCard, MuseDivider, MuseRow, MuseSwitchRow } from "./MuseList";
 
 /** The policy the apps link when the relay has not said where its own is. */
-export const PRIVACY_URL = "https://nanomuse.cn/privacy/";
+export const PRIVACY_URL = "https://github.com/WPMG-4The99/hearth/blob/main/docs/privacy.md";
 
 /**
  * Settings → Data controls, in the shape of Muse's: one switch, *Help improve nanoMuse's AI

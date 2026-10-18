@@ -468,7 +468,7 @@
     <string name="nm_avatar_share_subtitle">카드를 고르세요. 시스템 공유 시트로 내보냅니다.</string>
     <string name="nm_avatar_share_system">공유</string>
     <string name="nm_avatar_share_bubble">안녕하세요, 저는 개인 AI 에이전트 %1$s예요. nanoMuse를 만나 보세요: 오픈 소스이고, 휴대전화에서 실행돼요.</string>
-    <string name="nm_avatar_share_tagline">나만의 AI 에이전트, 오픈 소스 · github.com/nano-muse/nanoMuse</string>
+    <string name="nm_avatar_share_tagline">나만의 AI 에이전트, 오픈 소스 · github.com/WPMG-4The99/hearth</string>
 
     <!-- 0.1.10 · Motion -->
     <string name="nm_media_title">이미지 및 동영상 모델</string>

@@ -19,10 +19,9 @@ beside them). Windows releases also carry the update metadata electron-updater r
 which names the installer and its SHA-512, and the installer's `.exe.blockmap`. CI checks the set with electron-updater itself before
 anything is attached: it must find the candidate version in `latest.yml`, download the
 installer from a test feed and verify it, and refuse one whose bytes do not match
-(`harness/desktop/scripts/update-feed-check.mjs`). The feed the metadata is built for is the
-download mirror's [nanomuse.cn/dl/win/](https://nanomuse.cn/dl/win/), which moves to a new
-release only once its `latest.yml`, installer and `.blockmap` are all there and the installer's
-bytes match; until then it serves the previous release. The code is under
+(`harness/desktop/scripts/update-feed-check.mjs`). The feed the metadata is built for is
+[the Hearth GitHub releases feed](https://github.com/WPMG-4The99/hearth/releases/latest/download/).
+The code is under
 [`harness/`](../harness/): the bundle of plugins in
 `harness/dsh-nanomuse`, the Electron shell in `harness/desktop`; how to build it yourself is
 in [harness/README.md](../harness/README.md). Up to 0.1.29 the same installers wrapped the
@@ -134,7 +133,7 @@ speaking as nanoMuse through the `nanomuse` preset, with:
   do. The shell keeps it in `desktop.json` (mode 0600, since the address may carry a
   password) next to *open at login* and puts it on the dsh
   Host's environment at start (`HTTP_PROXY`, `HTTPS_PROXY`, `ALL_PROXY` for SOCKS, `NO_PROXY`
-  with `localhost,127.0.0.1,::1`, `cloud.nanomuse.cn` and the relay the plugin talks to, and
+  with `localhost,127.0.0.1,::1`, `hearth-cloud-the99.zocomputer.io` and the relay the plugin talks to, and
   `NODE_USE_ENV_PROXY=1`, which is what makes Node's fetch read them), so it takes effect
   after a restart; *Restart now* under the row restarts the Host with the window up. The
   phones have the same setting in the provider form, the web app in the own-key form, the

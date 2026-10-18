@@ -59,8 +59,8 @@ type SignInView = 'identifier' | 'code' | 'password'
 /** How long Start may take to open the main chat before we stop waiting. */
 const START_MS = 12_000
 /** The privacy policy as every client links it (the relay, the web console and the phones agree). */
-const PRIVACY_URL = 'https://nanomuse.cn/privacy/'
-const HANDS_URL = 'https://github.com/nano-muse/nanoMuse/blob/main/docs/sentinel.md'
+const PRIVACY_URL = 'https://github.com/WPMG-4The99/hearth/blob/main/docs/privacy.md'
+const HANDS_URL = 'https://github.com/WPMG-4The99/hearth/blob/main/docs/sentinel.md'
 
 function Pill({ children, onClick, disabled, type = 'button', ghost = false, small = false, className = '' }: {
   children?: ReactNode

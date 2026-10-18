@@ -250,7 +250,7 @@ function toAccount(me: Record<string, unknown>): Account {
   }
 }
 
-/** A client for one relay origin, e.g. `https://cloud.nanomuse.cn`. */
+/** A client for one relay origin, e.g. `https://hearth-cloud-the99.zocomputer.io`. */
 export class Relay {
   readonly origin: string
   private readonly fetchImpl: TimedFetch

@@ -468,7 +468,7 @@
     <string name="nm_avatar_share_subtitle">カードを選んでください。システムの共有シートから送られます。</string>
     <string name="nm_avatar_share_system">共有</string>
     <string name="nm_avatar_share_bubble">こんにちは、%1$s です。パーソナル AI エージェントです。nanoMuse をどうぞ：オープンソースで、スマートフォンの上で動きます。</string>
-    <string name="nm_avatar_share_tagline">あなたのパーソナル AI エージェント、オープンソース · github.com/nano-muse/nanoMuse</string>
+    <string name="nm_avatar_share_tagline">あなたのパーソナル AI エージェント、オープンソース · github.com/WPMG-4The99/hearth</string>
 
     <!-- 0.1.10 · Motion -->
     <string name="nm_media_title">画像・動画モデル</string>

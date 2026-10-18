@@ -10,7 +10,7 @@
 export const PROXY_SCHEMES = ["http", "https", "socks5", "socks5h"] as const;
 
 /** The relay every build knows (own-key installs read the star policy from it too). */
-export const DEFAULT_RELAY_HOST = "cloud.nanomuse.cn";
+export const DEFAULT_RELAY_HOST = "hearth-cloud-the99.zocomputer.io";
 
 /** Never through a proxy: the Host's own loopback, the operator's server, the connectors' callback. */
 const LOOPBACK = ["localhost", "127.0.0.1", "::1"];

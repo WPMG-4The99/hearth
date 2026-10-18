@@ -459,7 +459,7 @@
     <string name="nm_avatar_share_subtitle">选一张卡片，用系统分享发出去。</string>
     <string name="nm_avatar_share_system">分享</string>
     <string name="nm_avatar_share_bubble">你好，我是你的个人 AI 智能体%1$s。nanoMuse：开源、在手机上本地运行。</string>
-    <string name="nm_avatar_share_tagline">你的个人 AI 智能体，开源 · github.com/nano-muse/nanoMuse</string>
+    <string name="nm_avatar_share_tagline">你的个人 AI 智能体，开源 · github.com/WPMG-4The99/hearth</string>
     <!-- 0.1.10 · Motion -->
     <string name="nm_media_title">图像与视频模型</string>
     <string name="nm_media_intro">三个模型，各自单独选择：和你对话的对话模型、画形象和图片的图像模型、让形象动起来的视频模型。一把阿里云百炼的 key 三个全包。</string>

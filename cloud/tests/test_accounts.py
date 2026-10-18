@@ -334,7 +334,7 @@ async def test_invites_and_the_operator_grow_the_one_pool():
     a = await sign_up(client, sender, "dev-a@example.com", "pixel")
     ka = a["api_key"]
     inv = (await client.get("/v1/me/invite", headers=auth(ka))).json()
-    assert len(inv["code"]) == 8 and inv["url"] == "https://nanomuse.cn/web/?invite=" + inv["code"]
+    assert len(inv["code"]) == 8 and inv["url"] == "https://hearth-cloud-the99.zocomputer.io/app/?invite=" + inv["code"]
     assert (
         inv["invites"] == 0 and inv["bonus_cny"] == 3 and inv["invitee_bonus_cny"] == 3 and inv["earned_cny"] == 0 and inv["friends"] == []
     )

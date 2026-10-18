@@ -471,7 +471,7 @@
     <string name="nm_avatar_share_subtitle">Bir kart seç. Sistemin paylaşım sayfasıyla gönderilir.</string>
     <string name="nm_avatar_share_system">Paylaş</string>
     <string name="nm_avatar_share_bubble">Merhaba, ben %1$s, kişisel bir yapay zekâ ajanıyım. nanoMuse ile tanış: açık kaynak, telefonunda çalışır.</string>
-    <string name="nm_avatar_share_tagline">Kişisel yapay zekâ ajanın, açık kaynak · github.com/nano-muse/nanoMuse</string>
+    <string name="nm_avatar_share_tagline">Kişisel yapay zekâ ajanın, açık kaynak · github.com/WPMG-4The99/hearth</string>
 
     <!-- 0.1.10 · Motion -->
     <string name="nm_media_title">Görsel ve video modelleri</string>

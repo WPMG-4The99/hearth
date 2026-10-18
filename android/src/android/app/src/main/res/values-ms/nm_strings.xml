@@ -468,7 +468,7 @@
     <string name="nm_avatar_share_subtitle">Pilih satu kad. Ia dihantar melalui helaian kongsi sistem.</string>
     <string name="nm_avatar_share_system">Kongsi</string>
     <string name="nm_avatar_share_bubble">Hai, saya %1$s, ejen AI peribadi. Kenali nanoMuse: sumber terbuka, berjalan di telefon anda.</string>
-    <string name="nm_avatar_share_tagline">Ejen AI peribadi anda, sumber terbuka · github.com/nano-muse/nanoMuse</string>
+    <string name="nm_avatar_share_tagline">Ejen AI peribadi anda, sumber terbuka · github.com/WPMG-4The99/hearth</string>
 
     <!-- 0.1.10 · Motion -->
     <string name="nm_media_title">Model imej &amp; video</string>

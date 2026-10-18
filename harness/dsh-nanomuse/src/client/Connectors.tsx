@@ -34,7 +34,7 @@ const COMPUTER_SECTION = 'nanomuse-computer'
 const PERMISSIONS_SECTION = 'nanomuse-permissions'
 const FILES_SECTION = 'nanomuse-files'
 const HARNESS_MCP_DOCS = 'https://github.com/deepseek-ai/deepseek-harness/blob/main/docs/subsystems/mcp.md'
-const RUNTIME_DOCS = 'https://github.com/nano-muse/nanoMuse/blob/main/docs/configuration.md#connectors'
+const RUNTIME_DOCS = 'https://github.com/WPMG-4The99/hearth/blob/main/docs/configuration.md#connectors'
 const REGISTRY_SITE = 'https://registry.modelcontextprotocol.io/'
 const API = '/nanomuse/connectors'
 

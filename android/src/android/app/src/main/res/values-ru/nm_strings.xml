@@ -477,7 +477,7 @@
     <string name="nm_avatar_share_subtitle">Выберите карточку. Она уйдёт через системное меню «Поделиться».</string>
     <string name="nm_avatar_share_system">Поделиться</string>
     <string name="nm_avatar_share_bubble">Привет, я %1$s, личный ИИ-агент. Знакомьтесь с nanoMuse: открытый код, работает на вашем телефоне.</string>
-    <string name="nm_avatar_share_tagline">Ваш личный ИИ-агент с открытым кодом · github.com/nano-muse/nanoMuse</string>
+    <string name="nm_avatar_share_tagline">Ваш личный ИИ-агент с открытым кодом · github.com/WPMG-4The99/hearth</string>
 
     <!-- 0.1.10 · Motion -->
     <string name="nm_media_title">Модели изображений и видео</string>

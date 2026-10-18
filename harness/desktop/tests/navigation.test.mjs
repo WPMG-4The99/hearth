@@ -29,7 +29,7 @@ test("only the shell's own pages come from disk", () => {
 test("the verdict: stay, open outside, or drop", () => {
   assert.equal(navigationVerdict("http://127.0.0.1:38421/x", HOST, OWN), "allow");
   assert.equal(navigationVerdict(`${OWN}/loading.html`, HOST, OWN), "allow");
-  assert.equal(navigationVerdict("https://nanomuse.cn/docs/desktop", HOST, OWN), "external");
+  assert.equal(navigationVerdict("https://example.com/docs/desktop", HOST, OWN), "external");
   assert.equal(navigationVerdict("http://127.0.0.1:38421@evil.example/", HOST, OWN), "external", "to the browser, never into the window");
   assert.equal(navigationVerdict("javascript:alert(1)", HOST, OWN), "deny");
   assert.equal(navigationVerdict("file:///etc/passwd", HOST, OWN), "deny");

@@ -477,7 +477,7 @@
     <string name="nm_avatar_share_subtitle">Wybierz kartę. Trafi do systemowego arkusza udostępniania.</string>
     <string name="nm_avatar_share_system">Udostępnij</string>
     <string name="nm_avatar_share_bubble">Cześć, jestem %1$s, osobisty agent AI. Poznaj nanoMuse: otwarte źródła, działa na twoim telefonie.</string>
-    <string name="nm_avatar_share_tagline">Twój osobisty agent AI, open source · github.com/nano-muse/nanoMuse</string>
+    <string name="nm_avatar_share_tagline">Twój osobisty agent AI, open source · github.com/WPMG-4The99/hearth</string>
 
     <!-- 0.1.10 · Motion -->
     <string name="nm_media_title">Modele obrazów i wideo</string>

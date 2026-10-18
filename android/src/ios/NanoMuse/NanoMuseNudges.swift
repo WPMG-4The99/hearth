@@ -40,7 +40,7 @@ struct NanoMuseNudgePolicy: Equatable, Sendable {
     /// The built-in fallback — identical on Android, iOS, desktop and web.
     static let defaults = NanoMuseNudgePolicy(
         enabled: true,
-        url: "https://github.com/nano-muse/nanoMuse",
+        url: "https://github.com/WPMG-4The99/hearth",
         signedIn: true,
         tasks: [3, 10, 30],
         newLook: true,

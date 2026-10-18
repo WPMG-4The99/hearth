@@ -104,7 +104,7 @@ export interface Config {
 }
 
 export const Config: z<Config> = z.object({
-  baseURL: z.string().default('https://cloud.nanomuse.cn').description('The nanoMuse Cloud relay.'),
+  baseURL: z.string().default('https://hearth-cloud-the99.zocomputer.io').description('The Hearth relay.'),
   deviceName: z.string().default('').description('This device in the account\'s device list; empty means the host name.'),
   statePath: z.string().default('').description('Account snapshot file; empty means $DSH_HOME/nanomuse/cloud.json.'),
 })

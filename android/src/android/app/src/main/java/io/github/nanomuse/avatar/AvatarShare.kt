@@ -14,6 +14,7 @@ import android.text.StaticLayout
 import android.text.TextPaint
 import androidx.core.content.FileProvider
 import com.openminis.app.R
+import io.github.nanomuse.cloud.NanoMuseCloud
 import io.github.nanomuse.ui.avatar.AgentMood
 import java.io.File
 
@@ -156,7 +157,7 @@ object AvatarShare {
         val send = Intent(Intent.ACTION_SEND).apply {
             type = "image/png"
             putExtra(Intent.EXTRA_STREAM, uri)
-            putExtra(Intent.EXTRA_TEXT, context.getString(R.string.nm_avatar_share_bubble, agentName) + "\nhttps://github.com/nano-muse/nanoMuse")
+            putExtra(Intent.EXTRA_TEXT, context.getString(R.string.nm_avatar_share_bubble, agentName) + "\n${NanoMuseCloud.PROJECT_URL}")
             addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
         }
         val chooser = Intent.createChooser(send, context.getString(R.string.nm_avatar_share_title)).apply {

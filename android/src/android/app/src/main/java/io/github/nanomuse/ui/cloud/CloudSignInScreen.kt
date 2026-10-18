@@ -72,7 +72,7 @@ import kotlinx.coroutines.launch
 const val ROUTE_CLOUD_SIGN_IN = "nanomuse/cloud/sign-in"
 const val ROUTE_CLOUD_ACCOUNT = "nanomuse/cloud/account"
 
-private const val CLOUD_DOC_URL = "https://github.com/nano-muse/nanoMuse/blob/main/docs/cloud.md"
+private const val CLOUD_DOC_URL = "${NanoMuseCloud.PROJECT_URL}/blob/main/docs/cloud.md"
 
 /**
  * Sign in to nanoMuse Cloud: a mainland phone number (the code comes by SMS) or an e-mail

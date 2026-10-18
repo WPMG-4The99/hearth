@@ -179,16 +179,9 @@ def test_api_nudges_serves_the_policy_and_the_sign_in_copy(server, monkeypatch):
 
 
 # ----------------------------------------------------------------------------- release check
-def test_release_check_asks_the_mirror_first_and_github_second(monkeypatch):
+def test_release_check_asks_github_releases(monkeypatch):
     asked: list[str] = []
-    index = {
-        "repo": "nano-muse/nanoMuse",
-        "releases": [
-            {"tag": "v0.1.40", "name": "0.1.40", "published_at": "2026-10-01", "assets": []},
-            {"tag": "v0.1.39", "name": "0.1.39", "published_at": "2026-09-20", "assets": []},
-        ],
-    }
-    mirror_ok = True
+    github_ok = True
 
     class Client:
         def __init__(self, *a, **k): ...
@@ -201,16 +194,15 @@ def test_release_check_asks_the_mirror_first_and_github_second(monkeypatch):
 
         async def get(self, url, **kwargs):  # noqa: ANN001
             asked.append(url)
-            if url == update.INDEX_URL:
-                assert kwargs["timeout"] == update.INDEX_TIMEOUT_S
-                if not mirror_ok:
-                    raise update.httpx.ConnectError("mirror down")
-                return httpx.Response(200, json=index, request=httpx.Request("GET", url))
+            assert url == update.RELEASES_API
+            assert kwargs["timeout"] == update.TIMEOUT_S
+            if not github_ok:
+                raise update.httpx.ConnectError("github down")
             return httpx.Response(
                 200,
                 json={
                     "tag_name": "v0.1.41",
-                    "html_url": "https://github.com/nano-muse/nanoMuse/releases/tag/v0.1.41",
+                    "html_url": "https://github.com/WPMG-4The99/hearth/releases/tag/v0.1.41",
                 },
                 request=httpx.Request("GET", url),
             )
@@ -221,22 +213,19 @@ def test_release_check_asks_the_mirror_first_and_github_second(monkeypatch):
 
     check = update.UpdateCheck(True, current="0.1.35")
     view = asyncio.run(check.view())
-    assert asked == [update.INDEX_URL]  # the mirror answered: GitHub is not asked
-    assert view["latest"] == "0.1.40" and view["newer"] is True and view["source"] == "nanomuse.cn"
-    assert view["url"].endswith("/releases/tag/v0.1.40")
+    assert asked == [update.RELEASES_API]
+    assert view["latest"] == "0.1.41" and view["newer"] is True and view["source"] == "github"
+    assert view["url"].endswith("/releases/tag/v0.1.41")
     assert view["download_url"] == update.DOWNLOAD_PAGE
     assert view["checked_at"] and datetime.fromisoformat(view["checked_at"]).tzinfo is not None
     # the cache holds for a day; "check now" asks again
     asyncio.run(check.view())
     assert len(asked) == 1
-    mirror_ok = False
+    github_ok = False
     view = asyncio.run(check.view(force=True))
-    assert asked[1:] == [update.INDEX_URL, update.RELEASES_API]
-    assert view["latest"] == "0.1.41" and view["source"] == "github" and view["error"] is None
-    assert update.latest_from_index({"releases": [{"tag": "nightly"}]}) == ""
-    assert (
-        update.latest_from_index({"releases": [{"tag": "v0.1.2"}, {"tag": "v0.1.10"}]}) == "v0.1.10"
-    )
+    assert asked[1:] == [update.RELEASES_API]
+    # a failed recheck keeps the last good answer and records the error
+    assert view["latest"] == "0.1.41" and view["source"] == "github" and view["error"] == "ConnectError"
 
 
 def test_api_update_check_now(server, monkeypatch):

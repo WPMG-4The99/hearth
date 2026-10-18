@@ -463,7 +463,7 @@
     <string name="nm_avatar_share_subtitle">Pick a card. It goes out through the system share sheet.</string>
     <string name="nm_avatar_share_system">Share</string>
     <string name="nm_avatar_share_bubble">Hi, I\'m %1$s, a personal AI agent. Meet nanoMuse: open source, runs on your phone.</string>
-    <string name="nm_avatar_share_tagline">Your personal AI agent, open source · github.com/nano-muse/nanoMuse</string>
+    <string name="nm_avatar_share_tagline">Your personal AI agent, open source · github.com/WPMG-4The99/hearth</string>
     <!-- 0.1.10 · Motion -->
     <string name="nm_media_title">Image &amp; video models</string>
     <string name="nm_media_intro">Three models, each chosen on its own: the chat model you talk to, an image model for the avatar and pictures, a video model that makes the avatar move. One Alibaba Cloud Model Studio key covers all three.</string>

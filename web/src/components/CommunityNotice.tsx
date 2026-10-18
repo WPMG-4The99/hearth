@@ -3,10 +3,10 @@ import { useT } from "../i18n";
 import { cx } from "../util";
 import { markStarred } from "./StarNudge";
 
-export const REPO_URL = "https://github.com/nano-muse/nanoMuse";
-export const ISSUES_URL = "https://github.com/nano-muse/nanoMuse/issues/new/choose";
-/** The notice on the site, with the whole story: who pays, what is kept, how to help. */
-export const NOTICE_URL = "https://nanomuse.cn/#open-source";
+export const REPO_URL = "https://github.com/WPMG-4The99/hearth";
+export const ISSUES_URL = "https://github.com/WPMG-4The99/hearth/issues/new/choose";
+/** The project repository: who pays, what is kept, how to help. */
+export const NOTICE_URL = REPO_URL;
 
 /**
  * The community notice, said plainly wherever the project is introduced: free, open source,

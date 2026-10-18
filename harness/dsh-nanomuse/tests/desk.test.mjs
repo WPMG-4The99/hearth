@@ -121,8 +121,8 @@ test('versions compare numerically, with pre-releases below the release', () => 
 })
 
 test('the update check compares the bare bundle version, so the installed release is not offered again', async () => {
-  const mirror = { repo: 'nano-muse/nanoMuse', releases: [{ tag: 'v0.1.40', assets: [] }] }
-  const fetchMirror = async () => ({ ok: true, status: 200, json: async () => mirror })
+  const release = { tag_name: 'v0.1.40', html_url: 'https://github.com/WPMG-4The99/hearth/releases/tag/v0.1.40', assets: [] }
+  const fetchMirror = async () => ({ ok: true, status: 200, json: async () => release })
   const same = await checkForUpdate(BUNDLE_VERSION, fetchMirror)
   assert.equal(same.current, BUNDLE_VERSION)
   // the host bundle carries package.json's version: it read the environment until 0.1.41,
@@ -147,30 +147,21 @@ test('the installer for this computer is picked from the release', () => {
   assert.equal(pickAsset(assets, 'linux', 'arm64'), undefined)
 })
 
-test('the update check reads the nanomuse.cn index first, GitHub second, and never throws (C2)', async () => {
-  const github = { tag_name: 'v0.1.34', html_url: 'https://github.com/nano-muse/nanoMuse/releases/tag/v0.1.34', body: 'notes', assets: [{ name: 'nanoMuse-Desktop-0.1.34-win-x64.exe', browser_download_url: 'https://dl/x.exe', size: 5 }] }
-  const mirror = { repo: 'nano-muse/nanoMuse', releases: [{ tag: 'v0.1.33', assets: [{ name: 'nanoMuse-Desktop-0.1.33-linux-x64.AppImage', size: 3 }] }] }
-  // both answer: the index wins, and GitHub is not asked at all
+test('the update check reads GitHub releases and never throws (C2)', async () => {
+  const github = { tag_name: 'v0.1.34', html_url: 'https://github.com/WPMG-4The99/hearth/releases/tag/v0.1.34', body: 'notes', assets: [{ name: 'nanoMuse-Desktop-0.1.34-win-x64.exe', browser_download_url: 'https://dl/x.exe', size: 5 }] }
   const asked = []
-  const both = async (url) => { asked.push(url); return { ok: true, status: 200, json: async () => (url.includes('github') ? github : mirror) } }
-  const a = await checkForUpdate('0.1.33', both)
-  assert.equal(a.source, 'nanomuse.cn')
-  assert.equal(a.latest, '0.1.33')
-  assert.equal(a.newer, false)
-  assert.equal(a.assets[0].url, 'https://github.com/nano-muse/nanoMuse/releases/download/v0.1.33/nanoMuse-Desktop-0.1.33-linux-x64.AppImage')
-  assert.deepEqual(asked, ['https://nanomuse.cn/dl/index.json'])
-
-  // the index does not answer: GitHub
-  const b = await checkForUpdate('0.1.33', async (url) => (url.includes('nanomuse.cn') ? { ok: false, status: 502, json: async () => ({}) } : { ok: true, status: 200, json: async () => github }))
-  assert.equal(b.source, 'github')
-  assert.equal(b.latest, '0.1.34')
-  assert.equal(b.newer, true)
-  assert.equal(b.assets[0].url, 'https://dl/x.exe')
+  const ok = async (url) => { asked.push(url); return { ok: true, status: 200, json: async () => github } }
+  const a = await checkForUpdate('0.1.33', ok)
+  assert.equal(a.source, 'github')
+  assert.equal(a.latest, '0.1.34')
+  assert.equal(a.newer, true)
+  assert.equal(a.assets[0].url, 'https://dl/x.exe')
+  assert.deepEqual(asked, ['https://api.github.com/repos/WPMG-4The99/hearth/releases/latest'])
 
   const c = await checkForUpdate('0.1.33', async () => { throw new Error('offline') })
   assert.equal(c.source, 'none')
   assert.equal(c.latest, '')
-  assert.match(c.error, /nanomuse\.cn: offline; github: offline/)
+  assert.match(c.error, /github: offline/)
 })
 
 test('each update request gives up after the timeout (5 s by default)', async () => {
