@@ -15,7 +15,7 @@ Legend: **✓** done · **◐** partial (what is missing is in the note) · **�
 | Feature | Android | iOS | Desktop | Web |
 |---|---|---|---|---|
 | Sign in with a code (phone / e-mail) | ✓ | ✓ | ✓ | ✓ |
-| Sign in with a password | ✓ | ✓ 0.1.32 | ✓ | ✓ |
+| Sign in with a password | — | ✓ 0.1.32 | ✓ | ✓ |
 | Invite code at sign-in | ✓ | ✓ 0.1.32 | ✓ 0.1.32 | ✓ |
 | Amounts from the relay (`/v1/config`) before sign-in | ✓ | ✓ 0.1.32 | ✓ 0.1.32 | ✓ |
 | Allowance in yuan on the account page, the bar turning at 80 % | ✓ | ✓ 0.1.32 | ✓ 0.1.32 | ✓ |

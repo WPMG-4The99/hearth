@@ -8,8 +8,7 @@ provider, not a replacement.
 ## In the app
 
 Since 0.1.20 the account is where every app starts: the first screen asks for a
-phone number or an e-mail address and sends a six-digit code (or, once you have
-set one, takes your password) and then asks which model answers: the account's
+phone number or an e-mail address and sends a code, then asks which model answers: the account's
 own (the Cloud) or a key of your own. Codes by SMS reach mainland China numbers
 only (号码认证服务 sends nowhere else); a Hong Kong, Taiwan or overseas number is
 told so at once (`phone_region`) and signs in with an e-mail address instead.

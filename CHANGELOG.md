@@ -6,6 +6,8 @@ All notable changes to nanoMuse. The format follows [Keep a Changelog](https://k
 
 ### Apps
 
+- **Sign-in is a code only.** The phone no longer offers a password on the sign-in screen or on the first-run pages. The code box accepts four to six digits.
+
 - **Cap's phone shows Admin, and a staff phone shows Staff.** Admin sees every private list and job note in the household and can assign shared tasks. Staff sees her own list, her notes, and the shared board, and can mark a shared task done.
 
 - **The household log is on the chat menu.** Check-ins, panics and alerts from the accounts linked by `HOUSEHOLDS` are listed there, and Check in writes one. A panic that the other phone did not show says it was saved for the next time they open the app.
