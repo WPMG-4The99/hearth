@@ -1195,4 +1195,15 @@
     <string name="nm_household_kind_alert">Sygnał</string>
     <string name="nm_menu_household">Dom</string>
     <string name="nm_household_needs_sign_in">Zaloguj się, aby zobaczyć.</string>
+    <string name="nm_work_menu">Praca</string>
+    <string name="nm_work_title_admin">Admin</string>
+    <string name="nm_work_title_staff">Personel</string>
+    <string name="nm_work_board">Wspólne</string>
+    <string name="nm_work_mine">Moja lista</string>
+    <string name="nm_work_notes">Notatki</string>
+    <string name="nm_work_add">Dodaj</string>
+    <string name="nm_work_open">Wolne</string>
+    <string name="nm_work_assign">Przypisz</string>
+    <string name="nm_work_save">Zapisz</string>
+    <string name="nm_work_empty">Jeszcze nic.</string>
 </resources>

@@ -286,6 +286,30 @@ CREATE TABLE IF NOT EXISTS feed_keys (
     revoked_at    INTEGER,
     last_used_at  INTEGER
 );
+-- Private to one person. Other staff cannot read these. The household admin can.
+CREATE TABLE IF NOT EXISTS private_tasks (
+    id            TEXT PRIMARY KEY,
+    owner_id      TEXT NOT NULL,
+    text          TEXT NOT NULL,
+    done          INTEGER NOT NULL DEFAULT 0,
+    ts            INTEGER NOT NULL
+);
+CREATE INDEX IF NOT EXISTS private_tasks_owner ON private_tasks(owner_id, ts);
+CREATE TABLE IF NOT EXISTS private_notes (
+    account_id    TEXT PRIMARY KEY,
+    body          TEXT NOT NULL DEFAULT '',
+    updated_at    INTEGER NOT NULL
+);
+-- Shared board. Visible to the household of the person who added it.
+CREATE TABLE IF NOT EXISTS shared_tasks (
+    id            TEXT PRIMARY KEY,
+    creator_id    TEXT NOT NULL,
+    assignee_id   TEXT NOT NULL DEFAULT '',
+    text          TEXT NOT NULL,
+    done          INTEGER NOT NULL DEFAULT 0,
+    ts            INTEGER NOT NULL
+);
+CREATE INDEX IF NOT EXISTS shared_tasks_creator ON shared_tasks(creator_id, ts);
 """
 
 # How long a deleted account's key hashes are remembered. Long enough for every device of the
@@ -2074,6 +2098,99 @@ class Database:
     def touch_feed_key(self, key_hash: str) -> None:
         with self.tx() as c:
             c.execute("UPDATE feed_keys SET last_used_at=? WHERE key_hash=?", (now(), key_hash))
+
+    def private_notes(self, account_id: str) -> str:
+        with self._lock:
+            row = self._conn.execute("SELECT body FROM private_notes WHERE account_id=?", (account_id,)).fetchone()
+        return str(row["body"]) if row else ""
+
+    def set_private_notes(self, account_id: str, body: str) -> None:
+        with self.tx() as c:
+            c.execute(
+                "INSERT INTO private_notes(account_id, body, updated_at) VALUES (?,?,?) "
+                "ON CONFLICT(account_id) DO UPDATE SET body=excluded.body, updated_at=excluded.updated_at",
+                (account_id, body, now()),
+            )
+
+    def private_tasks(self, owner_id: str) -> list[sqlite3.Row]:
+        with self._lock:
+            return list(
+                self._conn.execute(
+                    "SELECT * FROM private_tasks WHERE owner_id=? ORDER BY ts DESC, rowid DESC",
+                    (owner_id,),
+                ).fetchall()
+            )
+
+    def private_task(self, task_id: str) -> sqlite3.Row | None:
+        with self._lock:
+            return self._conn.execute("SELECT * FROM private_tasks WHERE id=?", (task_id,)).fetchone()
+
+    def insert_private_task(self, owner_id: str, text: str) -> str:
+        task_id = uuid.uuid4().hex
+        with self.tx() as c:
+            c.execute(
+                "INSERT INTO private_tasks(id, owner_id, text, done, ts) VALUES (?,?,?,?,?)",
+                (task_id, owner_id, text, 0, now()),
+            )
+        return task_id
+
+    def update_private_task(self, task_id: str, text: str | None, done: int | None) -> None:
+        sets: list[str] = []
+        args: list[Any] = []
+        if text is not None:
+            sets.append("text=?")
+            args.append(text)
+        if done is not None:
+            sets.append("done=?")
+            args.append(done)
+        if not sets:
+            return
+        args.append(task_id)
+        with self.tx() as c:
+            c.execute(f"UPDATE private_tasks SET {', '.join(sets)} WHERE id=?", args)
+
+    def shared_tasks_for(self, creator_ids: list[str]) -> list[sqlite3.Row]:
+        if not creator_ids:
+            return []
+        marks = ",".join("?" * len(creator_ids))
+        with self._lock:
+            return list(
+                self._conn.execute(
+                    f"SELECT * FROM shared_tasks WHERE creator_id IN ({marks}) ORDER BY ts DESC, rowid DESC",
+                    creator_ids,
+                ).fetchall()
+            )
+
+    def shared_task(self, task_id: str) -> sqlite3.Row | None:
+        with self._lock:
+            return self._conn.execute("SELECT * FROM shared_tasks WHERE id=?", (task_id,)).fetchone()
+
+    def insert_shared_task(self, creator_id: str, text: str, assignee_id: str) -> str:
+        task_id = uuid.uuid4().hex
+        with self.tx() as c:
+            c.execute(
+                "INSERT INTO shared_tasks(id, creator_id, assignee_id, text, done, ts) VALUES (?,?,?,?,?,?)",
+                (task_id, creator_id, assignee_id, text, 0, now()),
+            )
+        return task_id
+
+    def update_shared_task(self, task_id: str, text: str | None, done: int | None, assignee_id: str | None) -> None:
+        sets: list[str] = []
+        args: list[Any] = []
+        if text is not None:
+            sets.append("text=?")
+            args.append(text)
+        if done is not None:
+            sets.append("done=?")
+            args.append(done)
+        if assignee_id is not None:
+            sets.append("assignee_id=?")
+            args.append(assignee_id)
+        if not sets:
+            return
+        args.append(task_id)
+        with self.tx() as c:
+            c.execute(f"UPDATE shared_tasks SET {', '.join(sets)} WHERE id=?", args)
 
     def save_probe(self, probe: Probe) -> None:
         with self.tx() as c:

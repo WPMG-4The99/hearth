@@ -367,6 +367,48 @@ object NanoMuseCloud {
         return call(context, "POST", "/v1/household/events", JSONObject().put("kind", "check-in"), key)
     }
 
+    /** Role, the people this phone may see, and the shared board. Private notes stay off other staff. */
+    suspend fun householdWork(context: Context): JSONObject {
+        val key = apiKey(context) ?: throw CloudException("signed_out", "sign in")
+        return call(context, "GET", "/v1/household/work", null, key)
+    }
+
+    suspend fun householdSaveNotes(context: Context, ownerId: String, body: String): JSONObject {
+        val key = apiKey(context) ?: throw CloudException("signed_out", "sign in")
+        return call(context, "PUT", "/v1/household/private/$ownerId/notes", JSONObject().put("body", body), key)
+    }
+
+    suspend fun householdAddPrivate(context: Context, ownerId: String, text: String): JSONObject {
+        val key = apiKey(context) ?: throw CloudException("signed_out", "sign in")
+        return call(context, "POST", "/v1/household/private/$ownerId/tasks", JSONObject().put("text", text), key)
+    }
+
+    suspend fun householdTogglePrivate(context: Context, ownerId: String, taskId: String, done: Boolean): JSONObject {
+        val key = apiKey(context) ?: throw CloudException("signed_out", "sign in")
+        return call(
+            context,
+            "POST",
+            "/v1/household/private/$ownerId/tasks/$taskId",
+            JSONObject().put("done", done),
+            key,
+        )
+    }
+
+    suspend fun householdAddShared(context: Context, text: String): JSONObject {
+        val key = apiKey(context) ?: throw CloudException("signed_out", "sign in")
+        return call(context, "POST", "/v1/household/board", JSONObject().put("text", text), key)
+    }
+
+    suspend fun householdMarkShared(context: Context, taskId: String, done: Boolean): JSONObject {
+        val key = apiKey(context) ?: throw CloudException("signed_out", "sign in")
+        return call(context, "POST", "/v1/household/board/$taskId", JSONObject().put("done", done), key)
+    }
+
+    suspend fun householdAssign(context: Context, taskId: String, assigneeId: String): JSONObject {
+        val key = apiKey(context) ?: throw CloudException("signed_out", "sign in")
+        return call(context, "POST", "/v1/household/board/$taskId", JSONObject().put("assignee_id", assigneeId), key)
+    }
+
     /**
      * The invite bonus as the relay states it, for the lines that mention it ("+¥5 for each
      * of you") — the relay's figure can change from its operator's page at any time, so no

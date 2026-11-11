@@ -1160,4 +1160,15 @@
     <string name="nm_household_kind_alert">提醒</string>
     <string name="nm_menu_household">家庭记录</string>
     <string name="nm_household_needs_sign_in">登录后才能看。</string>
+    <string name="nm_work_menu">工作</string>
+    <string name="nm_work_title_admin">管理员</string>
+    <string name="nm_work_title_staff">工作人员</string>
+    <string name="nm_work_board">大家的事</string>
+    <string name="nm_work_mine">我的清单</string>
+    <string name="nm_work_notes">工作备注</string>
+    <string name="nm_work_add">添加</string>
+    <string name="nm_work_open">未分配</string>
+    <string name="nm_work_assign">指派</string>
+    <string name="nm_work_save">保存</string>
+    <string name="nm_work_empty">还没有。</string>
 </resources>

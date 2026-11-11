@@ -122,6 +122,8 @@ docker compose up -d    # Caddy fetches the TLS certificate
 
 `HOUSEHOLDS` 连在一起的账号共用一份记录：报平安、紧急或提醒，每一条有时间、发送方账号，以及一句可选的短注。紧急和提醒在中继尝试显示到另一部手机之前就写下来，所以对方不在线也不会丢。`GET /v1/household/events` 读调用方所在家庭能看的记录。`POST /v1/household/events` 且 `{"kind":"check-in"}` 写一条报平安。不在任何家庭里的账号得到 `not_linked`。
 
+`HOUSEHOLD_ADMINS` 列出哪些邮箱是管理员。同一个家庭里的其他人是工作人员。由中继判定，应用不能把自己提升成管理员。管理员可以阅读并修改他所在家庭里每个人的私人清单和工作备注。工作人员只能读写自己的。共享看板是 `GET` 和 `POST /v1/household/board`：工作人员可以添加任务并标成完成，只有管理员可以指派或改派。共享任务的变化会写进家庭记录，种类是 `task`（例如 `done: Walk the dog`）。私人备注和私人清单不会写进去。`HOUSEHOLD_FEED_KINDS` 默认包含 `task`，运营者可以拿掉。
+
 不能去控制手机的读取方（例如 Jessica）用 feed key。运营者用 `POST /v1/admin/household-feed` 签发，用 `POST /v1/admin/household-feed/{id}/revoke` 作废。token 只出现一次，以 `nmf_` 开头，库里只存哈希。它打不开 hub、对话或 `/v1/me`。`HOUSEHOLD_FEED_KINDS` 限制这次读取返回哪些种类。细节在 [hub.md](hub.md#a-household-panic)。
 
 ## 协议 {#protocol}

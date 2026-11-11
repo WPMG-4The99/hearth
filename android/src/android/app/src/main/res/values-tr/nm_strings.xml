@@ -1187,4 +1187,15 @@
     <string name="nm_household_kind_alert">Uyarı</string>
     <string name="nm_menu_household">Ev</string>
     <string name="nm_household_needs_sign_in">Görmek için oturum aç.</string>
+    <string name="nm_work_menu">İş</string>
+    <string name="nm_work_title_admin">Yönetici</string>
+    <string name="nm_work_title_staff">Personel</string>
+    <string name="nm_work_board">Ortak</string>
+    <string name="nm_work_mine">Listem</string>
+    <string name="nm_work_notes">Notlar</string>
+    <string name="nm_work_add">Ekle</string>
+    <string name="nm_work_open">Boşta</string>
+    <string name="nm_work_assign">Ata</string>
+    <string name="nm_work_save">Kaydet</string>
+    <string name="nm_work_empty">Henüz yok.</string>
 </resources>

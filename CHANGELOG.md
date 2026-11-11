@@ -6,6 +6,8 @@ All notable changes to nanoMuse. The format follows [Keep a Changelog](https://k
 
 ### Apps
 
+- **Cap's phone shows Admin, and a staff phone shows Staff.** Admin sees every private list and job note in the household and can assign shared tasks. Staff sees her own list, her notes, and the shared board, and can mark a shared task done.
+
 - **The household log is on the chat menu.** Check-ins, panics and alerts from the accounts linked by `HOUSEHOLDS` are listed there, and Check in writes one. A panic that the other phone did not show says it was saved for the next time they open the app.
 
 - **The name a person sees is The Hearth.** The launcher, in-app titles, sign-in screens, the code email's subject and body, and the docs say The Hearth. The application id, `hearth://`, the relay address and the code email's From line are unchanged.
@@ -15,6 +17,8 @@ All notable changes to nanoMuse. The format follows [Keep a Changelog](https://k
 - **The Hearth is the name of the phone app.** The application id is `media.wyldephyremg.hearth` (debug builds add `.debug`), the launcher label is The Hearth, and links from outside the app use `hearth://`. The first screen is e-mail and a one-time code for the baked-in relay. After that, the model is The Hearth relay or a Grok account on the phone. Nix can keep a to-do list on the phone. A PANIC button sends an alert to the other phone in a household the relay operator linked with `HOUSEHOLDS`. Delivery is only while that phone's hub connection is up.
 
 ### Cloud
+
+- **Household roles, private lists and a shared board.** `HOUSEHOLD_ADMINS` names the admin addresses. Everyone else in a household is staff. Staff cannot read another person's list or notes, assign a task, or change their role. The admin can read and edit every private list and note in the households they belong to, and only the admin can assign a shared task. A shared change is a `task` row on the household log. Private notes are not. `HOUSEHOLD_FEED_KINDS` defaults to including `task`.
 
 - **A household log keeps check-ins, panics and alerts, and a feed key can only read it.** A panic or an alert is stored before the relay tries to show it, so an offline phone does not lose it. `GET /v1/household/events` returns the rows for the caller's own `HOUSEHOLDS` groups. `POST /v1/admin/household-feed` issues an `nmf_` token, shown once and stored as a hash, which `GET /v1/household/feed` accepts and the hub, chat and `/v1/me` refuse. `HOUSEHOLD_FEED_KINDS` limits the kinds. Revoking the token does not change any account.
 

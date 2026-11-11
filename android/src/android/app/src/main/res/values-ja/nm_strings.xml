@@ -1183,4 +1183,15 @@
     <string name="nm_household_kind_alert">知らせ</string>
     <string name="nm_menu_household">世帯</string>
     <string name="nm_household_needs_sign_in">見るにはログインしてください。</string>
+    <string name="nm_work_menu">仕事</string>
+    <string name="nm_work_title_admin">管理者</string>
+    <string name="nm_work_title_staff">スタッフ</string>
+    <string name="nm_work_board">共有</string>
+    <string name="nm_work_mine">自分のリスト</string>
+    <string name="nm_work_notes">仕事メモ</string>
+    <string name="nm_work_add">追加</string>
+    <string name="nm_work_open">未割り当て</string>
+    <string name="nm_work_assign">割り当て</string>
+    <string name="nm_work_save">保存</string>
+    <string name="nm_work_empty">まだありません。</string>
 </resources>

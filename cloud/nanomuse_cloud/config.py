@@ -615,9 +615,14 @@ class Settings:
     # households are separated by commas or newlines. There is no self-service
     # linking: an address that is not in a household cannot reach another account.
     households: str = field(default_factory=lambda: _env("HOUSEHOLDS"))
+    # E-mail addresses that are household admins. Everyone else in a household is staff.
+    # An address here that is not also in a HOUSEHOLDS group has no household to administer.
+    # The app cannot change this. Read when the process starts.
+    household_admins: str = field(default_factory=lambda: _env("HOUSEHOLD_ADMINS"))
     # Kinds a feed key may return, even if the key was issued with more. Comma
     # separated. Empty means the feed sees nothing. Read when the process starts.
-    household_feed_kinds: str = field(default_factory=lambda: _env("HOUSEHOLD_FEED_KINDS", "check-in,panic,alert"))
+    # `task` is a shared-board change (added, done, assigned). Never a private note.
+    household_feed_kinds: str = field(default_factory=lambda: _env("HOUSEHOLD_FEED_KINDS", "check-in,panic,alert,task"))
     signup_open: bool = field(default_factory=lambda: _env("SIGNUP_OPEN", "1") not in ("0", "false", "no"))
     # A sign-in for an app store's reviewer, who cannot receive our codes: for the
     # e-mail addresses in REVIEW_ADDRESSES (comma-separated) a code request sends nothing and

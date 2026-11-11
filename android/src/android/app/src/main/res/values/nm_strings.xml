@@ -1166,4 +1166,15 @@
     <string name="nm_household_kind_alert">Alert</string>
     <string name="nm_menu_household">Household</string>
     <string name="nm_household_needs_sign_in">Sign in to see this.</string>
+    <string name="nm_work_menu">Work</string>
+    <string name="nm_work_title_admin">Admin</string>
+    <string name="nm_work_title_staff">Staff</string>
+    <string name="nm_work_board">Shared</string>
+    <string name="nm_work_mine">My list</string>
+    <string name="nm_work_notes">Job notes</string>
+    <string name="nm_work_add">Add</string>
+    <string name="nm_work_open">Open</string>
+    <string name="nm_work_assign">Assign</string>
+    <string name="nm_work_save">Save</string>
+    <string name="nm_work_empty">Nothing yet.</string>
 </resources>

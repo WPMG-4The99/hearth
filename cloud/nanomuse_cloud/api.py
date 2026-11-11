@@ -1281,6 +1281,39 @@ def create_app(
         token = authorization[7:].strip() if authorization and authorization.lower().startswith("bearer ") else None
         return {"events": await asyncio.to_thread(cloud.read_feed, token, limit)}
 
+    @app.get("/v1/household/work")
+    async def household_work(caller: Caller = Depends(caller_dep)) -> dict:
+        return await asyncio.to_thread(cloud.household_work, caller.account_id)
+
+    @app.get("/v1/household/private/{owner_id}")
+    async def household_private(owner_id: str, caller: Caller = Depends(caller_dep)) -> dict:
+        return await asyncio.to_thread(cloud.private_space, caller.account_id, owner_id)
+
+    @app.put("/v1/household/private/{owner_id}/notes")
+    async def household_private_notes(owner_id: str, request: Request, caller: Caller = Depends(caller_dep)) -> dict:
+        body = await _json(request)
+        return await asyncio.to_thread(cloud.set_private_notes, caller.account_id, owner_id, body)
+
+    @app.post("/v1/household/private/{owner_id}/tasks")
+    async def household_private_add(owner_id: str, request: Request, caller: Caller = Depends(caller_dep)) -> dict:
+        body = await _json(request)
+        return await asyncio.to_thread(cloud.add_private_task, caller.account_id, owner_id, body)
+
+    @app.post("/v1/household/private/{owner_id}/tasks/{task_id}")
+    async def household_private_update(owner_id: str, task_id: str, request: Request, caller: Caller = Depends(caller_dep)) -> dict:
+        body = await _json(request)
+        return await asyncio.to_thread(cloud.update_private_task, caller.account_id, owner_id, task_id, body)
+
+    @app.post("/v1/household/board")
+    async def household_board_add(request: Request, caller: Caller = Depends(caller_dep)) -> dict:
+        body = await _json(request)
+        return await asyncio.to_thread(cloud.add_shared_task, caller.account_id, body)
+
+    @app.post("/v1/household/board/{task_id}")
+    async def household_board_update(task_id: str, request: Request, caller: Caller = Depends(caller_dep)) -> dict:
+        body = await _json(request)
+        return await asyncio.to_thread(cloud.update_shared_task, caller.account_id, task_id, body)
+
     # -- admin ------------------------------------------------------------------------------------
 
     def admin_dep(x_admin_token: str | None = Header(default=None)) -> None:

@@ -1191,4 +1191,15 @@
     <string name="nm_household_kind_alert">Alertă</string>
     <string name="nm_menu_household">Casa</string>
     <string name="nm_household_needs_sign_in">Conectează-te ca să vezi.</string>
+    <string name="nm_work_menu">Lucru</string>
+    <string name="nm_work_title_admin">Admin</string>
+    <string name="nm_work_title_staff">Personal</string>
+    <string name="nm_work_board">Comun</string>
+    <string name="nm_work_mine">Lista mea</string>
+    <string name="nm_work_notes">Note</string>
+    <string name="nm_work_add">Adaugă</string>
+    <string name="nm_work_open">Liber</string>
+    <string name="nm_work_assign">Atribuie</string>
+    <string name="nm_work_save">Salvează</string>
+    <string name="nm_work_empty">Nimic încă.</string>
 </resources>

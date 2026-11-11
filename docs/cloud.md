@@ -494,6 +494,8 @@ whatever relay serves it at `/app`.
 
 Accounts linked by `HOUSEHOLDS` share one log: a check-in, a panic or an alert, each with the time, the sender's account and a short optional note. A panic or an alert is written before the relay tries to show it on another phone, so an offline phone does not lose it. `GET /v1/household/events` reads the rows the caller's households may see. `POST /v1/household/events` with `{"kind":"check-in"}` writes a check-in. An account that is not in a household gets `not_linked`.
 
+`HOUSEHOLD_ADMINS` is the list of e-mail addresses that are admins. Everyone else in a household is staff. The relay decides. The app cannot promote anyone. An admin can read and edit every private list and job note in the households they belong to. Staff can read and edit only their own. The shared board is `GET` and `POST /v1/household/board`: staff may add a task and mark it done, and only an admin may assign or reassign it. A shared change is a household-log row of kind `task` (for example `done: Walk the dog`). Private notes and private tasks are not written there. `HOUSEHOLD_FEED_KINDS` includes `task` unless the operator removes it.
+
 Jessica, or any other reader that must not control a phone, uses a feed key. The operator issues it from `POST /v1/admin/household-feed` and revokes it with `POST /v1/admin/household-feed/{id}/revoke`. The token is shown once, starts with `nmf_`, and is stored only as a hash. It cannot open the hub, chat or `/v1/me`. `HOUSEHOLD_FEED_KINDS` limits which kinds that read returns. Details are in [hub.md](hub.md#a-household-panic).
 
 ## Protocol

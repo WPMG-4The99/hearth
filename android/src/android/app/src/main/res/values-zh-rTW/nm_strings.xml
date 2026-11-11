@@ -1153,4 +1153,15 @@
     <string name="nm_household_kind_alert">提醒</string>
     <string name="nm_menu_household">家庭紀錄</string>
     <string name="nm_household_needs_sign_in">登入後才能看。</string>
+    <string name="nm_work_menu">工作</string>
+    <string name="nm_work_title_admin">管理員</string>
+    <string name="nm_work_title_staff">工作人員</string>
+    <string name="nm_work_board">大家的事</string>
+    <string name="nm_work_mine">我的清單</string>
+    <string name="nm_work_notes">工作備註</string>
+    <string name="nm_work_add">新增</string>
+    <string name="nm_work_open">未指派</string>
+    <string name="nm_work_assign">指派</string>
+    <string name="nm_work_save">儲存</string>
+    <string name="nm_work_empty">還沒有。</string>
 </resources>

@@ -1183,4 +1183,15 @@
     <string name="nm_household_kind_alert">알림</string>
     <string name="nm_menu_household">집안</string>
     <string name="nm_household_needs_sign_in">보려면 로그인하세요.</string>
+    <string name="nm_work_menu">일</string>
+    <string name="nm_work_title_admin">관리자</string>
+    <string name="nm_work_title_staff">직원</string>
+    <string name="nm_work_board">공유</string>
+    <string name="nm_work_mine">내 목록</string>
+    <string name="nm_work_notes">업무 메모</string>
+    <string name="nm_work_add">추가</string>
+    <string name="nm_work_open">미지정</string>
+    <string name="nm_work_assign">배정</string>
+    <string name="nm_work_save">저장</string>
+    <string name="nm_work_empty">아직 없습니다.</string>
 </resources>

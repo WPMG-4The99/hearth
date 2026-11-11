@@ -1187,4 +1187,15 @@
     <string name="nm_household_kind_alert">Alert</string>
     <string name="nm_menu_household">Bahay</string>
     <string name="nm_household_needs_sign_in">Mag-sign in para makita.</string>
+    <string name="nm_work_menu">Trabaho</string>
+    <string name="nm_work_title_admin">Admin</string>
+    <string name="nm_work_title_staff">Staff</string>
+    <string name="nm_work_board">Sabay</string>
+    <string name="nm_work_mine">Listahan ko</string>
+    <string name="nm_work_notes">Mga tala</string>
+    <string name="nm_work_add">Idagdag</string>
+    <string name="nm_work_open">Bukas</string>
+    <string name="nm_work_assign">Italaga</string>
+    <string name="nm_work_save">I-save</string>
+    <string name="nm_work_empty">Wala pa.</string>
 </resources>

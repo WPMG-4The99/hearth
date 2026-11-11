@@ -16,8 +16,9 @@ from .identifiers import BadIdentifier, Identifier, parse
 log = logging.getLogger("nanomuse_cloud")
 
 _SPLIT = re.compile(r"[,;\n]+")
-KINDS = ("check-in", "panic", "alert")
+KINDS = ("check-in", "panic", "alert", "task")
 TEXT_MAX = 200
+NOTES_MAX = 4000
 
 
 def groups(raw: str) -> list[list[Identifier]]:
@@ -94,6 +95,29 @@ def group_containing(raw: str, email: str) -> list[Identifier] | None:
         if any(m.value == ident.value for m in members):
             return members
     return None
+
+
+def admin_identifiers(raw: str) -> list[Identifier]:
+    """E-mail addresses in HOUSEHOLD_ADMINS. Phones and junk are skipped."""
+    out: list[Identifier] = []
+    seen: set[str] = set()
+    for part in _SPLIT.split(raw or ""):
+        part = part.strip()
+        if not part:
+            continue
+        try:
+            ident = parse(part)
+        except BadIdentifier:
+            log.warning("HOUSEHOLD_ADMINS: skipped an entry that is not an e-mail address")
+            continue
+        if ident.channel != "email":
+            log.warning("HOUSEHOLD_ADMINS: skipped a phone number; admins are e-mail addresses")
+            continue
+        if ident.value in seen:
+            continue
+        seen.add(ident.value)
+        out.append(ident)
+    return out
 
 
 def group_by_key(raw: str, key: str) -> list[Identifier] | None:

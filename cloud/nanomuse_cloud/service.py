@@ -32,8 +32,9 @@ from .crypto import IdentifierCrypto
 from .db import Database, now
 from .geo import Place
 from .households import KINDS as HOUSEHOLD_KINDS
+from .households import NOTES_MAX as HOUSEHOLD_NOTES_MAX
 from .households import TEXT_MAX as HOUSEHOLD_TEXT_MAX
-from .households import group_by_key, group_containing, group_key, partner_hashes
+from .households import admin_identifiers, group_by_key, group_containing, group_key, partner_hashes
 from .households import groups as household_groups
 from .identifiers import BadIdentifier, Identifier, parse
 from .nudges import BadNudges
@@ -396,6 +397,9 @@ class Cloud:
         # The members' identifiers, hashed once so a request can be matched
         # against the list without ever seeing the plaintext.
         self.member_hashes: frozenset[str] = frozenset(h for i in self._listed_identifiers() for h in i.hashes(settings.hmac_key))
+        self.admin_hashes: frozenset[str] = frozenset(
+            h for i in admin_identifiers(settings.household_admins) for h in i.hashes(settings.hmac_key)
+        )
         # The reviewer's addresses (REVIEW_ADDRESSES), hashed the same way; empty, and so
         # the whole feature off, unless REVIEW_CODE is six digits as well.
         self.review_hashes: frozenset[str] = frozenset(h for i in self._review_identifiers() for h in i.hashes(settings.hmac_key))
@@ -683,7 +687,7 @@ class Cloud:
         """Append one row. The sender must be in a household. Panic and alert are
         recorded whether or not another phone is connected."""
         if kind not in HOUSEHOLD_KINDS:
-            raise CloudError(400, "bad_kind", "That kind is not check-in, panic or alert")
+            raise CloudError(400, "bad_kind", "That kind is not one this log keeps")
         if self._household_visible_ids(account_id) is None:
             raise CloudError(403, "not_linked", "This account is not linked to another")
         if self.db.count_household_events_since(account_id, now() - 3600) >= HOUSEHOLD_EVENT_HOUR:
@@ -790,6 +794,160 @@ class Cloud:
                 break
         self.db.touch_feed_key(_sha256(bearer))
         return [self._row_event(item) for item in self.db.household_events_for(ids, limit, kinds)]
+
+    def household_role(self, account_id: str) -> str:
+        """`admin` when the account's address is in HOUSEHOLD_ADMINS, otherwise `staff`.
+        Not linked: not a role at all."""
+        if not self._in_household(account_id):
+            raise CloudError(403, "not_linked", "This account is not linked to another")
+        row = self.db.account(account_id)
+        if row is not None and row["id_hash"] in self.admin_hashes:
+            return "admin"
+        return "staff"
+
+    def _refuse_role_claim(self, body: dict) -> None:
+        if "role" in body:
+            raise CloudError(403, "not_allowed", "A role is set by the operator, not from the app")
+
+    def _can_touch_private(self, caller_id: str, owner_id: str) -> str:
+        role = self.household_role(caller_id)
+        if owner_id != caller_id and role != "admin":
+            raise CloudError(403, "not_allowed", "That list is private")
+        visible = self._household_visible_ids(caller_id) or []
+        if owner_id not in visible:
+            raise CloudError(403, "not_allowed", "That person is not in your household")
+        return role
+
+    def _person(self, account_id: str, include_private: bool) -> dict:
+        row = self.db.account(account_id)
+        person = {
+            "account_id": account_id,
+            "who": self.account_label(account_id),
+            "role": "admin" if row is not None and row["id_hash"] in self.admin_hashes else "staff",
+        }
+        if include_private:
+            person["notes"] = self.db.private_notes(account_id)
+            person["tasks"] = [self._private_view(item) for item in self.db.private_tasks(account_id)]
+        return person
+
+    def _private_view(self, row: sqlite3.Row) -> dict:
+        return {"id": row["id"], "text": row["text"], "done": bool(row["done"]), "ts": int(row["ts"])}
+
+    def _shared_view(self, row: sqlite3.Row) -> dict:
+        assignee = row["assignee_id"] or ""
+        return {
+            "id": row["id"],
+            "text": row["text"],
+            "done": bool(row["done"]),
+            "assignee_id": assignee,
+            "assignee": self.account_label(assignee) if assignee else "",
+            "creator_id": row["creator_id"],
+            "ts": int(row["ts"]),
+        }
+
+    def household_work(self, account_id: str) -> dict:
+        role = self.household_role(account_id)
+        people = []
+        for pid in self._household_visible_ids(account_id) or []:
+            people.append(self._person(pid, include_private=role == "admin" or pid == account_id))
+        board = [self._shared_view(row) for row in self.db.shared_tasks_for(self._household_visible_ids(account_id) or [])]
+        return {"role": role, "people": people, "board": board}
+
+    def private_space(self, caller_id: str, owner_id: str) -> dict:
+        self._can_touch_private(caller_id, owner_id)
+        person = self._person(owner_id, include_private=True)
+        return {"notes": person["notes"], "tasks": person["tasks"]}
+
+    def set_private_notes(self, caller_id: str, owner_id: str, body: dict) -> dict:
+        self._refuse_role_claim(body)
+        self._can_touch_private(caller_id, owner_id)
+        text = str(body.get("body") or "")[:HOUSEHOLD_NOTES_MAX]
+        self.db.set_private_notes(owner_id, text)
+        return {"notes": text}
+
+    def add_private_task(self, caller_id: str, owner_id: str, body: dict) -> dict:
+        self._refuse_role_claim(body)
+        self._can_touch_private(caller_id, owner_id)
+        text = " ".join(str(body.get("text") or "").split())[:HOUSEHOLD_TEXT_MAX]
+        if not text:
+            raise CloudError(400, "bad_task", "A task needs a few words")
+        task_id = self.db.insert_private_task(owner_id, text)
+        row = self.db.private_task(task_id)
+        return {"task": self._private_view(row)} if row else {}
+
+    def update_private_task(self, caller_id: str, owner_id: str, task_id: str, body: dict) -> dict:
+        self._refuse_role_claim(body)
+        self._can_touch_private(caller_id, owner_id)
+        row = self.db.private_task(task_id)
+        if row is None or row["owner_id"] != owner_id:
+            raise CloudError(404, "no_task", "No such task")
+        text = " ".join(str(body["text"]).split())[:HOUSEHOLD_TEXT_MAX] if "text" in body else None
+        if text is not None and not text:
+            raise CloudError(400, "bad_task", "A task needs a few words")
+        done = (1 if body["done"] else 0) if "done" in body else None
+        self.db.update_private_task(task_id, text, done)
+        fresh = self.db.private_task(task_id)
+        return {"task": self._private_view(fresh)} if fresh else {}
+
+    def _task_notice(self, account_id: str, verb: str, title: str) -> None:
+        """A shared-board change for the household log. Never a private note."""
+        self.record_household_event(account_id, "task", f"{verb}: {title}"[:HOUSEHOLD_TEXT_MAX])
+
+    def add_shared_task(self, caller_id: str, body: dict) -> dict:
+        self._refuse_role_claim(body)
+        role = self.household_role(caller_id)
+        if "assignee" in body or "assignee_id" in body:
+            if role != "admin":
+                raise CloudError(403, "not_allowed", "Only the admin can assign a task")
+        text = " ".join(str(body.get("text") or "").split())[:HOUSEHOLD_TEXT_MAX]
+        if not text:
+            raise CloudError(400, "bad_task", "A task needs a few words")
+        assignee = ""
+        if role == "admin":
+            assignee = self._assignee(caller_id, body)
+        task_id = self.db.insert_shared_task(caller_id, text, assignee)
+        self._task_notice(caller_id, "assigned" if assignee else "added", text)
+        row = self.db.shared_task(task_id)
+        return {"task": self._shared_view(row)} if row else {}
+
+    def update_shared_task(self, caller_id: str, task_id: str, body: dict) -> dict:
+        self._refuse_role_claim(body)
+        role = self.household_role(caller_id)
+        visible = set(self._household_visible_ids(caller_id) or [])
+        row = self.db.shared_task(task_id)
+        if row is None or row["creator_id"] not in visible:
+            raise CloudError(404, "no_task", "No such task")
+        if "assignee" in body or "assignee_id" in body:
+            if role != "admin":
+                raise CloudError(403, "not_allowed", "Only the admin can assign a task")
+        if "text" in body and " ".join(str(body.get("text") or "").split()) != row["text"]:
+            if role != "admin":
+                raise CloudError(403, "not_allowed", "Only the admin can rewrite a shared task")
+        text = " ".join(str(body["text"]).split())[:HOUSEHOLD_TEXT_MAX] if "text" in body else None
+        if text is not None and not text:
+            raise CloudError(400, "bad_task", "A task needs a few words")
+        done = (1 if body["done"] else 0) if "done" in body else None
+        assignee = self._assignee(caller_id, body) if role == "admin" and ("assignee" in body or "assignee_id" in body) else None
+        self.db.update_shared_task(task_id, text, done, assignee)
+        fresh = self.db.shared_task(task_id)
+        title = fresh["text"] if fresh else row["text"]
+        if text is not None and text != row["text"]:
+            self._task_notice(caller_id, "edited", title)
+        if assignee is not None and assignee != (row["assignee_id"] or ""):
+            self._task_notice(caller_id, "assigned" if assignee else "open", title)
+        if done is not None and done != int(row["done"]):
+            self._task_notice(caller_id, "done" if done else "reopened", title)
+        return {"task": self._shared_view(fresh)} if fresh else {}
+
+    def _assignee(self, caller_id: str, body: dict) -> str:
+        raw = body.get("assignee_id", body.get("assignee", ""))
+        assignee = "" if raw is None else str(raw).strip()
+        if not assignee:
+            return ""
+        visible = self._household_visible_ids(caller_id) or []
+        if assignee not in visible:
+            raise CloudError(400, "bad_assignee", "Assign a person in this household")
+        return assignee
 
     def account_label(self, account_id: str) -> str:
         """A short name for a panic: the e-mail's local part, or the stored hint."""

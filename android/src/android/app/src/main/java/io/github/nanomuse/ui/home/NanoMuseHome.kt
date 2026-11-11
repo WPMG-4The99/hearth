@@ -599,6 +599,10 @@ private fun TabHeader(
                             onClick = { menu = false; navController.safeNavigate(io.github.nanomuse.household.ROUTE_HOUSEHOLD) },
                         )
                         DropdownMenuItem(
+                            text = { Text(stringResource(R.string.nm_work_menu)) },
+                            onClick = { menu = false; navController.safeNavigate(io.github.nanomuse.household.ROUTE_WORK) },
+                        )
+                        DropdownMenuItem(
                             text = { Text(stringResource(R.string.nm_menu_todos)) },
                             onClick = { menu = false; navController.safeNavigate(io.github.nanomuse.todos.ROUTE_TODOS) },
                         )

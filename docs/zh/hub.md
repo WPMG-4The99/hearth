@@ -106,7 +106,7 @@ hub 上传递两类请求：
 
 手机显示这个提醒时，不需要打开「远程控制」。还没有推送。当场弹出的提醒仍然要接收方的 hub 连接还在。记录本身不需要：用账号的 key `GET /v1/household/events` 取回调用方自己的记录，以及每一个和调用方同在一个家庭里的账号的记录，`POST /v1/household/events` 且 `{"kind": "check-in"}` 写一条报平安。这个 POST 不接受 panic 和 alert。一个家庭的记录不会给另一个家庭。
 
-另有一把只能读这份记录的 feed key，别的事做不了。运营者用 `POST /v1/admin/household-feed`（`X-Admin-Token`，`{"label", "member", "kinds"?}`）签发，token 只在这一次回答里出现，前缀是 `nmf_`。`member` 是这把 key 所绑定的那个家庭里的一个邮箱。拿这把 token `GET /v1/household/feed` 读记录。`HOUSEHOLD_FEED_KINDS`（逗号分隔，默认 `check-in,panic,alert`）是上限：设进去的种类即使签发给了 key，不在这份上限里也不会返回。`POST /v1/admin/household-feed/{id}/revoke` 作废这把 key，不动任何账号。在 `HOUSEHOLDS` 里增删地址会改变这个家庭的 id，旧的 feed key 要重新签发才能再用。这两项设置都在中继进程启动时读取。
+另有一把只能读这份记录的 feed key，别的事做不了。运营者用 `POST /v1/admin/household-feed`（`X-Admin-Token`，`{"label", "member", "kinds"?}`）签发，token 只在这一次回答里出现，前缀是 `nmf_`。`member` 是这把 key 所绑定的那个家庭里的一个邮箱。拿这把 token `GET /v1/household/feed` 读记录。`HOUSEHOLD_FEED_KINDS`（逗号分隔，默认 `check-in,panic,alert,task`）是上限：设进去的种类即使签发给了 key，不在这份上限里也不会返回。`task` 是共享任务的变化。私人备注不会成为一条记录。`POST /v1/admin/household-feed/{id}/revoke` 作废这把 key，不动任何账号。在 `HOUSEHOLDS` 里增删地址会改变这个家庭的 id，旧的 feed key 要重新签发才能再用。这两项设置都在中继进程启动时读取。
 
 ## 代码 {#the-code}
 

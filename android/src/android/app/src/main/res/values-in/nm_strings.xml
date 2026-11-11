@@ -1183,4 +1183,15 @@
     <string name="nm_household_kind_alert">Peringatan</string>
     <string name="nm_menu_household">Rumah</string>
     <string name="nm_household_needs_sign_in">Masuk untuk melihat.</string>
+    <string name="nm_work_menu">Kerja</string>
+    <string name="nm_work_title_admin">Admin</string>
+    <string name="nm_work_title_staff">Staf</string>
+    <string name="nm_work_board">Bersama</string>
+    <string name="nm_work_mine">Daftar saya</string>
+    <string name="nm_work_notes">Catatan</string>
+    <string name="nm_work_add">Tambah</string>
+    <string name="nm_work_open">Terbuka</string>
+    <string name="nm_work_assign">Tugaskan</string>
+    <string name="nm_work_save">Simpan</string>
+    <string name="nm_work_empty">Belum ada.</string>
 </resources>

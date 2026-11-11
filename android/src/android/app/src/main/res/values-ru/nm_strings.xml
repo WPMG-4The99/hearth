@@ -1195,4 +1195,15 @@
     <string name="nm_household_kind_alert">Сигнал</string>
     <string name="nm_menu_household">Дом</string>
     <string name="nm_household_needs_sign_in">Войдите, чтобы посмотреть.</string>
+    <string name="nm_work_menu">Работа</string>
+    <string name="nm_work_title_admin">Админ</string>
+    <string name="nm_work_title_staff">Сотрудник</string>
+    <string name="nm_work_board">Общее</string>
+    <string name="nm_work_mine">Мой список</string>
+    <string name="nm_work_notes">Заметки</string>
+    <string name="nm_work_add">Добавить</string>
+    <string name="nm_work_open">Свободно</string>
+    <string name="nm_work_assign">Назначить</string>
+    <string name="nm_work_save">Сохранить</string>
+    <string name="nm_work_empty">Пока пусто.</string>
 </resources>
