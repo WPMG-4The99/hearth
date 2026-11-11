@@ -164,9 +164,9 @@ async def test_invite_abuse_deletions_forget_the_live_state_too():
 
 
 async def test_public_config_carries_the_code_lifetime_and_the_password_length():
-    app, client, sender, up, cloud, settings = make(code_ttl_s=300, password_min_len=12)
+    app, client, sender, up, cloud, settings = make(code_ttl_s=300)
     cfg = (await client.get("/v1/config")).json()
-    assert cfg["code_ttl_s"] == 300 and cfg["password_min_len"] == 12
+    assert cfg["code_ttl_s"] == 300 and "password_min_len" not in cfg
 
 
 def test_the_database_waits_for_a_busy_writer_instead_of_failing_at_once(tmp_path):

@@ -86,14 +86,11 @@
   // ── state ───────────────────────────────────────────────────────
   const LS = window.localStorage;
   const base = location.origin;
-  // the relay's figures the forms print (/v1/config, public, a minute's cache): how long a
-  // code is good for and the shortest password it takes; these are the defaults an older
-  // relay leaves us with until the answer lands
-  const cfg = { code_ttl_s: 600, password_min_len: 8 };
+  // how long a code is good for, from /v1/config; 10 minutes until that answer lands
+  const cfg = { code_ttl_s: 600 };
   const codeMinutes = () => Math.max(1, Math.round((Number(cfg.code_ttl_s) || 600) / 60));
   fetch(base + "/v1/config").then((r) => (r.ok ? r.json() : {})).then((c) => {
     if (c && Number(c.code_ttl_s) > 0) cfg.code_ttl_s = Number(c.code_ttl_s);
-    if (c && Number(c.password_min_len) > 0) cfg.password_min_len = Number(c.password_min_len);
   }).catch(() => { /* the defaults stand */ });
   const params = new URLSearchParams(location.search);
   let key = LS.getItem("nm.key") || "";
@@ -182,35 +179,27 @@
   // ── sign in view ─────────────────────────────────────────────────
   { const inv = new URLSearchParams(location.search).get("invite"); if (inv) LS.setItem("nm.invite", inv); }
   function renderSignIn() {
-    let identifier = LS.getItem("nm.identifier") || "", mode = LS.getItem("nm.mode") || "code", sent = false, busy = false, msg = "", bad = false, showPw = false;
+    let identifier = LS.getItem("nm.identifier") || "", sent = false, busy = false, msg = "", bad = false;
     const draw = () => {
-      const byPw = mode === "password";
       app.replaceChildren(h("div", { class: "signin" }, h("div", { class: "card rise" },
         h("div", { class: "disc" }, h("img", { src: "mark.svg", alt: "" })),
         h("h1", {}, "The Hearth"),
         h("p", { class: "sub" }, T.tagline),
-        h("div", { class: "seg" },
-          h("button", { class: byPw ? "" : "on", onclick: () => { mode = "code"; LS.setItem("nm.mode", mode); msg = ""; draw(); } }, T.byCode),
-          h("button", { class: byPw ? "on" : "", onclick: () => { mode = "password"; LS.setItem("nm.mode", mode); sent = false; msg = ""; draw(); } }, T.byPassword)),
         h("div", { class: "field" }, h("label", {}, T.identifier),
           h("div", { class: "in" }, h("input", { id: "ident", type: "text", autocomplete: "username", inputmode: /^\s*[+\d]/.test(identifier) ? "tel" : "email", value: identifier, disabled: sent ? "" : null, oninput: (e) => { identifier = e.target.value; e.target.inputMode = /^\s*[+\d]/.test(identifier) ? "tel" : "email"; }, onkeydown: (e) => { if (e.key === "Enter") go(); } })),
           // said up front, not only after a code never came: SMS reaches mainland numbers only (0.20)
-          !byPw && !sent ? h("p", { class: "fine", style: "margin:6px 0 0" }, T.smsRegion) : null),
-        byPw ? h("div", { class: "field" }, h("label", {}, T.password),
-          h("div", { class: "in" }, h("input", { id: "pw", type: showPw ? "text" : "password", autocomplete: "current-password", onkeydown: (e) => { if (e.key === "Enter") go(); } }),
-            h("button", { type: "button", onclick: () => { showPw = !showPw; const i = document.getElementById("pw"); if (i) i.type = showPw ? "text" : "password"; } }, showPw ? T.hide : T.show))) : null,
-        !byPw && sent ? h("div", { class: "field" }, h("label", {}, T.code),
+          !sent ? h("p", { class: "fine", style: "margin:6px 0 0" }, T.smsRegion) : null),
+        sent ? h("div", { class: "field" }, h("label", {}, T.code),
           h("div", { class: "in" }, h("input", { id: "code", type: "text", inputmode: "numeric", autocomplete: "one-time-code", maxlength: "6", onkeydown: (e) => { if (e.key === "Enter") go(); } }))) : null,
-        h("button", { class: "btn", disabled: busy ? "" : null, onclick: go }, byPw || sent ? T.signIn : T.sendCode),
-        !byPw && sent ? h("button", { class: "btn ghost", onclick: () => { sent = false; msg = ""; draw(); } }, T.another) : null,
-        byPw ? h("button", { class: "btn ghost", onclick: () => { mode = "code"; LS.setItem("nm.mode", mode); msg = ""; draw(); } }, T.forgot) : null,
+        h("button", { class: "btn", disabled: busy ? "" : null, onclick: go }, sent ? T.signIn : T.sendCode),
+        sent ? h("button", { class: "btn ghost", onclick: () => { sent = false; msg = ""; draw(); } }, T.another) : null,
         h("div", { class: "hint" + (bad ? " bad" : msg ? " ok" : "") }, msg),
         h("p", { class: "fine" }, T.fine, h("br"), h("b", {}, `${T.relay}: `), base),
       )));
-      const focus = document.getElementById(byPw ? (identifier ? "pw" : "ident") : sent ? "code" : "ident");
+      const focus = document.getElementById(sent ? "code" : "ident");
       if (focus) focus.focus();
     };
-    const go = () => { if (mode === "password") login(); else if (sent) verify(); else send(); };
+    const go = () => { if (sent) verify(); else send(); };
     async function send() {
       identifier = identifier.trim(); if (!identifier) return;
       busy = true; msg = ""; bad = false; draw();
@@ -230,15 +219,6 @@
       // a friend's code from the link (?invite=…) travels with the first sign-in; it counts for a new account only
       const invite = new URLSearchParams(location.search).get("invite") || LS.getItem("nm.invite") || "";
       try { adopt(await api("POST", "/v1/auth/verify", { identifier, code: code.replace(/\D/g, ""), device: deviceName(), invite })); LS.removeItem("nm.invite"); return; }
-      catch (e) { msg = errText(e); bad = true; }
-      busy = false; draw();
-    }
-    async function login() {
-      identifier = identifier.trim();
-      const pw = (document.getElementById("pw") || {}).value || "";
-      if (!identifier || !pw) return;
-      busy = true; msg = ""; bad = false; draw();
-      try { LS.setItem("nm.identifier", identifier); adopt(await api("POST", "/v1/auth/login", { identifier, password: pw, device: deviceName() })); return; }
       catch (e) { msg = errText(e); bad = true; }
       busy = false; draw();
     }
@@ -526,10 +506,6 @@
       h("div", { class: "identity" }, h("div", { class: "disc" }, initial),
         h("div", { class: "who" }, h("div", { class: "n" }, a.hint || hint),
           h("div", { class: "m" }, `${a.channel === "phone" ? T.phone : T.email} · ${T.since} ${dateOf(a.created_at)}`, a.member ? [" · ", h("span", { class: "pill ok" }, T.member)] : null))),
-      h("button", { class: "row tap", onclick: () => passwordDialog(!!a.has_password, body) },
-        h("span", { class: "tile violet", html: ICON.key }),
-        h("div", { class: "txt" }, h("div", { class: "t" }, a.has_password ? T.changePassword : T.setPassword), h("div", { class: "s" }, a.has_password ? `${T.hasPassword}${a.password_set_at ? " · " + dateOf(a.password_set_at) : ""}` : T.noPassword)),
-        h("span", { class: "chev" })),
       h("div", { class: "row" }, h("span", { class: "tile grey", html: ICON.devices }), h("div", { class: "txt" }, h("div", { class: "t" }, T.signIns)), h("span", { class: "v" }, h("b", {}, fmtN(a.sessions || 0)))),
       h("div", { class: "row" }, h("span", { class: "tile grey", html: ICON.shield }), h("div", { class: "txt" }, h("div", { class: "t" }, "ID"), h("div", { class: "s" }, h("code", {}, (a.id || "").slice(0, 12) + "…"))))));
     // allowance — the key pages in the order for where the person is (0.17: `region`,
@@ -613,7 +589,7 @@
     if (sessions.length) kids.push(h("div", { class: "label" }, T.signIns), h("div", { class: "card" }, ...sessions.map((s) => h("div", { class: "row" },
       h("span", { class: "tile" + (s.current ? "" : " grey"), html: /web|网页|browser/i.test(s.device || "") ? ICON.web : /phone|android|手机|iphone/i.test(s.device || "") ? ICON.phone : ICON.computer }),
       h("div", { class: "txt" }, h("div", { class: "t" }, s.device || "—", s.current ? [" ", h("span", { class: "pill blue" }, T.thisOne)] : null),
-        h("div", { class: "s" }, `${s.via === "password" ? T.viaPassword : s.via === "session" ? T.viaWeb : T.viaCode} · ${when(s.created_at)}${s.last_used_at ? ` · ${T.lastUsed} ${ago(s.last_used_at)}` : ""}`)),
+        h("div", { class: "s" }, `${s.via === "session" ? T.viaWeb : T.viaCode} · ${when(s.created_at)}${s.last_used_at ? ` · ${T.lastUsed} ${ago(s.last_used_at)}` : ""}`)),
       s.current ? null : h("button", { class: "btn quiet sm", onclick: async () => { try { await api("DELETE", `/v1/me/sessions/${encodeURIComponent(s.prefix)}`, null, key); } catch (e) { alert(errText(e)); } await loadMe(); drawAccount(body); } }, T.revoke)))));
     // activity
     const events = me.events || [];
@@ -626,38 +602,6 @@
       h("button", { class: "row tap danger", onclick: async () => { if (await ask(T.signOutAll, T.signOutAllConfirm, T.signOutAll, true)) { try { await api("POST", "/v1/auth/sign-out-all", { all: true }, key); } catch (_) { /* leaving anyway */ } signOut(true); } } }, h("span", { class: "tile bad", html: ICON.out }), h("div", { class: "txt" }, h("div", { class: "t" }, T.signOutAll)))),
       h("p", { class: "fine" }, T.community));
     body.replaceChildren(...kids);
-  }
-  function passwordDialog(has, sheetBody) {
-    let msg = "", bad = false;
-    const cur = h("input", { type: "password", autocomplete: "current-password" });
-    const nw = h("input", { type: "password", autocomplete: "new-password" });
-    const again = h("input", { type: "password", autocomplete: "new-password" });
-    const hintEl = h("div", { class: "hint" });
-    const setMsg = (m, isBad) => { hintEl.textContent = m; hintEl.className = "hint" + (isBad ? " bad" : m ? " ok" : ""); };
-    const save = async () => {
-      if (nw.value.length < cfg.password_min_len) return setMsg(T.pwShort(cfg.password_min_len), true);
-      if (nw.value !== again.value) return setMsg(T.pwMismatch, true);
-      try { await api("POST", "/v1/auth/password", { password: nw.value, current: has ? cur.value : undefined }, key); closeSheet(); openAccount(); }
-      catch (e) { setMsg(errText(e), true); }
-    };
-    const remove = async () => {
-      try { await api("POST", "/v1/auth/password", { password: "", current: cur.value }, key); closeSheet(); openAccount(); }
-      catch (e) { setMsg(errText(e), true); }
-    };
-    const d = dialog(T.pwTitle(has), h("div", {},
-      h("p", {}, T.pwWhy(cfg.password_min_len)),
-      has ? h("div", { class: "field" }, h("label", {}, T.pwCurrent), h("div", { class: "in" }, cur)) : null,
-      h("div", { class: "field" }, h("label", {}, T.pwNew), h("div", { class: "in" }, nw)),
-      h("div", { class: "field" }, h("label", {}, T.pwAgain), h("div", { class: "in" }, again)),
-      hintEl,
-    ), [
-      has ? h("button", { class: "btn danger", style: "margin-right:auto", onclick: remove }, T.pwRemove) : null,
-      h("button", { class: "btn quiet", onclick: () => { closeSheet(); if (sheetBody) openAccount(); } }, T.cancel),
-      h("button", { class: "btn", onclick: save }, T.save),
-    ]);
-    if (msg) setMsg(msg, bad);
-    (has ? cur : nw).focus();
-    return d;
   }
 
   // ── boot ─────────────────────────────────────────────────────────

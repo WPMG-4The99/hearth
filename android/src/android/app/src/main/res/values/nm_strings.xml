@@ -619,10 +619,6 @@
     <string name="nm_setup_source_cloud_sub">The model on the relay for this household. Nothing to paste.</string>
     <string name="nm_setup_source_own_sub">OpenAI, Anthropic, DeepSeek, Bailian and other OpenAI-compatible endpoints. The key stays on this phone.</string>
     <string name="nm_setup_source_fine_print">Pick one to start. The other can be added later.</string>
-    <string name="nm_setup_password_title">Set a password</string>
-    <string name="nm_setup_password_sub">Your account is in. With a password, your computers and your other phones sign in at once, without waiting for a code.</string>
-    <string name="nm_setup_password_set">Set the password</string>
-    <string name="nm_setup_password_fine_print">Optional. You can set or change it later under Account.</string>
     <string name="nm_welcome_feat_chat">Chat, pictures, video</string>
     <string name="nm_welcome_feat_chat_sub">A capable model, image and video generation, tools, skills and memory, on your phone</string>
     <string name="nm_welcome_feat_hands">Hands: it uses your phone</string>
@@ -640,9 +636,6 @@
     <string name="nm_cloud_signin_title">Sign in to The Hearth</string>
     <string name="nm_cloud_signin_subtitle">Your email, then the one-time code. This relay writes the code to its log.</string>
     <string name="nm_cloud_mode_code">With a code</string>
-    <string name="nm_cloud_mode_password">With a password</string>
-    <string name="nm_cloud_password">Password</string>
-    <string name="nm_cloud_forgot_password">Forgot the password? Sign in with a code</string>
     <string name="nm_cloud_identifier">Email</string>
     <string name="nm_cloud_identifier_hint">you@example.com</string>
     <string name="nm_cloud_code">Code</string>
@@ -706,16 +699,11 @@
     <string name="nm_cloud_err_rate_limited">Too many requests at once. A moment, please.</string>
     <string name="nm_cloud_err_unreachable">Could not reach The Hearth. Check the connection.</string>
     <string name="nm_cloud_err_generic">Something went wrong.</string>
-    <string name="nm_cloud_err_bad_credentials">Wrong e-mail or password.</string>
-    <string name="nm_cloud_err_no_password">This account has no password yet. Sign in with a code, then set one under Account.</string>
+    <string name="nm_cloud_err_bad_credentials">That sign-in was refused.</string>
     <string name="nm_cloud_err_locked">Too many wrong attempts. Wait a few minutes.</string>
-    <string name="nm_cloud_err_password_wrong">The current password is wrong.</string>
-    <string name="nm_cloud_err_password_required">Enter the current password first.</string>
-    <string name="nm_cloud_err_password_short">The password needs at least 8 characters.</string>
-    <string name="nm_cloud_err_password_weak">That password is too easy to guess.</string>
     <string name="nm_cloud_err_signup_closed">Sign-ups are paused on this relay for now. An account that already exists can still sign in.</string>
     <string name="nm_cloud_err_domain_limited">Today\'s sign-up limit for addresses at that domain is reached on this relay. Try again tomorrow, or use another address.</string>
-    <string name="nm_cloud_err_channel_unsupported">This relay does not send codes to that kind of address. Use the other kind (e-mail or phone number), or sign in with a password.</string>
+    <string name="nm_cloud_err_channel_unsupported">This relay does not send codes to that kind of address. Use the other kind (e-mail or phone number).</string>
     <string name="nm_cloud_err_too_large">That message is too large for the model. Shorten it, leave out some attachments, or start a new chat.</string>
     <string name="nm_cloud_err_content_rejected">The model provider\'s content check declined this request. Try different words, or start a new chat if it keeps happening: the words it objects to can be earlier in the conversation.</string>
     <string name="nm_cloud_err_provider_busy">The model provider is busy right now. Try again in a moment.</string>
@@ -733,18 +721,6 @@
     <!-- 0.1.20: the account page -->
     <string name="nm_cloud_since">since %1$s</string>
     <string name="nm_cloud_account_id">Account %1$s…</string>
-    <string name="nm_cloud_password_set">Set</string>
-    <string name="nm_cloud_password_unset">Not set</string>
-    <string name="nm_cloud_password_title_set">Set a password</string>
-    <string name="nm_cloud_password_title_change">Change the password</string>
-    <string name="nm_cloud_password_current">Current password</string>
-    <string name="nm_cloud_password_new">New password (8 characters or more)</string>
-    <string name="nm_cloud_password_confirm">Repeat the new password</string>
-    <string name="nm_cloud_password_mismatch">The two passwords differ.</string>
-    <string name="nm_cloud_password_why">With a password you can sign in on another device without waiting for a code. Right after a code sign-in the current password may be left empty.</string>
-    <string name="nm_cloud_password_remove">Remove the password</string>
-    <string name="nm_cloud_password_saved">Password saved.</string>
-    <string name="nm_cloud_password_removed">Password removed.</string>
     <string name="nm_cloud_devices_signed_in">Signed in on</string>
     <string name="nm_cloud_device_unknown">Unknown device</string>
     <string name="nm_cloud_this_device">this phone</string>
@@ -1110,8 +1086,6 @@
     <string name="nm_models_search_clear">Clear the search</string>
     <string name="nm_models_no_match">No model matches</string>
     <!-- Names for icon-only controls, read by screen readers (#338) -->
-    <string name="nm_a11y_show_password">Show password</string>
-    <string name="nm_a11y_hide_password">Hide password</string>
     <string name="nm_a11y_avatar_candidate">Candidate %1$d</string>
     <string name="nm_a11y_share_card">Card %1$d</string>
     <string name="nm_a11y_add">Add</string>

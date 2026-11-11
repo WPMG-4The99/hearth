@@ -630,10 +630,6 @@
     <string name="nm_setup_source_cloud_sub">이 집 릴레이의 모델. 붙여 넣을 것이 없습니다.</string>
     <string name="nm_setup_source_own_sub">OpenAI, Anthropic, DeepSeek, 바이롄(Bailian) 및 기타 OpenAI 호환 엔드포인트. 키는 이 휴대전화에 머뭅니다.</string>
     <string name="nm_setup_source_fine_print">시작할 쪽을 하나 고릅니다. 다른 쪽은 나중에 더할 수 있습니다.</string>
-    <string name="nm_setup_password_title">비밀번호 설정</string>
-    <string name="nm_setup_password_sub">계정에 들어왔습니다. 비밀번호가 있으면 컴퓨터와 다른 휴대전화에서 코드를 기다리지 않고 바로 로그인합니다.</string>
-    <string name="nm_setup_password_set">비밀번호 설정</string>
-    <string name="nm_setup_password_fine_print">선택 사항입니다. 나중에 계정에서 설정하거나 바꿀 수 있습니다.</string>
     <string name="nm_welcome_feat_chat">채팅, 그림, 동영상</string>
     <string name="nm_welcome_feat_chat_sub">쓸 만한 모델, 이미지와 동영상 생성, 도구, 스킬, 메모리. 모두 휴대전화에서</string>
     <string name="nm_welcome_feat_hands">손: 휴대전화를 직접 씁니다</string>
@@ -650,9 +646,6 @@
     <string name="nm_cloud_signin_title">The Hearth 로그인</string>
     <string name="nm_cloud_signin_subtitle">이메일을 넣고, 그다음 일회용 코드. 이 릴레이는 코드를 자기 로그에 적습니다.</string>
     <string name="nm_cloud_mode_code">코드로</string>
-    <string name="nm_cloud_mode_password">비밀번호로</string>
-    <string name="nm_cloud_password">비밀번호</string>
-    <string name="nm_cloud_forgot_password">비밀번호를 잊으셨나요? 코드로 로그인</string>
     <string name="nm_cloud_identifier">이메일</string>
     <string name="nm_cloud_identifier_hint">you@example.com</string>
     <string name="nm_cloud_code">코드</string>
@@ -718,15 +711,10 @@
     <string name="nm_cloud_err_unreachable">The Hearth에 연결할 수 없습니다. 연결을 확인하세요.</string>
     <string name="nm_cloud_err_generic">문제가 생겼습니다.</string>
     <string name="nm_cloud_err_bad_credentials">이메일 또는 비밀번호가 틀렸습니다.</string>
-    <string name="nm_cloud_err_no_password">이 계정에는 아직 비밀번호가 없습니다. 코드로 로그인한 뒤 계정에서 설정하세요.</string>
     <string name="nm_cloud_err_locked">틀린 시도가 너무 많습니다. 몇 분 기다리세요.</string>
-    <string name="nm_cloud_err_password_wrong">현재 비밀번호가 틀렸습니다.</string>
-    <string name="nm_cloud_err_password_required">먼저 현재 비밀번호를 입력하세요.</string>
-    <string name="nm_cloud_err_password_short">비밀번호는 8자 이상이어야 합니다.</string>
-    <string name="nm_cloud_err_password_weak">그 비밀번호는 추측하기 너무 쉽습니다.</string>
     <string name="nm_cloud_err_signup_closed">이 릴레이는 당분간 가입을 받지 않습니다. 이미 있는 계정은 그대로 로그인할 수 있습니다.</string>
     <string name="nm_cloud_err_domain_limited">해당 도메인의 주소는 이 릴레이에서 오늘의 가입 한도에 도달했습니다. 내일 다시 시도하거나 다른 주소를 사용하세요.</string>
-    <string name="nm_cloud_err_channel_unsupported">이 릴레이는 그런 종류의 주소로는 인증 코드를 보내지 않습니다. 다른 종류(이메일 또는 전화번호)를 사용하거나 비밀번호로 로그인하세요.</string>
+    <string name="nm_cloud_err_channel_unsupported">이 릴레이는 그런 종류의 주소로는 인증 코드를 보내지 않습니다. 다른 종류(이메일 또는 전화번호)를 사용하세요.</string>
     <string name="nm_cloud_err_too_large">이 메시지는 모델이 받기엔 너무 큽니다. 줄이거나, 첨부 일부를 빼거나, 새 채팅을 시작하세요.</string>
     <string name="nm_cloud_err_content_rejected">모델 제공자의 콘텐츠 검사가 이 요청을 거부했습니다. 다른 표현으로 시도해 보세요. 계속 반복되면 새 대화를 시작하세요. 문제가 된 표현이 대화의 앞부분에 있을 수 있습니다.</string>
     <string name="nm_cloud_err_provider_busy">모델 제공자가 지금 바쁩니다. 잠시 후 다시 시도하세요.</string>
@@ -745,18 +733,6 @@
     <!-- 0.1.20: the account page -->
     <string name="nm_cloud_since">%1$s부터</string>
     <string name="nm_cloud_account_id">계정 %1$s…</string>
-    <string name="nm_cloud_password_set">설정됨</string>
-    <string name="nm_cloud_password_unset">설정 안 됨</string>
-    <string name="nm_cloud_password_title_set">비밀번호 설정</string>
-    <string name="nm_cloud_password_title_change">비밀번호 변경</string>
-    <string name="nm_cloud_password_current">현재 비밀번호</string>
-    <string name="nm_cloud_password_new">새 비밀번호(8자 이상)</string>
-    <string name="nm_cloud_password_confirm">새 비밀번호 다시 입력</string>
-    <string name="nm_cloud_password_mismatch">두 비밀번호가 다릅니다.</string>
-    <string name="nm_cloud_password_why">비밀번호가 있으면 다른 기기에서 코드를 기다리지 않고 로그인할 수 있습니다. 코드로 로그인한 직후에는 현재 비밀번호를 비워 둘 수 있습니다.</string>
-    <string name="nm_cloud_password_remove">비밀번호 제거</string>
-    <string name="nm_cloud_password_saved">비밀번호를 저장했습니다.</string>
-    <string name="nm_cloud_password_removed">비밀번호를 제거했습니다.</string>
     <string name="nm_cloud_devices_signed_in">로그인한 기기</string>
     <string name="nm_cloud_device_unknown">알 수 없는 기기</string>
     <string name="nm_cloud_this_device">이 휴대전화</string>
@@ -1127,8 +1103,6 @@
     <string name="nm_models_search_clear">검색 지우기</string>
     <string name="nm_models_no_match">일치하는 모델이 없습니다</string>
     <!-- Names for icon-only controls, read by screen readers (#338) -->
-    <string name="nm_a11y_show_password">비밀번호 표시</string>
-    <string name="nm_a11y_hide_password">비밀번호 숨기기</string>
     <string name="nm_a11y_avatar_candidate">후보 %1$d</string>
     <string name="nm_a11y_share_card">카드 %1$d</string>
     <string name="nm_a11y_add">추가</string>

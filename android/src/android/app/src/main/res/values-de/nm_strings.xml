@@ -633,10 +633,6 @@
     <string name="nm_setup_source_cloud_sub">Das Modell auf dem Relay dieses Haushalts. Nichts zum Einfügen.</string>
     <string name="nm_setup_source_own_sub">OpenAI, Anthropic, DeepSeek, Bailian und andere OpenAI-kompatible Endpunkte. Der Schlüssel bleibt auf diesem Telefon.</string>
     <string name="nm_setup_source_fine_print">Zum Start eines wählen. Das andere lässt sich später hinzufügen.</string>
-    <string name="nm_setup_password_title">Passwort festlegen</string>
-    <string name="nm_setup_password_sub">Dein Konto steht. Mit einem Passwort melden sich deine Computer und deine anderen Telefone sofort an, ohne auf einen Code zu warten.</string>
-    <string name="nm_setup_password_set">Passwort festlegen</string>
-    <string name="nm_setup_password_fine_print">Optional. Du kannst es später unter Konto festlegen oder ändern.</string>
     <string name="nm_welcome_feat_chat">Chat, Bilder, Video</string>
     <string name="nm_welcome_feat_chat_sub">Ein fähiges Modell, Bild- und Videoerzeugung, Werkzeuge, Skills und Gedächtnis, auf deinem Telefon</string>
     <string name="nm_welcome_feat_hands">Hände: Er nutzt dein Telefon</string>
@@ -653,9 +649,6 @@
     <string name="nm_cloud_signin_title">Bei The Hearth anmelden</string>
     <string name="nm_cloud_signin_subtitle">Zuerst die E-Mail, dann der einmalige Code. Dieses Relay schreibt den Code in sein Protokoll.</string>
     <string name="nm_cloud_mode_code">Mit einem Code</string>
-    <string name="nm_cloud_mode_password">Mit einem Passwort</string>
-    <string name="nm_cloud_password">Passwort</string>
-    <string name="nm_cloud_forgot_password">Passwort vergessen? Mit einem Code anmelden</string>
     <string name="nm_cloud_identifier">E-Mail</string>
     <string name="nm_cloud_identifier_hint">du@example.com</string>
     <string name="nm_cloud_code">Code</string>
@@ -721,15 +714,10 @@
     <string name="nm_cloud_err_unreachable">The Hearth ist nicht erreichbar. Prüfe die Verbindung.</string>
     <string name="nm_cloud_err_generic">Etwas ist schiefgegangen.</string>
     <string name="nm_cloud_err_bad_credentials">E-Mail oder Passwort falsch.</string>
-    <string name="nm_cloud_err_no_password">Dieses Konto hat noch kein Passwort. Melde dich mit einem Code an und lege dann unter Konto eins fest.</string>
     <string name="nm_cloud_err_locked">Zu viele falsche Versuche. Warte ein paar Minuten.</string>
-    <string name="nm_cloud_err_password_wrong">Das aktuelle Passwort ist falsch.</string>
-    <string name="nm_cloud_err_password_required">Gib zuerst das aktuelle Passwort ein.</string>
-    <string name="nm_cloud_err_password_short">Das Passwort braucht mindestens 8 Zeichen.</string>
-    <string name="nm_cloud_err_password_weak">Dieses Passwort ist zu leicht zu erraten.</string>
     <string name="nm_cloud_err_signup_closed">Neue Konten sind auf diesem Relay vorerst ausgesetzt. Ein bestehendes Konto kann sich weiter anmelden.</string>
     <string name="nm_cloud_err_domain_limited">Für Adressen dieser Domain ist das heutige Anmeldelimit auf diesem Relay erreicht. Versuche es morgen noch einmal oder nimm eine andere Adresse.</string>
-    <string name="nm_cloud_err_channel_unsupported">Dieses Relay sendet an diese Art von Adresse keine Codes. Nimm die andere Art (E-Mail oder Telefonnummer) oder melde dich mit dem Passwort an.</string>
+    <string name="nm_cloud_err_channel_unsupported">Dieses Relay sendet an diese Art von Adresse keine Codes. Nimm die andere Art (E-Mail oder Telefonnummer).</string>
     <string name="nm_cloud_err_too_large">Diese Nachricht ist zu groß für das Modell. Kürze sie, lass einige Anhänge weg oder beginne einen neuen Chat.</string>
     <string name="nm_cloud_err_content_rejected">Die Inhaltsprüfung des Modellanbieters hat diese Anfrage abgelehnt. Formuliere es anders oder beginne einen neuen Chat, wenn es sich wiederholt: Die beanstandeten Wörter können weiter vorn im Gespräch stehen.</string>
     <string name="nm_cloud_err_provider_busy">Der Modellanbieter ist gerade ausgelastet. Versuche es gleich noch einmal.</string>
@@ -748,18 +736,6 @@
     <!-- 0.1.20: the account page -->
     <string name="nm_cloud_since">seit %1$s</string>
     <string name="nm_cloud_account_id">Konto %1$s…</string>
-    <string name="nm_cloud_password_set">Festgelegt</string>
-    <string name="nm_cloud_password_unset">Nicht festgelegt</string>
-    <string name="nm_cloud_password_title_set">Passwort festlegen</string>
-    <string name="nm_cloud_password_title_change">Passwort ändern</string>
-    <string name="nm_cloud_password_current">Aktuelles Passwort</string>
-    <string name="nm_cloud_password_new">Neues Passwort (8 Zeichen oder mehr)</string>
-    <string name="nm_cloud_password_confirm">Neues Passwort wiederholen</string>
-    <string name="nm_cloud_password_mismatch">Die beiden Passwörter stimmen nicht überein.</string>
-    <string name="nm_cloud_password_why">Mit einem Passwort kannst du dich auf einem anderen Gerät anmelden, ohne auf einen Code zu warten. Direkt nach einer Anmeldung per Code darf das aktuelle Passwort leer bleiben.</string>
-    <string name="nm_cloud_password_remove">Passwort entfernen</string>
-    <string name="nm_cloud_password_saved">Passwort gespeichert.</string>
-    <string name="nm_cloud_password_removed">Passwort entfernt.</string>
     <string name="nm_cloud_devices_signed_in">Angemeldet auf</string>
     <string name="nm_cloud_device_unknown">Unbekanntes Gerät</string>
     <string name="nm_cloud_this_device">dieses Telefon</string>
@@ -1131,8 +1107,6 @@
     <string name="nm_models_search_clear">Suche löschen</string>
     <string name="nm_models_no_match">Kein Modell passt</string>
     <!-- Names for icon-only controls, read by screen readers (#338) -->
-    <string name="nm_a11y_show_password">Passwort anzeigen</string>
-    <string name="nm_a11y_hide_password">Passwort verbergen</string>
     <string name="nm_a11y_avatar_candidate">Kandidat %1$d</string>
     <string name="nm_a11y_share_card">Karte %1$d</string>
     <string name="nm_a11y_add">Hinzufügen</string>

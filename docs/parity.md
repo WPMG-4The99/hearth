@@ -23,7 +23,7 @@ Legend: **✓** done · **◐** partial (what is missing is in the note) · **�
 | "Ways on" when the pool is spent (own key · invite · star) | ✓ | ✓ 0.1.32 | ✓ 0.1.32 | ✓ |
 | Invite code and link, earnings | ✓ | ✓ 0.1.32 | ✓ | ✓ |
 | Usage by kind and by model, today / all time | ✓ | ✓ 0.1.32 | ✓ 0.1.32 | ✓ |
-| Set / change / remove the password | ✓ | ✓ 0.1.32 | ✓ 0.1.32 | ✓ |
+| Set / change / remove the password | — | ✓ 0.1.32 | ✓ 0.1.32 | ✓ |
 | Signed-in devices, revoke one, sign out everywhere | ✓ | ✓ 0.1.32 | ✓ 0.1.32 | ✓ |
 | Account timeline (sign-ins, settings, refusals) | ✓ | ✓ 0.1.32 | ✓ 0.1.32 | ✓ |
 | Delete account | ✓ | ✓ 0.1.32 | ✓ 0.1.32 | ✓ |

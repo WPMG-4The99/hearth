@@ -630,10 +630,6 @@
     <string name="nm_setup_source_cloud_sub">Model pada relay rumah ini. Tiada apa untuk ditampal.</string>
     <string name="nm_setup_source_own_sub">OpenAI, Anthropic, DeepSeek, Bailian dan titik akhir serasi OpenAI yang lain. Kunci kekal di telefon ini.</string>
     <string name="nm_setup_source_fine_print">Pilih satu untuk mula. Yang satu lagi boleh ditambah kemudian.</string>
-    <string name="nm_setup_password_title">Tetapkan kata laluan</string>
-    <string name="nm_setup_password_sub">Akaun anda sudah masuk. Dengan kata laluan, komputer dan telefon anda yang lain log masuk serta-merta, tanpa menunggu kod.</string>
-    <string name="nm_setup_password_set">Tetapkan kata laluan</string>
-    <string name="nm_setup_password_fine_print">Pilihan. Anda boleh menetapkan atau menukarnya kemudian di bawah Akaun.</string>
     <string name="nm_welcome_feat_chat">Sembang, gambar, video</string>
     <string name="nm_welcome_feat_chat_sub">Model yang berkebolehan, penjanaan imej dan video, alat, kemahiran dan memori, di telefon anda</string>
     <string name="nm_welcome_feat_hands">Tangan: ia menggunakan telefon anda</string>
@@ -650,9 +646,6 @@
     <string name="nm_cloud_signin_title">Log masuk ke The Hearth</string>
     <string name="nm_cloud_signin_subtitle">E-mel dahulu, kemudian kod sekali guna. Relay ini menulis kod ke lognya.</string>
     <string name="nm_cloud_mode_code">Dengan kod</string>
-    <string name="nm_cloud_mode_password">Dengan kata laluan</string>
-    <string name="nm_cloud_password">Kata laluan</string>
-    <string name="nm_cloud_forgot_password">Lupa kata laluan? Log masuk dengan kod</string>
     <string name="nm_cloud_identifier">E-mel</string>
     <string name="nm_cloud_identifier_hint">anda@example.com</string>
     <string name="nm_cloud_code">Kod</string>
@@ -718,15 +711,10 @@
     <string name="nm_cloud_err_unreachable">Tidak dapat menghubungi The Hearth. Semak sambungan.</string>
     <string name="nm_cloud_err_generic">Ada yang tidak kena.</string>
     <string name="nm_cloud_err_bad_credentials">E-mel atau kata laluan salah.</string>
-    <string name="nm_cloud_err_no_password">Akaun ini belum ada kata laluan. Log masuk dengan kod, kemudian tetapkan satu di bawah Akaun.</string>
     <string name="nm_cloud_err_locked">Terlalu banyak percubaan salah. Tunggu beberapa minit.</string>
-    <string name="nm_cloud_err_password_wrong">Kata laluan semasa salah.</string>
-    <string name="nm_cloud_err_password_required">Masukkan kata laluan semasa dahulu.</string>
-    <string name="nm_cloud_err_password_short">Kata laluan memerlukan sekurang-kurangnya 8 aksara.</string>
-    <string name="nm_cloud_err_password_weak">Kata laluan itu terlalu mudah diteka.</string>
     <string name="nm_cloud_err_signup_closed">Pendaftaran di relay ini dijeda buat masa ini. Akaun yang sudah ada masih boleh log masuk.</string>
     <string name="nm_cloud_err_domain_limited">Alamat dari domain itu sudah mencapai had pendaftaran hari ini di relay ini. Cuba lagi esok atau gunakan alamat lain.</string>
-    <string name="nm_cloud_err_channel_unsupported">Relay ini tidak menghantar kod ke jenis alamat itu. Gunakan jenis lain (e-mel atau nombor telefon), atau log masuk dengan kata laluan.</string>
+    <string name="nm_cloud_err_channel_unsupported">Relay ini tidak menghantar kod ke jenis alamat itu. Gunakan jenis lain (e-mel atau nombor telefon).</string>
     <string name="nm_cloud_err_too_large">Mesej itu terlalu besar untuk model. Pendekkan, buang beberapa lampiran, atau mulakan sembang baharu.</string>
     <string name="nm_cloud_err_content_rejected">Semakan kandungan penyedia model menolak permintaan ini. Cuba perkataan lain, atau mulakan sembang baharu jika ia berulang: perkataan yang ditolak mungkin berada lebih awal dalam perbualan.</string>
     <string name="nm_cloud_err_provider_busy">Penyedia model sedang sibuk. Cuba lagi sebentar nanti.</string>
@@ -745,18 +733,6 @@
     <!-- 0.1.20: the account page -->
     <string name="nm_cloud_since">sejak %1$s</string>
     <string name="nm_cloud_account_id">Akaun %1$s…</string>
-    <string name="nm_cloud_password_set">Ditetapkan</string>
-    <string name="nm_cloud_password_unset">Belum ditetapkan</string>
-    <string name="nm_cloud_password_title_set">Tetapkan kata laluan</string>
-    <string name="nm_cloud_password_title_change">Tukar kata laluan</string>
-    <string name="nm_cloud_password_current">Kata laluan semasa</string>
-    <string name="nm_cloud_password_new">Kata laluan baharu (8 aksara atau lebih)</string>
-    <string name="nm_cloud_password_confirm">Ulang kata laluan baharu</string>
-    <string name="nm_cloud_password_mismatch">Kedua-dua kata laluan berbeza.</string>
-    <string name="nm_cloud_password_why">Dengan kata laluan, anda boleh log masuk di peranti lain tanpa menunggu kod. Sejurus selepas log masuk dengan kod, kata laluan semasa boleh dibiarkan kosong.</string>
-    <string name="nm_cloud_password_remove">Buang kata laluan</string>
-    <string name="nm_cloud_password_saved">Kata laluan disimpan.</string>
-    <string name="nm_cloud_password_removed">Kata laluan dibuang.</string>
     <string name="nm_cloud_devices_signed_in">Log masuk di</string>
     <string name="nm_cloud_device_unknown">Peranti tidak dikenali</string>
     <string name="nm_cloud_this_device">telefon ini</string>
@@ -1127,8 +1103,6 @@
     <string name="nm_models_search_clear">Kosongkan carian</string>
     <string name="nm_models_no_match">Tiada model yang sepadan</string>
     <!-- Names for icon-only controls, read by screen readers (#338) -->
-    <string name="nm_a11y_show_password">Tunjukkan kata laluan</string>
-    <string name="nm_a11y_hide_password">Sembunyikan kata laluan</string>
     <string name="nm_a11y_avatar_candidate">Calon %1$d</string>
     <string name="nm_a11y_share_card">Kad %1$d</string>
     <string name="nm_a11y_add">Tambah</string>

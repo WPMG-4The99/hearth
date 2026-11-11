@@ -610,10 +610,6 @@
     <string name="nm_setup_source_cloud_sub">用這台中繼上的模型。不用貼上金鑰。</string>
     <string name="nm_setup_source_own_sub">OpenAI、Anthropic、DeepSeek、百煉等相容 OpenAI 介面的服務。key 只留在這台手機上。</string>
     <string name="nm_setup_source_fine_print">先選一個。另一個以後還能加上。</string>
-    <string name="nm_setup_password_title">設一個密碼</string>
-    <string name="nm_setup_password_sub">帳號已登入。設了密碼，電腦和其他手機就能直接登入，不用再等驗證碼。</string>
-    <string name="nm_setup_password_set">設定密碼</string>
-    <string name="nm_setup_password_fine_print">可選。以後也可以在「帳號」裡設定或修改。</string>
     <string name="nm_welcome_feat_chat">對話、圖片、影片</string>
     <string name="nm_welcome_feat_chat_sub">能力不錯的模型，圖片與影片生成，工具、技能和記憶，都在你的手機上</string>
     <string name="nm_welcome_feat_hands">Hands：替你操作手機</string>
@@ -630,9 +626,6 @@
     <string name="nm_cloud_signin_title">登入 The Hearth</string>
     <string name="nm_cloud_signin_subtitle">先填郵箱，再填一次性驗證碼。這台中繼把驗證碼寫在自己的日誌裡。</string>
     <string name="nm_cloud_mode_code">驗證碼登入</string>
-    <string name="nm_cloud_mode_password">密碼登入</string>
-    <string name="nm_cloud_password">密碼</string>
-    <string name="nm_cloud_forgot_password">忘了密碼？用驗證碼登入</string>
     <string name="nm_cloud_identifier">郵箱</string>
     <string name="nm_cloud_identifier_hint">you@example.com</string>
     <string name="nm_cloud_code">驗證碼</string>
@@ -696,15 +689,10 @@
     <string name="nm_cloud_err_unreachable">連不上 The Hearth，請檢查網路。</string>
     <string name="nm_cloud_err_generic">出了點問題。</string>
     <string name="nm_cloud_err_bad_credentials">信箱或密碼不對。</string>
-    <string name="nm_cloud_err_no_password">這個帳號還沒有設定密碼。先用驗證碼登入，再到「帳號」裡設定。</string>
     <string name="nm_cloud_err_locked">錯誤次數太多，請過幾分鐘再試。</string>
-    <string name="nm_cloud_err_password_wrong">目前的密碼不對。</string>
-    <string name="nm_cloud_err_password_required">請先輸入目前的密碼。</string>
-    <string name="nm_cloud_err_password_short">密碼至少 8 位。</string>
-    <string name="nm_cloud_err_password_weak">這個密碼太好猜了。</string>
     <string name="nm_cloud_err_signup_closed">這台中繼暫時關閉了註冊。已有的帳號仍可登入。</string>
     <string name="nm_cloud_err_domain_limited">這個網域的信箱今天在這台中繼上的註冊名額已經用完。明天再試，或者換一個地址。</string>
-    <string name="nm_cloud_err_channel_unsupported">這台中繼不會給這類地址發送驗證碼。換另一類地址（信箱或手機號），或者用密碼登入。</string>
+    <string name="nm_cloud_err_channel_unsupported">這台中繼不會給這類地址發送驗證碼。換另一類地址（信箱或手機號）。</string>
     <string name="nm_cloud_err_too_large">這則訊息對模型來說太長了。縮短一些、去掉幾個附件，或者新開一個對話。</string>
     <string name="nm_cloud_err_content_rejected">模型服務商的內容審核沒有放行這次請求。換個說法試試；如果反覆出現，就新開一個對話，被攔下的可能是對話裡更早的內容。</string>
     <string name="nm_cloud_err_provider_busy">模型服務商現在很忙，稍後再試。</string>
@@ -722,18 +710,6 @@
     <!-- 0.1.20: the account page -->
     <string name="nm_cloud_since">%1$s 加入</string>
     <string name="nm_cloud_account_id">帳號 %1$s…</string>
-    <string name="nm_cloud_password_set">已設定</string>
-    <string name="nm_cloud_password_unset">未設定</string>
-    <string name="nm_cloud_password_title_set">設定密碼</string>
-    <string name="nm_cloud_password_title_change">修改密碼</string>
-    <string name="nm_cloud_password_current">目前的密碼</string>
-    <string name="nm_cloud_password_new">新密碼（至少 8 位）</string>
-    <string name="nm_cloud_password_confirm">再輸一次新密碼</string>
-    <string name="nm_cloud_password_mismatch">兩次輸入的密碼不一致。</string>
-    <string name="nm_cloud_password_why">設了密碼，在別的裝置上登入就不用等驗證碼。剛用驗證碼登入時，目前的密碼可以不填。</string>
-    <string name="nm_cloud_password_remove">移除密碼</string>
-    <string name="nm_cloud_password_saved">密碼已儲存。</string>
-    <string name="nm_cloud_password_removed">密碼已移除。</string>
     <string name="nm_cloud_devices_signed_in">已登入的裝置</string>
     <string name="nm_cloud_device_unknown">未知裝置</string>
     <string name="nm_cloud_this_device">這台手機</string>
@@ -1097,8 +1073,6 @@
     <string name="nm_models_search_clear">清除搜尋</string>
     <string name="nm_models_no_match">沒有符合的模型</string>
     <!-- Names for icon-only controls, read by screen readers (#338) -->
-    <string name="nm_a11y_show_password">顯示密碼</string>
-    <string name="nm_a11y_hide_password">隱藏密碼</string>
     <string name="nm_a11y_avatar_candidate">候選 %1$d</string>
     <string name="nm_a11y_share_card">卡片 %1$d</string>
     <string name="nm_a11y_add">新增</string>

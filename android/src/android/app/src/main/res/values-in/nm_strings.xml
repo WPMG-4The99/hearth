@@ -630,10 +630,6 @@
     <string name="nm_setup_source_cloud_sub">Model di relay rumah ini. Tidak ada yang perlu ditempel.</string>
     <string name="nm_setup_source_own_sub">OpenAI, Anthropic, DeepSeek, Bailian dan endpoint lain yang kompatibel dengan OpenAI. Kuncinya tetap di ponsel ini.</string>
     <string name="nm_setup_source_fine_print">Pilih satu untuk mulai. Yang lain bisa ditambah nanti.</string>
-    <string name="nm_setup_password_title">Atur kata sandi</string>
-    <string name="nm_setup_password_sub">Akunmu sudah masuk. Dengan kata sandi, komputermu dan ponselmu yang lain bisa langsung masuk tanpa menunggu kode.</string>
-    <string name="nm_setup_password_set">Atur kata sandi</string>
-    <string name="nm_setup_password_fine_print">Opsional. Kamu bisa mengatur atau mengubahnya nanti di Akun.</string>
     <string name="nm_welcome_feat_chat">Chat, gambar, video</string>
     <string name="nm_welcome_feat_chat_sub">Model yang cakap, pembuatan gambar dan video, alat, skill dan memori, di ponselmu</string>
     <string name="nm_welcome_feat_hands">Tangan: ia memakai ponselmu</string>
@@ -650,9 +646,6 @@
     <string name="nm_cloud_signin_title">Masuk ke The Hearth</string>
     <string name="nm_cloud_signin_subtitle">Email dulu, lalu kode sekali pakai. Relay ini menulis kode ke log-nya.</string>
     <string name="nm_cloud_mode_code">Dengan kode</string>
-    <string name="nm_cloud_mode_password">Dengan kata sandi</string>
-    <string name="nm_cloud_password">Kata sandi</string>
-    <string name="nm_cloud_forgot_password">Lupa kata sandi? Masuk dengan kode</string>
     <string name="nm_cloud_identifier">Email</string>
     <string name="nm_cloud_identifier_hint">kamu@example.com</string>
     <string name="nm_cloud_code">Kode</string>
@@ -718,15 +711,10 @@
     <string name="nm_cloud_err_unreachable">Tidak bisa menjangkau The Hearth. Periksa koneksi.</string>
     <string name="nm_cloud_err_generic">Ada yang salah.</string>
     <string name="nm_cloud_err_bad_credentials">E-mail atau kata sandi salah.</string>
-    <string name="nm_cloud_err_no_password">Akun ini belum punya kata sandi. Masuk dengan kode, lalu atur di Akun.</string>
     <string name="nm_cloud_err_locked">Terlalu banyak percobaan salah. Tunggu beberapa menit.</string>
-    <string name="nm_cloud_err_password_wrong">Kata sandi saat ini salah.</string>
-    <string name="nm_cloud_err_password_required">Masukkan kata sandi saat ini dulu.</string>
-    <string name="nm_cloud_err_password_short">Kata sandi perlu minimal 8 karakter.</string>
-    <string name="nm_cloud_err_password_weak">Kata sandi itu terlalu mudah ditebak.</string>
     <string name="nm_cloud_err_signup_closed">Pendaftaran di relay ini dijeda untuk sementara. Akun yang sudah ada tetap bisa masuk.</string>
     <string name="nm_cloud_err_domain_limited">Alamat dari domain itu sudah mencapai batas pendaftaran hari ini di relay ini. Coba lagi besok atau gunakan alamat lain.</string>
-    <string name="nm_cloud_err_channel_unsupported">Relay ini tidak mengirim kode ke jenis alamat itu. Gunakan jenis lain (e-mail atau nomor telepon), atau masuk dengan kata sandi.</string>
+    <string name="nm_cloud_err_channel_unsupported">Relay ini tidak mengirim kode ke jenis alamat itu. Gunakan jenis lain (e-mail atau nomor telepon).</string>
     <string name="nm_cloud_err_too_large">Pesan itu terlalu besar untuk model. Persingkat, hilangkan beberapa lampiran, atau mulai obrolan baru.</string>
     <string name="nm_cloud_err_content_rejected">Pemeriksaan konten penyedia model menolak permintaan ini. Coba kata-kata lain, atau mulai obrolan baru jika terus terjadi: kata-kata yang ditolaknya bisa berada lebih awal dalam percakapan.</string>
     <string name="nm_cloud_err_provider_busy">Penyedia model sedang sibuk. Coba lagi sebentar lagi.</string>
@@ -745,18 +733,6 @@
     <!-- 0.1.20: the account page -->
     <string name="nm_cloud_since">sejak %1$s</string>
     <string name="nm_cloud_account_id">Akun %1$s…</string>
-    <string name="nm_cloud_password_set">Sudah diatur</string>
-    <string name="nm_cloud_password_unset">Belum diatur</string>
-    <string name="nm_cloud_password_title_set">Atur kata sandi</string>
-    <string name="nm_cloud_password_title_change">Ubah kata sandi</string>
-    <string name="nm_cloud_password_current">Kata sandi saat ini</string>
-    <string name="nm_cloud_password_new">Kata sandi baru (8 karakter atau lebih)</string>
-    <string name="nm_cloud_password_confirm">Ulangi kata sandi baru</string>
-    <string name="nm_cloud_password_mismatch">Kedua kata sandi berbeda.</string>
-    <string name="nm_cloud_password_why">Dengan kata sandi kamu bisa masuk di perangkat lain tanpa menunggu kode. Tepat setelah masuk dengan kode, kata sandi saat ini boleh dikosongkan.</string>
-    <string name="nm_cloud_password_remove">Hapus kata sandi</string>
-    <string name="nm_cloud_password_saved">Kata sandi disimpan.</string>
-    <string name="nm_cloud_password_removed">Kata sandi dihapus.</string>
     <string name="nm_cloud_devices_signed_in">Masuk di</string>
     <string name="nm_cloud_device_unknown">Perangkat tidak dikenal</string>
     <string name="nm_cloud_this_device">ponsel ini</string>
@@ -1127,8 +1103,6 @@
     <string name="nm_models_search_clear">Hapus pencarian</string>
     <string name="nm_models_no_match">Tidak ada model yang cocok</string>
     <!-- Names for icon-only controls, read by screen readers (#338) -->
-    <string name="nm_a11y_show_password">Tampilkan kata sandi</string>
-    <string name="nm_a11y_hide_password">Sembunyikan kata sandi</string>
     <string name="nm_a11y_avatar_candidate">Kandidat %1$d</string>
     <string name="nm_a11y_share_card">Kartu %1$d</string>
     <string name="nm_a11y_add">Tambah</string>

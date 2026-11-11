@@ -68,7 +68,6 @@ Errors carry a stable `code` the app can turn into a sentence:
 | 400 | `code_wrong` / `code_expired` | verification code |
 | 400 | `channel_unsupported` | this relay's `CODE_SENDER` does not send codes that way (SMS or e-mail); the sentence says which |
 | 502 | `send_failed` | the SMS or mail provider refused or did not answer; the code was not sent |
-| 400 | `bad_credentials` / `no_password` / `password_short` / `password_long` / `password_weak` / `password_wrong` / `password_required` | the password sign-in and the password form (`bad_credentials` is 401; `locked` is 429 after too many wrong passwords) |
 | 404 | `no_session` | the sign-in to revoke no longer exists |
 | 409 | `device_online` | `DELETE /v1/devices/{id}` (or the hub's `forget`) for a device that is connected right now; sign out on it first |
 | 409 | `sync_off` | a `/v1/sync/*` call while the person has conversation sync turned off |
@@ -79,7 +78,7 @@ Errors carry a stable `code` the app can turn into a sentence:
 | 401 | `bad_key` | unknown or revoked key — the phone keeps the account's data aside for the next sign-in |
 | 401 | `account_deleted` | the key's account was deleted (0.1.40; remembered for 90 days) — the phone may delete the account's data |
 | 402 | `out_of_tokens` | grant used up — top up with the admin endpoint |
-| 403 | `account_disabled` | the operator switched the account off: its keys answer `401 bad_key`, `POST /v1/auth/verify` answers this, and `/v1/auth/login` answers it only to the right password (a wrong one is `401 bad_credentials` as for any account). `POST /v1/auth/code` answers the same `204` as for anyone, counts towards the same limits and sends nothing, so a request there learns neither that the number has an account nor that it is off |
+| 403 | `account_disabled` | the operator switched the account off: its keys answer `401 bad_key`, and `POST /v1/auth/verify` answers this. `POST /v1/auth/code` answers the same `204` as for anyone, counts towards the same limits and sends nothing, so a request there learns neither that the number has an account nor that it is off |
 | 403 | `session_from_session` | `POST /v1/auth/session-key` was called with a session key; only a device's standing key may mint one, so a leaked short-lived key cannot renew itself |
 | 404 | `model_not_offered` | not on the menu |
 | 400 | `no_secrets_in_profile` | a profile `connectors` entry carried a key named like a credential; nothing was stored |
@@ -192,10 +191,6 @@ for the full list. The ones that matter:
 | `MAX_IN_FLIGHT` | 4 | requests of one account under way at the same time (0 = off); each holds a reservation against the allowance while it runs — see *Money* |
 | `UPSTREAM_TIMEOUT_S` | 180 | how long one call to the provider may take (connecting has 20 s of its own); a reservation that outlives it by two minutes is dropped |
 | `TRUSTED_PROXIES` | empty | whose `X-Forwarded-For` to believe, comma-separated addresses or networks (`*` for every peer); empty = every loopback, private, link-local and shared address (Caddy on this box or the compose network, a tailnet). Set, it is the whole list: a non-global peer not on it is not believed either |
-| `PASSWORD_MIN_LEN` | 8 | the shortest password the relay accepts (`400 password_short` below it) |
-| `PASSWORD_MAX_ATTEMPTS`, `LOCKOUT_S` | 5, 900 | wrong passwords before an account is locked for that long (a code still works) |
-| `PASSWORD_RESET_WINDOW_S` | 1800 | after a sign-in with a code, how long a new password may be set without the old one (the way back in when it is forgotten) |
-| `LOGIN_FAIL_PER_IP_HOUR` | 30 | wrong passwords from one network address per hour across all accounts — a list of numbers tried once each never trips the per-account lock, this does (0.12); 0 = off |
 | `CODE_TTL_S`, `CODE_MAX_ATTEMPTS` | 600, 5 | how long a sign-in code is good for, and how many wrong guesses it survives |
 | `CODE_PER_IDENTIFIER_10M`, `CODE_PER_IP_HOUR` | 3, 10 | codes one number or address may request per ten minutes, and one network address per hour; past either the request is answered `429 code_too_often` |
 | `CODE_SENDER` | `log` | `log`, `smtp`, `aliyun` or `both` (SMS for phones, mail for addresses) |
@@ -297,10 +292,8 @@ person sees the adjustment on their account page.
 which are overridden, and the count below the allowance; `GET /v1/config`
 (no key) returns `version`, `signup_open`, `allowance_cny` / `allowance_usd`,
 `invite_bonus_cny`, `invitee_bonus_cny`, `usd_cny`, `invite_url`,
-`own_key_docs`, `privacy_url`, `repo_url`, `improve_default`, and the two figures the
-sign-in and password forms print, `code_ttl_s` and `password_min_len`, so the web
-console says how long a code is good for and how short a password may be in the
-relay's own numbers.
+`own_key_docs`, `privacy_url`, `repo_url`, `improve_default`, and `code_ttl_s`,
+so the web console says how long a code is good for in the relay's own number.
 
 ### Controls (0.22)
 
@@ -521,8 +514,8 @@ vanished before its stream began cannot hold a slot for good.
 ### Operator's page
 
 `/app/admin/` asks for `CLOUD_ADMIN_TOKEN` (kept in the tab's sessionStorage)
-and is the dashboard from `/v1/admin/overview`: how many accounts (with a
-password, members, disabled), who was active today and over the period,
+and is the dashboard from `/v1/admin/overview`: how many accounts (members,
+disabled), who was active today and over the period,
 what it cost today / this week / over 7, 30 or 90 days split by kind (chat,
 pictures, video) and by model, spend by day as stacked bars, the top
 spenders, today's signals (sign-ins, failures, budget refusals, upstream
@@ -616,8 +609,8 @@ selector applies to all of them). *Overview* keeps the headline tiles, a
 health strip, spend by day, the top regions and spenders and the latest
 events, each panel linking to its page. *People* is the accounts filtered:
 by region (country → province → city, from the account's latest address),
-sign-up channel, status (member, disabled, locked, with or without a
-password, *Help improve* on, pool used up, a device online, new this
+sign-up channel, status (member, disabled, locked,
+*Help improve* on, pool used up, a device online, new this
 period), last activity (24 h, 7 d, 30 d, older, never), lifetime spend
 bucket and last client, plus a search over the hint / id / address — and the
 charts above the table are the same filters drawn: sign-ups by day, where
@@ -678,7 +671,7 @@ own, brought someone) and *Version* (the client versions seen, with counts).
 one it opens *People*; the CSV gained `version`, `invited_by` and `invites`.
 The account drawer's statement and timeline each have kind chips (chat,
 pictures, video, calls, credits; sign-ins, refusals, errors, content checks,
-calls, passwords, invites, credits) and a text box (model or note; detail or
+calls, invites, credits) and a text box (model or note; detail or
 kind name) sent to the relay as `?kind=&q=`, so the count is of what matches
 and the filter holds across pages; an account that never made a request gets
 one line instead of three empty tables. Opening another page closes the
@@ -745,10 +738,10 @@ deletion; the account's own timeline goes with the account.
 ### Web console
 
 `/app/` is the person's own page in the same design as the phone app: sign in
-with a code or a password, the devices of the account with their Muses to
+with a code, the devices of the account with their Muses to
 talk to, and an account sheet (`/v1/me`) with the allowance, usage by kind
 and by model, the sign-ins with a way to revoke each, the recent activity,
-set / change / remove the password, sign out here or everywhere.
+sign out here or everywhere.
 
 ### Invitations and the one pool (0.5, both sides since 0.9)
 

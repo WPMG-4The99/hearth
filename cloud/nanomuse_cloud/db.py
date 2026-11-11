@@ -35,7 +35,7 @@ CREATE TABLE IF NOT EXISTS accounts (
     disabled      INTEGER NOT NULL DEFAULT 0,
     identifier_enc TEXT NOT NULL DEFAULT '',  -- AES-GCM of the phone / address, base64
     unlimited     INTEGER NOT NULL DEFAULT 0,  -- a member: no daily money cap (set by the operator)
-    password_hash TEXT NOT NULL DEFAULT '',    -- scrypt$salt$hash, empty = no password (codes only)
+    password_hash TEXT NOT NULL DEFAULT '',    -- unused; kept so an older file still opens
     password_set_at INTEGER,
     failed_logins INTEGER NOT NULL DEFAULT 0,  -- wrong passwords in a row
     locked_until  INTEGER,                     -- password sign-in refused until then
@@ -1289,32 +1289,6 @@ class Database:
                 (limit,),
             ).fetchall()
 
-    # -- passwords -----------------------------------------------------------------
-
-    def set_password(self, account_id: str, password_hash: str) -> None:
-        """Also clears any lock: a new password is a fresh start."""
-        with self.tx() as c:
-            c.execute(
-                "UPDATE accounts SET password_hash=?, password_set_at=?, failed_logins=0, locked_until=NULL WHERE id=?",
-                (password_hash, now() if password_hash else None, account_id),
-            )
-
-    def login_failed(self, account_id: str, max_attempts: int, lockout_s: int) -> int:
-        """Counts a wrong password; locks the account for `lockout_s` at the
-        limit. Returns how many tries are left (0 = locked now)."""
-        with self.tx() as c:
-            c.execute("UPDATE accounts SET failed_logins=failed_logins+1 WHERE id=?", (account_id,))
-            r = c.execute("SELECT failed_logins FROM accounts WHERE id=?", (account_id,)).fetchone()
-            failed = int(r[0]) if r else 0
-            if failed >= max_attempts:
-                c.execute("UPDATE accounts SET locked_until=?, failed_logins=0 WHERE id=?", (now() + lockout_s, account_id))
-                return 0
-        return max(0, max_attempts - failed)
-
-    def login_succeeded(self, account_id: str) -> None:
-        with self.tx() as c:
-            c.execute("UPDATE accounts SET failed_logins=0, locked_until=NULL WHERE id=?", (account_id,))
-
     def list_accounts(self, limit: int = 200) -> list[sqlite3.Row]:
         with self._lock:
             return self._conn.execute("SELECT * FROM accounts ORDER BY created_at DESC LIMIT ?", (limit,)).fetchall()
@@ -1410,7 +1384,7 @@ class Database:
     def accounts_by_channel(self) -> list[sqlite3.Row]:
         with self._lock:
             return self._conn.execute(
-                """SELECT channel, COUNT(*) AS accounts, SUM(CASE WHEN password_hash<>'' THEN 1 ELSE 0 END) AS with_password,
+                """SELECT channel, COUNT(*) AS accounts,
                           SUM(unlimited) AS members, SUM(disabled) AS disabled, SUM(contribute) AS contribute, SUM(sync_enabled) AS sync_on
                    FROM accounts GROUP BY channel ORDER BY accounts DESC"""
             ).fetchall()
@@ -1431,7 +1405,7 @@ class Database:
         with self._lock:
             return self._conn.execute(
                 "SELECT k.*, a.disabled AS account_disabled, a.granted, a.used, a.channel, a.hint, a.created_at AS account_created_at, "
-                "a.id_hash, a.unlimited AS account_unlimited, a.password_hash, a.password_set_at, "
+                "a.id_hash, a.unlimited AS account_unlimited, "
                 "a.invite_code, a.invites, a.grant_uy, a.contribute_bonus_at, a.contribute "
                 "FROM api_keys k JOIN accounts a ON a.id=k.account_id WHERE k.key_hash=?",
                 (key_hash,),
@@ -1705,8 +1679,7 @@ class Database:
     def account_counts(self) -> dict[str, int]:
         with self._lock:
             r = self._conn.execute(
-                """SELECT COUNT(*) AS total, SUM(disabled) AS disabled, SUM(unlimited) AS unlimited,
-                          SUM(CASE WHEN password_hash<>'' THEN 1 ELSE 0 END) AS with_password
+                """SELECT COUNT(*) AS total, SUM(disabled) AS disabled, SUM(unlimited) AS unlimited
                    FROM accounts"""
             ).fetchone()
             keys = self._conn.execute("SELECT COUNT(*) FROM api_keys WHERE revoked_at IS NULL").fetchone()
@@ -1715,7 +1688,6 @@ class Database:
             "total": int(r["total"] or 0),
             "disabled": int(r["disabled"] or 0),
             "unlimited": int(r["unlimited"] or 0),
-            "with_password": int(r["with_password"] or 0),
             "live_keys": int(keys[0]),
             "devices": int(devices[0]),
         }

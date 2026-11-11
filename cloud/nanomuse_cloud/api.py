@@ -1,18 +1,16 @@
 """HTTP: the sign-up endpoints the app calls, and the OpenAI-shaped proxy.
 
     GET  /healthz                                               → {ok, version, models, paused}
-    GET  /v1/config                                             → the public figures the apps print (allowance, bonus, links, code_ttl_s, password_min_len); a minute's cache
+    GET  /v1/config                                             → the public figures the apps print (allowance, bonus, links, code_ttl_s); a minute's cache
     POST /v1/auth/code        {identifier}                      → 204 (400 phone_region: a number the SMS sender cannot reach; a disabled account gets the same 204 and no code is sent; 429 domain_limited: a new address of a domain at its day's sign-up limit)
     POST /v1/auth/verify      {identifier, code, device, invite?} → {api_key, base_url, account, tokens, models}
-    POST /v1/auth/login       {identifier, password, device}    → the same, for accounts that set a password
-    POST /v1/auth/password    {password, current?}              → 204 (set / change; "" + current removes)
     GET  /v1/me                                                 → account, tokens, spend (¥ spent / pool / left), invite, contribute, usage by kind, models, recent, nudges
     GET  /v1/nudges                                             → when the apps may ask for a star (0.18; public, cached an hour; the operator's policy over the defaults)
     GET  /v1/me/invite                                          → the invite code and link, who came with it, what they brought
     GET  /v1/estimate         ?images=5&clips=4                 → what that would cost next to what is left (nothing charged)
     GET  /v1/me/sessions                                        → live sign-ins (device, via, when; the current one marked)
     DELETE /v1/me/sessions/{prefix}                             → 204 (sign one device out)
-    GET  /v1/me/events                                          → the account's own timeline (sign-ins, password changes…)
+    GET  /v1/me/events                                          → the account's own timeline (sign-ins, refusals…)
     POST /v1/me/contribute {on}                                 → Data controls: "help improve nanoMuse's AI models" — keep the text of my chat turns (the default for new accounts is IMPROVE_DEFAULT)
     DELETE /v1/me/samples                                       → delete every turn kept from me
     GET  /v1/sync/state                                         → 0.19: {enabled, cursor, counts, limits, working[]} — conversation sync between the account's devices
@@ -458,39 +456,6 @@ def create_app(
         key, caller, created = await asyncio.to_thread(cloud.verify_code, ident, code, device, invite)
         me = cloud.me(caller, client_place(request))
         return {"api_key": key, "created": created, **me}
-
-    @app.post("/v1/auth/login")
-    async def auth_login(request: Request) -> dict:
-        """The password way in: no message to wait for, for people who set one."""
-        body = await _json(request)
-        try:
-            ident = parse(str(body.get("identifier", "")))
-        except BadIdentifier as e:
-            raise CloudError(400, "bad_identifier", "Enter a mainland phone number or an e-mail address") from e
-        password = str(body.get("password", ""))
-        if not password:
-            raise CloudError(400, "password_required", "Enter the password")
-        device = str(body.get("device", ""))[:80]
-        key, caller = await asyncio.to_thread(cloud.login_password, ident, password, device, client_ip(request))
-        me = cloud.me(caller, client_place(request))
-        return {"api_key": key, "created": False, **me}
-
-    @app.post("/v1/auth/password", status_code=204)
-    async def auth_password(request: Request, caller: Caller = Depends(caller_dep)) -> Response:
-        """Set or change the password (`current` when one exists, unless this
-        key came from a code sign-in just now); {"password": ""} with `current`
-        removes it."""
-        body = await _json(request)
-        password = str(body.get("password", ""))
-        current = body.get("current")
-        current = str(current) if current is not None else None
-        if password == "":
-            if not current:
-                raise CloudError(400, "password_required", "Enter the current password to remove it")
-            await asyncio.to_thread(cloud.clear_password, caller, current)
-        else:
-            await asyncio.to_thread(cloud.set_password, caller, password, current)
-        return Response(status_code=204)
 
     @app.get("/v1/nudges")
     async def public_nudges() -> Response:

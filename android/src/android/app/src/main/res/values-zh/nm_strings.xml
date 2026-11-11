@@ -615,10 +615,6 @@
     <string name="nm_setup_source_cloud_sub">用这台中继上的模型。不用粘贴密钥。</string>
     <string name="nm_setup_source_own_sub">OpenAI、Anthropic、DeepSeek、百炼等兼容 OpenAI 接口的服务。key 只留在这台手机上。</string>
     <string name="nm_setup_source_fine_print">先选一个。另一个以后还能加上。</string>
-    <string name="nm_setup_password_title">设一个密码</string>
-    <string name="nm_setup_password_sub">账号已登录。设了密码，电脑和其他手机就能直接登录，不用再等验证码。</string>
-    <string name="nm_setup_password_set">设置密码</string>
-    <string name="nm_setup_password_fine_print">可选。以后也可以在「账号」里设置或修改。</string>
     <string name="nm_welcome_feat_chat">对话、图片、视频</string>
     <string name="nm_welcome_feat_chat_sub">能力不错的模型，图片与视频生成，工具、技能和记忆，都在你的手机上</string>
     <string name="nm_welcome_feat_hands">Hands：替你操作手机</string>
@@ -635,9 +631,6 @@
     <string name="nm_cloud_signin_title">登录 The Hearth</string>
     <string name="nm_cloud_signin_subtitle">先填邮箱，再填一次性验证码。这台中继把验证码写在自己的日志里。</string>
     <string name="nm_cloud_mode_code">验证码登录</string>
-    <string name="nm_cloud_mode_password">密码登录</string>
-    <string name="nm_cloud_password">密码</string>
-    <string name="nm_cloud_forgot_password">忘了密码？用验证码登录</string>
     <string name="nm_cloud_identifier">邮箱</string>
     <string name="nm_cloud_identifier_hint">you@example.com</string>
     <string name="nm_cloud_code">验证码</string>
@@ -701,15 +694,10 @@
     <string name="nm_cloud_err_unreachable">连不上 The Hearth，请检查网络。</string>
     <string name="nm_cloud_err_generic">出了点问题。</string>
     <string name="nm_cloud_err_bad_credentials">邮箱或密码不对。</string>
-    <string name="nm_cloud_err_no_password">这个账号还没有设置密码。先用验证码登录，再到「账号」里设置。</string>
     <string name="nm_cloud_err_locked">错误次数太多，请过几分钟再试。</string>
-    <string name="nm_cloud_err_password_wrong">当前密码不对。</string>
-    <string name="nm_cloud_err_password_required">请先输入当前密码。</string>
-    <string name="nm_cloud_err_password_short">密码至少 8 位。</string>
-    <string name="nm_cloud_err_password_weak">这个密码太好猜了。</string>
     <string name="nm_cloud_err_signup_closed">这台中继暂时关闭了注册。已有的账号仍可登录。</string>
     <string name="nm_cloud_err_domain_limited">这个域名的邮箱今天在这台中继上的注册名额已经用完。明天再试，或者换一个地址。</string>
-    <string name="nm_cloud_err_channel_unsupported">这台中继不会给这类地址发送验证码。换另一类地址（邮箱或手机号），或者用密码登录。</string>
+    <string name="nm_cloud_err_channel_unsupported">这台中继不会给这类地址发送验证码。换另一类地址（邮箱或手机号）。</string>
     <string name="nm_cloud_err_too_large">这条消息对模型来说太长了。缩短一些、去掉几个附件，或者新开一个对话。</string>
     <string name="nm_cloud_err_content_rejected">模型服务商的内容审核没有放行这次请求。换个说法试试；如果反复出现，就新开一个对话，被拦下的可能是对话里更早的内容。</string>
     <string name="nm_cloud_err_provider_busy">模型服务商现在很忙，稍后再试。</string>
@@ -727,18 +715,6 @@
     <!-- 0.1.20: the account page -->
     <string name="nm_cloud_since">%1$s 加入</string>
     <string name="nm_cloud_account_id">账号 %1$s…</string>
-    <string name="nm_cloud_password_set">已设置</string>
-    <string name="nm_cloud_password_unset">未设置</string>
-    <string name="nm_cloud_password_title_set">设置密码</string>
-    <string name="nm_cloud_password_title_change">修改密码</string>
-    <string name="nm_cloud_password_current">当前密码</string>
-    <string name="nm_cloud_password_new">新密码（至少 8 位）</string>
-    <string name="nm_cloud_password_confirm">再输一次新密码</string>
-    <string name="nm_cloud_password_mismatch">两次输入的密码不一致。</string>
-    <string name="nm_cloud_password_why">设了密码，在别的设备上登录就不用等验证码。刚用验证码登录时，当前密码可以不填。</string>
-    <string name="nm_cloud_password_remove">去掉密码</string>
-    <string name="nm_cloud_password_saved">密码已保存。</string>
-    <string name="nm_cloud_password_removed">密码已去掉。</string>
     <string name="nm_cloud_devices_signed_in">已登录的设备</string>
     <string name="nm_cloud_device_unknown">未知设备</string>
     <string name="nm_cloud_this_device">这台手机</string>
@@ -1104,8 +1080,6 @@
     <string name="nm_models_search_clear">清除搜索</string>
     <string name="nm_models_no_match">没有匹配的模型</string>
     <!-- Names for icon-only controls, read by screen readers (#338) -->
-    <string name="nm_a11y_show_password">显示密码</string>
-    <string name="nm_a11y_hide_password">隐藏密码</string>
     <string name="nm_a11y_avatar_candidate">候选 %1$d</string>
     <string name="nm_a11y_share_card">卡片 %1$d</string>
     <string name="nm_a11y_add">添加</string>

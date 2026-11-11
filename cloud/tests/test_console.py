@@ -183,12 +183,12 @@ def test_web_console_prints_the_relays_code_lifetime_and_password_length():
     """The relay's ``CODE_TTL_S`` and ``PASSWORD_MIN_LEN`` are configurable; the console
     reads them from ``/v1/config`` since 0.25 instead of saying ten minutes and 8 characters."""
     source = (CONSOLE / "app.js").read_text(encoding="utf-8")
-    assert '"/v1/config"' in source and "cfg.code_ttl_s" in source and "cfg.password_min_len" in source
+    assert '"/v1/config"' in source and "cfg.code_ttl_s" in source
     assert source.count("codeSent: (m) =>") == 2 and source.count("pwShort: (n) =>") == 2 and source.count("pwWhy: (n) =>") == 2
     assert "十分钟" not in source and "ten minutes" not in source
     assert "8 个字符" not in source and "8 位" not in source and "8 characters" not in source
     # the default stands for a relay that does not send the fields yet
-    assert "code_ttl_s: 600" in source and "password_min_len: 8" in source
+    assert "code_ttl_s: 600" in source
 
 
 def test_admin_console_searches_and_filters_further():

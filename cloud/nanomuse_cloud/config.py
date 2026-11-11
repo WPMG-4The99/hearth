@@ -592,19 +592,6 @@ class Settings:
 
     code_ttl_s: int = field(default_factory=lambda: _int("CODE_TTL_S", 600))
     code_per_identifier_10m: int = field(default_factory=lambda: _int("CODE_PER_IDENTIFIER_10M", 3))
-    # Passwords are optional on top of the code: someone who set one may sign
-    # in with it on a new device without waiting for a message. After this
-    # many wrong tries in a row the password is locked for LOCKOUT_S seconds
-    # (a code still works, and setting a new password clears the lock).
-    password_min_len: int = field(default_factory=lambda: _int("PASSWORD_MIN_LEN", 8))
-    password_max_attempts: int = field(default_factory=lambda: _int("PASSWORD_MAX_ATTEMPTS", 5))
-    lockout_s: int = field(default_factory=lambda: _int("LOCKOUT_S", 900))
-    # Wrong passwords from one network address across all accounts per hour; the
-    # per-account lockout above does not stop a list of numbers tried once each.
-    login_fail_per_ip_hour: int = field(default_factory=lambda: _int("LOGIN_FAIL_PER_IP_HOUR", 30))
-    # How long after a code sign-in a password may be set without the old one
-    # (the "forgot my password" path: sign in with a code, set a new one).
-    password_reset_window_s: int = field(default_factory=lambda: _int("PASSWORD_RESET_WINDOW_S", 1800))
     # Members: phone numbers / e-mail addresses (comma-separated) that have no
     # daily cap — the operator and friends. Normalised like the identifiers
     # themselves, so "139 0000 1111" works. With SIGNUP_OPEN=0 the relay is

@@ -634,10 +634,6 @@
     <string name="nm_setup_source_cloud_sub">Le modèle du relais de cette maison. Rien à coller.</string>
     <string name="nm_setup_source_own_sub">OpenAI, Anthropic, DeepSeek, Bailian et d’autres points de terminaison compatibles OpenAI. La clé reste sur ce téléphone.</string>
     <string name="nm_setup_source_fine_print">Choisissez-en un pour commencer. L\'autre peut être ajouté plus tard.</string>
-    <string name="nm_setup_password_title">Définir un mot de passe</string>
-    <string name="nm_setup_password_sub">Votre compte est prêt. Avec un mot de passe, vos ordinateurs et vos autres téléphones se connectent tout de suite, sans attendre de code.</string>
-    <string name="nm_setup_password_set">Définir le mot de passe</string>
-    <string name="nm_setup_password_fine_print">Facultatif. Vous pourrez le définir ou le changer plus tard sous Compte.</string>
     <string name="nm_welcome_feat_chat">Chat, images, vidéo</string>
     <string name="nm_welcome_feat_chat_sub">Un modèle solide, génération d’images et de vidéo, outils, compétences et mémoire, sur votre téléphone</string>
     <string name="nm_welcome_feat_hands">Mains : il utilise votre téléphone</string>
@@ -654,9 +650,6 @@
     <string name="nm_cloud_signin_title">Se connecter à The Hearth</string>
     <string name="nm_cloud_signin_subtitle">Votre e-mail, puis le code à usage unique. Ce relais écrit le code dans son journal.</string>
     <string name="nm_cloud_mode_code">Avec un code</string>
-    <string name="nm_cloud_mode_password">Avec un mot de passe</string>
-    <string name="nm_cloud_password">Mot de passe</string>
-    <string name="nm_cloud_forgot_password">Mot de passe oublié ? Connectez-vous avec un code</string>
     <string name="nm_cloud_identifier">E-mail</string>
     <string name="nm_cloud_identifier_hint">vous@example.com</string>
     <string name="nm_cloud_code">Code</string>
@@ -722,15 +715,10 @@
     <string name="nm_cloud_err_unreachable">Impossible de joindre The Hearth. Vérifiez la connexion.</string>
     <string name="nm_cloud_err_generic">Quelque chose n’a pas marché.</string>
     <string name="nm_cloud_err_bad_credentials">E-mail ou mot de passe incorrect.</string>
-    <string name="nm_cloud_err_no_password">Ce compte n’a pas encore de mot de passe. Connectez-vous avec un code, puis définissez-en un sous Compte.</string>
     <string name="nm_cloud_err_locked">Trop de tentatives incorrectes. Attendez quelques minutes.</string>
-    <string name="nm_cloud_err_password_wrong">Le mot de passe actuel est incorrect.</string>
-    <string name="nm_cloud_err_password_required">Saisissez d’abord le mot de passe actuel.</string>
-    <string name="nm_cloud_err_password_short">Le mot de passe doit faire au moins 8 caractères.</string>
-    <string name="nm_cloud_err_password_weak">Ce mot de passe est trop facile à deviner.</string>
     <string name="nm_cloud_err_signup_closed">Les inscriptions sont suspendues sur ce relais pour le moment. Un compte déjà créé peut toujours se connecter.</string>
     <string name="nm_cloud_err_domain_limited">Les adresses de ce domaine ont atteint la limite d’inscriptions du jour sur ce relais. Réessayez demain ou utilisez une autre adresse.</string>
-    <string name="nm_cloud_err_channel_unsupported">Ce relais n’envoie pas de code à ce type d’adresse. Utilisez l’autre type (e-mail ou numéro de téléphone) ou connectez-vous avec votre mot de passe.</string>
+    <string name="nm_cloud_err_channel_unsupported">Ce relais n’envoie pas de code à ce type d’adresse. Utilisez l’autre type (e-mail ou numéro de téléphone).</string>
     <string name="nm_cloud_err_too_large">Ce message est trop volumineux pour le modèle. Raccourcissez-le, retirez quelques pièces jointes ou commencez une nouvelle discussion.</string>
     <string name="nm_cloud_err_content_rejected">Le contrôle de contenu du fournisseur du modèle a refusé cette demande. Essayez d\'autres mots ou, si cela se répète, ouvrez une nouvelle discussion : les mots en cause peuvent se trouver plus haut dans la conversation.</string>
     <string name="nm_cloud_err_provider_busy">Le fournisseur du modèle est occupé en ce moment. Réessayez dans un instant.</string>
@@ -749,18 +737,6 @@
     <!-- 0.1.20: the account page -->
     <string name="nm_cloud_since">depuis %1$s</string>
     <string name="nm_cloud_account_id">Compte %1$s…</string>
-    <string name="nm_cloud_password_set">Défini</string>
-    <string name="nm_cloud_password_unset">Non défini</string>
-    <string name="nm_cloud_password_title_set">Définir un mot de passe</string>
-    <string name="nm_cloud_password_title_change">Changer le mot de passe</string>
-    <string name="nm_cloud_password_current">Mot de passe actuel</string>
-    <string name="nm_cloud_password_new">Nouveau mot de passe (8 caractères ou plus)</string>
-    <string name="nm_cloud_password_confirm">Répétez le nouveau mot de passe</string>
-    <string name="nm_cloud_password_mismatch">Les deux mots de passe diffèrent.</string>
-    <string name="nm_cloud_password_why">Avec un mot de passe, vous pouvez vous connecter sur un autre appareil sans attendre de code. Juste après une connexion par code, le mot de passe actuel peut rester vide.</string>
-    <string name="nm_cloud_password_remove">Supprimer le mot de passe</string>
-    <string name="nm_cloud_password_saved">Mot de passe enregistré.</string>
-    <string name="nm_cloud_password_removed">Mot de passe supprimé.</string>
     <string name="nm_cloud_devices_signed_in">Connecté sur</string>
     <string name="nm_cloud_device_unknown">Appareil inconnu</string>
     <string name="nm_cloud_this_device">ce téléphone</string>
@@ -1132,8 +1108,6 @@
     <string name="nm_models_search_clear">Effacer la recherche</string>
     <string name="nm_models_no_match">Aucun modèle ne correspond</string>
     <!-- Names for icon-only controls, read by screen readers (#338) -->
-    <string name="nm_a11y_show_password">Afficher le mot de passe</string>
-    <string name="nm_a11y_hide_password">Masquer le mot de passe</string>
     <string name="nm_a11y_avatar_candidate">Candidat %1$d</string>
     <string name="nm_a11y_share_card">Carte %1$d</string>
     <string name="nm_a11y_add">Ajouter</string>

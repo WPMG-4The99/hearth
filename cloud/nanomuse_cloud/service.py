@@ -83,28 +83,6 @@ def region_of_place(place: Place | None) -> str:
     return "intl"
 
 
-def hash_password(password: str) -> str:
-    """scrypt with a random salt: `scrypt$<salt>$<hash>`, both base64. The
-    parameters are the library's recommended interactive ones; a check takes
-    a few tens of milliseconds, which is what a sign-in should cost."""
-    salt = secrets.token_bytes(16)
-    digest = hashlib.scrypt(password.encode(), salt=salt, n=2**14, r=8, p=1, dklen=32)
-    return "scrypt$" + base64.b64encode(salt).decode() + "$" + base64.b64encode(digest).decode()
-
-
-def check_password(password: str, stored: str) -> bool:
-    try:
-        algo, salt_b64, hash_b64 = stored.split("$", 2)
-        if algo != "scrypt":
-            return False
-        salt = base64.b64decode(salt_b64)
-        expected = base64.b64decode(hash_b64)
-    except (ValueError, TypeError):
-        return False
-    digest = hashlib.scrypt(password.encode(), salt=salt, n=2**14, r=8, p=1, dklen=len(expected))
-    return hmac.compare_digest(digest, expected)
-
-
 class CloudError(Exception):
     """An error the app should show. `status` is the HTTP status, `code` a stable
     machine-readable name the app can switch on (it has strings for each)."""
@@ -264,10 +242,7 @@ class Caller:
     # A member has no daily money cap: on the operator's list (ALLOWED_IDENTIFIERS,
     # matched by the identifier's hash) or flagged on the account by the operator.
     member: bool = False
-    has_password: bool = False
-    password_set_at: int | None = None
-    # How and when this particular key was issued: a recent code sign-in may
-    # set a password without knowing the old one (the reset path).
+    # How and when this particular key was issued. Sign-in is a code only.
     via: str = "code"
     key_created_at: int = 0
     key_prefix: str = ""
@@ -387,7 +362,6 @@ class Cloud:
         self.crypto = IdentifierCrypto(settings.identifier_key)
         # 0.22: the operator's switches and thresholds (settings table, applied at once)
         self.controls = Controls(self.db, settings)
-        self._login_failures: dict[str, list[int]] = {}
         if settings.dev_mode:
             log.warning("CLOUD_SECRET is not set: development mode, identifiers hashed with a fixed key")
         if settings.unlimited:
@@ -637,10 +611,8 @@ class Cloud:
             "privacy_url": self.s.privacy_url,
             "repo_url": self.s.repo_url,
             "improve_default": self.s.improve_default,
-            # how long a sign-in code is good for and the shortest password accepted, so the
-            # sign-in and password forms print the relay's figures and not their own
+            # how long a sign-in code is good for, so the sign-in form prints the relay's figure
             "code_ttl_s": self.s.code_ttl_s,
-            "password_min_len": self.s.password_min_len,
         }
 
     def household_partner_ids(self, account_id: str) -> list[str]:
@@ -1328,108 +1300,6 @@ class Cloud:
         self.db.add_event(caller.account_id, "sign_in.session", (device or "session")[:60])
         return key, expires_at
 
-    # -- passwords --------------------------------------------------------------------
-
-    def _check_new_password(self, password: str, ident_value: str = "") -> None:
-        if len(password) < self.s.password_min_len:
-            raise CloudError(400, "password_short", f"Use at least {self.s.password_min_len} characters")
-        if len(password) > 128:
-            raise CloudError(400, "password_long", "That password is too long")
-        if len(set(password)) < 3:
-            raise CloudError(400, "password_weak", "Use a few different characters")
-        if ident_value and password.strip().lower() == ident_value.strip().lower():
-            raise CloudError(400, "password_weak", "The password cannot be the address itself")
-
-    def set_password(self, caller: Caller, password: str, current: str | None = None) -> None:
-        """Set or change the password. When one is already set, the old one is
-        needed — unless this key came from a code sign-in a few minutes ago,
-        which is the "forgot it" path (the code proved the phone or mailbox)."""
-        account = self.db.account(caller.account_id)
-        if account is None:
-            raise CloudError(404, "no_account", "No such account")
-        self._check_new_password(password, self.crypto.decrypt(caller.account_id, account["identifier_enc"] or "") or "")
-        stored = account["password_hash"] or ""
-        if stored:
-            fresh_code = caller.via == "code" and now() - caller.key_created_at <= self.s.password_reset_window_s
-            if not fresh_code:
-                if not current:
-                    raise CloudError(400, "password_required", "Enter the current password (or sign in with a code first)")
-                if not check_password(current, stored):
-                    left = self.db.login_failed(caller.account_id, self.s.password_max_attempts, self.s.lockout_s)
-                    raise CloudError(
-                        400,
-                        "password_wrong",
-                        f"That is not the current password ({left} tries left)"
-                        if left
-                        else "Too many wrong tries; sign in with a code to reset it",
-                    )
-        self.db.set_password(caller.account_id, hash_password(password))
-        self.db.add_event(caller.account_id, "password.set" if not stored else "password.changed")
-
-    def clear_password(self, caller: Caller, current: str) -> None:
-        account = self.db.account(caller.account_id)
-        if account is None or not account["password_hash"]:
-            return
-        if not check_password(current, account["password_hash"]):
-            raise CloudError(400, "password_wrong", "That is not the current password")
-        self.db.set_password(caller.account_id, "")
-        self.db.add_event(caller.account_id, "password.cleared")
-
-    def login_password(self, ident: Identifier, password: str, device: str, ip: str = "") -> tuple[str, Caller]:
-        """Sign in on a new device with the password instead of waiting for a code."""
-        if ip and self._login_failures_from(ip) >= self.s.login_fail_per_ip_hour > 0:
-            raise CloudError(429, "locked", "Too many wrong passwords from this network; wait a while or sign in with a code")
-        if not self.allowed(ident):
-            raise CloudError(403, "not_invited", "This relay is private; that address is not on its list")
-        account = self._account_for(ident)
-        if account is None:
-            # Same answer as a wrong password: the sign-in form must not tell
-            # whether a number has an account.
-            hash_password("x")  # keep the timing alike
-            self._note_login_failure(ip)
-            self.db.add_event("", "sign_in.failed", ident.channel)
-            raise CloudError(401, "bad_credentials", "That address and password do not match")
-        locked_until = account["locked_until"]
-        if locked_until and int(locked_until) > now():
-            raise CloudError(429, "locked", "Too many wrong passwords; wait a while or sign in with a code")
-        if not account["password_hash"]:
-            raise CloudError(400, "no_password", "This account has no password yet; sign in with a code and set one under Account")
-        if not check_password(password, account["password_hash"]):
-            left = self.db.login_failed(account["id"], self.s.password_max_attempts, self.s.lockout_s)
-            self._note_login_failure(ip)
-            self.db.add_event(account["id"], "sign_in.failed", device)
-            if left == 0:
-                raise CloudError(429, "locked", "Too many wrong passwords; wait a while or sign in with a code")
-            raise CloudError(401, "bad_credentials", "That address and password do not match")
-        if account["disabled"]:
-            # Only the holder of the right password hears that the account is disabled; a
-            # probe with a guessed password gets the same answer as for any wrong password.
-            raise CloudError(403, "account_disabled", "This account is disabled")
-        self.db.login_succeeded(account["id"])
-        key, caller = self._issue_key(account["id"], device, via="password")
-        self.db.add_event(account["id"], "sign_in.password", device)
-        return key, caller
-
-    def _login_failures_from(self, ip: str) -> int:
-        """Wrong passwords this network address has sent in the last hour."""
-        cutoff = now() - 3600
-        stamps = [t for t in self._login_failures.get(ip, ()) if t >= cutoff]
-        if stamps:
-            self._login_failures[ip] = stamps
-        else:
-            self._login_failures.pop(ip, None)
-        return len(stamps)
-
-    def _note_login_failure(self, ip: str) -> None:
-        if not ip:
-            return
-        if len(self._login_failures) >= 10_000 and ip not in self._login_failures:
-            # a flood of addresses: forget the oldest rather than grow without bound
-            cutoff = now() - 3600
-            for stale in [k for k, v in self._login_failures.items() if not v or v[-1] < cutoff]:
-                del self._login_failures[stale]
-        self._login_failures.setdefault(ip, []).append(now())
-
     # -- keys -------------------------------------------------------------------------
 
     def _caller(self, key_hash: str) -> Caller | None:
@@ -1448,8 +1318,6 @@ class Cloud:
                 used=int(row["used"]),
                 account_created_at=int(row["account_created_at"]),
                 member=bool(row["account_unlimited"]) or row["id_hash"] in self.member_hashes,
-                has_password=bool(row["password_hash"]),
-                password_set_at=int(row["password_set_at"]) if row["password_set_at"] else None,
                 via=row["via"] or "code",
                 key_created_at=int(row["created_at"]),
                 key_prefix=row["prefix"],
@@ -1706,8 +1574,6 @@ class Cloud:
                 "member": caller.member,
                 # may name any model of the provider's for its kind (any_model_members)
                 "any_model": self.any_model(caller),
-                "has_password": caller.has_password,
-                "password_set_at": caller.password_set_at,
                 "sessions": len(self.db.keys_for(caller.account_id, live_only=True)),
                 "signed_in_via": caller.via,
             },
@@ -2583,10 +2449,11 @@ class Cloud:
             d = dict(r)
             d["identifier"] = self.crypto.decrypt(d["id"], d.pop("identifier_enc", "")) or ""
             id_hash = d.pop("id_hash", None)
-            d["has_password"] = bool(d.pop("password_hash", ""))
+            d.pop("password_hash", None)
+            d.pop("password_set_at", None)
             d.pop("failed_logins", None)
-            locked_until = d.pop("locked_until", None)
-            d["locked"] = bool(locked_until and int(locked_until) > t)
+            d.pop("locked_until", None)
+            d["locked"] = False
             d["disabled"] = bool(d["disabled"])
             d["unlimited"] = bool(d.get("unlimited"))
             d["listed"] = id_hash in self.member_hashes
@@ -2840,13 +2707,15 @@ class Cloud:
         a["identifier"] = self.crypto.decrypt(account_id, a.pop("identifier_enc", "") or "") or ""
         id_hash = a.pop("id_hash", None)
         a.pop("password_hash", None)
-        a["has_password"] = bool(row["password_hash"])
+        a.pop("password_set_at", None)
         a["disabled"] = bool(a["disabled"])
         a["unlimited"] = bool(a.get("unlimited"))
         a["listed"] = id_hash in self.member_hashes
         a["member"] = a["unlimited"] or a["listed"]
         a["review"] = id_hash in self.review_hashes
-        a["locked"] = bool(row["locked_until"] and int(row["locked_until"]) > t)
+        a.pop("locked_until", None)
+        a.pop("failed_logins", None)
+        a["locked"] = False
         spent_total = self.db.spent_since(account_id, 0)
         self._pool_fields(a, spent_cny=self.s.uy_to_cny(spent_total))
         # who this account brought (the newest 500, with the count of all of them), and who
@@ -3157,7 +3026,6 @@ class Cloud:
             "contributors": self.db.contributors(),
             "allowed_identifiers": [s.strip() for s in self.s.allowed_identifiers.split(",") if s.strip()],
             "sender": self.s.sender,
-            "password_min_len": self.s.password_min_len,
             # the per-domain sign-up limit (read-only here; the environment sets it)
             "signup_per_domain_day": self.s.signup_per_domain_day,
             "signup_domain_allow": [s.strip() for s in self.s.signup_domain_allow.split(",") if s.strip()],
