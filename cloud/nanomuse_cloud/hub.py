@@ -205,6 +205,8 @@ class Pending:
     # The account the call was delivered to. Same as account_id for a call inside
     # one account. A household panic keys `pending` by this, so the answer finds it.
     target_account: str = ""
+    # Already written to the household log. A missed delivery still leaves the row.
+    household: bool = False
 
 
 class Hub:
@@ -601,13 +603,15 @@ class Hub:
         if action not in HOUSEHOLD_ACTIONS:
             await self._not_allowed(conn, call_id)
             return
-        partners = self.cloud.household_partner_ids(conn.account_id)
-        if not partners:
+        if not self.cloud.in_household(conn.account_id):
             await self._not_linked(conn, call_id)
             return
+        if not await self._remember_household(conn, call_id, action, frame):
+            return
+        partners = self.cloud.household_partner_ids(conn.account_id)
         target = self._newest_partner_device(partners)
         if target is None:
-            await conn.send({"type": "error", "id": call_id, "code": "device_offline", "message": "The other phone is not connected"})
+            await conn.send({"type": "result", "id": call_id, "ok": True, "body": {"saved": True, "delivered": False}})
             return
         await self._deliver_household(conn, call_id, action, frame, target)
 
@@ -621,10 +625,11 @@ class Hub:
         if action not in HOUSEHOLD_ACTIONS or foreign.account_id not in self.cloud.household_partner_ids(conn.account_id):
             await conn.send({"type": "error", "id": call_id, "code": "device_offline", "message": "That device is not connected"})
             return
+        if not await self._remember_household(conn, call_id, action, frame):
+            return
         if foreign.kind == "web":
-            await conn.send(
-                {"type": "error", "id": call_id, "code": "not_controllable", "message": "A browser tab cannot be asked to do things"}
-            )
+            # Already in the log. A browser tab cannot show the alert.
+            await conn.send({"type": "result", "id": call_id, "ok": True, "body": {"saved": True, "delivered": False}})
             return
         await self._deliver_household(conn, call_id, action, frame, foreign)
 
@@ -636,6 +641,7 @@ class Hub:
             target=target.device_id,
             account_id=conn.account_id,
             target_account=target.account_id,
+            household=True,
         )
         args = frame.get("args") if isinstance(frame.get("args"), dict) else {}
         sender = conn.brief()
@@ -662,6 +668,16 @@ class Hub:
                 if best is None or conn.connected_at >= best.connected_at:
                     best = conn
         return best
+
+    async def _remember_household(self, conn: Connection, call_id: str, action: str, frame: dict) -> bool:
+        """Write the panic or alert before anyone is asked to show it. False when it was refused."""
+        args = frame.get("args") if isinstance(frame.get("args"), dict) else {}
+        try:
+            self.cloud.record_household_event(conn.account_id, action, str(args.get("text") or ""))
+        except CloudError as e:
+            await conn.send({"type": "error", "id": call_id, "code": e.code, "message": e.message})
+            return False
+        return True
 
     async def _not_allowed(self, conn: Connection, call_id: str) -> None:
         await conn.send(
@@ -699,6 +715,9 @@ class Hub:
             return
         out = {k: v for k, v in frame.items() if k in ("type", "id", "ok", "body", "error", "message")}
         out["from"] = conn.brief()
+        if p.household and frame.get("type") == "result" and not out.get("ok"):
+            # The row is already stored. A phone that could not show the alert does not erase it.
+            out = {"type": "result", "id": call_id, "ok": True, "body": {"saved": True, "delivered": False}, "from": conn.brief()}
         await caller.send(out)
 
     async def _sweep(self) -> None:
@@ -708,7 +727,9 @@ class Hub:
             if p.started < cutoff:
                 del self.pending[key]
                 caller = self.online.get(p.account_id, {}).get(p.caller)
-                if caller:
+                if caller and p.household:
+                    await caller.send({"type": "result", "id": p.call_id, "ok": True, "body": {"saved": True, "delivered": False}})
+                elif caller:
                     await caller.send({"type": "error", "id": p.call_id, "code": "timeout", "message": "the device did not answer in time"})
 
 

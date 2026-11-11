@@ -355,6 +355,18 @@ object NanoMuseCloud {
         return repo(context)?.loadApiKey(inst.id)?.takeIf { it.isNotBlank() }
     }
 
+    /** The household log: check-ins, panics and alerts this account is allowed to see. */
+    suspend fun householdEvents(context: Context): JSONArray {
+        val key = apiKey(context) ?: throw CloudException("signed_out", "sign in")
+        return call(context, "GET", "/v1/household/events", null, key).optJSONArray("events") ?: JSONArray()
+    }
+
+    /** A check-in in the household log. Panic and alert go through the hub. */
+    suspend fun householdCheckIn(context: Context): JSONObject {
+        val key = apiKey(context) ?: throw CloudException("signed_out", "sign in")
+        return call(context, "POST", "/v1/household/events", JSONObject().put("kind", "check-in"), key)
+    }
+
     /**
      * The invite bonus as the relay states it, for the lines that mention it ("+¥5 for each
      * of you") — the relay's figure can change from its operator's page at any time, so no

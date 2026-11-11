@@ -1174,4 +1174,13 @@
     <string name="nm_todos_add">เพิ่ม</string>
     <string name="nm_todos_delete">ลบ</string>
     <string name="nm_menu_todos">สิ่งที่ต้องทำ</string>
+    <string name="nm_panic_saved">บันทึกแล้ว อีกคนจะเห็นเมื่อเปิดแอปครั้งถัดไป</string>
+    <string name="nm_household_title">บ้าน</string>
+    <string name="nm_household_check_in">แจ้งว่าสบายดี</string>
+    <string name="nm_household_empty">ยังไม่มีอะไร</string>
+    <string name="nm_household_kind_check_in">แจ้งข่าว</string>
+    <string name="nm_household_kind_panic">ฉุกเฉิน</string>
+    <string name="nm_household_kind_alert">เตือน</string>
+    <string name="nm_menu_household">บ้าน</string>
+    <string name="nm_household_needs_sign_in">ลงชื่อเข้าใช้เพื่อดู</string>
 </resources>

@@ -1174,4 +1174,13 @@
     <string name="nm_todos_add">추가</string>
     <string name="nm_todos_delete">삭제</string>
     <string name="nm_menu_todos">할 일</string>
+    <string name="nm_panic_saved">저장했습니다. 상대가 다음에 앱을 열면 볼 수 있습니다.</string>
+    <string name="nm_household_title">집안</string>
+    <string name="nm_household_check_in">안부를 남기기</string>
+    <string name="nm_household_empty">아직 없습니다.</string>
+    <string name="nm_household_kind_check_in">안부</string>
+    <string name="nm_household_kind_panic">긴급</string>
+    <string name="nm_household_kind_alert">알림</string>
+    <string name="nm_menu_household">집안</string>
+    <string name="nm_household_needs_sign_in">보려면 로그인하세요.</string>
 </resources>

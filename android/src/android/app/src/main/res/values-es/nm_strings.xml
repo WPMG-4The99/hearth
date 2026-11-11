@@ -1178,4 +1178,13 @@
     <string name="nm_todos_add">Añadir</string>
     <string name="nm_todos_delete">Eliminar</string>
     <string name="nm_menu_todos">Tareas</string>
+    <string name="nm_panic_saved">Guardado. Lo verán la próxima vez que abran la aplicación.</string>
+    <string name="nm_household_title">Casa</string>
+    <string name="nm_household_check_in">Avisar que estoy</string>
+    <string name="nm_household_empty">Nada todavía.</string>
+    <string name="nm_household_kind_check_in">Aviso</string>
+    <string name="nm_household_kind_panic">Emergencia</string>
+    <string name="nm_household_kind_alert">Alerta</string>
+    <string name="nm_menu_household">Casa</string>
+    <string name="nm_household_needs_sign_in">Entra para verlo.</string>
 </resources>

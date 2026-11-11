@@ -490,6 +490,12 @@ yourself ([android.md](android.md), [ios.md](ios.md)); the desktop reads it from
 the plugin's `config.baseURL` ([desktop.md](desktop.md)) and the web console is
 whatever relay serves it at `/app`.
 
+## Household log
+
+Accounts linked by `HOUSEHOLDS` share one log: a check-in, a panic or an alert, each with the time, the sender's account and a short optional note. A panic or an alert is written before the relay tries to show it on another phone, so an offline phone does not lose it. `GET /v1/household/events` reads the rows the caller's households may see. `POST /v1/household/events` with `{"kind":"check-in"}` writes a check-in. An account that is not in a household gets `not_linked`.
+
+Jessica, or any other reader that must not control a phone, uses a feed key. The operator issues it from `POST /v1/admin/household-feed` and revokes it with `POST /v1/admin/household-feed/{id}/revoke`. The token is shown once, starts with `nmf_`, and is stored only as a hash. It cannot open the hub, chat or `/v1/me`. `HOUSEHOLD_FEED_KINDS` limits which kinds that read returns. Details are in [hub.md](hub.md#a-household-panic).
+
 ## Protocol
 
 The app's calls, all JSON:
@@ -514,6 +520,9 @@ DELETE /v1/me/profile       Bearer                            → 204
 GET  /v1/me/sessions        Bearer                            → {sessions: [{prefix, device, via, created_at, last_used_at, expires_at, current}]}
 DELETE /v1/me/sessions/{prefix}  Bearer                       → 204; 404 no_session
 GET  /v1/me/events          Bearer  ?limit=50                 → {events: [{ts, kind, detail}]}
+GET  /v1/household/events   Bearer  ?limit=50                 → {events: [{id, ts, kind, account_id, who, text}]}; 403 not_linked
+POST /v1/household/events   Bearer  {kind: "check-in", text?} → {event}; 400 bad_kind, 403 not_linked, 429 too_many
+GET  /v1/household/feed     Bearer nmf_… ?limit=50           → the same shape, only the kinds HOUSEHOLD_FEED_KINDS still allows; 401 bad_key, 403 household_gone
 POST /v1/auth/sign-out      Bearer                            → 204
 POST /v1/auth/sign-out-all  Bearer  {all?}                    → {signed_out}
 POST /v1/auth/delete        Bearer                            → 204

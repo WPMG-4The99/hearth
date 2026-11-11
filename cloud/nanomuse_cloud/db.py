@@ -264,6 +264,28 @@ CREATE TABLE IF NOT EXISTS deleted_keys (
     key_hash      TEXT PRIMARY KEY,
     deleted_at    INTEGER NOT NULL
 );
+-- Household log: a check-in, panic or alert from one account. Who may see a row is
+-- decided when it is read, from the operator's HOUSEHOLDS list, not stored here.
+CREATE TABLE IF NOT EXISTS household_events (
+    id            TEXT PRIMARY KEY,
+    account_id    TEXT NOT NULL,
+    kind          TEXT NOT NULL,             -- check-in | panic | alert
+    text          TEXT NOT NULL DEFAULT '',  -- a short note, never a conversation
+    ts            INTEGER NOT NULL
+);
+CREATE INDEX IF NOT EXISTS household_events_account_ts ON household_events(account_id, ts);
+-- A read-only feed key (Jessica). Not an account key: the hash is the only secret kept.
+CREATE TABLE IF NOT EXISTS feed_keys (
+    id            TEXT PRIMARY KEY,
+    key_hash      TEXT NOT NULL UNIQUE,
+    prefix        TEXT NOT NULL,
+    label         TEXT NOT NULL,
+    group_key     TEXT NOT NULL,             -- hash of the household's addresses, sorted
+    kinds         TEXT NOT NULL,             -- JSON list, narrowed again by HOUSEHOLD_FEED_KINDS
+    created_at    INTEGER NOT NULL,
+    revoked_at    INTEGER,
+    last_used_at  INTEGER
+);
 """
 
 # How long a deleted account's key hashes are remembered. Long enough for every device of the
@@ -1985,6 +2007,73 @@ class Database:
             )
             for r in rows
         ]
+
+    # -- household log and feed keys ------------------------------------------------
+
+    def insert_household_event(self, account_id: str, kind: str, text: str, ts: int | None = None) -> str:
+        event_id = uuid.uuid4().hex
+        with self.tx() as c:
+            c.execute(
+                "INSERT INTO household_events(id, account_id, kind, text, ts) VALUES (?,?,?,?,?)",
+                (event_id, account_id, kind, text[:200], int(ts if ts is not None else now())),
+            )
+        return event_id
+
+    def count_household_events_since(self, account_id: str, since: int) -> int:
+        with self._lock:
+            row = self._conn.execute(
+                "SELECT COUNT(*) AS n FROM household_events WHERE account_id=? AND ts>=?",
+                (account_id, int(since)),
+            ).fetchone()
+        return int(row["n"] if row else 0)
+
+    def household_events_for(self, account_ids: list[str], limit: int, kinds: list[str] | None = None) -> list[sqlite3.Row]:
+        if not account_ids or kinds == []:
+            return []
+        cap = max(1, min(int(limit), 100))
+        marks = ",".join("?" * len(account_ids))
+        sql = f"SELECT * FROM household_events WHERE account_id IN ({marks})"
+        args: list[Any] = list(account_ids)
+        if kinds is not None:
+            sql += f" AND kind IN ({','.join('?' * len(kinds))})"
+            args.extend(kinds)
+        sql += " ORDER BY ts DESC, rowid DESC LIMIT ?"
+        args.append(cap)
+        with self._lock:
+            return list(self._conn.execute(sql, args).fetchall())
+
+    def insert_feed_key(self, key_hash: str, prefix: str, label: str, group_key: str, kinds_json: str) -> str:
+        feed_id = uuid.uuid4().hex
+        with self.tx() as c:
+            c.execute(
+                "INSERT INTO feed_keys(id, key_hash, prefix, label, group_key, kinds, created_at) VALUES (?,?,?,?,?,?,?)",
+                (feed_id, key_hash, prefix[:16], label[:60], group_key, kinds_json, now()),
+            )
+        return feed_id
+
+    def feed_key(self, key_hash: str) -> sqlite3.Row | None:
+        with self._lock:
+            return self._conn.execute("SELECT * FROM feed_keys WHERE key_hash=?", (key_hash,)).fetchone()
+
+    def feed_key_by_id(self, feed_id: str) -> sqlite3.Row | None:
+        with self._lock:
+            return self._conn.execute("SELECT * FROM feed_keys WHERE id=?", (feed_id,)).fetchone()
+
+    def feed_keys(self) -> list[sqlite3.Row]:
+        with self._lock:
+            return list(self._conn.execute("SELECT * FROM feed_keys ORDER BY created_at DESC").fetchall())
+
+    def revoke_feed_key(self, feed_id: str) -> bool:
+        with self.tx() as c:
+            cur = c.execute(
+                "UPDATE feed_keys SET revoked_at=? WHERE id=? AND revoked_at IS NULL",
+                (now(), feed_id),
+            )
+            return cur.rowcount > 0
+
+    def touch_feed_key(self, key_hash: str) -> None:
+        with self.tx() as c:
+            c.execute("UPDATE feed_keys SET last_used_at=? WHERE key_hash=?", (now(), key_hash))
 
     def save_probe(self, probe: Probe) -> None:
         with self.tx() as c:

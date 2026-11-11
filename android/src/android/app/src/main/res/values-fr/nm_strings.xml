@@ -1179,4 +1179,13 @@
     <string name="nm_todos_add">Ajouter</string>
     <string name="nm_todos_delete">Supprimer</string>
     <string name="nm_menu_todos">Tâches</string>
+    <string name="nm_panic_saved">Enregistré. L\'autre personne le verra à la prochaine ouverture de l\'application.</string>
+    <string name="nm_household_title">Foyer</string>
+    <string name="nm_household_check_in">Dire que je vais bien</string>
+    <string name="nm_household_empty">Rien pour le moment.</string>
+    <string name="nm_household_kind_check_in">Présence</string>
+    <string name="nm_household_kind_panic">Urgence</string>
+    <string name="nm_household_kind_alert">Alerte</string>
+    <string name="nm_menu_household">Foyer</string>
+    <string name="nm_household_needs_sign_in">Connectez-vous pour le voir.</string>
 </resources>

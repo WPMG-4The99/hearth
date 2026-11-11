@@ -1174,4 +1174,13 @@
     <string name="nm_todos_add">Tambah</string>
     <string name="nm_todos_delete">Hapus</string>
     <string name="nm_menu_todos">Tugas</string>
+    <string name="nm_panic_saved">Tersimpan. Orang lain melihatnya saat membuka aplikasi lagi.</string>
+    <string name="nm_household_title">Rumah</string>
+    <string name="nm_household_check_in">Kabar baik</string>
+    <string name="nm_household_empty">Belum ada apa-apa.</string>
+    <string name="nm_household_kind_check_in">Kabar</string>
+    <string name="nm_household_kind_panic">Darurat</string>
+    <string name="nm_household_kind_alert">Peringatan</string>
+    <string name="nm_menu_household">Rumah</string>
+    <string name="nm_household_needs_sign_in">Masuk untuk melihat.</string>
 </resources>

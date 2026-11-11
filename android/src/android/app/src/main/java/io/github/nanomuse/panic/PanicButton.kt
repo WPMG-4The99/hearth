@@ -42,6 +42,7 @@ fun PanicButton(modifier: Modifier = Modifier) {
     var busy by remember { mutableStateOf(false) }
     var result by remember { mutableStateOf<String?>(null) }
     val delivered = stringResource(R.string.nm_panic_delivered)
+    val saved = stringResource(R.string.nm_panic_saved)
     val offline = stringResource(R.string.nm_panic_not_delivered)
     val unlinked = stringResource(R.string.nm_panic_not_linked)
     val disconnected = stringResource(R.string.nm_panic_not_connected)
@@ -61,7 +62,7 @@ fun PanicButton(modifier: Modifier = Modifier) {
             armed = false
             busy = true
             scope.launch {
-                val line = withContext(Dispatchers.IO) { send(context, delivered, offline, unlinked, disconnected) }
+                val line = withContext(Dispatchers.IO) { send(context, delivered, saved, offline, unlinked, disconnected) }
                 busy = false
                 result = line
             }
@@ -95,11 +96,18 @@ fun PanicButton(modifier: Modifier = Modifier) {
     }
 }
 
-private fun send(context: android.content.Context, delivered: String, offline: String, unlinked: String, disconnected: String): String {
+private fun send(
+    context: android.content.Context,
+    delivered: String,
+    saved: String,
+    offline: String,
+    unlinked: String,
+    disconnected: String,
+): String {
     if (!Hub.isConnected) return disconnected
     return try {
-        Hub.call("household", "panic", JSONObject().put("text", "panic"), timeoutMs = 20_000)
-        delivered
+        val body = Hub.call("household", "panic", JSONObject().put("text", "panic"), timeoutMs = 20_000)
+        if (body.optBoolean("delivered")) delivered else saved
     } catch (e: HubException) {
         when (e.code) {
             "not_linked" -> unlinked
