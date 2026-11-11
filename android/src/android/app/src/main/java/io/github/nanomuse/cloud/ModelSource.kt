@@ -25,7 +25,9 @@ object ModelSource {
         val config = repo.config.value
         val group = config.modelGroups.firstOrNull { g ->
             g.memberEntryIds.any { eid -> config.modelEntries.any { it.id == eid && it.providerInstanceId == cloudId } }
-        } ?: config.modelGroups.firstOrNull { it.name == NanoMuseCloud.LABEL && it.memberEntryIds.isNotEmpty() }
+        } ?: config.modelGroups.firstOrNull {
+            (it.name == NanoMuseCloud.LABEL || it.name == "Hearth") && it.memberEntryIds.isNotEmpty()
+        }
             ?: return false
         repo.defaultPrimaryGroupId = group.id
         return true

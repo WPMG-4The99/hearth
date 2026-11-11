@@ -109,9 +109,9 @@ class ContactsOffloadHandler(private val context: Context) : NativeOffloadHandle
                         id = if (needsWrite) "CONTACTS_RW" else Manifest.permission.READ_CONTACTS,
                         title = "Contacts permission needed",
                         message = if (needsWrite) {
-                            "Hearth needs read + write contacts permission to delete entries. Open Settings to allow it." // nanoMuse: Hearth product name.
+                            "The Hearth needs read + write contacts permission to delete entries. Open Settings to allow it." // nanoMuse: The Hearth product name.
                         } else {
-                            "Hearth needs contacts permission to read your address book. Open Settings to allow it." // nanoMuse: Hearth product name.
+                            "The Hearth needs contacts permission to read your address book. Open Settings to allow it." // nanoMuse: The Hearth product name.
                         },
                         settingsAction = android.provider.Settings.ACTION_APPLICATION_DETAILS_SETTINGS,
                         requiresPackageUri = true,

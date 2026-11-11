@@ -18,7 +18,7 @@ Windows 版本还带着 electron-updater 要读的更新元数据：`latest.yml`
 SHA-512，旁边是安装包的 `.exe.blockmap`。CI 在把它们附上 release 之前，会先让 electron-updater
 亲自检查这一套：它必须能在 `latest.yml` 里找到候选版本、从测试源下载安装包并校验通过，字节对不上
 的会被拒绝（`harness/desktop/scripts/update-feed-check.mjs`）。这套元数据对应的更新源是
-[Hearth 的 GitHub releases](https://github.com/WPMG-4The99/hearth/releases/latest/download/)。
+[The Hearth 的 GitHub releases](https://github.com/WPMG-4The99/hearth/releases/latest/download/)。
 代码在 [`harness/`](../../harness/) 下：插件包在 `harness/dsh-nanomuse`，Electron 外壳在
 `harness/desktop`；自己怎么构建见 [harness/README.md](../../harness/README.md)。到 0.1.29 为止，
 同名的安装包装的是 Python 运行时和网页版，套在它们自己的 Electron 外壳里（`desktop/app`），

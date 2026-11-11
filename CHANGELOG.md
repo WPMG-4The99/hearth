@@ -6,9 +6,11 @@ All notable changes to nanoMuse. The format follows [Keep a Changelog](https://k
 
 ### Apps
 
-- **The apps and the runtime sign in to the Hearth relay and look for updates on GitHub.** The default relay is `https://hearth-cloud-the99.zocomputer.io`. Update checks ask GitHub releases for `WPMG-4The99/hearth` and no longer ask `nanomuse.cn`. Help improve stays off until a person turns it on.
+- **The name a person sees is The Hearth.** The launcher, in-app titles, sign-in screens, the code email's subject and body, and the docs say The Hearth. The application id, `hearth://`, the relay address and the code email's From line are unchanged.
 
-- **Hearth is the name of the phone app.** The application id is `media.wyldephyremg.hearth` (debug builds add `.debug`), the launcher label is Hearth, and links from outside the app use `hearth://`. The first screen is e-mail and a one-time code for the baked-in relay. After that, the model is the Hearth relay or a Grok account on the phone. Nix can keep a to-do list on the phone. A PANIC button sends an alert to the other phone in a household the relay operator linked with `HOUSEHOLDS`. Delivery is only while that phone's hub connection is up.
+- **The apps and the runtime sign in to The Hearth relay and look for updates on GitHub.** The default relay is `https://hearth-cloud-the99.zocomputer.io`. Update checks ask GitHub releases for `WPMG-4The99/hearth` and no longer ask `nanomuse.cn`. Help improve stays off until a person turns it on.
+
+- **The Hearth is the name of the phone app.** The application id is `media.wyldephyremg.hearth` (debug builds add `.debug`), the launcher label is The Hearth, and links from outside the app use `hearth://`. The first screen is e-mail and a one-time code for the baked-in relay. After that, the model is The Hearth relay or a Grok account on the phone. Nix can keep a to-do list on the phone. A PANIC button sends an alert to the other phone in a household the relay operator linked with `HOUSEHOLDS`. Delivery is only while that phone's hub connection is up.
 
 ### Cloud
 

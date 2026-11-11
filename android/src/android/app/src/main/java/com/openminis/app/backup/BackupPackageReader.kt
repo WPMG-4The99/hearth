@@ -49,7 +49,7 @@ class BackupPackageReader(private val root: File) {
             "/" + manifest.format.substringAfter('/', "").substringBefore('.')
         if (major != BackupFormat.CURRENT) {
             throw BackupException(
-                "This backup was created by a newer version of Hearth (${manifest.format}). Please update the app." // nanoMuse: Hearth product name.
+                "This backup was created by a newer version of The Hearth (${manifest.format}). Please update the app." // nanoMuse: The Hearth product name.
             )
         }
         return manifest

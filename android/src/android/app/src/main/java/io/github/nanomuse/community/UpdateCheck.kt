@@ -30,7 +30,7 @@ object UpdateCheck {
     private const val KEY_CHECKED_AT = "checked_at"
     private const val KEY_FAILED = "failed"
 
-    /** Where "Update" goes on Android: the Hearth releases page. */
+    /** Where "Update" goes on Android: The Hearth releases page. */
     const val DOWNLOAD_URL = "https://github.com/WPMG-4The99/hearth/releases"
     const val GITHUB_LATEST_URL = "https://api.github.com/repos/WPMG-4The99/hearth/releases/latest"
 

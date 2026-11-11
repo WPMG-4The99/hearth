@@ -94,15 +94,15 @@ internal fun toolDisplayName(toolName: String): String = when (toolName) {
  * Mirrors iOS ToolLiveSheet.toolTitle so the wording matches per tool.
  */
 internal fun toolTitleLabel(toolName: String): String = when (toolName) {
-    "shell_execute" -> "Hearth is using Shell" // nanoMuse: Hearth product name.
-    "file_read" -> "Hearth is reading File" // nanoMuse: Hearth product name.
-    "file_write" -> "Hearth is using Editor" // nanoMuse: Hearth product name.
-    "file_edit" -> "Hearth is editing File" // nanoMuse: Hearth product name.
-    "browser_use" -> "Hearth is using Browser" // nanoMuse: Hearth product name.
-    "read_image" -> "Hearth is reading Image" // nanoMuse: Hearth product name.
-    "memory_write", "memory_get" -> "Hearth is using Memory" // nanoMuse: Hearth product name.
-    "web_search" -> "Hearth is using Search" // nanoMuse: Hearth product name.
-    else -> "Hearth is using ${toolDisplayName(toolName)}" // nanoMuse: Hearth product name.
+    "shell_execute" -> "The Hearth is using Shell" // nanoMuse: The Hearth product name.
+    "file_read" -> "The Hearth is reading File" // nanoMuse: The Hearth product name.
+    "file_write" -> "The Hearth is using Editor" // nanoMuse: The Hearth product name.
+    "file_edit" -> "The Hearth is editing File" // nanoMuse: The Hearth product name.
+    "browser_use" -> "The Hearth is using Browser" // nanoMuse: The Hearth product name.
+    "read_image" -> "The Hearth is reading Image" // nanoMuse: The Hearth product name.
+    "memory_write", "memory_get" -> "The Hearth is using Memory" // nanoMuse: The Hearth product name.
+    "web_search" -> "The Hearth is using Search" // nanoMuse: The Hearth product name.
+    else -> "The Hearth is using ${toolDisplayName(toolName)}" // nanoMuse: The Hearth product name.
 }
 
 // nanoMuse: the same label once the step is over (issue #67 — the sheet's bottom bar
@@ -111,15 +111,15 @@ internal fun toolTitleLabel(toolName: String): String = when (toolName) {
 internal fun toolTitleLabel(toolName: String, status: ToolBlockStatus?): String = when (status) {
     null, ToolBlockStatus.RUNNING, ToolBlockStatus.STREAMING, ToolBlockStatus.PENDING -> toolTitleLabel(toolName)
     ToolBlockStatus.SUCCESS -> when (toolName) {
-        "shell_execute" -> "Hearth used Shell" // nanoMuse: Hearth product name.
-        "file_read" -> "Hearth read File" // nanoMuse: Hearth product name.
-        "file_write" -> "Hearth used Editor" // nanoMuse: Hearth product name.
-        "file_edit" -> "Hearth edited File" // nanoMuse: Hearth product name.
-        "browser_use" -> "Hearth used Browser" // nanoMuse: Hearth product name.
-        "read_image" -> "Hearth read Image" // nanoMuse: Hearth product name.
-        "memory_write", "memory_get" -> "Hearth used Memory" // nanoMuse: Hearth product name.
-        "web_search" -> "Hearth used Search" // nanoMuse: Hearth product name.
-        else -> "Hearth used ${toolDisplayName(toolName)}" // nanoMuse: Hearth product name.
+        "shell_execute" -> "The Hearth used Shell" // nanoMuse: The Hearth product name.
+        "file_read" -> "The Hearth read File" // nanoMuse: The Hearth product name.
+        "file_write" -> "The Hearth used Editor" // nanoMuse: The Hearth product name.
+        "file_edit" -> "The Hearth edited File" // nanoMuse: The Hearth product name.
+        "browser_use" -> "The Hearth used Browser" // nanoMuse: The Hearth product name.
+        "read_image" -> "The Hearth read Image" // nanoMuse: The Hearth product name.
+        "memory_write", "memory_get" -> "The Hearth used Memory" // nanoMuse: The Hearth product name.
+        "web_search" -> "The Hearth used Search" // nanoMuse: The Hearth product name.
+        else -> "The Hearth used ${toolDisplayName(toolName)}" // nanoMuse: The Hearth product name.
     }
     ToolBlockStatus.FAILED -> "${toolDisplayName(toolName).replaceFirstChar { it.uppercase() }} failed"
     ToolBlockStatus.CANCELLED -> "${toolDisplayName(toolName).replaceFirstChar { it.uppercase() }} stopped"

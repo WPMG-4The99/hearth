@@ -124,7 +124,7 @@ fun AboutScreen(onBack: () -> Unit) {
                 iconColor = tileBlue,
                 title = stringResource(R.string.nm_about_upstream),
                 subtitle = stringResource(R.string.nm_about_upstream_detail),
-                // nanoMuse: the credits line names the upstream project; this link is Hearth's source.
+                // nanoMuse: the credits line names the upstream project; this link is The Hearth's source.
                 onClick = { openExternalUrl(context, "https://github.com/WPMG-4The99/hearth") },
                 trailing = { ExternalLinkIcon() },
                 minHeight = 72.dp,

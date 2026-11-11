@@ -186,7 +186,7 @@ fi
 # rotated by this script (rotating it would orphan every account).
 [ -z "$(get CLOUD_SECRET)" ] && set_kv CLOUD_SECRET "$(random_hex)"
 # A private relay for a few people: invitations point here, not at a copied example
-# (the old public cloud, or the Hearth relay this tree ships as the default).
+# (the old public cloud, or The Hearth relay this tree ships as the default).
 case "$(get INVITE_URL)" in
   "https://nanomuse.cn/web/?invite=" | "https://hearth-cloud-the99.zocomputer.io/app/?invite=")
     set_kv INVITE_URL "$BASE/app/?invite="

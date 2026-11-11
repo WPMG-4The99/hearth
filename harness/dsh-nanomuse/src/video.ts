@@ -13,7 +13,7 @@
  *  4. the MP4 is downloaded from the `video_url` the task ends with.
  *
  * `host` is Model Studio itself (`https://dashscope.aliyuncs.com`) with the person's own
- * key, or the Hearth relay, which serves the same
+ * key, or The Hearth relay, which serves the same
  * `/api/v1/…` paths next to its OpenAI-shaped `/v1` and pays from the account's allowance.
  *
  * The two model families take different bodies: MiniMax wants `media[first_frame]`,

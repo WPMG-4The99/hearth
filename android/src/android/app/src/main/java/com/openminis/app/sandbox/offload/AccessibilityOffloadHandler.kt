@@ -54,7 +54,7 @@ Groups:
 Output: JSON envelope { ok, data | error: { code, message } }.
 Use --compact to emit on a single line; --quiet to strip the envelope.
 
-First-run: enable "Hearth" under Settings → Accessibility, then `service ping`.
+First-run: enable "The Hearth" under Settings → Accessibility, then `service ping`.
 """
         private const val SERVICE_HELP = "service status | ping\n"
         private const val UI_HELP = """ui dump | find | info | node | screenshot
@@ -147,12 +147,12 @@ First-run: enable "Hearth" under Settings → Accessibility, then `service ping`
                         "Android is blocking the accessibility toggle for this install " +
                             "(\"Restricted setting\" — applies to apps installed from a " +
                             "downloaded APK). Allow it via App info → ⋮ → Allow restricted " +
-                            "settings, then enable Hearth under Settings → Accessibility. " + // nanoMuse: Hearth product name.
+                            "settings, then enable The Hearth under Settings → Accessibility. " + // nanoMuse: The Hearth product name.
                             "Settings → Permissions → System Permissions has a one-tap fix " +
                             "when Shizuku is available."
                     } else {
                         "Accessibility permission was revoked (this happens after a force-stop). " +
-                            "Re-enable Hearth under Settings → Accessibility, or use Settings → " + // nanoMuse: Hearth product name.
+                            "Re-enable The Hearth under Settings → Accessibility, or use Settings → " + // nanoMuse: The Hearth product name.
                             "Permissions → Integrations to repair it with Shizuku."
                     },
                     exit = 77,
@@ -189,7 +189,7 @@ First-run: enable "Hearth" under Settings → Accessibility, then `service ping`
             }
         } catch (e: NotRunning) {
             err(args, "SERVICE_NOT_RUNNING",
-                e.message ?: "Accessibility service is not running. Enable Hearth under Settings → Accessibility.", // nanoMuse: Hearth product name.
+                e.message ?: "Accessibility service is not running. Enable The Hearth under Settings → Accessibility.", // nanoMuse: The Hearth product name.
                 exit = 77)
         } catch (e: Throwable) {
             AppLogger.warning(TAG, "uncaught: ${e.javaClass.simpleName} ${e.message}")
@@ -230,7 +230,7 @@ First-run: enable "Hearth" under Settings → Accessibility, then `service ping`
                             "Allow it via App info → ⋮ → Allow restricted settings first.\n",
                     )
                 else
-                    NativeOffloadResult(77, "✗ Accessibility service is not running — go to Settings → Accessibility → Hearth to enable\n") // nanoMuse: Hearth product name.
+                    NativeOffloadResult(77, "✗ Accessibility service is not running — go to Settings → Accessibility → The Hearth to enable\n") // nanoMuse: The Hearth product name.
             }
             else -> NativeOffloadResult(2, "$TOOL service: unknown action\n$SERVICE_HELP")
         }
@@ -1116,7 +1116,7 @@ First-run: enable "Hearth" under Settings → Accessibility, then `service ping`
 
     private fun svcOrThrow(): MinisAccessibilityService =
         MinisAccessibilityService.getInstance()
-            ?: throw NotRunning("Accessibility service is not running. Enable Hearth under Settings → Accessibility.") // nanoMuse: Hearth product name.
+            ?: throw NotRunning("Accessibility service is not running. Enable The Hearth under Settings → Accessibility.") // nanoMuse: The Hearth product name.
 
     private fun ok(args: OffloadArgs, data: Any): NativeOffloadResult {
         val body = JSONObject().put("ok", true).put("data", data).toString()

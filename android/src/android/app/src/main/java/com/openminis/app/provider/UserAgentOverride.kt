@@ -64,6 +64,6 @@ object MinisUserAgent {
     val DEFAULT: String by lazy {
         val release = android.os.Build.VERSION.RELEASE ?: "unknown"
         val model = (android.os.Build.MODEL ?: "unknown").trim().ifEmpty { "unknown" }
-        "Hearth/${BuildConfig.VERSION_NAME} (Android $release; $model)" // nanoMuse: Hearth product name.
+        "Hearth/${BuildConfig.VERSION_NAME} (Android $release; $model)" // nanoMuse: User-Agent token; a space is illegal, so this stays Hearth.
     }
 }

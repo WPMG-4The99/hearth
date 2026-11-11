@@ -182,7 +182,7 @@
          never go to Google's device backup; a reinstall starts empty and the account's chats come
          back through sync at sign-in (docs/sync.md). The two rule files below are kept for the day
          the switch is turned on again. -->
-    <!-- nanoMuse: appLabel is @string/app_name, Hearth in every locale, on both builds. -->
+    <!-- nanoMuse: appLabel is @string/app_name, The Hearth in every locale, on both builds. -->
     <application
         android:name=".MinisApp"
         android:allowBackup="false"

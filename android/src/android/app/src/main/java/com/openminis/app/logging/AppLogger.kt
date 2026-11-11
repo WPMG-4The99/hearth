@@ -181,7 +181,7 @@ object AppLogger {
         val parenIdx = if (slashIdx >= 0) rawLine.indexOf('(', slashIdx) else -1
         if (slashIdx >= 0 && parenIdx > slashIdx) {
             val tag = rawLine.substring(slashIdx + 1, parenIdx).trim()
-            if (tag.startsWith("Hearth.") || tag == "AppLogger") return // nanoMuse: Hearth product name.
+            if (tag.startsWith("Hearth.") || tag == "AppLogger") return // nanoMuse: log tag, not the name on screen.
         }
         try {
             val now = Date()
@@ -306,7 +306,7 @@ object AppLogger {
         val timestamp = timestampFormat.format(now)
 
         // Also output to logcat
-        val logcatTag = "Hearth.$category" // nanoMuse: Hearth product name.
+        val logcatTag = "Hearth.$category" // nanoMuse: log tag, not the name on screen.
         when (level) {
             "ERROR" -> Log.e(logcatTag, message)
             "WARN" -> Log.w(logcatTag, message)

@@ -76,7 +76,7 @@ android {
             abiFilters += listOf((project.findProperty("nm.abi") as String?) ?: "arm64-v8a")
         }
 
-        // nanoMuse: both builds use @string/app_name, which is Hearth in every locale.
+        // nanoMuse: both builds use @string/app_name, which is The Hearth in every locale.
         manifestPlaceholders["appLabel"] = "@string/app_name"
 
         externalNativeBuild {

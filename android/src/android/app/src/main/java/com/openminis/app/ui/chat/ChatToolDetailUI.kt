@@ -353,7 +353,7 @@ internal fun ToolDetailSheet(
                 // the elapsed-duration text) so it sits next to where the
                 // user is already scanning timing info.
                 Text(
-                    text = "Hearth Computer", // nanoMuse: Hearth product name.
+                    text = "The Hearth Computer", // nanoMuse: The Hearth product name.
                     fontSize = 15.sp,
                     fontWeight = FontWeight.SemiBold,
                     color = ChatColors.primaryText,

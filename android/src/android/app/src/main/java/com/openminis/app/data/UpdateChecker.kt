@@ -34,7 +34,7 @@ import java.util.concurrent.TimeUnit
 object UpdateChecker {
 
     private const val TAG = "UpdateChecker"
-    // nanoMuse: Hearth releases, not the upstream nanoMuse repository.
+    // nanoMuse: The Hearth releases, not the upstream nanoMuse repository.
     private const val OWNER = "WPMG-4The99"
     // T133: the public repo is OpenMinis/OpenMinis (org + repo share a name).
     // Previously pointed at OpenMinis/MinisApp, which is the private dev
@@ -259,7 +259,7 @@ object UpdateChecker {
     }
 
     /** Public so UI can deep-link users to manual download when GitHub is blocked. */
-    // nanoMuse: the same Hearth releases page as UpdateCheck.DOWNLOAD_URL.
+    // nanoMuse: the same The Hearth releases page as UpdateCheck.DOWNLOAD_URL.
     const val RELEASES_URL: String = "https://github.com/WPMG-4The99/hearth/releases"
 
     /** Returns (downloadUrl, sizeBytes) for the first .apk asset, or (null, 0). */

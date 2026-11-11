@@ -46,7 +46,7 @@ class ConfigOffloadHandler : NativeOffloadHandler {
         const val EXIT_PERMISSION_DENIED = 126
 
         const val HELP_TEXT =
-            "minis-config - read or change Hearth app settings (logged + revertable)\n" + // nanoMuse: Hearth product name.
+            "minis-config - read or change The Hearth app settings (logged + revertable)\n" + // nanoMuse: The Hearth product name.
                 "\n" +
                 "USAGE:\n" +
                 "  minis-config <subcommand> [args]\n" +

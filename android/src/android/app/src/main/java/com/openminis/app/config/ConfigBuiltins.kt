@@ -965,7 +965,7 @@ internal object ConfigBuiltins {
             ClosureField(
                 path = "soul.name",
                 displayName = "Soul name",
-                description = "The agent's name as shown in chat bubble headers and as the system-prompt identity. Trimmed; empty falls back to \"Hearth\".", // nanoMuse: Hearth product name.
+                description = "The agent's name as shown in chat bubble headers and as the system-prompt identity. Trimmed; empty falls back to \"The Hearth\".", // nanoMuse: The Hearth product name.
                 valueSchema = ConfigSchema.Str(maxLength = 64),
                 risk = ConfigRisk.SENSITIVE,
                 revertable = true,
