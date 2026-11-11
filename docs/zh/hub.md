@@ -100,11 +100,13 @@ hub 上传递两类请求：
 
 中继环境变量 `HOUSEHOLDS` 把两个或更多账号连在一起。由运营者设置。账号自己不能建立这种联系。
 
-设备发送 `call`，`to` 为 `household`，`action` 为 `panic` 或 `alert`。中继把这一帧交给已连接账号里最新上线的手机或电脑（浏览器标签页除外），并加上 `from.who`，也就是发件人的名字：邮箱地址里 `@` 前面的那一段。回答会回到发送方。如果对方的手机没有连上，调用方收到 `device_offline`，说明是 `The other phone is not connected`。如果这个账号不在任何一个家庭里，调用方收到 `not_linked`。
+设备发送 `call`，`to` 为 `household`，`action` 为 `panic` 或 `alert`。中继先写入家庭记录，再把这一帧交给已连接账号里最新上线的手机或电脑（浏览器标签页除外），并加上 `from.who`，也就是发件人的名字：邮箱地址里 `@` 前面的那一段。回答会回到发送方。如果有手机当场显示了，结果里 `delivered` 为 true。如果当时没有人连着，结果仍然成功，`saved` 为 true、`delivered` 为 false：记录留着，其他手机下次打开家庭记录就能读到。如果这个账号不在任何一个家庭里，调用方收到 `not_linked`，什么都不记。
 
 发往 `household` 的 `shell`、`files`、`screen`、`task`、`open` 以及其他动作都会得到 `not_allowed`。什么都不会送出去。设备 id 仍然只指向调用方自己的账号：把 shell 指向另一个账号的设备，得到的是 `device_offline`，也不会送出。发给已连接的对方设备 id 的 panic 会送达。发给其他人的设备 id 的 panic 是 `device_offline`，因此不会借此确认那个 id 存在。
 
-手机显示这个提醒时，不需要打开「远程控制」。还没有推送。只有接收方的 hub 连接还在时才能送达。
+手机显示这个提醒时，不需要打开「远程控制」。还没有推送。当场弹出的提醒仍然要接收方的 hub 连接还在。记录本身不需要：用账号的 key `GET /v1/household/events` 取回调用方自己的记录，以及每一个和调用方同在一个家庭里的账号的记录，`POST /v1/household/events` 且 `{"kind": "check-in"}` 写一条报平安。这个 POST 不接受 panic 和 alert。一个家庭的记录不会给另一个家庭。
+
+另有一把只能读这份记录的 feed key，别的事做不了。运营者用 `POST /v1/admin/household-feed`（`X-Admin-Token`，`{"label", "member", "kinds"?}`）签发，token 只在这一次回答里出现，前缀是 `nmf_`。`member` 是这把 key 所绑定的那个家庭里的一个邮箱。拿这把 token `GET /v1/household/feed` 读记录。`HOUSEHOLD_FEED_KINDS`（逗号分隔，默认 `check-in,panic,alert`）是上限：设进去的种类即使签发给了 key，不在这份上限里也不会返回。`POST /v1/admin/household-feed/{id}/revoke` 作废这把 key，不动任何账号。在 `HOUSEHOLDS` 里增删地址会改变这个家庭的 id，旧的 feed key 要重新签发才能再用。这两项设置都在中继进程启动时读取。
 
 ## 代码 {#the-code}
 

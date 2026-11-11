@@ -1186,4 +1186,13 @@
     <string name="nm_todos_add">Добавить</string>
     <string name="nm_todos_delete">Удалить</string>
     <string name="nm_menu_todos">Дела</string>
+    <string name="nm_panic_saved">Сохранено. Другой человек увидит это, когда снова откроет приложение.</string>
+    <string name="nm_household_title">Дом</string>
+    <string name="nm_household_check_in">Я на связи</string>
+    <string name="nm_household_empty">Пока пусто.</string>
+    <string name="nm_household_kind_check_in">Отметка</string>
+    <string name="nm_household_kind_panic">Тревога</string>
+    <string name="nm_household_kind_alert">Сигнал</string>
+    <string name="nm_menu_household">Дом</string>
+    <string name="nm_household_needs_sign_in">Войдите, чтобы посмотреть.</string>
 </resources>

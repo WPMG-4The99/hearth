@@ -1186,4 +1186,13 @@
     <string name="nm_todos_add">Dodaj</string>
     <string name="nm_todos_delete">Usuń</string>
     <string name="nm_menu_todos">Zadania</string>
+    <string name="nm_panic_saved">Zapisane. Druga osoba zobaczy to przy następnym otwarciu aplikacji.</string>
+    <string name="nm_household_title">Dom</string>
+    <string name="nm_household_check_in">Daję znać</string>
+    <string name="nm_household_empty">Jeszcze nic.</string>
+    <string name="nm_household_kind_check_in">Obecność</string>
+    <string name="nm_household_kind_panic">Alarm</string>
+    <string name="nm_household_kind_alert">Sygnał</string>
+    <string name="nm_menu_household">Dom</string>
+    <string name="nm_household_needs_sign_in">Zaloguj się, aby zobaczyć.</string>
 </resources>

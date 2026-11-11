@@ -1178,4 +1178,13 @@
     <string name="nm_todos_add">Idagdag</string>
     <string name="nm_todos_delete">Burahin</string>
     <string name="nm_menu_todos">Mga gawain</string>
+    <string name="nm_panic_saved">Nai-save. Makikita ito ng isa kapag binuksan ulit ang app.</string>
+    <string name="nm_household_title">Bahay</string>
+    <string name="nm_household_check_in">Ayos ako</string>
+    <string name="nm_household_empty">Wala pa.</string>
+    <string name="nm_household_kind_check_in">Check-in</string>
+    <string name="nm_household_kind_panic">Panic</string>
+    <string name="nm_household_kind_alert">Alert</string>
+    <string name="nm_menu_household">Bahay</string>
+    <string name="nm_household_needs_sign_in">Mag-sign in para makita.</string>
 </resources>

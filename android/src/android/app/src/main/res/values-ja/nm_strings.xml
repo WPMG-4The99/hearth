@@ -1174,4 +1174,13 @@
     <string name="nm_todos_add">追加</string>
     <string name="nm_todos_delete">削除</string>
     <string name="nm_menu_todos">やること</string>
+    <string name="nm_panic_saved">残しました。相手は次にアプリを開いたときに見られます。</string>
+    <string name="nm_household_title">世帯</string>
+    <string name="nm_household_check_in">無事を伝える</string>
+    <string name="nm_household_empty">まだありません。</string>
+    <string name="nm_household_kind_check_in">無事</string>
+    <string name="nm_household_kind_panic">緊急</string>
+    <string name="nm_household_kind_alert">知らせ</string>
+    <string name="nm_menu_household">世帯</string>
+    <string name="nm_household_needs_sign_in">見るにはログインしてください。</string>
 </resources>

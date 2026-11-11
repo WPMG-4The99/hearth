@@ -1157,4 +1157,13 @@
     <string name="nm_todos_add">Add</string>
     <string name="nm_todos_delete">Delete</string>
     <string name="nm_menu_todos">To-dos</string>
+    <string name="nm_panic_saved">Saved. They will see it when they next open the app.</string>
+    <string name="nm_household_title">Household</string>
+    <string name="nm_household_check_in">Check in</string>
+    <string name="nm_household_empty">Nothing here yet.</string>
+    <string name="nm_household_kind_check_in">Check-in</string>
+    <string name="nm_household_kind_panic">Panic</string>
+    <string name="nm_household_kind_alert">Alert</string>
+    <string name="nm_menu_household">Household</string>
+    <string name="nm_household_needs_sign_in">Sign in to see this.</string>
 </resources>

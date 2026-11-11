@@ -1182,4 +1182,13 @@
     <string name="nm_todos_add">Adaugă</string>
     <string name="nm_todos_delete">Șterge</string>
     <string name="nm_menu_todos">De făcut</string>
+    <string name="nm_panic_saved">Salvat. Cealaltă persoană îl vede când deschide aplicația data viitoare.</string>
+    <string name="nm_household_title">Casa</string>
+    <string name="nm_household_check_in">Sunt bine</string>
+    <string name="nm_household_empty">Nimic încă.</string>
+    <string name="nm_household_kind_check_in">Prezență</string>
+    <string name="nm_household_kind_panic">Urgență</string>
+    <string name="nm_household_kind_alert">Alertă</string>
+    <string name="nm_menu_household">Casa</string>
+    <string name="nm_household_needs_sign_in">Conectează-te ca să vezi.</string>
 </resources>

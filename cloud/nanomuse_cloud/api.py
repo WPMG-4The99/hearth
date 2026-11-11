@@ -1261,11 +1261,54 @@ def create_app(
         if console_dir.is_dir():
             app.mount("/app", StaticFiles(directory=str(console_dir), html=True), name="console")
 
+    # -- household log: the accounts in one HOUSEHOLDS group, and a feed key that only reads --
+
+    @app.get("/v1/household/events")
+    async def household_events(limit: int = 50, caller: Caller = Depends(caller_dep)) -> dict:
+        return {"events": await asyncio.to_thread(cloud.household_events, caller.account_id, limit)}
+
+    @app.post("/v1/household/events")
+    async def household_check_in(request: Request, caller: Caller = Depends(caller_dep)) -> dict:
+        body = await _json(request)
+        kind = str(body.get("kind") or "check-in")
+        if kind != "check-in":
+            raise CloudError(400, "bad_kind", "A phone records a check-in here. Panic and alert go through the hub.")
+        event = await asyncio.to_thread(cloud.record_household_event, caller.account_id, "check-in", str(body.get("text") or ""))
+        return {"event": event}
+
+    @app.get("/v1/household/feed")
+    async def household_feed(limit: int = 50, authorization: str | None = Header(default=None)) -> dict:
+        token = authorization[7:].strip() if authorization and authorization.lower().startswith("bearer ") else None
+        return {"events": await asyncio.to_thread(cloud.read_feed, token, limit)}
+
     # -- admin ------------------------------------------------------------------------------------
 
     def admin_dep(x_admin_token: str | None = Header(default=None)) -> None:
         if not settings.admin_token or not secrets.compare_digest((x_admin_token or "").encode(), settings.admin_token.encode()):
             raise CloudError(401, "admin", "admin token required")
+
+    @app.post("/v1/admin/household-feed", dependencies=[Depends(admin_dep)])
+    async def admin_issue_feed(request: Request) -> dict:
+        """Issue a feed key. The token is in this answer only. Revoking it does not touch an account."""
+        body = await _json(request)
+        kinds = body.get("kinds")
+        if kinds is not None and not isinstance(kinds, list):
+            raise CloudError(400, "bad_kind", "kinds is a list")
+        token, info = await asyncio.to_thread(
+            cloud.issue_feed_key,
+            str(body.get("label") or ""),
+            str(body.get("member") or ""),
+            [str(k) for k in kinds] if isinstance(kinds, list) else None,
+        )
+        return {"token": token, **info}
+
+    @app.get("/v1/admin/household-feed", dependencies=[Depends(admin_dep)])
+    async def admin_list_feed() -> dict:
+        return {"keys": cloud.list_feed_keys()}
+
+    @app.post("/v1/admin/household-feed/{feed_id}/revoke", dependencies=[Depends(admin_dep)])
+    async def admin_revoke_feed(feed_id: str) -> dict:
+        return cloud.revoke_feed_key(feed_id)
 
     @app.get("/v1/admin/accounts", dependencies=[Depends(admin_dep)])
     async def admin_accounts() -> dict:

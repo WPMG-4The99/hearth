@@ -1178,4 +1178,13 @@
     <string name="nm_todos_add">Ekle</string>
     <string name="nm_todos_delete">Sil</string>
     <string name="nm_menu_todos">Yapılacaklar</string>
+    <string name="nm_panic_saved">Kaydedildi. Diğer kişi uygulamayı bir sonraki açışında görür.</string>
+    <string name="nm_household_title">Ev</string>
+    <string name="nm_household_check_in">İyiyim</string>
+    <string name="nm_household_empty">Henüz bir şey yok.</string>
+    <string name="nm_household_kind_check_in">Bildirim</string>
+    <string name="nm_household_kind_panic">Acil</string>
+    <string name="nm_household_kind_alert">Uyarı</string>
+    <string name="nm_menu_household">Ev</string>
+    <string name="nm_household_needs_sign_in">Görmek için oturum aç.</string>
 </resources>

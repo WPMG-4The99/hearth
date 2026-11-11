@@ -1144,4 +1144,13 @@
     <string name="nm_todos_add">新增</string>
     <string name="nm_todos_delete">刪除</string>
     <string name="nm_menu_todos">待辦</string>
+    <string name="nm_panic_saved">已記下。對方下次打開應用就能看到。</string>
+    <string name="nm_household_title">家庭紀錄</string>
+    <string name="nm_household_check_in">報平安</string>
+    <string name="nm_household_empty">還沒有紀錄。</string>
+    <string name="nm_household_kind_check_in">報平安</string>
+    <string name="nm_household_kind_panic">緊急</string>
+    <string name="nm_household_kind_alert">提醒</string>
+    <string name="nm_menu_household">家庭紀錄</string>
+    <string name="nm_household_needs_sign_in">登入後才能看。</string>
 </resources>

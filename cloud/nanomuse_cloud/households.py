@@ -1,4 +1,4 @@
-"""Households the operator linked: who may send a panic to whom.
+"""Households the operator linked: who may send a panic to whom, and who shares a log.
 
 ``HOUSEHOLDS`` is operator config. An account cannot edit it. One household is
 two or more e-mail addresses separated by ``|``. Several households are
@@ -7,6 +7,7 @@ separated by commas, semicolons or newlines.
 
 from __future__ import annotations
 
+import hashlib
 import logging
 import re
 
@@ -15,6 +16,8 @@ from .identifiers import BadIdentifier, Identifier, parse
 log = logging.getLogger("nanomuse_cloud")
 
 _SPLIT = re.compile(r"[,;\n]+")
+KINDS = ("check-in", "panic", "alert")
+TEXT_MAX = 200
 
 
 def groups(raw: str) -> list[list[Identifier]]:
@@ -68,3 +71,33 @@ def partner_hashes(raw: str, key: bytes, mine_hash: str) -> list[str]:
                     seen.add(h)
                     found.append(h)
     return found
+
+
+def group_key(members: list[Identifier]) -> str:
+    """Stable id of one household: the hash of its addresses, sorted. Adding or
+    removing an address makes a different id."""
+    joined = "\n".join(sorted(m.value for m in members))
+    return hashlib.sha256(joined.encode()).hexdigest()
+
+
+def group_containing(raw: str, email: str) -> list[Identifier] | None:
+    """The first household in ``raw`` that contains this address. None when it
+    is not an e-mail, or not in any household. A person listed twice is in the
+    first group only, for the purpose of issuing a feed key."""
+    try:
+        ident = parse(email)
+    except BadIdentifier:
+        return None
+    if ident.channel != "email":
+        return None
+    for members in groups(raw):
+        if any(m.value == ident.value for m in members):
+            return members
+    return None
+
+
+def group_by_key(raw: str, key: str) -> list[Identifier] | None:
+    for members in groups(raw):
+        if group_key(members) == key:
+            return members
+    return None

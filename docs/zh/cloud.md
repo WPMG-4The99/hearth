@@ -118,6 +118,12 @@ docker compose up -d    # Caddy fetches the TLS certificate
 
 各端默认连 `https://hearth-cloud-the99.zocomputer.io`。手机登录表单下面的「使用其他服务器」可以填你自己跑的中继地址（[android.md](android.md)、[ios.md](ios.md)）；桌面端从插件的 `config.baseURL` 读（[desktop.md](desktop.md)）；网页控制台就是在 `/app` 提供它的那台中继。
 
+## 家庭记录 {#household-log}
+
+`HOUSEHOLDS` 连在一起的账号共用一份记录：报平安、紧急或提醒，每一条有时间、发送方账号，以及一句可选的短注。紧急和提醒在中继尝试显示到另一部手机之前就写下来，所以对方不在线也不会丢。`GET /v1/household/events` 读调用方所在家庭能看的记录。`POST /v1/household/events` 且 `{"kind":"check-in"}` 写一条报平安。不在任何家庭里的账号得到 `not_linked`。
+
+不能去控制手机的读取方（例如 Jessica）用 feed key。运营者用 `POST /v1/admin/household-feed` 签发，用 `POST /v1/admin/household-feed/{id}/revoke` 作废。token 只出现一次，以 `nmf_` 开头，库里只存哈希。它打不开 hub、对话或 `/v1/me`。`HOUSEHOLD_FEED_KINDS` 限制这次读取返回哪些种类。细节在 [hub.md](hub.md#a-household-panic)。
+
 ## 协议 {#protocol}
 
 App 的调用，全部是 JSON：
@@ -142,6 +148,9 @@ DELETE /v1/me/profile       Bearer                            → 204
 GET  /v1/me/sessions        Bearer                            → {sessions: [{prefix, device, via, created_at, last_used_at, expires_at, current}]}
 DELETE /v1/me/sessions/{prefix}  Bearer                       → 204; 404 no_session
 GET  /v1/me/events          Bearer  ?limit=50                 → {events: [{ts, kind, detail}]}
+GET  /v1/household/events   Bearer  ?limit=50                 → {events: [{id, ts, kind, account_id, who, text}]}; 403 not_linked
+POST /v1/household/events   Bearer  {kind: "check-in", text?} → {event}; 400 bad_kind, 403 not_linked, 429 too_many
+GET  /v1/household/feed     Bearer nmf_… ?limit=50           → 同一形状，只返回 HOUSEHOLD_FEED_KINDS 仍允许的种类；401 bad_key, 403 household_gone
 POST /v1/auth/sign-out      Bearer                            → 204
 POST /v1/auth/sign-out-all  Bearer  {all?}                    → {signed_out}
 POST /v1/auth/delete        Bearer                            → 204

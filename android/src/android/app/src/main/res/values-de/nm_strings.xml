@@ -1178,4 +1178,13 @@
     <string name="nm_todos_add">Hinzufügen</string>
     <string name="nm_todos_delete">Löschen</string>
     <string name="nm_menu_todos">Aufgaben</string>
+    <string name="nm_panic_saved">Gespeichert. Die andere Person sieht es, wenn sie die App das nächste Mal öffnet.</string>
+    <string name="nm_household_title">Haushalt</string>
+    <string name="nm_household_check_in">Ich bin da</string>
+    <string name="nm_household_empty">Noch nichts.</string>
+    <string name="nm_household_kind_check_in">Anwesenheit</string>
+    <string name="nm_household_kind_panic">Notfall</string>
+    <string name="nm_household_kind_alert">Hinweis</string>
+    <string name="nm_menu_household">Haushalt</string>
+    <string name="nm_household_needs_sign_in">Zum Ansehen anmelden.</string>
 </resources>

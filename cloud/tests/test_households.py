@@ -75,7 +75,9 @@ def test_panic_reaches_the_linked_phone_and_the_result_comes_back(client):
         assert call["from"]["name"] == "Cap"
         right.send_json({"type": "result", "id": "p1", "ok": True, "body": {"delivered": True}})
         res = left.receive_json()
-        assert res["type"] == "result" and res["ok"] is True and res["body"] == {"delivered": True}
+        assert res["type"] == "result" and res["ok"] is True and res["body"]["delivered"] is True
+        listed = client.get("/v1/household/events", headers={"Authorization": f"Bearer {key_b}"}).json()
+        assert listed["events"][0]["kind"] == "panic" and listed["events"][0]["who"] == "a"
 
         left.send_json({"type": "call", "id": "a1", "to": "household", "action": "alert", "args": {"text": "home"}})
         alert = right.receive_json()
@@ -84,14 +86,15 @@ def test_panic_reaches_the_linked_phone_and_the_result_comes_back(client):
         assert left.receive_json()["ok"] is True
 
 
-def test_partner_offline_is_not_delivered(client):
+def test_partner_offline_is_saved_for_later(client):
     key_a = sign_up(client, "a@example.com")
     sign_up(client, "b@example.com")  # the account exists; the phone does not connect
     with connect(client, key_a) as left:
         _join(left, "phone-a", "Cap")
         left.send_json({"type": "call", "id": "p1", "to": "household", "action": "panic", "args": {"text": "panic"}})
-        err = left.receive_json()
-        assert err["code"] == "device_offline" and err["id"] == "p1"
+        saved = left.receive_json()
+        assert saved["type"] == "result" and saved["ok"] is True and saved["id"] == "p1"
+        assert saved["body"] == {"saved": True, "delivered": False}
 
 
 def test_unlinked_account_is_rejected(client):

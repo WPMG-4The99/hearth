@@ -31,8 +31,10 @@ from .controls import Controls
 from .crypto import IdentifierCrypto
 from .db import Database, now
 from .geo import Place
+from .households import KINDS as HOUSEHOLD_KINDS
+from .households import TEXT_MAX as HOUSEHOLD_TEXT_MAX
+from .households import group_by_key, group_containing, group_key, partner_hashes
 from .households import groups as household_groups
-from .households import partner_hashes
 from .identifiers import BadIdentifier, Identifier, parse
 from .nudges import BadNudges
 from .nudges import defaults as nudges_defaults
@@ -45,6 +47,10 @@ from .senders import CodeSender, LogSender, SendError, make_sender
 log = logging.getLogger("nanomuse_cloud")
 
 KEY_PREFIX = "nm_"
+# A feed key is not an account key. It starts with nmf_, so it also starts with nm_
+# and account auth looks it up, finds nothing, and refuses it.
+FEED_PREFIX = "nmf_"
+HOUSEHOLD_EVENT_HOUR = 30
 # the settings-table key of the nudges policy (0.18, nudges.py)
 NUDGES_KEY = "nudges"
 
@@ -651,6 +657,139 @@ class Cloud:
             seen.add(other["id"])
             ids.append(other["id"])
         return ids
+
+    def feed_kind_ceiling(self) -> list[str]:
+        """Kinds HOUSEHOLD_FEED_KINDS still allows. Order follows the known kinds."""
+        asked = {part.strip() for part in self.s.household_feed_kinds.split(",") if part.strip()}
+        return [kind for kind in HOUSEHOLD_KINDS if kind in asked]
+
+    def in_household(self, account_id: str) -> bool:
+        return self._in_household(account_id)
+
+    def _in_household(self, account_id: str) -> bool:
+        """True when this account's address is in a HOUSEHOLDS group, even if the other person has not signed up yet."""
+        row = self.db.account(account_id)
+        if row is None:
+            return False
+        return bool(partner_hashes(self.s.households, self.s.hmac_key, row["id_hash"]))
+
+    def _household_visible_ids(self, account_id: str) -> list[str] | None:
+        """This account and the partner accounts that already exist. None when it is not linked."""
+        if not self._in_household(account_id):
+            return None
+        return [account_id, *self.household_partner_ids(account_id)]
+
+    def record_household_event(self, account_id: str, kind: str, text: str = "") -> dict:
+        """Append one row. The sender must be in a household. Panic and alert are
+        recorded whether or not another phone is connected."""
+        if kind not in HOUSEHOLD_KINDS:
+            raise CloudError(400, "bad_kind", "That kind is not check-in, panic or alert")
+        if self._household_visible_ids(account_id) is None:
+            raise CloudError(403, "not_linked", "This account is not linked to another")
+        if self.db.count_household_events_since(account_id, now() - 3600) >= HOUSEHOLD_EVENT_HOUR:
+            raise CloudError(429, "too_many", "Too many household events; wait a while")
+        note = " ".join(str(text or "").split())[:HOUSEHOLD_TEXT_MAX]
+        ts = now()
+        event_id = self.db.insert_household_event(account_id, kind, note, ts)
+        self.db.add_event(account_id, f"household.{kind}", "")
+        return self._household_event_view(event_id, account_id, kind, note, ts)
+
+    def household_events(self, account_id: str, limit: int = 50) -> list[dict]:
+        ids = self._household_visible_ids(account_id)
+        if ids is None:
+            raise CloudError(403, "not_linked", "This account is not linked to another")
+        return [self._row_event(row) for row in self.db.household_events_for(ids, limit)]
+
+    def _household_event_view(self, event_id: str, account_id: str, kind: str, text: str, ts: int) -> dict:
+        return {
+            "id": event_id,
+            "ts": ts,
+            "kind": kind,
+            "account_id": account_id,
+            "who": self.account_label(account_id),
+            "text": text,
+        }
+
+    def _row_event(self, row: sqlite3.Row) -> dict:
+        return self._household_event_view(row["id"], row["account_id"], row["kind"], row["text"] or "", int(row["ts"]))
+
+    def issue_feed_key(self, label: str, member: str, kinds: list[str] | None) -> tuple[str, dict]:
+        """A token that can only read one household's log. Shown once. The hash is what is kept."""
+        members = group_containing(self.s.households, member)
+        if members is None:
+            raise CloudError(400, "not_linked", "That address is not in a household")
+        ceiling = self.feed_kind_ceiling()
+        wanted = [k for k in (kinds or list(HOUSEHOLD_KINDS)) if k in HOUSEHOLD_KINDS]
+        allowed = [k for k in wanted if k in ceiling]
+        if not allowed:
+            raise CloudError(400, "bad_kind", "None of those kinds are allowed by HOUSEHOLD_FEED_KINDS")
+        token = FEED_PREFIX + secrets.token_urlsafe(30)
+        feed_id = self.db.insert_feed_key(
+            _sha256(token), token[:12], (label or "feed").strip()[:60] or "feed", group_key(members), json.dumps(allowed)
+        )
+        self.db.audit_add("operator", "household.feed.issued", feed_id, (label or "feed")[:60])
+        return token, self._feed_view(self.db.feed_key_by_id(feed_id))
+
+    def list_feed_keys(self) -> list[dict]:
+        return [self._feed_view(row) for row in self.db.feed_keys()]
+
+    def revoke_feed_key(self, feed_id: str) -> dict:
+        row = self.db.feed_key_by_id(feed_id)
+        if row is None:
+            raise CloudError(404, "no_feed", "No feed key with that id")
+        self.db.revoke_feed_key(feed_id)
+        self.db.audit_add("operator", "household.feed.revoked", feed_id, row["label"] or "")
+        fresh = self.db.feed_key_by_id(feed_id)
+        return self._feed_view(fresh if fresh is not None else row)
+
+    def _feed_view(self, row: sqlite3.Row | None) -> dict:
+        if row is None:
+            return {}
+        members = group_by_key(self.s.households, row["group_key"])
+        try:
+            kinds = json.loads(row["kinds"] or "[]")
+        except ValueError:
+            kinds = []
+        return {
+            "id": row["id"],
+            "prefix": row["prefix"],
+            "label": row["label"],
+            "kinds": [k for k in kinds if k in HOUSEHOLD_KINDS],
+            "created_at": int(row["created_at"]),
+            "revoked_at": int(row["revoked_at"]) if row["revoked_at"] else None,
+            "last_used_at": int(row["last_used_at"]) if row["last_used_at"] else None,
+            "household": "missing" if members is None else "ok",
+            "who": [m.value.split("@", 1)[0][:60] for m in members] if members else [],
+        }
+
+    def read_feed(self, bearer: str | None, limit: int = 50) -> list[dict]:
+        """Events for the household this feed key was issued for, narrowed by the operator's kinds."""
+        if not bearer or not bearer.startswith(FEED_PREFIX):
+            raise CloudError(401, "bad_key", "That is not a household feed key")
+        row = self.db.feed_key(_sha256(bearer))
+        if row is None or row["revoked_at"] is not None:
+            raise CloudError(401, "bad_key", "This feed key is no longer valid")
+        members = group_by_key(self.s.households, row["group_key"])
+        if members is None:
+            raise CloudError(403, "household_gone", "That household is no longer configured; issue a new feed key")
+        try:
+            issued = json.loads(row["kinds"] or "[]")
+        except ValueError:
+            issued = []
+        ceiling = set(self.feed_kind_ceiling())
+        kinds = [k for k in issued if k in ceiling]
+        ids: list[str] = []
+        seen: set[str] = set()
+        for member in members:
+            for digest in member.hashes(self.s.hmac_key):
+                account = self.db.account_by_hash(digest)
+                if account is None or account["disabled"] or account["id"] in seen:
+                    continue
+                seen.add(account["id"])
+                ids.append(account["id"])
+                break
+        self.db.touch_feed_key(_sha256(bearer))
+        return [self._row_event(item) for item in self.db.household_events_for(ids, limit, kinds)]
 
     def account_label(self, account_id: str) -> str:
         """A short name for a panic: the e-mail's local part, or the stored hint."""

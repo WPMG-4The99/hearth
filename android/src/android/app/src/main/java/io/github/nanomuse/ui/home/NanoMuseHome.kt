@@ -595,6 +595,10 @@ private fun TabHeader(
                 DropdownMenu(expanded = menu, onDismissRequest = { menu = false }) {
                     if (tab == HomeTab.CHAT) {
                         DropdownMenuItem(
+                            text = { Text(stringResource(R.string.nm_menu_household)) },
+                            onClick = { menu = false; navController.safeNavigate(io.github.nanomuse.household.ROUTE_HOUSEHOLD) },
+                        )
+                        DropdownMenuItem(
                             text = { Text(stringResource(R.string.nm_menu_todos)) },
                             onClick = { menu = false; navController.safeNavigate(io.github.nanomuse.todos.ROUTE_TODOS) },
                         )

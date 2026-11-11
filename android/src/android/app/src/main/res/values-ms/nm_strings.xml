@@ -1174,4 +1174,13 @@
     <string name="nm_todos_add">Tambah</string>
     <string name="nm_todos_delete">Padam</string>
     <string name="nm_menu_todos">Tugasan</string>
+    <string name="nm_panic_saved">Disimpan. Orang lain nampaknya apabila membuka apl lagi.</string>
+    <string name="nm_household_title">Rumah</string>
+    <string name="nm_household_check_in">Khabar baik</string>
+    <string name="nm_household_empty">Belum ada apa-apa.</string>
+    <string name="nm_household_kind_check_in">Khabar</string>
+    <string name="nm_household_kind_panic">Kecemasan</string>
+    <string name="nm_household_kind_alert">Amaran</string>
+    <string name="nm_menu_household">Rumah</string>
+    <string name="nm_household_needs_sign_in">Log masuk untuk melihat.</string>
 </resources>
