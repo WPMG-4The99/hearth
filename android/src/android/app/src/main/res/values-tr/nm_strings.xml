@@ -961,7 +961,7 @@
     <string name="nm_hub_err_not_controllable">O cihazdan bir şey yapması istenemez.</string>
     <string name="nm_hub_err_unknown_agent">O kodlama ajanı bilgisayarda yok.</string>
     <string name="nm_hub_err_no_session">O oturum artık bilgisayarda yok.</string>
-    <string name="nm_hub_err_unknown_action">Bilgisayar, bu eylemi bilmeyen The Hearth'in daha eski bir sürümünü çalıştırıyor.</string>
+    <string name="nm_hub_err_unknown_action">Bilgisayar, bu eylemi bilmeyen The Hearth\'in daha eski bir sürümünü çalıştırıyor.</string>
     <string name="nm_hub_err_bad_key">Relay’de oturum kapatılmış; yeniden oturum aç.</string>
     <string name="nm_hub_err_generic">Bilgisayar bunu yapamadı.</string>
     <string name="nm_devices_refused">Relay reddetti; yeniden oturum aç</string>
