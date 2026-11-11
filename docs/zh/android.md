@@ -1,8 +1,8 @@
 # Android App
 
-`android/` 是手机上的 Hearth，GPL-3.0，衍生自 [nanoMuse](https://github.com/nano-muse/nanoMuse)，
+`android/` 是手机上的 The Hearth，GPL-3.0，衍生自 [nanoMuse](https://github.com/nano-muse/nanoMuse)，
 而 nanoMuse 基于 [OpenMinis](https://github.com/OpenMinis/OpenMinis) 1.13：一个原生 App，智能体**在手机上**运行，Linux shell、浏览器、MCP 服务器、
-技能和定时任务都装在 APK 里。Hearth 自己的代码在 `io.github.nanomuse.*` 下（Kotlin 包名保持不变）；OpenMinis 文件里的改动用 `// nanoMuse:` 标出。应用 id 是
+技能和定时任务都装在 APK 里。The Hearth 自己的代码在 `io.github.nanomuse.*` 下（Kotlin 包名保持不变）；OpenMinis 文件里的改动用 `// nanoMuse:` 标出。应用 id 是
 `media.wyldephyremg.hearth`，系统认得这个 App 的 URL scheme 是 `hearth://`。同一部手机上如果还装着
 nanoMuse 或 OpenMinis，不会和它们抢同一个 scheme。App 内部的链接仍是 `minis://…`（上游的词汇，沙箱、
 系统提示词和模型都用它）。从系统进来的 `hearth://`，以及旧构建留下的 `nanomuse://`，都按 `minis://` 来读。
@@ -17,7 +17,7 @@ nanoMuse 或 OpenMinis，不会和它们抢同一个 scheme。App 内部的链�
 作为设计记录保留在 [archive/android-python-line.md](../archive/android-python-line.md)，不是你今天
 下载到的东西。
 
-Debug 构建会加上后缀 `.debug`，id 是 `media.wyldephyremg.hearth.debug`，可以和 Hearth 的正式版装在同一部手机上。两种构建的桌面名称都是 Hearth。文件共享、闹钟权限和沙箱套接字都跟着当前这个构建的 id 走。外部链接用 `hearth://`。
+Debug 构建会加上后缀 `.debug`，id 是 `media.wyldephyremg.hearth.debug`，可以和 The Hearth 的正式版装在同一部手机上。两种构建的桌面名称都是 The Hearth。文件共享、闹钟权限和沙箱套接字都跟着当前这个构建的 id 走。外部链接用 `hearth://`。
 
 一个 APK，一种架构：`nanoMuse-<version>-arm64.apk`（arm64-v8a，Android 8.0 / API 26 及以上，
 `targetSdk` 35）。每个版本都用同一把签名密钥，所以新 APK 直接覆盖旧的，数据保留。没有上架
@@ -31,7 +31,7 @@ Play 商店：「设置 → 版本」把已安装的构建和 `WPMG-4The99/heart
    `sha256sum -c nanoMuse-<version>-arm64.apk.sha256`。
 2. 打开它。Android 会问一次，是否允许从你的浏览器或文件管理器安装。
 3. **登录。** 第一屏就是这个构建里写死的中继账号：先填邮箱，再填一次性验证码（这台中继把验证码写在日志里）。「高级：换一台服务器」留给测试用的中继。账号让
-   你的设备能连成一体（[hub.md](hub.md)），也带来一个起步用的模型（[cloud.md](cloud.md)）。然后选哪个模型来回答：**Hearth 中继**（默认），或者**我的 Grok 账号**（在这部手机上登录 xAI）。
+   你的设备能连成一体（[hub.md](hub.md)），也带来一个起步用的模型（[cloud.md](cloud.md)）。然后选哪个模型来回答：**The Hearth 中继**（默认），或者**我的 Grok 账号**（在这部手机上登录 xAI）。
    两种都能用手机上的工具，包括日历和待办。设的是四个模型，
    不是一个，都在同一页「**设置 → 模型**」里（设置顶部那张卡片打开它）：**对话**，和你说话
    的模型（账号的菜单默认停在 `deepseek-v4.1-flash`）；**操作屏幕**，看屏幕的那个

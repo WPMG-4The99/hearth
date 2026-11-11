@@ -189,7 +189,7 @@ class AgentForegroundService : Service() {
         if (com.openminis.app.crash.CrashFrequencyDetector.isSafeMode()) {
             try {
                 val stub = androidx.core.app.NotificationCompat.Builder(this, CHANNEL_ID)
-                    .setContentTitle("Hearth") // nanoMuse: Hearth product name.
+                    .setContentTitle("The Hearth") // nanoMuse: The Hearth product name.
                     .setSmallIcon(android.R.drawable.stat_sys_warning)
                     .setOngoing(false)
                     .build()
@@ -983,15 +983,15 @@ class AgentForegroundService : Service() {
      * so the user still gets a hint about what's running.
      */
     private fun toolDisplayLabel(toolName: String): String = when (toolName) {
-        "shell_execute" -> "Hearth is using Shell" // nanoMuse: Hearth product name.
-        "file_read" -> "Hearth is reading File" // nanoMuse: Hearth product name.
-        "file_write" -> "Hearth is using Editor" // nanoMuse: Hearth product name.
-        "file_edit" -> "Hearth is editing File" // nanoMuse: Hearth product name.
-        "browser_use" -> "Hearth is using Browser" // nanoMuse: Hearth product name.
-        "read_image" -> "Hearth is reading Image" // nanoMuse: Hearth product name.
-        "memory_write", "memory_get" -> "Hearth is using Memory" // nanoMuse: Hearth product name.
-        "web_search" -> "Hearth is using Search" // nanoMuse: Hearth product name.
-        else -> "Hearth is using $toolName" // nanoMuse: Hearth product name.
+        "shell_execute" -> "The Hearth is using Shell" // nanoMuse: The Hearth product name.
+        "file_read" -> "The Hearth is reading File" // nanoMuse: The Hearth product name.
+        "file_write" -> "The Hearth is using Editor" // nanoMuse: The Hearth product name.
+        "file_edit" -> "The Hearth is editing File" // nanoMuse: The Hearth product name.
+        "browser_use" -> "The Hearth is using Browser" // nanoMuse: The Hearth product name.
+        "read_image" -> "The Hearth is reading Image" // nanoMuse: The Hearth product name.
+        "memory_write", "memory_get" -> "The Hearth is using Memory" // nanoMuse: The Hearth product name.
+        "web_search" -> "The Hearth is using Search" // nanoMuse: The Hearth product name.
+        else -> "The Hearth is using $toolName" // nanoMuse: The Hearth product name.
     }
 
     /**

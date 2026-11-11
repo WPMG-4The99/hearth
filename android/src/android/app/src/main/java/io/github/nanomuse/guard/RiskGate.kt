@@ -230,16 +230,16 @@ object RiskGate {
     }
 
     const val INSTALL_NOTICE =
-        "[Hearth] This command installs software; it ran without asking. Mention it to the user in one line."
+        "[The Hearth] This command installs software; it ran without asking. Mention it to the user in one line."
 
     /** After "always allow for X": the model tells the user where the grant lives, once. */
     fun rememberedNotice(target: String, riskClass: RiskClass): String =
-        "[Hearth] The user chose to remember this approval (${riskClass.name.lowercase()} · $target)" +
+        "[The Hearth] The user chose to remember this approval (${riskClass.name.lowercase()} · $target)" +
             (if (riskClass == RiskClass.MONEY) ", confirmed with their screen lock, so payments in $target will run without a card from now on" else "") +
             ". Tell them in one line that it is listed under Settings → Permissions → Remembered approvals, where it can be revoked."
 
     /** A payment that ran on a standing grant: always said out loud. */
     fun autoPaidNotice(target: String): String =
-        "[Hearth] This payment step ran without asking because the user remembered approvals for $target. " +
+        "[The Hearth] This payment step ran without asking because the user remembered approvals for $target. " +
             "Say so in one line, and remind them it can be revoked under Settings → Permissions."
 }

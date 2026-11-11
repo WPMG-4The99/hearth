@@ -265,7 +265,7 @@ class SpeechOffloadHandler(private val context: Context) : NativeOffloadHandler 
                     OffloadPermissionManager.SettingsGateRequest(
                         id = Manifest.permission.RECORD_AUDIO,
                         title = "Microphone permission needed",
-                        message = "Hearth needs microphone permission to transcribe speech. Open Settings to allow it.", // nanoMuse: Hearth product name.
+                        message = "The Hearth needs microphone permission to transcribe speech. Open Settings to allow it.", // nanoMuse: The Hearth product name.
                         settingsAction = android.provider.Settings.ACTION_APPLICATION_DETAILS_SETTINGS,
                         requiresPackageUri = true,
                         positiveLabel = "Open Settings",

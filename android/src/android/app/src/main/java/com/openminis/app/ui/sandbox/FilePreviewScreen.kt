@@ -1300,7 +1300,7 @@ private suspend fun saveImageToGallery(context: Context, src: File): Boolean =
                     put(MediaStore.Images.Media.MIME_TYPE, mime)
                     put(
                         MediaStore.Images.Media.RELATIVE_PATH,
-                        Environment.DIRECTORY_PICTURES + "/Hearth", // nanoMuse: Hearth product name.
+                        Environment.DIRECTORY_PICTURES + "/The Hearth", // nanoMuse: The Hearth product name.
                     )
                     put(MediaStore.Images.Media.IS_PENDING, 1)
                 }
@@ -1318,7 +1318,7 @@ private suspend fun saveImageToGallery(context: Context, src: File): Boolean =
                 val dir = Environment.getExternalStoragePublicDirectory(
                     Environment.DIRECTORY_PICTURES,
                 )
-                val minisDir = File(dir, "Hearth").also { it.mkdirs() } // nanoMuse: Hearth product name.
+                val minisDir = File(dir, "The Hearth").also { it.mkdirs() } // nanoMuse: The Hearth product name.
                 val dest = File(minisDir, filename)
                 src.inputStream().use { input ->
                     dest.outputStream().use { input.copyTo(it) }

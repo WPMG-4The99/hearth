@@ -46,11 +46,16 @@ import org.json.JSONObject
  * content is forwarded to the model, not stored. See `docs/cloud.md`.
  */
 object NanoMuseCloud {
-    /** Hearth's relay. Every default cloud address in the app is this constant. */
+    /** The Hearth's relay. Every default cloud address in the app is this constant. */
     const val DEFAULT_BASE = "https://hearth-cloud-the99.zocomputer.io"
     /** The Hearth repository: docs, releases, and the community links. */
     const val PROJECT_URL = "https://github.com/WPMG-4The99/hearth"
-    const val LABEL = "Hearth"
+    const val LABEL = "The Hearth"
+
+    /** Provider and group name stored before the product name was The Hearth. */
+    private const val LEGACY_LABEL = "Hearth"
+
+    private fun isCloudGroup(name: String): Boolean = name == LABEL || name == LEGACY_LABEL
 
     private const val PREFS = "nanomuse"
     private const val KEY_BASE = "cloud.base"
@@ -280,7 +285,25 @@ object NanoMuseCloud {
     /** The provider instance the relay is signed in as, if it still exists. */
     fun instance(context: Context): ProviderInstance? {
         val id = prefs(context).getString(KEY_INSTANCE, null) ?: return null
-        return repo(context)?.instance(id)
+        val found = repo(context)?.instance(id) ?: return null
+        renameLegacyGroups(context, found.id)
+        if (found.label != LEGACY_LABEL) return found
+        val renamed = found.copy(label = LABEL)
+        repo(context)?.updateInstance(renamed)
+        return renamed
+    }
+
+    /** An already signed-in phone stored the provider and its group as "Hearth". */
+    private fun renameLegacyGroups(context: Context, instanceId: String) {
+        val repo = repo(context) ?: return
+        val config = repo.config.value
+        for (group in config.modelGroups) {
+            if (group.name != LEGACY_LABEL) continue
+            val ours = group.memberEntryIds.any { eid ->
+                config.modelEntries.any { it.id == eid && it.providerInstanceId == instanceId }
+            }
+            if (ours) repo.updateGroup(group.copy(name = LABEL))
+        }
     }
 
     fun isSignedIn(context: Context): Boolean {
@@ -806,13 +829,14 @@ object NanoMuseCloud {
             // Ours already, with the recommended model or with the person's own choice
             // (a member who swapped the recommended model for another must not get a
             // second "nanoMuse Cloud" group with the old one back on signing in again).
-            val already = config.modelGroups.any { chatEntry.id in it.memberEntryIds || (it.name == LABEL && it.memberEntryIds.isNotEmpty()) }
+            val already = config.modelGroups.any { chatEntry.id in it.memberEntryIds || (isCloudGroup(it.name) && it.memberEntryIds.isNotEmpty()) }
             if (!already) {
                 // A group of ours left empty by an earlier sign-out is reused rather
                 // than doubled; otherwise a new one.
-                val empty = config.modelGroups.firstOrNull { it.name == LABEL && it.memberEntryIds.isEmpty() }
+                val empty = config.modelGroups.firstOrNull { isCloudGroup(it.name) && it.memberEntryIds.isEmpty() }
                 if (empty != null) {
-                    repo.updateGroup(empty.copy(memberEntryIds = (empty.memberEntryIds + chatEntry.id).toMutableList()))
+                    val named = if (empty.name == LABEL) empty else empty.copy(name = LABEL)
+                    repo.updateGroup(named.copy(memberEntryIds = (named.memberEntryIds + chatEntry.id).toMutableList()))
                     if (repo.defaultPrimaryGroupId == null) repo.defaultPrimaryGroupId = empty.id
                 } else {
                     val group = ModelGroup(name = LABEL)
@@ -825,7 +849,7 @@ object NanoMuseCloud {
             val default = repo.config.value.modelGroups.firstOrNull { it.id == repo.defaultPrimaryGroupId }
             if (default == null || default.memberEntryIds.isEmpty()) {
                 val groups = repo.config.value.modelGroups
-                repo.defaultPrimaryGroupId = (groups.firstOrNull { chatEntry.id in it.memberEntryIds } ?: groups.firstOrNull { it.name == LABEL && it.memberEntryIds.isNotEmpty() })?.id
+                repo.defaultPrimaryGroupId = (groups.firstOrNull { chatEntry.id in it.memberEntryIds } ?: groups.firstOrNull { isCloudGroup(it.name) && it.memberEntryIds.isNotEmpty() })?.id
             }
         }
         // The image model is not written here any more (0.1.41): with nothing chosen,

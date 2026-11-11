@@ -1,8 +1,8 @@
 # The Android app
 
-`android/` is Hearth for the phone, a GPL-3.0 fork of [nanoMuse](https://github.com/nano-muse/nanoMuse),
+`android/` is The Hearth for the phone, a GPL-3.0 fork of [nanoMuse](https://github.com/nano-muse/nanoMuse),
 itself [OpenMinis](https://github.com/OpenMinis/OpenMinis) 1.13: a native app whose agent runs **on the phone**, with a Linux shell, a
-browser, MCP servers, skills and scheduled tasks inside the APK. Hearth's own code lives in
+browser, MCP servers, skills and scheduled tasks inside the APK. The Hearth's own code lives in
 `io.github.nanomuse.*` (the Kotlin packages keep their names); edits inside OpenMinis files are marked `// nanoMuse:`. The
 application id is `media.wyldephyremg.hearth` and the URL scheme the system knows the app by is
 `hearth://`. A phone that also has nanoMuse or OpenMinis installed does not share that scheme.
@@ -23,7 +23,7 @@ around a Python server, two APK flavours) is kept as a design record in
 download today.
 
 A debug build adds the suffix `.debug`, so its id is `media.wyldephyremg.hearth.debug` and it
-installs next to a release build of Hearth. Both builds use the launcher label Hearth. File
+installs next to a release build of The Hearth. Both builds use the launcher label The Hearth. File
 providers, the alarm permission and the sandbox socket follow the id of the build that is
 running. External links use `hearth://` on both.
 
@@ -43,7 +43,7 @@ the installed build next to the newest GitHub release of `WPMG-4The99/hearth`
    address, then a one-time code (this relay writes the code to its log). *Advanced: different
    server* is there for a test relay. It is what lets your devices work as one
    ([hub.md](hub.md)) and brings a model to start with ([cloud.md](cloud.md)). Then choose which
-   model answers: **Hearth relay** (the default) or **My Grok account** (xAI on this phone).
+   model answers: **The Hearth relay** (the default) or **My Grok account** (xAI on this phone).
    Both can use the phone's tools, including the calendar and the to-do list. Four models are set, not one, and they live on one page, **Settings →
    Models** (the card at the top of Settings opens it): **Chat**, the model that talks with
    you (the account's menu opens on `deepseek-v4.1-flash`); **Operating the screen**, the one

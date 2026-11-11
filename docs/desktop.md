@@ -20,7 +20,7 @@ which names the installer and its SHA-512, and the installer's `.exe.blockmap`. 
 anything is attached: it must find the candidate version in `latest.yml`, download the
 installer from a test feed and verify it, and refuse one whose bytes do not match
 (`harness/desktop/scripts/update-feed-check.mjs`). The feed the metadata is built for is
-[the Hearth GitHub releases feed](https://github.com/WPMG-4The99/hearth/releases/latest/download/).
+[The Hearth GitHub releases feed](https://github.com/WPMG-4The99/hearth/releases/latest/download/).
 The code is under
 [`harness/`](../harness/): the bundle of plugins in
 `harness/dsh-nanomuse`, the Electron shell in `harness/desktop`; how to build it yourself is

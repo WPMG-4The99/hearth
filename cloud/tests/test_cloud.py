@@ -1601,10 +1601,11 @@ def test_code_mail_has_text_and_html_in_both_languages():
 
     msg = compose_code_mail("no-reply@mail.nanomuse.cn", "someone@example.com", "123456", 10)
     assert msg["From"] == "Hearth <no-reply@mail.nanomuse.cn>" and msg["To"] == "someone@example.com"
-    assert "123456" in msg["Subject"]
+    assert msg["Subject"] == "The Hearth 验证码 123456 · Your code for The Hearth"
     parts = {p.get_content_type(): p.get_content() for p in msg.iter_parts()}
     assert set(parts) == {"text/plain", "text/html"}
-    assert "验证码是 123456" in parts["text/plain"] and "Your Hearth code is 123456" in parts["text/plain"]
+    assert "The Hearth 的验证码是 123456" in parts["text/plain"] and "Your code for The Hearth is 123456" in parts["text/plain"]
+    assert "The Hearth" in parts["text/html"] and "Hearth <" not in parts["text/html"]
     assert "1 2 3 4 5 6" in parts["text/html"] and "10 分钟" in parts["text/html"] and "10 minutes" in parts["text/html"]
     assert "<script" not in parts["text/html"]
 

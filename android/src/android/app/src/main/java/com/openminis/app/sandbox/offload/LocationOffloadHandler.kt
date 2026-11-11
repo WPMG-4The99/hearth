@@ -131,7 +131,7 @@ class LocationOffloadHandler(private val context: Context) : NativeOffloadHandle
                         OffloadPermissionManager.SettingsGateRequest(
                             id = Manifest.permission.ACCESS_FINE_LOCATION,
                             title = "Location permission needed",
-                            message = "Hearth needs location permission to get your current location. Open Settings to allow it.", // nanoMuse: Hearth product name.
+                            message = "The Hearth needs location permission to get your current location. Open Settings to allow it.", // nanoMuse: The Hearth product name.
                             settingsAction = android.provider.Settings.ACTION_APPLICATION_DETAILS_SETTINGS,
                             requiresPackageUri = true,
                             positiveLabel = "Open Settings",
@@ -206,7 +206,7 @@ class LocationOffloadHandler(private val context: Context) : NativeOffloadHandle
             Build.MANUFACTURER.equals("OnePlus", ignoreCase = true) ||
             Build.MANUFACTURER.equals("Vivo", ignoreCase = true)
         ) {
-            " On ${OsCompat.oemLabel()} devices, disable battery optimization and enable autostart for Hearth so background location stays active." // nanoMuse: Hearth product name.
+            " On ${OsCompat.oemLabel()} devices, disable battery optimization and enable autostart for The Hearth so background location stays active." // nanoMuse: The Hearth product name.
         } else ""
         val body = JSONObject()
             .put("error", "location_unavailable_stale")

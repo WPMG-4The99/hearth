@@ -38,7 +38,7 @@ object OwnScheme {
         return if (s == SYSTEM || s == LEGACY) INTERNAL else scheme
     }
 
-    /** The `minis://…` form of [url] when it is a Hearth or legacy link; otherwise [url] itself. */
+    /** The `minis://…` form of [url] when it is a hearth:// link or a legacy link; otherwise [url] itself. */
     fun internalUrl(url: String): String {
         for (name in listOf(SYSTEM, LEGACY)) {
             val prefix = "$name://"

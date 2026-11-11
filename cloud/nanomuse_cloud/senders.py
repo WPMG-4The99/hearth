@@ -108,7 +108,7 @@ def compose_notice_mail(sender: str, to: str, subject: str, lines: list[str]) ->
     msg = EmailMessage()
     msg["From"] = sender if "<" in sender else f"Hearth <{sender}>"
     msg["To"] = to
-    msg["Subject"] = f"Hearth · {subject}"
+    msg["Subject"] = f"The Hearth · {subject}"
     msg["Auto-Submitted"] = "auto-generated"
     msg["X-Auto-Response-Suppress"] = "All"
     msg.set_content("\n".join(lines) + "\n\nHearth · automated, no reply / 自动发送，请勿回复\n")
@@ -123,31 +123,31 @@ def compose_code_mail(sender: str, to: str, code: str, minutes: int) -> EmailMes
     msg = EmailMessage()
     msg["From"] = sender if "<" in sender else f"Hearth <{sender}>"
     msg["To"] = to
-    msg["Subject"] = f"Hearth 验证码 {code} · Your Hearth code"
+    msg["Subject"] = f"The Hearth 验证码 {code} · Your code for The Hearth"
     msg["Auto-Submitted"] = "auto-generated"
     msg["X-Auto-Response-Suppress"] = "All"
     msg.set_content(
-        f"你的 Hearth 验证码是 {code}，{minutes} 分钟内有效。\n"
-        "在 Hearth 里填入即可登录；不要把它告诉任何人。\n\n"
-        f"Your Hearth code is {code}; it expires in {minutes} minutes.\n"
-        "Enter it in the Hearth app to sign in. Do not share it with anyone.\n\n"
+        f"The Hearth 的验证码是 {code}，{minutes} 分钟内有效。\n"
+        "在 The Hearth 里填入即可登录；不要把它告诉任何人。\n\n"
+        f"Your code for The Hearth is {code}; it expires in {minutes} minutes.\n"
+        "Enter it in The Hearth app to sign in. Do not share it with anyone.\n\n"
         "如果这不是你本人的操作，忽略这封邮件即可。\n"
         "If you did not ask for this, you can ignore this message.\n\n"
-        "Hearth · https://github.com/WPMG-4The99/hearth · 自动发送，请勿回复 / automated, no reply\n"
+        "The Hearth · https://github.com/WPMG-4The99/hearth · 自动发送，请勿回复 / automated, no reply\n"
     )
     spaced = " ".join(code)
     html = f"""<!doctype html>
 <html><body style="margin:0;padding:24px;background:#f5f5f7;font-family:-apple-system,BlinkMacSystemFont,'PingFang SC','Helvetica Neue',Arial,sans-serif;color:#1d1d1f">
 <table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr><td align="center">
 <table role="presentation" width="420" cellpadding="0" cellspacing="0" style="max-width:420px;background:#ffffff;border-radius:16px;padding:32px 28px">
-<tr><td style="font-size:15px;font-weight:600;color:#6e6e73;padding-bottom:18px">Hearth</td></tr>
+<tr><td style="font-size:15px;font-weight:600;color:#6e6e73;padding-bottom:18px">The Hearth</td></tr>
 <tr><td style="font-size:16px;line-height:24px">你的验证码 / Your code</td></tr>
 <tr><td style="font-size:40px;font-weight:700;letter-spacing:6px;padding:14px 0 18px;font-variant-numeric:tabular-nums">{spaced}</td></tr>
-<tr><td style="font-size:14px;line-height:22px;color:#3a3a3c">{minutes} 分钟内有效。在 Hearth 里填入即可登录；不要把它告诉任何人。</td></tr>
-<tr><td style="font-size:14px;line-height:22px;color:#3a3a3c;padding-top:8px">It expires in {minutes} minutes. Enter it in the Hearth app to sign in; do not share it with anyone.</td></tr>
+<tr><td style="font-size:14px;line-height:22px;color:#3a3a3c">{minutes} 分钟内有效。在 The Hearth 里填入即可登录；不要把它告诉任何人。</td></tr>
+<tr><td style="font-size:14px;line-height:22px;color:#3a3a3c;padding-top:8px">It expires in {minutes} minutes. Enter it in The Hearth app to sign in; do not share it with anyone.</td></tr>
 <tr><td style="font-size:12px;line-height:18px;color:#8e8e93;padding-top:22px">如果这不是你本人的操作，忽略这封邮件即可。<br>If you did not ask for this, you can ignore this message.</td></tr>
 </table>
-<div style="font-size:12px;color:#8e8e93;padding-top:16px">Hearth · <a href="https://github.com/WPMG-4The99/hearth" style="color:#8e8e93">github.com/WPMG-4The99/hearth</a> · 自动发送，请勿回复 / automated, no reply</div>
+<div style="font-size:12px;color:#8e8e93;padding-top:16px">The Hearth · <a href="https://github.com/WPMG-4The99/hearth" style="color:#8e8e93">github.com/WPMG-4The99/hearth</a> · 自动发送，请勿回复 / automated, no reply</div>
 </td></tr></table>
 </body></html>
 """

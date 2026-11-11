@@ -89,7 +89,7 @@ object HubActions {
                 "file.put" -> call.result(filePut(context, call.args.optString("path"), call.args.optString("data"), call.args.optBoolean("force")))
                 "open" -> call.result(open(context, call.args.optString("url")))
                 "screen" -> call.result(screen())
-                "notify" -> call.result(notify(context, call.args.optString("text"), call.args.optString("title").ifBlank { "Hearth" }, call.senderName))
+                "notify" -> call.result(notify(context, call.args.optString("text"), call.args.optString("title").ifBlank { "The Hearth" }, call.senderName))
                 "task" -> task(context, call)
                 "approve" -> approve(call)
                 "stop" -> call.result(JSONObject().put("stopped", stop(context, call)))
@@ -127,7 +127,7 @@ object HubActions {
         .put("name", Hub.name(context))
         .put("os", "Android ${Build.VERSION.RELEASE}")
         .put("model", "${Build.MANUFACTURER} ${Build.MODEL}")
-        .put("app", "Hearth ${Hub.VERSION}")
+        .put("app", "The Hearth ${Hub.VERSION}")
         .put("sandbox", if (PRootKernel.isBooted) "ready" else "not booted")
         .put("screen", MinisAccessibilityService.getInstance() != null)
         .put("actions", JSONArray(Hub.ACTIONS))
@@ -278,13 +278,13 @@ object HubActions {
             (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O &&
                 nm.getNotificationChannel(CHANNEL)?.importance == NotificationManager.IMPORTANCE_NONE)
         if (blocked) {
-            return JSONObject().put("ok", false).put("shown", false).put("message", "notifications are not allowed for Hearth on this phone")
+            return JSONObject().put("ok", false).put("shown", false).put("message", "notifications are not allowed for The Hearth on this phone")
         }
         return try {
             nm.notify((System.currentTimeMillis() % 100_000).toInt() + 40_000, n)
             JSONObject().put("ok", true).put("shown", true)
         } catch (e: SecurityException) {
-            JSONObject().put("ok", false).put("shown", false).put("message", "notifications are not allowed for Hearth on this phone")
+            JSONObject().put("ok", false).put("shown", false).put("message", "notifications are not allowed for The Hearth on this phone")
         }
     }
 
@@ -294,11 +294,11 @@ object HubActions {
         val text = call.args.optString("text").trim()
         if (text.isEmpty()) { call.fail("usage", "text is required"); return }
         val app = context.applicationContext as? MinisApp
-        if (app == null || !app.subsystemsReady()) { call.fail("not_ready", "Hearth on the phone is still starting"); return }
+        if (app == null || !app.subsystemsReady()) { call.fail("not_ready", "The Hearth on the phone is still starting"); return }
         val senderId = call.from.optString("id")
         val conversation = running.conversationKey(senderId, call.args.optString("conversation"))
         val sessionId = runBlocking { sessionFor(app, conversation, call.senderName) }
-        if (sessionId == null) { call.fail("no_model", "the phone has no model to think with; sign in to Hearth there"); return }
+        if (sessionId == null) { call.fail("no_model", "the phone has no model to think with; sign in to The Hearth there"); return }
         call.event(JSONObject().put("stage", "thinking").put("session", sessionId))
         AgentForegroundService.startService(app, sessionCount = 1, toolStatus = context.getString(R.string.nm_hub_task_from, call.senderName))
         val prompt = HubTasks.prompt(
