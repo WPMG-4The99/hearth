@@ -1,8 +1,7 @@
 /**
- * The sign-in form in Settings → Account (phone number or e-mail → six-digit
- * code, or the account's password as the other way), the same steps the
- * first run walks through full-window. The host does the talking to the relay;
- * this only holds the form.
+ * The sign-in form in Settings → Account (phone number or e-mail, then the
+ * emailed code), the same steps the first run walks through full-window. The
+ * host does the talking to the relay; this only holds the form.
  */
 import { Button, Input } from '@deepseek-ai/dsh-client-ui-primitives'
 import { createElement as h, useState, type FormEvent, type ReactNode } from 'react'
@@ -19,10 +18,9 @@ export interface SignInProps {
 }
 
 export function SignIn({ t, onSignedIn, footer, wide = false }: SignInProps): ReactNode {
-  const [step, setStep] = useState<'identifier' | 'code' | 'password'>('identifier')
+  const [step, setStep] = useState<'identifier' | 'code'>('identifier')
   const [identifier, setIdentifier] = useState('')
   const [code, setCode] = useState('')
-  const [password, setPassword] = useState('')
   // A friend's invite code, as on the phone: optional, typed with the six-digit code; the relay
   // credits both when it is the first sign-in. Shown folded; a tap opens the field.
   const [invite, setInvite] = useState('')
@@ -74,17 +72,8 @@ export function SignIn({ t, onSignedIn, footer, wide = false }: SignInProps): Re
     })
   }
 
-  const login = (event: FormEvent) => {
-    event.preventDefault()
-    void run(async () => {
-      const status = await call<CloudStatus>('login', { identifier: identifier.trim(), password })
-      setPassword('')
-      onSignedIn(status)
-    })
-  }
-
   const primary = { variant: 'primary' as const, size: 'md' as const, type: 'submit' as const, style: wide ? { width: '100%' } : undefined }
-  const back = () => { setStep('identifier'); setError(undefined); setCode(''); setPassword('') }
+  const back = () => { setStep('identifier'); setError(undefined); setCode('') }
 
   if (step === 'code') {
     return h('form', { style: column, onSubmit: signIn },
@@ -100,19 +89,6 @@ export function SignIn({ t, onSignedIn, footer, wide = false }: SignInProps): Re
       error ? h('div', { style: errorStyle, role: 'alert' }, error) : null,
       h('div', { style: row },
         h(Button, { ...primary, disabled: busy || code.trim().length !== 6 }, busy ? t('signingIn') : t('signIn')),
-        h(Button, { variant: 'ghost', size: 'md', type: 'button', disabled: busy, onClick: () => { setStep('password'); setError(undefined) } }, t('obOtherWay')),
-        h(Button, { variant: 'ghost', size: 'md', type: 'button', disabled: busy, onClick: back }, t('back'))),
-      footer)
-  }
-
-  if (step === 'password') {
-    return h('form', { style: column, onSubmit: login },
-      h('div', { style: muted }, identifier.trim()),
-      h(Input, { value: password, type: 'password', onChange: (e: FormEvent<HTMLInputElement>) => setPassword(e.currentTarget.value), placeholder: t('obPassword'), autoComplete: 'current-password', autoFocus: true, 'aria-label': t('obPassword') }),
-      error ? h('div', { style: errorStyle, role: 'alert' }, error) : null,
-      h('div', { style: row },
-        h(Button, { ...primary, disabled: busy || password.length === 0 }, busy ? t('signingIn') : t('signIn')),
-        h(Button, { variant: 'ghost', size: 'md', type: 'button', disabled: busy, onClick: () => { setStep('code'); setError(undefined) } }, t('obUseCode')),
         h(Button, { variant: 'ghost', size: 'md', type: 'button', disabled: busy, onClick: back }, t('back'))),
       footer)
   }

@@ -64,12 +64,12 @@ harness 保留外部下载方式。不带软件内更新能力的版本，需先
 工具、技能、目标、计划模式、压缩、子智能体、MCP），通过 `nanomuse` 预设以 nanoMuse 的身份
 说话，再加上：
 
-- **账号**：手机号或邮箱加验证码（或者密码，配上朋友的邀请码），对着
+- **账号**：手机号或邮箱加验证码（配上朋友的邀请码），对着
   [nanoMuse Cloud](cloud.md) 登录；key 放在 dsh 的凭据存储里；账号的模型作为 harness 自带的
   OpenAI 兼容适配器下的 *nanoMuse Cloud* 服务商（模型通路上没有任何我们自己的东西）；
   「设置 → 账号」就是手机上那整个账号页（以人民币计的额度池和额度快用完时继续用的几条路、
-  邀请码、按类型和按模型的用量、密码、持有 key 的设备、时间线、注销），通过 Host 的透传路由
-  读出来（`/nanomuse/cloud/me`、`/sessions`、`/account-events`、`/password`、`/sign-out-all`、
+  邀请码、按类型和按模型的用量、持有 key 的设备、时间线、注销），通过 Host 的透传路由
+  读出来（`/nanomuse/cloud/me`、`/sessions`、`/account-events`、`/sign-out-all`、
   `/delete-account`、`/config`）；
 - **一段你自己的视频当形象**：智能体页面钢笔菜单和形象工作室里的「你自己的视频…」接受一段
   MP4 或 MOV（最长 15 秒、最大 30 MB；H.264 视频，或这台电脑能解码的 HEVC：Windows 和 macOS

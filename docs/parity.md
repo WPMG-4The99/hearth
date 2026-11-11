@@ -15,7 +15,7 @@ Legend: **✓** done · **◐** partial (what is missing is in the note) · **�
 | Feature | Android | iOS | Desktop | Web |
 |---|---|---|---|---|
 | Sign in with a code (phone / e-mail) | ✓ | ✓ | ✓ | ✓ |
-| Sign in with a password | — | ✓ 0.1.32 | ✓ | ✓ |
+| Sign in with a password | — | ✓ 0.1.32 | — | — |
 | Invite code at sign-in | ✓ | ✓ 0.1.32 | ✓ 0.1.32 | ✓ |
 | Amounts from the relay (`/v1/config`) before sign-in | ✓ | ✓ 0.1.32 | ✓ 0.1.32 | ✓ |
 | Allowance in yuan on the account page, the bar turning at 80 % | ✓ | ✓ 0.1.32 | ✓ 0.1.32 | ✓ |
@@ -23,7 +23,7 @@ Legend: **✓** done · **◐** partial (what is missing is in the note) · **�
 | "Ways on" when the pool is spent (own key · invite · star) | ✓ | ✓ 0.1.32 | ✓ 0.1.32 | ✓ |
 | Invite code and link, earnings | ✓ | ✓ 0.1.32 | ✓ | ✓ |
 | Usage by kind and by model, today / all time | ✓ | ✓ 0.1.32 | ✓ 0.1.32 | ✓ |
-| Set / change / remove the password | — | ✓ 0.1.32 | ✓ 0.1.32 | ✓ |
+| Set / change / remove the password | — | ✓ 0.1.32 | — | — |
 | Signed-in devices, revoke one, sign out everywhere | ✓ | ✓ 0.1.32 | ✓ 0.1.32 | ✓ |
 | Account timeline (sign-ins, settings, refusals) | ✓ | ✓ 0.1.32 | ✓ 0.1.32 | ✓ |
 | Delete account | ✓ | ✓ 0.1.32 | ✓ 0.1.32 | ✓ |
@@ -95,7 +95,7 @@ Legend: **✓** done · **◐** partial (what is missing is in the note) · **�
 | Accent follows the avatar | ✓ | ✓ | ✓ | ✓ |
 | Rooms: Feed · Ideas · Goals · Library | ✓ | ✓ 0.1.34 with a scheduler *(11)* | ✓ 0.1.34 on the phone's fence protocol | ✓ |
 | Ideas by kind: chat · routine (at a time) · goal (a category) | ✓ | ✓ 0.1.34 | ✓ 0.1.34 the phone's list | ✓ 0.1.34 |
-| First run: the phone's pages (sign in · password · which model answers · models · permissions · notifications · meet), then the shell; never skipped on a fresh install | ✓ | ✓ 0.1.34, notifications page 0.1.35 *(4)* | ✓ 0.1.35 kept by the host in `firstrun.json` *(25)* | ✓ onboarding |
+| First run: the phone's pages (sign in · which model answers · models · permissions · notifications · meet), then the shell; never skipped on a fresh install | ✓ | ✓ 0.1.34, notifications page 0.1.35 *(4)* | ✓ 0.1.35 kept by the host in `firstrun.json` *(25)* | ✓ onboarding |
 | Feed opens on the intro card (*Write it now*), the first day is written after the first conversation, a daily routine at 08:00 | ✓ | ✓ 0.1.35 | ✓ 0.1.35 | ✓ 0.1.35 |
 | Ideas prefilled with the curated list (`ideas.{en,zh}.json`, byte for byte, with a test) | ✓ | ✓ | ✓ 0.1.34; empty-when-bundled bug fixed 0.1.35 | ✓ 0.1.35 |
 | Splash: wordmark and the person's own face, never the dragon | ✓ | ✓ system launch screen | ✓ 0.1.35 | n/a |

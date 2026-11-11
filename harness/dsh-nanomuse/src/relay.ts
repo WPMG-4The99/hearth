@@ -289,19 +289,6 @@ export class Relay {
     return { apiKey: String(body.api_key ?? ''), created: Boolean(body.created), account: toAccount(body) }
   }
 
-  /** The password way in, for people who set one (`POST /v1/auth/login`). */
-  async login(identifier: string, password: string, device: string, signal?: AbortSignal): Promise<SignIn> {
-    const res = await this.fetchImpl(`${this.origin}/v1/auth/login`, {
-      method: 'POST',
-      headers: JSON_HEADERS,
-      body: JSON.stringify({ identifier, password, device: device.slice(0, 80) }),
-      signal: signal ?? null,
-    })
-    if (!res.ok) await fail(res)
-    const body = (await res.json()) as Record<string, unknown>
-    return { apiKey: String(body.api_key ?? ''), created: false, account: toAccount(body) }
-  }
-
   /** The account's invite code and link, and what inviting has brought (`GET /v1/me/invite`). */
   async invite(apiKey: string, signal?: AbortSignal): Promise<Invite> {
     const res = await this.fetchImpl(`${this.origin}/v1/me/invite`, { headers: this.auth(apiKey), signal: signal ?? null })
@@ -419,7 +406,7 @@ export class Relay {
     return body && typeof body === 'object' ? (body as Record<string, unknown>) : {}
   }
 
-  /** The whole account sheet (`GET /v1/me`), as the relay sends it: usage by kind and model, the pool, the invite, the password. */
+  /** The whole account sheet (`GET /v1/me`), as the relay sends it: usage by kind and model, the pool, the invite. */
   async meSheet(apiKey: string, signal?: AbortSignal): Promise<Record<string, unknown>> {
     const res = await this.fetchImpl(`${this.origin}/v1/me`, { headers: this.auth(apiKey), signal: signal ?? null })
     if (!res.ok) await fail(res)
@@ -444,17 +431,6 @@ export class Relay {
     const res = await this.fetchImpl(`${this.origin}/v1/me/events?limit=${Math.max(1, Math.min(200, Math.floor(limit)))}`, { headers: this.auth(apiKey), signal: signal ?? null })
     if (!res.ok) await fail(res)
     return (await res.json()) as Record<string, unknown>
-  }
-
-  /** Set or change the password (`POST /v1/auth/password`); `current` when one exists; an empty password with `current` removes it. */
-  async setPassword(apiKey: string, password: string, current?: string, signal?: AbortSignal): Promise<void> {
-    const res = await this.fetchImpl(`${this.origin}/v1/auth/password`, {
-      method: 'POST',
-      headers: { ...JSON_HEADERS, ...this.auth(apiKey) },
-      body: JSON.stringify({ password, ...(current === undefined ? {} : { current }) }),
-      signal: signal ?? null,
-    })
-    if (!res.ok) await fail(res)
   }
 
   /** Retire every key of the account, this device's too (`POST /v1/auth/sign-out-all`). */
