@@ -354,7 +354,6 @@ export interface CloudAccount {
   required?: boolean;
   /** the account's models as a source (*Use nanoMuse Cloud models*); false leaves them out of the automatic order and the listings */
   models?: boolean;
-  has_password?: boolean;
   /** on the operator's list: no spend limit */
   member?: boolean;
   /** may name any model of the provider's for its kind (chat, picture, clip), not only the menu's */
@@ -420,8 +419,6 @@ export interface CloudMe {
     created_at: number;
     member: boolean;
     any_model?: boolean;
-    has_password: boolean;
-    password_set_at: number | null;
     sessions: number;
     signed_in_via: string;
     /** "cn" for a mainland account; older relays do not say */

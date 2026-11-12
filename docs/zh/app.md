@@ -219,7 +219,7 @@ nanomuse serve --port 9000 --no-qr
 | GET / PUT | `/api/sync/state` · `{enabled}` | 账号各设备之间同步的对话（[every-device.md](every-device.md#the-same-conversations-everywhere)）：`{enabled, available, paused, cursor, last_pull_at, last_push_at, error, relay}`；`available` 是「已登录且设置允许」，`paused` 在收到 401 后置上，直到下一次登录，`relay` 是中继自己的 `{enabled, cursor, counts{conversations, messages}, limits}`，问不到时为 `null`。`PUT {enabled: false}` 在这里关掉同步，并删掉中继为这个账号保存的内容（其他设备的开关会在它们下一次推送或拉取时跟着关，中继会以 `sync_off` 拒绝）；`PUT {enabled: true}` 重新打开，并把这里的聊天推上去。中继的拒绝会以它的状态码和代码原样返回（`409 sync_off`）。从 0.1.38 起，状态里还带 `side_chats`（这台设备的*同时同步旁聊*，默认关闭：只推送和拉取主要聊天）和 `working`（`[{thread, cid, device, device_name, at}]`：此刻正在回答的其他设备，来自 hub 的 `working` 帧，每条十分钟后丢弃）；`PUT {side_chats: true}` 把这台设备的旁聊发上去，并从头把账号的旁聊拉一次，`false` 则从此留在本地 |
 | POST | `/api/sync/delete` | 删掉中继上每一段已同步的对话，开关保持原样；返回状态 |
 | POST | `/api/sync/pull` | 现在就抓取并应用其他设备的改动：`{applied, …state}` |
-| GET | `/api/cloud` | 应用所显示的 nanoMuse Cloud 账号：`{base_url, signed_in, required, models, hint, channel, signed_in_at, has_password, account_id, member, any_model, region, is_model}`（[cloud.md](cloud.md)）。下面每条 `/api/cloud/*` 路由遇到中继拒绝时，都以中继的状态码、它的那句话作答，代码放在 `X-Nanomuse-Code` 头里；没有登录账号时是 401 `bad_key` |
+| GET | `/api/cloud` | 应用所显示的 nanoMuse Cloud 账号：`{base_url, signed_in, required, models, hint, channel, signed_in_at, account_id, member, any_model, region, is_model}`（[cloud.md](cloud.md)）。下面每条 `/api/cloud/*` 路由遇到中继拒绝时，都以中继的状态码、它的那句话作答，代码放在 `X-Nanomuse-Code` 头里；没有登录账号时是 401 `bad_key` |
 | GET | `/api/cloud/config` | 中继的公开数字（新账号的额度、邀请奖励、是否开放注册、要加星的仓库）；旧中继或没有中继时是 `{}` |
 | POST | `/api/cloud/code` `{identifier}` | 向一个邮箱地址或手机号发送登录验证码；`{ok}` |
 | POST | `/api/cloud/verify` `{identifier, code, invite?}` | 用验证码登录（首次注册可带邀请码）；回答中继的 `/v1/me`，顺带刷新提示策略 |

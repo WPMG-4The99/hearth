@@ -15,7 +15,7 @@ Legend: **✓** done · **◐** partial (what is missing is in the note) · **�
 | Feature | Android | iOS | Desktop | Web |
 |---|---|---|---|---|
 | Sign in with a code (phone / e-mail) | ✓ | ✓ | ✓ | ✓ |
-| Sign in with a password | — | ✓ 0.1.32 | — | — |
+| Sign in with a password | — | — | — | — |
 | Invite code at sign-in | ✓ | ✓ 0.1.32 | ✓ 0.1.32 | ✓ |
 | Amounts from the relay (`/v1/config`) before sign-in | ✓ | ✓ 0.1.32 | ✓ 0.1.32 | ✓ |
 | Allowance in yuan on the account page, the bar turning at 80 % | ✓ | ✓ 0.1.32 | ✓ 0.1.32 | ✓ |
@@ -23,7 +23,7 @@ Legend: **✓** done · **◐** partial (what is missing is in the note) · **�
 | "Ways on" when the pool is spent (own key · invite · star) | ✓ | ✓ 0.1.32 | ✓ 0.1.32 | ✓ |
 | Invite code and link, earnings | ✓ | ✓ 0.1.32 | ✓ | ✓ |
 | Usage by kind and by model, today / all time | ✓ | ✓ 0.1.32 | ✓ 0.1.32 | ✓ |
-| Set / change / remove the password | — | ✓ 0.1.32 | — | — |
+| Set / change / remove the password | — | — | — | — |
 | Signed-in devices, revoke one, sign out everywhere | ✓ | ✓ 0.1.32 | ✓ 0.1.32 | ✓ |
 | Account timeline (sign-ins, settings, refusals) | ✓ | ✓ 0.1.32 | ✓ 0.1.32 | ✓ |
 | Delete account | ✓ | ✓ 0.1.32 | ✓ 0.1.32 | ✓ |

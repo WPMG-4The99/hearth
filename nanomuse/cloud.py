@@ -159,27 +159,6 @@ class CloudClient:
             self.api_key = key
         return data
 
-    async def login(self, identifier: str, password: str, device: str) -> dict[str, Any]:
-        """The password way in, for accounts that set one; same reply as ``verify``."""
-        data = await self._request(
-            "POST",
-            "/v1/auth/login",
-            {"identifier": identifier, "password": password, "device": device},
-            token="",
-        )
-        key = str(data.get("api_key") or "")
-        if key:
-            self.api_key = key
-        return data
-
-    async def set_password(self, password: str, current: str | None = None) -> None:
-        """Set or change the account password (``current`` when one exists, unless this key
-        came from a code sign-in just now); an empty password with ``current`` removes it."""
-        body: dict[str, Any] = {"password": password}
-        if current is not None:
-            body["current"] = current
-        await self._request("POST", "/v1/auth/password", body)
-
     async def me(self) -> dict[str, Any]:
         return await self._request("GET", "/v1/me")
 

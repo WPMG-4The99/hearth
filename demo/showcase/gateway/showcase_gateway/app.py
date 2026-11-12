@@ -99,11 +99,6 @@ class WebVerifyIn(BaseModel):
     invite: str = Field(default="", max_length=32)
 
 
-class WebLoginIn(BaseModel):
-    identifier: str = Field(min_length=3, max_length=120)
-    password: str = Field(min_length=1, max_length=200)
-
-
 async def client_ip(request: Request, proxies: TrustedProxies) -> str:
     """The visitor's address: ``X-Forwarded-For`` when the connection comes from the edge
     proxy (peers.py), the peer's own address otherwise. A session container that calls the
@@ -388,21 +383,6 @@ def create_app(
             {"ticket": ticket, "visitor": visitor.public()}, headers={"Cache-Control": "no-store"}
         )
 
-    @app.post("/api/demo/signin/login")
-    async def signin_login(body: WebLoginIn, request: Request) -> Response:
-        try:
-            ticket, visitor = await visitors.login(
-                body.identifier.strip(),
-                body.password,
-                await client_ip(request, proxies),
-                ua=request.headers.get("user-agent", ""),
-            )
-        except Refused as exc:
-            return _refused(exc)
-        return JSONResponse(
-            {"ticket": ticket, "visitor": visitor.public()}, headers={"Cache-Control": "no-store"}
-        )
-
     @app.get("/api/demo/me")
     async def signin_me(request: Request) -> Response:
         try:
@@ -456,16 +436,6 @@ def create_app(
                 body.code,
                 await client_ip(request, proxies),
                 invite=body.invite.strip(),
-            )
-        except Refused as exc:
-            return _refused(exc)
-        return JSONResponse(account.public(settings), headers={"Cache-Control": "no-store"})
-
-    @app.post("/api/web/login")
-    async def web_login(body: WebLoginIn, request: Request) -> Response:
-        try:
-            account = await accounts.login(
-                body.identifier.strip(), body.password, await client_ip(request, proxies)
             )
         except Refused as exc:
             return _refused(exc)

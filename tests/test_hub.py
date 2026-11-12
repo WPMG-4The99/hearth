@@ -1109,22 +1109,20 @@ def test_coding_actions_are_served_to_other_devices(
     assert res["ok"] is False and res["error"] == "not_installed"
 
 
-def test_password_sign_in_and_account_management(
-    hub_server, monkeypatch: pytest.MonkeyPatch
-) -> None:
-    """Passwords, other sign-ins, signing out everywhere — the runtime's side of the account
+def test_code_sign_in_and_account_management(hub_server, monkeypatch: pytest.MonkeyPatch) -> None:
+    """A code signs in; other devices and signing out everywhere stay on the signed-in key
     (the relay's own rules are covered in cloud/tests)."""
     client, service, _llm, relay = hub_server
     calls: list[tuple[str, Any]] = []
 
-    async def fake_login(
-        self: CloudClient, identifier: str, password: str, device: str = ""
+    async def fake_verify(
+        self: CloudClient, identifier: str, code: str, device: str = "", invite: str = ""
     ) -> dict[str, Any]:
         from nanomuse.cloud import CloudError
 
-        calls.append(("login", (identifier, password, device)))
-        if password != "correct horse":
-            raise CloudError(401, "bad_credentials", "wrong")
+        calls.append(("verify", (identifier, code, device)))
+        if code != "123456":
+            raise CloudError(400, "bad_code", "wrong code")
         self.api_key = "test-key"
         return {
             "api_key": "test-key",
@@ -1132,19 +1130,13 @@ def test_password_sign_in_and_account_management(
                 "id": "acc_1",
                 "hint": "s***@example.com",
                 "channel": "email",
-                "has_password": True,
             },
             "usage": {"today": {"by_kind": {"chat": {"charged": 12}}}},
         }
 
-    async def fake_set_password(
-        self: CloudClient, password: str, current: str | None = None
-    ) -> None:
-        calls.append(("set_password", (password, current)))
-
     async def fake_sessions(self: CloudClient) -> list[dict[str, Any]]:
         return [
-            {"prefix": "nmk_aaaa", "device": "Desk", "via": "password", "current": True},
+            {"prefix": "nmk_aaaa", "device": "Desk", "via": "code", "current": True},
             {"prefix": "nmk_bbbb", "device": "Pixel", "via": "code", "current": False},
         ]
 
@@ -1155,51 +1147,31 @@ def test_password_sign_in_and_account_management(
         calls.append(("sign_out_all", everything))
         return 2 if everything else 1
 
-    monkeypatch.setattr(CloudClient, "login", fake_login)
-    monkeypatch.setattr(CloudClient, "set_password", fake_set_password)
+    monkeypatch.setattr(CloudClient, "verify", fake_verify)
     monkeypatch.setattr(CloudClient, "sessions", fake_sessions)
     monkeypatch.setattr(CloudClient, "revoke_session", fake_revoke)
     monkeypatch.setattr(CloudClient, "sign_out_all", fake_sign_out_all)
 
     before = client.get("/api/cloud").json()
-    assert (
-        before["signed_in"] is False
-        and before["required"] is True
-        and before["has_password"] is False
-    )
+    assert before["signed_in"] is False and before["required"] is True
+    # the routes are gone; a POST falls through to the static app, which answers 405
+    gone = client.post("/api/cloud/login", json={"identifier": "a@b.c", "password": "x"})
+    assert gone.status_code == 405
+    gone = client.post("/api/cloud/password", json={"password": "x"})
+    assert gone.status_code == 405
     bad = client.post(
-        "/api/cloud/login", json={"identifier": "someone@example.com", "password": "nope"}
+        "/api/cloud/verify", json={"identifier": "someone@example.com", "code": "000000"}
     )
-    assert bad.status_code == 401 and "do not match" in str(bad.json()["detail"])
-    assert (
-        client.post(
-            "/api/cloud/login", json={"identifier": "someone@example.com", "password": ""}
-        ).status_code
-        == 422
-    )
+    assert bad.status_code == 400
     ok = client.post(
-        "/api/cloud/login", json={"identifier": "someone@example.com", "password": "correct horse"}
+        "/api/cloud/verify", json={"identifier": "someone@example.com", "code": "123456"}
     )
     assert ok.status_code == 200, ok.text
     account = ok.json()
-    assert (
-        account["signed_in"] is True
-        and account["has_password"] is True
-        and account["account_id"] == "acc_1"
-    )
+    assert account["signed_in"] is True and account["account_id"] == "acc_1"
     assert calls[-1][1][2] == "Desk"  # the device name travels with the sign-in
     assert service.app.vault.get("NANOMUSE_CLOUD_KEY") == "test-key"
     wait_for(lambda: client.get("/api/hub").json()["state"] == "connected")
-
-    # change the password (the relay checks the current one)
-    r = client.post(
-        "/api/cloud/password", json={"password": "new longer one", "current": "correct horse"}
-    )
-    assert r.status_code == 200 and r.json()["has_password"] is True
-    assert calls[-1] == ("set_password", ("new longer one", "correct horse"))
-    # remove it
-    r = client.post("/api/cloud/password", json={"password": "", "current": "new longer one"})
-    assert r.status_code == 200 and r.json()["has_password"] is False
 
     sessions = client.get("/api/cloud/sessions").json()["sessions"]
     assert [s["device"] for s in sessions] == ["Desk", "Pixel"] and sessions[0]["current"] is True

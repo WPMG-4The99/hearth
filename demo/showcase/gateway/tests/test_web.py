@@ -319,7 +319,7 @@ async def test_an_invite_code_is_passed_on_to_the_relay(web):
         r = await c.get("/web/?invite=abcd2345")
         assert r.status_code == 200 and 'id="invite"' in r.text
         assert "¥" not in r.text  # no amounts on the way in; the account page has them
-        assert "Mainland China phone number or e-mail" in r.text and "/api/web/login" in r.text
+        assert "Mainland China phone number or e-mail" in r.text and "/api/web/code" in r.text
         assert "phone_region" in r.text  # the relay's refusal of an overseas number, in Chinese too
         r = await c.post("/api/web/code", json={"identifier": "invited@example.com"})
         assert r.status_code == 204
@@ -336,30 +336,12 @@ async def test_an_invite_code_is_passed_on_to_the_relay(web):
         assert r.status_code == 422
 
 
-async def test_the_password_way_in(web):
+async def test_password_sign_in_is_gone(web):
     settings, runner, upstream, clock, accounts, app = web
     async with app.router.lifespan_context(app):
         c = await client_for(app)
-        # the relay's refusals are passed on: no password yet, wrong password
-        r = await c.post("/api/web/login", json={"identifier": "13800138000", "password": "x"})
-        assert r.status_code == 400 and body(r)["error"] == "no_password"
-        r = await c.post(
-            "/api/web/login", json={"identifier": "someone@example.com", "password": "nope"}
-        )
-        assert r.status_code == 400 and body(r)["error"] == "password_wrong"
-        r = await c.post(
-            "/api/web/login", json={"identifier": "someone@example.com", "password": ""}
-        )
-        assert r.status_code == 422
-
         r = await c.post(
             "/api/web/login",
             json={"identifier": "someone@example.com", "password": "correct horse"},
         )
-        assert r.status_code == 200, r.text
-        me = body(r)
-        assert me["slug"].startswith("w") and "token=" in me["url"]
-        assert upstream.calls[-1].url.path != "/v1/auth/code"  # no code was asked for
-        # the same account by code lands on the same Muse
-        r2 = await sign_in(c, "someone@example.com")
-        assert body(r2)["slug"] == me["slug"]
+        assert r.status_code == 404

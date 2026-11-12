@@ -1,9 +1,9 @@
-import { Check, Clapperboard, Copy, DatabaseZap, Gift, Image as ImageIcon, KeyRound, Loader2, LogOut, MessageCircle, Phone, Share2, ShieldCheck, Smartphone, Trash2 } from "lucide-react";
+import { Clapperboard, Copy, DatabaseZap, Gift, Image as ImageIcon, Loader2, LogOut, MessageCircle, Phone, Share2, ShieldCheck, Smartphone, Trash2 } from "lucide-react";
 import { useEffect, useState, type ReactNode } from "react";
 import { api } from "../api";
 import { AllowanceWays } from "../components/AllowanceWays";
 import { PageBar } from "../components/BackBar";
-import { inputCls, primaryBtn, secondaryBtn } from "../components/Form";
+import { primaryBtn, secondaryBtn } from "../components/Form";
 import { SignIn } from "../components/SignIn";
 import { StarNudgeOnce, useCloudConfig } from "../components/StarNudge";
 import { useT, intlLocale } from "../i18n";
@@ -14,7 +14,7 @@ import { cx, relativeSeconds } from "../util";
 
 /**
  * Your nanoMuse Cloud account: who you are signed in as, what has been used (by kind — chat,
- * pictures, clips — and by model), the password, every device signed in, and the
+ * pictures, clips — and by model), every device signed in, and the
  * way out (sign out here, everywhere, or delete the account). Everything the relay knows
  * about you is on this one screen; what the relay keeps of your chats is one switch away, under
  * Settings → Data controls.
@@ -47,7 +47,7 @@ export function AccountScreen() {
   useEffect(() => {
     void load();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [signedIn, account?.has_password]);
+  }, [signedIn]);
 
   return (
     <div className="flex h-full flex-col">
@@ -57,7 +57,7 @@ export function AccountScreen() {
         {!signedIn ? (
           <Section>
             <p className="text-[13.5px] text-muted leading-relaxed">
-              {t("Free. One account for all your devices, with a model and ¥{allowance} of use to start; a code the first time, a password afterwards if you like.", {
+              {t("Free. One account for all your devices, with a model and ¥{allowance} of use to start. A code signs you in.", {
                 allowance: (cfg.allowance_cny ?? 10).toFixed(0),
               })}
             </p>
@@ -73,7 +73,6 @@ export function AccountScreen() {
             {me?.invite?.code && <Invite invite={me.invite} />}
             {me && <Usage me={me} />}
             {me && <DataControlsLink me={me} />}
-            <Password account={account} onChanged={() => void load()} />
             <Sessions sessions={sessions} loading={loading} onChanged={() => void load()} />
             {events && events.length > 0 && <Timeline events={events} />}
             <SignOut account={account} onDone={() => setTab("chat")} />
@@ -367,84 +366,6 @@ function fmtTokens(n: number): string {
   if (n >= 1_000_000) return `${(n / 1_000_000).toFixed(1)}M`;
   if (n >= 1_000) return `${(n / 1_000).toFixed(n >= 100_000 ? 0 : 1)}k`;
   return String(n);
-}
-
-function Password({ account, onChanged }: { account: CloudAccount | null; onChanged: () => void }) {
-  const t = useT();
-  const { toast } = useStore();
-  const has = !!account?.has_password;
-  const [open, setOpen] = useState(false);
-  const [current, setCurrent] = useState("");
-  const [next, setNext] = useState("");
-  const [again, setAgain] = useState("");
-  const [busy, setBusy] = useState(false);
-  const [error, setError] = useState<string | null>(null);
-
-  const save = async (remove = false) => {
-    if (!remove && (next.length < 8 || next !== again)) return;
-    setBusy(true);
-    setError(null);
-    try {
-      await api.cloudPassword(remove ? "" : next, has ? current : undefined);
-      toast(remove ? t("Password removed.") : has ? t("Password changed.") : t("Password set."));
-      setOpen(false);
-      setCurrent("");
-      setNext("");
-      setAgain("");
-      onChanged();
-    } catch (e) {
-      setError(t((e as Error).message));
-    } finally {
-      setBusy(false);
-    }
-  };
-
-  return (
-    <Section title={t("Password")}>
-      <div className="flex items-center gap-3">
-        <span className={cx("flex h-9 w-9 items-center justify-center rounded-xl", has ? "bg-emerald-500/12 text-emerald-600 dark:text-emerald-300" : "bg-surface-2 text-muted")}>
-          <KeyRound size={17} />
-        </span>
-        <div className="min-w-0 flex-1 text-[13.5px]">
-          <div className="font-medium">{has ? t("A password is set") : t("No password yet")}</div>
-          <div className="text-[12.5px] text-muted">{has ? t("Sign in with it on a new device, or with a code as before.") : t("Optional. With one, a new device can sign in without waiting for a code.")}</div>
-        </div>
-        {!open && (
-          <button type="button" onClick={() => setOpen(true)} className={cx(secondaryBtn, "shrink-0 px-3 py-2 text-[13px]")}>
-            {has ? t("Change") : t("Set")}
-          </button>
-        )}
-      </div>
-      {open && (
-        <form
-          className="space-y-2.5"
-          onSubmit={(e) => {
-            e.preventDefault();
-            void save();
-          }}
-        >
-          {has && <input type="password" value={current} onChange={(e) => setCurrent(e.target.value)} placeholder={t("Current password")} aria-label={t("Current password")} autoComplete="current-password" className={inputCls} />}
-          <input type="password" value={next} onChange={(e) => setNext(e.target.value)} placeholder={t("New password (8 characters or more)")} aria-label={t("New password (8 characters or more)")} autoComplete="new-password" autoFocus className={inputCls} />
-          <input type="password" value={again} onChange={(e) => setAgain(e.target.value)} placeholder={t("Once more")} aria-label={t("Once more")} autoComplete="new-password" className={inputCls} />
-          {again && next !== again && <p className="text-[12px] text-rose-600 dark:text-rose-300">{t("The two do not match.")}</p>}
-          {error && <p className="rounded-2xl bg-rose-500/12 px-3 py-2 text-[12.5px] text-rose-700 dark:text-rose-300">{error}</p>}
-          <div className="flex flex-wrap gap-2">
-            <button type="submit" disabled={busy || next.length < 8 || next !== again || (has && !current)} className={cx(primaryBtn, "flex-1")}>
-              {busy ? <Loader2 size={15} className="animate-spin" /> : <Check size={15} />} {has ? t("Change password") : t("Set password")}
-            </button>
-            {has && (
-              <button type="button" disabled={busy || !current} onClick={() => void save(true)} className={secondaryBtn}>
-                {t("Remove")}
-              </button>
-            )}
-            <button type="button" onClick={() => setOpen(false)} className={secondaryBtn}>
-              {t("Cancel")}
-            </button>
-          </div>
-        </form>
-      )}
-    </Section>
-  );
 }
 
 function Sessions({ sessions, loading, onChanged }: { sessions: CloudSession[] | null; loading: boolean; onChanged: () => void }) {

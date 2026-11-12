@@ -2,8 +2,8 @@
 
 The phone in the browser is a demo — a MobileGym with a lite web app in it, a long way from
 the Android app — and the project wants to know who is trying it and be able to reach them.
-So a visitor signs in to nanoMuse Cloud first (a code to a phone or an inbox, or the account's
-password), the same account the apps use; a first sign-in creates the account, with its free
+So a visitor signs in to nanoMuse Cloud first (a code to a phone or an inbox), the same
+account the apps use; a first sign-in creates the account, with its free
 allowance, for the day the person installs the app.
 
 The gateway asks the relay to verify the code the way the kept Muses did (accounts.py), notes
@@ -291,14 +291,6 @@ class VisitorBook:
         if invite:
             payload["invite"] = invite
         data = await self._relay("POST", "/v1/auth/verify", payload, ip, ua=ua)
-        return await self._admit(data, ip, ua)
-
-    async def login(
-        self, identifier: str, password: str, ip: str, ua: str = ""
-    ) -> tuple[str, Visitor]:
-        """The password way in, for accounts that set one; the relay's answer is passed on."""
-        payload = {"identifier": identifier, "password": password, "device": DEVICE_NAME}
-        data = await self._relay("POST", "/v1/auth/login", payload, ip, ua=ua)
         return await self._admit(data, ip, ua)
 
     async def _admit(self, data: dict[str, Any], ip: str, ua: str = "") -> tuple[str, Visitor]:

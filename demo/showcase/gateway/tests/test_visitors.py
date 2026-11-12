@@ -233,22 +233,14 @@ async def test_tickets_lapse_and_can_be_handed_back(showcase):
         assert r.status_code == 401
 
 
-async def test_the_password_way_in(showcase):
+async def test_password_sign_in_is_gone(showcase):
     settings, runner, upstream, clock, book, app = showcase
     async with await client_for(app) as c:
         r = await c.post(
             "/api/demo/signin/login",
-            json={"identifier": "someone@example.com", "password": "wrong"},
-        )
-        assert r.status_code == 400
-        assert r.json()["error"] == "password_wrong"
-        r = await c.post(
-            "/api/demo/signin/login",
             json={"identifier": "someone@example.com", "password": "correct horse"},
         )
-        assert r.status_code == 200, r.text
-        assert r.json()["visitor"]["channel"] == "email"
-        assert upstream.revoked  # the login's key, revoked like the code's
+        assert r.status_code == 404
 
 
 async def test_switched_off_means_the_old_way(showcase):

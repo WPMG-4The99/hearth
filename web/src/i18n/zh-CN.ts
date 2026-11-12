@@ -1316,7 +1316,7 @@ const zhCN: Record<string, string> = {
   "Every device of yours, one nanoMuse": "你的每台设备，同一个 nanoMuse",
   "A model with a free allowance, or your own key": "自带免费额度的模型，或用你自己的 key",
   "Keys in your vault; nothing you say is kept on the relay": "key 留在你的保险库里；你说的内容不会留在中继上",
-  "Free. One account for all your devices, with a model and ¥{allowance} of use to start; a code the first time, a password afterwards if you like.": "免费。一个账号连起你所有设备，自带模型和 ¥{allowance} 的起始额度；第一次用验证码登录，之后可以设密码。",
+  "Free. One account for all your devices, with a model and ¥{allowance} of use to start. A code signs you in.": "免费。一个账号连起你所有设备，自带模型和 ¥{allowance} 的起始额度。验证码登录。",
   "With a code": "验证码登录",
   "With a password": "密码登录",
   "No password yet? Use a code first; set one under Account.": "还没有密码？先用验证码登录，再到「账号」里设置。",

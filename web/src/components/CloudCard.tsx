@@ -11,7 +11,7 @@ import { SignIn } from "./SignIn";
 /**
  * nanoMuse Cloud: the free account that gives every device of yours one place to meet
  * (the hub) and a model to start with (the relay). The sign-in is the one form the whole
- * app uses (`SignIn`: a code or the password, the invite code, the SMS note); the key lands
+ * app uses (`SignIn`: a code, the invite code, the SMS note); the key lands
  * in the vault on this machine.
  */
 export function CloudCard({

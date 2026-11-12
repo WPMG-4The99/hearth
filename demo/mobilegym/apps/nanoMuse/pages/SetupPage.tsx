@@ -9,7 +9,6 @@ import {
   DemoError,
   fetchDemoInfo,
   requestSignInCode,
-  signInWithPassword,
   signOut,
   startDemoSession,
   verifySignInCode,
@@ -245,12 +244,9 @@ function NoticeCard({ title, body, closing }: { title: string; body: string; clo
   );
 }
 
-type SignInMode = 'code' | 'password';
-
 /**
  * nanoMuse Cloud's sign-in, the Android app's (ui/cloud/*): a phone number or an e-mail, a
- * code sent to it — or the account's password. The relay's refusals come back by code and are
- * said in the phone's language.
+ * code sent to it. The relay's refusals come back by code and are said in the phone's language.
  */
 function SignInPage({
   gateway,
@@ -262,10 +258,8 @@ function SignInPage({
   onSignedIn: (ticket: string, visitor: { hint: string; channel: string }) => void;
 }) {
   const s = useNanoMuseStrings();
-  const [mode, setMode] = useState<SignInMode>('code');
   const [identifier, setIdentifier] = useState('');
   const [code, setCode] = useState('');
-  const [password, setPassword] = useState('');
   const [sent, setSent] = useState(false);
   const [wait, setWait] = useState(0);
   const [busy, setBusy] = useState<'send' | 'verify' | null>(null);
@@ -309,21 +303,14 @@ function SignInPage({
       setError(s.relay_bad_identifier);
       return;
     }
-    if (mode === 'code' && !/^\d{6}$/.test(code.trim())) {
+    if (!/^\d{6}$/.test(code.trim())) {
       setError(s.relay_code_wrong);
-      return;
-    }
-    if (mode === 'password' && !password) {
-      setError(s.relay_bad_credentials);
       return;
     }
     setBusy('verify');
     setError('');
     try {
-      const result =
-        mode === 'code'
-          ? await verifySignInCode(gateway, identifier.trim(), code.trim())
-          : await signInWithPassword(gateway, identifier.trim(), password);
+      const result = await verifySignInCode(gateway, identifier.trim(), code.trim());
       onSignedIn(result.ticket, { hint: result.visitor.hint, channel: result.visitor.channel });
     } catch (err) {
       setError(said(err));
@@ -332,7 +319,7 @@ function SignInPage({
     }
   };
 
-  const canVerify = mode === 'code' ? sent && code.trim().length === 6 : password.length > 0;
+  const canVerify = sent && code.trim().length === 6;
 
   return (
     <Page
@@ -350,16 +337,6 @@ function SignInPage({
           {s.signin_verify}
         </Pill>
       }
-      secondary={
-        <TextButton
-          onClick={() => {
-            setMode(mode === 'code' ? 'password' : 'code');
-            setError('');
-          }}
-        >
-          {mode === 'code' ? s.signin_mode_password : s.signin_mode_code}
-        </TextButton>
-      }
       finePrint={s.signin_fine_print}
     >
       <form onSubmit={submit} className="flex flex-col gap-2.5">
@@ -371,24 +348,20 @@ function SignInPage({
           label={s.signin_identifier}
           inputMode="email"
         />
-        {mode === 'code' ? (
-          <div className="flex items-end gap-2">
-            <div className="flex-1">
-              <Field type="text" value={code} onChange={setCode} placeholder="······" label={s.signin_code} inputMode="numeric" />
-            </div>
-            <button
-              type="button"
-              disabled={busy === 'send' || wait > 0}
-              onClick={() => void send()}
-              className="h-12 px-4 rounded-2xl text-[14px] font-medium text-app-primary disabled:text-app-text-muted flex-none"
-              style={{ background: 'var(--nm-fill)' }}
-            >
-              {wait > 0 ? fmt(s.signin_resend_in, wait) : sent ? s.signin_resend : s.signin_send_code}
-            </button>
+        <div className="flex items-end gap-2">
+          <div className="flex-1">
+            <Field type="text" value={code} onChange={setCode} placeholder="······" label={s.signin_code} inputMode="numeric" />
           </div>
-        ) : (
-          <Field type="password" value={password} onChange={setPassword} placeholder="" label={s.signin_password} />
-        )}
+          <button
+            type="button"
+            disabled={busy === 'send' || wait > 0}
+            onClick={() => void send()}
+            className="h-12 px-4 rounded-2xl text-[14px] font-medium text-app-primary disabled:text-app-text-muted flex-none"
+            style={{ background: 'var(--nm-fill)' }}
+          >
+            {wait > 0 ? fmt(s.signin_resend_in, wait) : sent ? s.signin_resend : s.signin_send_code}
+          </button>
+        </div>
         <button type="submit" className="hidden" />
       </form>
     </Page>

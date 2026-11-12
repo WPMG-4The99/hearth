@@ -11515,6 +11515,183 @@
         }
       }
     },
+    "That sign-in was refused." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Diese Anmeldung wurde abgelehnt."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "That sign-in was refused."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ese inicio de sesión fue rechazado."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cette connexion a été refusée."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "そのサインインは拒否されました。"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "그 로그인은 거절되었습니다."
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Этот вход был отклонён."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "这次登录被拒绝了。"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "這次登入被拒絕了。"
+          }
+        }
+      }
+    },
+    "This relay does not send codes to that kind of address. Use the other kind (e-mail or phone number)." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dieses Relay sendet an diese Art von Adresse keine Codes. Nimm die andere Art (E-Mail oder Telefonnummer)."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "This relay does not send codes to that kind of address. Use the other kind (e-mail or phone number)."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Este relay no envía códigos a ese tipo de dirección. Usa el otro tipo (correo o número de teléfono)."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ce relais n’envoie pas de code à ce type d’adresse. Utilisez l’autre type (e-mail ou numéro de téléphone)."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "このリレーはその種類のアドレスには確認コードを送りません。別の種類（メールアドレスか電話番号）を使ってください。"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "이 릴레이는 그런 종류의 주소로는 인증 코드를 보내지 않습니다. 다른 종류(이메일 또는 전화번호)를 사용하세요."
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Этот релей не отправляет коды на такой тип адреса. Используйте другой тип (e-mail или номер телефона)."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "这台中继不会给这类地址发送验证码。换另一类地址（邮箱或手机号）。"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "這台中繼不會給這類地址發送驗證碼。換另一類地址（信箱或手機號）。"
+          }
+        }
+      }
+    },
+    "Too many wrong attempts. Wait a few minutes." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Zu viele falsche Versuche. Warte ein paar Minuten."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Too many wrong attempts. Wait a few minutes."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Demasiados intentos fallidos. Espera unos minutos."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Trop de tentatives incorrectes. Attendez quelques minutes."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "間違いが続きました。数分待ってください。"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "잘못된 시도가 너무 많습니다. 몇 분 기다려 주세요."
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Слишком много неверных попыток. Подождите несколько минут."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "错误次数太多。请过几分钟再试。"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "錯誤次數太多。請過幾分鐘再試。"
+          }
+        }
+      }
+    },
     "This relay does not send codes to that kind of address. Use the other kind (e-mail or phone number), or sign in with a password." : {
       "extractionState" : "manual",
       "localizations" : {

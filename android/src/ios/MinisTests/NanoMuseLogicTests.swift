@@ -288,21 +288,19 @@ final class NanoMuseLogicTests: XCTestCase {
     }
 
     func testFirstRunStages() {
-        XCTAssertEqual(NanoMuseFirstRun.stage(signedIn: false, hasGroups: false, sourceChosen: false, modelsSkipped: false, fresh: false, passwordAnswered: false), .welcome)
-        // Signed out with a key of one's own: past the welcome, and the account's pages (password, source) are skipped.
-        XCTAssertEqual(NanoMuseFirstRun.stage(signedIn: false, hasProviders: true, hasGroups: false, sourceChosen: false, modelsSkipped: false, fresh: false, passwordAnswered: false), .models)
-        XCTAssertEqual(NanoMuseFirstRun.stage(signedIn: false, hasProviders: true, hasGroups: true, sourceChosen: false, modelsSkipped: false, fresh: false, passwordAnswered: false), .meet)
-        XCTAssertEqual(NanoMuseFirstRun.stage(signedIn: true, hasGroups: false, sourceChosen: false, modelsSkipped: false, fresh: true, passwordAnswered: false), .password)
-        XCTAssertEqual(NanoMuseFirstRun.stage(signedIn: true, hasGroups: false, sourceChosen: false, modelsSkipped: false, fresh: true, passwordAnswered: true), .source)
-        XCTAssertEqual(NanoMuseFirstRun.stage(signedIn: true, hasGroups: false, sourceChosen: true, modelsSkipped: false, fresh: false, passwordAnswered: false), .models)
-        XCTAssertEqual(NanoMuseFirstRun.stage(signedIn: true, hasGroups: true, sourceChosen: true, modelsSkipped: false, fresh: false, passwordAnswered: false), .meet)
-        XCTAssertEqual(NanoMuseFirstRun.stage(signedIn: true, hasGroups: false, sourceChosen: true, modelsSkipped: true, fresh: false, passwordAnswered: false), .meet)
+        XCTAssertEqual(NanoMuseFirstRun.stage(signedIn: false, hasGroups: false, sourceChosen: false, modelsSkipped: false), .welcome)
+        // Signed out with a key of one's own: past the welcome, and the account's pages are skipped.
+        XCTAssertEqual(NanoMuseFirstRun.stage(signedIn: false, hasProviders: true, hasGroups: false, sourceChosen: false, modelsSkipped: false), .models)
+        XCTAssertEqual(NanoMuseFirstRun.stage(signedIn: false, hasProviders: true, hasGroups: true, sourceChosen: false, modelsSkipped: false), .meet)
+        XCTAssertEqual(NanoMuseFirstRun.stage(signedIn: true, hasGroups: false, sourceChosen: false, modelsSkipped: false), .source)
+        XCTAssertEqual(NanoMuseFirstRun.stage(signedIn: true, hasGroups: false, sourceChosen: true, modelsSkipped: false), .models)
+        XCTAssertEqual(NanoMuseFirstRun.stage(signedIn: true, hasGroups: true, sourceChosen: true, modelsSkipped: false), .meet)
+        XCTAssertEqual(NanoMuseFirstRun.stage(signedIn: true, hasGroups: false, sourceChosen: true, modelsSkipped: true), .meet)
         // The phone page (notifications) sits between the model pages and Meet, as Android's Hands page does.
-        XCTAssertEqual(NanoMuseFirstRun.stage(signedIn: true, hasGroups: true, sourceChosen: true, modelsSkipped: false, fresh: false, passwordAnswered: false, notificationsSeen: false), .notifications)
-        XCTAssertEqual(NanoMuseFirstRun.stage(signedIn: true, hasGroups: false, sourceChosen: true, modelsSkipped: false, fresh: false, passwordAnswered: false, notificationsSeen: false), .models)
+        XCTAssertEqual(NanoMuseFirstRun.stage(signedIn: true, hasGroups: true, sourceChosen: true, modelsSkipped: false, notificationsSeen: false), .notifications)
+        XCTAssertEqual(NanoMuseFirstRun.stage(signedIn: true, hasGroups: false, sourceChosen: true, modelsSkipped: false, notificationsSeen: false), .models)
         // Three dots: account · phone · meet.
         XCTAssertEqual(NanoMuseFirstRun.dot(.welcome), 0)
-        XCTAssertEqual(NanoMuseFirstRun.dot(.password), 0)
         XCTAssertEqual(NanoMuseFirstRun.dot(.source), 0)
         XCTAssertEqual(NanoMuseFirstRun.dot(.models), 0)
         XCTAssertEqual(NanoMuseFirstRun.dot(.notifications), 1)

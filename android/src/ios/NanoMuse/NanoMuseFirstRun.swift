@@ -3,8 +3,7 @@
 //  nanoMuse
 //
 //  The first run, the way Android does it (ui/onboarding/FirstRunSetup.kt):
-//  Welcome (the account) → Password (only after a sign-in that created the
-//  account) → Which model answers → Notifications → Meet <name>. Android's
+//  Welcome (the account) → which model answers → Notifications → Meet <name>. Android's
 //  Hands page does not exist on iPhone (no accessibility service to grant);
 //  the phone page asks for notifications instead, which routines need.
 //
@@ -46,15 +45,13 @@ enum NanoMuseFirstRun {
         (!signedIn && !hasProviders) || (!hasSessions && !done)
     }
 
-    enum Stage: Int { case welcome, password, source, models, notifications, meet }
+    enum Stage: Int { case welcome, source, models, notifications, meet }
 
     /// The page to show, from what the app has. Android has a Hands page where the iPhone
     /// has Notifications: routines and goal check-ins need the permission.
-    /// Signed out with a provider of one's own (`hasProviders`), the account pages are skipped:
-    /// the password is the account's and the source question is answered by the key.
-    static func stage(signedIn: Bool, hasProviders: Bool = false, hasGroups: Bool, sourceChosen: Bool, modelsSkipped: Bool, fresh: Bool, passwordAnswered: Bool, notificationsSeen: Bool = true) -> Stage {
+    /// Signed out with a provider of one's own (`hasProviders`), the account pages are skipped.
+    static func stage(signedIn: Bool, hasProviders: Bool = false, hasGroups: Bool, sourceChosen: Bool, modelsSkipped: Bool, notificationsSeen: Bool = true) -> Stage {
         if !signedIn && !hasProviders { return .welcome }
-        if signedIn && fresh && !passwordAnswered { return .password }
         if signedIn && !sourceChosen { return .source }
         if !hasGroups && !modelsSkipped { return .models }
         if !notificationsSeen { return .notifications }
@@ -64,7 +61,7 @@ enum NanoMuseFirstRun {
     /// The dot that lights: account · phone · meet (the model pages fold into the first), as Android.
     static func dot(_ stage: Stage) -> Int {
         switch stage {
-        case .welcome, .password, .source, .models: return 0
+        case .welcome, .source, .models: return 0
         case .notifications: return 1
         case .meet: return 2
         }
@@ -82,7 +79,6 @@ struct NanoMuseFirstRunView: View {
     @State private var modelsSkipped = false
     @State private var sourceChosen = NanoMuseFirstRun.sourceChosen
     @State private var notificationsSeen = NanoMuseFirstRun.notificationsSeen
-    @State private var passwordAnswered = false
     @State private var showSignIn = false
     @State private var showOwnKey = false
     @State private var showGroups = false
@@ -101,8 +97,6 @@ struct NanoMuseFirstRunView: View {
             hasGroups: store.modelGroups.contains { !$0.memberEntryIds.isEmpty },
             sourceChosen: sourceChosen,
             modelsSkipped: modelsSkipped,
-            fresh: signedIn && NanoMuseCloud.freshAccount,
-            passwordAnswered: passwordAnswered,
             notificationsSeen: notificationsSeen
         )
     }
@@ -127,7 +121,6 @@ struct NanoMuseFirstRunView: View {
             Group {
                 switch stage {
                 case .welcome: welcomePage
-                case .password: NanoMusePasswordPage { NanoMuseCloud.clearFreshAccount(); passwordAnswered = true }
                 case .source: sourcePage
                 case .models: modelsPage
                 case .notifications: NanoMuseNotificationsPage { NanoMuseFirstRun.markNotificationsSeen(); notificationsSeen = true }
@@ -142,8 +135,8 @@ struct NanoMuseFirstRunView: View {
         }
         .background(NanoMuseTones.surface.ignoresSafeArea())
         .sheet(isPresented: $showSignIn) { NavigationStack { NanoMuseCloudView() } }
-        // Signed in: the sheet has done its job and goes, so the next page (the password, the
-        // source) is in view at once instead of behind the account page.
+        // Signed in: the sheet has done its job and goes, so the next page (which model
+        // answers) is in view at once instead of behind the account page.
         .nmOnChange(of: signedIn) { now in
             if now, showSignIn { showSignIn = false }
         }
@@ -222,57 +215,6 @@ struct NanoMuseFirstRunView: View {
             finePrint: AppLocalized("Before anything it cannot take back, such as deleting, sending or paying, it stops and asks you first.")
         ) {
             EmptyView()
-        }
-    }
-}
-
-/// Right after a sign-in that created the account: a password, so the next device signs in
-/// without waiting for a code. Skippable; Account has the same form later.
-struct NanoMusePasswordPage: View {
-    var onDone: () -> Void
-    @State private var next = ""
-    @State private var again = ""
-    @State private var busy = false
-    @State private var error: String?
-
-    var body: some View {
-        NanoMuseSetupPage(
-            hero: { NanoMuseHeroGlyph(symbol: "key") },
-            title: AppLocalized("Set a password"),
-            subtitle: AppLocalized("Your account is in. With a password, your computers and your other phones sign in at once, without waiting for a code."),
-            primaryLabel: AppLocalized("Set the password"),
-            onPrimary: { Task { await save() } },
-            secondaryLabel: AppLocalized("Skip for now"),
-            onSecondary: onDone,
-            finePrint: AppLocalized("Optional. You can set or change it later under Account."),
-            busy: busy
-        ) {
-            VStack(spacing: 10) {
-                SecureField(AppLocalized("New password (8 characters or more)"), text: $next)
-                    .textContentType(.newPassword)
-                    .textFieldStyle(.roundedBorder)
-                SecureField(AppLocalized("Repeat the new password"), text: $again)
-                    .textContentType(.newPassword)
-                    .textFieldStyle(.roundedBorder)
-                if let error {
-                    Text(error).font(.footnote).foregroundStyle(.red).multilineTextAlignment(.center)
-                }
-            }
-        }
-    }
-
-    private func save() async {
-        guard !busy else { return }
-        if next.count < 8 { error = AppLocalized("The password needs at least 8 characters."); return }
-        if next != again { error = AppLocalized("The two passwords differ."); return }
-        error = nil
-        busy = true
-        defer { busy = false }
-        do {
-            try await NanoMuseCloud.setPassword(next, current: nil)
-            onDone()
-        } catch {
-            self.error = NanoMuseCloud.describe(error)
         }
     }
 }

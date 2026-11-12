@@ -318,16 +318,6 @@ class HubService:
         data = await self.cloud.verify(identifier, code.strip(), self.device_name, invite=invite)
         return await self._signed_in(data)
 
-    async def login(self, identifier: str, password: str) -> dict[str, Any]:
-        """Sign in with the account password instead of a code."""
-        identifier = identifier.strip()
-        if not identifier:
-            raise CloudError(400, "bad_identifier", "Enter a phone number or an e-mail address.")
-        if not password:
-            raise CloudError(400, "password_required", "Enter the password.")
-        data = await self.cloud.login(identifier, password, self.device_name)
-        return await self._signed_in(data)
-
     async def _signed_in(self, data: dict[str, Any]) -> dict[str, Any]:
         key = str(data.get("api_key") or "")
         if not key:
@@ -348,7 +338,6 @@ class HubService:
             "hint": str(account.get("hint") or ""),
             "channel": str(account.get("channel") or ""),
             "signed_in_at": now_iso(),
-            "has_password": bool(account.get("has_password")),
             "account_id": str(account.get("id") or ""),
             "member": bool(account.get("member")),
             "any_model": bool(account.get("any_model")),
@@ -416,18 +405,6 @@ class HubService:
             ids.remove(recommended)
             ids.insert(0, recommended)
         return ids
-
-    async def set_password(self, password: str, current: str | None = None) -> dict[str, Any]:
-        if not self.signed_in:
-            raise CloudError(401, "bad_key", "Sign in first.")
-        self.cloud.api_key = self._key()
-        await self.cloud.set_password(password, current)
-        cloud = dict(self.data.get("cloud") or {})
-        cloud["has_password"] = bool(password)
-        self.data["cloud"] = cloud
-        self._save()
-        self.publish()
-        return self.account_view()
 
     async def sessions(self) -> list[dict[str, Any]]:
         if not self.signed_in:
@@ -515,7 +492,6 @@ class HubService:
             cloud = dict(self.data.get("cloud") or {})
             region = str(data.get("region") or account.get("region") or cloud.get("region") or "")
             fresh = {
-                "has_password": bool(account.get("has_password")),
                 # a member, and (the relay's any_model) free to name any model of the
                 # provider's — the operator may grant or take back either between reads
                 "member": bool(account.get("member")),
@@ -546,7 +522,6 @@ class HubService:
             "hint": str(cloud.get("hint") or ""),
             "channel": str(cloud.get("channel") or ""),
             "signed_in_at": cloud.get("signed_in_at"),
-            "has_password": bool(cloud.get("has_password")),
             "account_id": str(cloud.get("account_id") or ""),
             "member": bool(cloud.get("member")),
             "any_model": bool(cloud.get("any_model")),

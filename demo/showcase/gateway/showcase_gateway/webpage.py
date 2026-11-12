@@ -2,7 +2,7 @@
 
 Two steps: a phone number or an e-mail address, then the six-digit code nanoMuse Cloud sends
 (and, the first time, a friend's invite code if there is one — ``?invite=`` in the address
-fills it in); or, for an account that set one, the password in one step. On success the
+fills it in). On success the
 browser goes to the account's own Muse at ``<slug>.<SESSION_DOMAIN>``. The page
 is served by the gateway itself so that it has no build step and no assets to keep in step.
 
@@ -109,24 +109,14 @@ i.en,i.zh{font-style:normal}
 
   <section class="card">
   <form id="step1">
-    <div class="tabs" role="tablist">
-      <button type="button" class="tab on" id="tab-code" role="tab" aria-selected="true"><i class="zh">验证码登录</i><i class="en">With a code</i></button>
-      <button type="button" class="tab" id="tab-pass" role="tab" aria-selected="false"><i class="zh">密码登录</i><i class="en">With a password</i></button>
-    </div>
     <label for="ident"><i class="zh">中国大陆手机号或邮箱</i><i class="en">Mainland China phone number or e-mail</i></label>
     <input id="ident" name="identifier" autocomplete="username" required autofocus>
-    <div id="pass-box" class="hidden">
-      <label for="password"><i class="zh">密码</i><i class="en">Password</i></label>
-      <input id="password" name="password" type="password" autocomplete="current-password">
-      <div class="hint"><i class="zh">还没有密码？先用验证码登录，再在「账号」里设一个。</i><i class="en">No password yet? Sign in with a code first, then set one under Account.</i></div>
-    </div>
     <div class="hint" id="code-hint"><i class="zh">中国大陆手机号收短信验证码，其他的发到邮箱。</i><i class="en">A mainland China number gets the code by SMS; anything else by e-mail.</i></div>
     <details class="inv" id="inv">
       <summary><i class="zh">有邀请码？</i><i class="en">Have an invite code?</i></summary>
       <input id="invite" name="invite" maxlength="8" autocomplete="off" spellcheck="false" placeholder="ABCD2345">
     </details>
     <button id="send" type="submit"><i class="zh">发送验证码</i><i class="en">Send the code</i></button>
-    <button id="login" type="submit" class="hidden"><i class="zh">进入我的 nanoMuse</i><i class="en">Open my nanoMuse</i></button>
     <div class="msg" id="msg1"></div>
   </form>
 
@@ -173,23 +163,10 @@ i.en,i.zh{font-style:normal}
 
   var s1 = document.getElementById("step1"), s2 = document.getElementById("step2");
   var ident = document.getElementById("ident"), code = document.getElementById("code");
-  var password = document.getElementById("password"), passBox = document.getElementById("pass-box");
-  var codeHint = document.getElementById("code-hint"), inv = document.getElementById("inv");
-  var tabCode = document.getElementById("tab-code"), tabPass = document.getElementById("tab-pass");
+  var inv = document.getElementById("inv");
   var invite = document.getElementById("invite");
   var msg1 = document.getElementById("msg1"), msg2 = document.getElementById("msg2");
-  var send = document.getElementById("send"), login = document.getElementById("login"), go = document.getElementById("go");
-  var mode = "code";
-  function setMode(m){
-    mode = m; var pw = m === "password";
-    tabCode.classList.toggle("on", !pw); tabPass.classList.toggle("on", pw);
-    tabCode.setAttribute("aria-selected", String(!pw)); tabPass.setAttribute("aria-selected", String(pw));
-    passBox.classList.toggle("hidden", !pw); codeHint.classList.toggle("hidden", pw); inv.classList.toggle("hidden", pw);
-    send.classList.toggle("hidden", pw); login.classList.toggle("hidden", !pw); show(msg1, "");
-    if (pw && ident.value) password.focus();
-  }
-  tabCode.onclick = function(){ setMode("code"); };
-  tabPass.onclick = function(){ setMode("password"); };
+  var send = document.getElementById("send"), go = document.getElementById("go");
   // digits get the phone keypad, anything else the e-mail layout
   ident.oninput = function(){ ident.inputMode = /^\\s*[+\\d]/.test(ident.value) ? "tel" : "email"; };
   function cleanInvite(v){ return (v || "").toUpperCase().replace(/[^A-Z0-9]/g, "").slice(0, 8); }
@@ -209,7 +186,6 @@ i.en,i.zh{font-style:normal}
     phone_region: "短信验证码目前只支持中国大陆手机号，海外用户请用邮箱登录。", bad_identifier: "请输入中国大陆手机号或邮箱。",
     code_wrong: "验证码不对。", code_expired: "验证码已过期，请重新发送。", code_too_often: "发送太频繁了，请几分钟后再试。",
     send_failed: "验证码没发出去，请稍后再试。", not_invited: "这个 relay 是私有的，这个账号不在名单上。",
-    bad_credentials: "账号和密码不匹配。", no_password: "这个账号还没设密码，先用验证码登录，再在「账号」里设一个。", locked: "密码错得太多次了，请稍后再试，或改用验证码登录。",
     web_off: "这里没有开启网页版。", web_full: "网页版的名额已满。装 App 吧，它跑在你自己的设备上。",
     web_busy: "网页版现在很忙，请几分钟后再试，或者装 App。", start_failed: "没能启动你的 Muse，请稍后再试。",
     start_timeout: "你的 Muse 启动太久了，请稍后再试。", sign_in_again: "登录已失效，请重新登录。",
@@ -227,13 +203,6 @@ i.en,i.zh{font-style:normal}
   }
   s1.onsubmit = function(ev){
     ev.preventDefault();
-    if (mode === "password") {
-      if (!password.value) { password.focus(); return; }
-      login.disabled = true; show(msg1, t("starting"));
-      post("/api/web/login", {identifier: ident.value.trim(), password: password.value}).then(function(r){ enter(r, login, msg1); })
-        .catch(function(){ login.disabled = false; show(msg1, t("network"), true); });
-      return;
-    }
     send.disabled = true; show(msg1, t("sending"));
     post("/api/web/code", {identifier: ident.value.trim()}).then(function(r){
       send.disabled = false;

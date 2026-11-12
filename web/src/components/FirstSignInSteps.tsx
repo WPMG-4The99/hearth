@@ -1,21 +1,17 @@
-import { ArrowRight, CloudCog, KeyRound, Loader2, LogIn } from "lucide-react";
+import { ArrowRight, CloudCog, KeyRound, LogIn } from "lucide-react";
 import { useEffect, useId, useState, useRef } from "react";
-import { api } from "../api";
 import { useT } from "../i18n";
 import { useFocusTrap } from "./useFocusTrap";
 import { useStore } from "../store";
 import { cx } from "../util";
 import { ownKeyWay } from "../region";
 import { openOwnKeySetup } from "./AllowanceWays";
-import { inputCls, primaryBtn, secondaryBtn } from "./Form";
+import { primaryBtn, secondaryBtn } from "./Form";
 
 /**
- * Two short, skippable steps right after an account is *created* (the relay said
- * ``created: true``), the same two the phone asks: a password, so the next device signs in
- * without waiting for a code; and which model answers — the account's own, or a key of
- * one's own (that door leads to Connections with 阿里云百炼 preselected). Each can be done or
- * undone later under Account and Connections. The flag lives in sessionStorage so a reload
- * mid-way does not lose the steps, and is cleared once they are done or skipped.
+ * Which model answers, right after an account is created: the account's own, or a key of
+ * one's own. It can be changed later under Connections. The flag lives in sessionStorage
+ * so a reload does not lose the step, and is cleared once it is done.
  */
 const FLAG = "nm.cloud.first_sign_in";
 const EVENT = "nm:first-sign-in";
@@ -60,34 +56,12 @@ export function useFirstSignIn(): boolean {
 
 export function FirstSignInSteps() {
   const t = useT();
-  const { toast, refreshHub, setTab, state } = useStore();
+  const { refreshHub, setTab, state } = useStore();
   const way = ownKeyWay(state.hub?.account);
-  const [step, setStep] = useState<"password" | "source">("password");
-  const [password, setPassword] = useState("");
-  const [again, setAgain] = useState("");
-  const [busy, setBusy] = useState(false);
-  const [error, setError] = useState<string | null>(null);
 
   const done = async () => {
     clearFirstSignIn();
     await refreshHub().catch(() => undefined);
-  };
-
-  const setIt = async () => {
-    if (password.length < 8 || password !== again) return;
-    setBusy(true);
-    setError(null);
-    try {
-      await api.cloudPassword(password);
-      toast(t("Password set."));
-      setPassword("");
-      setAgain("");
-      setStep("source");
-    } catch (e) {
-      setError(t((e as Error).message));
-    } finally {
-      setBusy(false);
-    }
   };
 
   const ownKey = async () => {
@@ -98,57 +72,9 @@ export function FirstSignInSteps() {
   const panel = useRef<HTMLDivElement>(null);
   const titleId = useId();
   useFocusTrap(panel, true);
-  const mismatch = again.length > 0 && again !== password;
   return (
     <div className="fixed inset-0 z-50 flex items-end justify-center bg-black/40 backdrop-blur-[2px] sm:items-center" role="dialog" aria-modal="true" aria-labelledby={titleId}>
       <div ref={panel} className="safe-bottom w-full max-w-[520px] rounded-t-[28px] bg-bg p-6 shadow-2xl sm:rounded-[28px]">
-        <div className="mb-4 flex gap-1">
-          <span className={cx("h-1.5 w-5 rounded-full bg-accent")} />
-          <span className={cx("h-1.5 rounded-full transition-all", step === "source" ? "w-5 bg-accent" : "w-1.5 bg-border")} />
-        </div>
-
-        {step === "password" ? (
-          <form
-            className="space-y-4"
-            onSubmit={(e) => {
-              e.preventDefault();
-              void setIt();
-            }}
-          >
-            <div className="flex items-start gap-3">
-              <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-accent/12 text-accent">
-                <KeyRound size={20} />
-              </span>
-              <div>
-                <h2 id={titleId} className="text-[20px] font-bold tracking-tight">{t("Set a password")}</h2>
-                <p className="mt-1 text-[13.5px] leading-relaxed text-muted">{t("Your account is in. With a password, your phone and your other computers sign in at once, without waiting for a code. Optional; you can set one later under Account.")}</p>
-              </div>
-            </div>
-            <div className="space-y-2">
-              <input
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                autoComplete="new-password"
-                autoFocus
-                placeholder={t("At least 8 characters")}
-                aria-label={t("Password")}
-                className={inputCls}
-              />
-              <input type="password" value={again} onChange={(e) => setAgain(e.target.value)} autoComplete="new-password" placeholder={t("Once more")} aria-label={t("Once more")} className={cx(inputCls, mismatch && "border-rose-400")} />
-              {mismatch && <p className="text-[12px] text-rose-600 dark:text-rose-300">{t("The two do not match.")}</p>}
-            </div>
-            {error && <div className="rounded-2xl bg-rose-500/12 px-3 py-2 text-[12.5px] text-rose-700 dark:text-rose-300">{error}</div>}
-            <div className="flex gap-2">
-              <button type="button" disabled={busy} onClick={() => setStep("source")} className={secondaryBtn}>
-                {t("Skip")}
-              </button>
-              <button type="submit" disabled={busy || password.length < 8 || password !== again} className={cx(primaryBtn, "flex-1 py-3")}>
-                {busy ? <Loader2 size={15} className="animate-spin" /> : null} {t("Set the password")} <ArrowRight size={16} />
-              </button>
-            </div>
-          </form>
-        ) : (
           <div className="space-y-4">
             <div className="flex items-start gap-3">
               <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-accent/12 text-accent">
@@ -187,15 +113,14 @@ export function FirstSignInSteps() {
               </li>
             </ul>
             <div className="flex gap-2">
-              <button type="button" disabled={busy} onClick={() => void ownKey()} className={secondaryBtn}>
+              <button type="button" onClick={() => void ownKey()} className={secondaryBtn}>
                 {t("I have my own API key")}
               </button>
-              <button type="button" disabled={busy} onClick={() => void done()} className={cx(primaryBtn, "flex-1 py-3")}>
+              <button type="button" onClick={() => void done()} className={cx(primaryBtn, "flex-1 py-3")}>
                 {t("Use the nanoMuse Cloud model")} <ArrowRight size={16} />
               </button>
             </div>
           </div>
-        )}
       </div>
     </div>
   );

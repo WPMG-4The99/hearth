@@ -6,7 +6,7 @@ All notable changes to nanoMuse. The format follows [Keep a Changelog](https://k
 
 ### Apps
 
-- **Sign-in is a code only.** The phone and the desktop no longer offer a password on the sign-in screen, the first-run pages, or the account page. The relay no longer accepts `POST /v1/auth/login` or `POST /v1/auth/password`. Old password columns stay in the database and are not read. The code box accepts four to six digits.
+- **Sign-in is a code only.** The phone, the iPhone, the desktop, the web console and the demo sign-in no longer offer a password on the sign-in screen, the first-run pages, or the account page. The relay no longer accepts `POST /v1/auth/login` or `POST /v1/auth/password`. Old password columns stay in the database and are not read. The code box accepts four to six digits.
 
 - **Cap's phone shows Admin, and a staff phone shows Staff.** Admin sees every private list and job note in the household and can assign shared tasks. Staff sees her own list, her notes, and the shared board, and can mark a shared task done.
 

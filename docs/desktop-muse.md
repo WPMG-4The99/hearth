@@ -95,11 +95,9 @@ skipped on a fresh install and never shown twice:
    Welcome again). Sign-in
    is the phone's: *Phone number or e-mail* with the line that a mainland China number
    gets an SMS and anything else an e-mail, the code boxes that verify themselves on the
-   sixth digit, *Try another way* for a password (`/v1/auth/code`, `/v1/auth/verify`,
-   `/v1/auth/login`).
-2. **Set a password** (a fresh account only; *Later* skips it).
-3. **Which model answers**: the Cloud account's models, or your own key.
-4. **Choose models** (own key only): the providers of the catalogue
+   sixth digit (`/v1/auth/code`, `/v1/auth/verify`).
+2. **Which model answers**: the Cloud account's models, or your own key.
+3. **Choose models** (own key only): the providers of the catalogue
    (`assets/providers.json`, the same list as the phones' and the web app's), the ones for
    where you are first (Alibaba Cloud Bailian in mainland China, one key for chat, the
    hands, pictures and clips; OpenRouter and then OpenAI elsewhere), each row saying what it
@@ -112,7 +110,7 @@ skipped on a fresh install and never shown twice:
    cut off before. *More ways* folds out the rest of the catalogue, the servers on this
    computer (Ollama, LM Studio, vLLM) and any OpenAI-compatible endpoint by hand. *Skip for
    now* until a key is saved or a sign-in finished; *Continue* then.
-5. **Allow nanoMuse to use your computer?** (macOS only): *Accessibility* and *Screen
+4. **Allow nanoMuse to use your computer?** (macOS only): *Accessibility* and *Screen
    Recording* rows, each with *Allow* that asks the system through the desktop shell and
    turns into a green check as the system grants it (polled, and again when the window gets
    focus or the page becomes visible; one hook, `permissions.ts`, behind every place that
@@ -127,7 +125,7 @@ skipped on a fresh install and never shown twice:
    the hands failed, why, in the host's words), and a black capture gets its own notice with
    *Relaunch*.
    On Linux and Windows the page is skipped.
-6. **Meet <name>**: the face, *Start*.
+5. **Meet <name>**: the face, *Start*.
 
 Start binds the **main chat** (the agent's own folder, `~/nanoMuse`, registered as a
 workspace so the composer is live) as the **first conversation**, the phone's
