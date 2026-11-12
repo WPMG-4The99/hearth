@@ -38,12 +38,9 @@ class FirstRunSetupTest {
     }
 
     @Test
-    fun `a sign-in that created the account is followed by the password page`() {
-        assertEquals(Stage.PASSWORD, FirstRunSetup.stage(signedIn = true, hasGroups = true, sourceChosen = false, modelsSkipped = false, handsSeen = false, handsPossible = true, fresh = true, passwordAnswered = false))
-        assertEquals(Stage.SOURCE, FirstRunSetup.stage(signedIn = true, hasGroups = true, sourceChosen = false, modelsSkipped = false, handsSeen = false, handsPossible = true, fresh = true, passwordAnswered = true))
-        assertEquals(Stage.SOURCE, FirstRunSetup.stage(signedIn = true, hasGroups = true, sourceChosen = false, modelsSkipped = false, handsSeen = false, handsPossible = true, fresh = false, passwordAnswered = false))
+    fun `a new account goes to the model choice, not a password`() {
+        assertEquals(Stage.SOURCE, FirstRunSetup.stage(signedIn = true, hasGroups = true, sourceChosen = false, modelsSkipped = false, handsSeen = false, handsPossible = true, fresh = true, passwordAnswered = false))
         assertEquals(Stage.WELCOME, FirstRunSetup.stage(signedIn = false, hasGroups = true, sourceChosen = false, modelsSkipped = false, handsSeen = false, handsPossible = true, fresh = true, passwordAnswered = false))
-        assertEquals(0, FirstRunSetup.dot(Stage.PASSWORD))
     }
 
     @Test

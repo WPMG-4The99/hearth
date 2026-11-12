@@ -639,10 +639,6 @@
     <string name="nm_setup_source_cloud_sub">Модель на релее этого дома. Вставлять ничего не нужно.</string>
     <string name="nm_setup_source_own_sub">OpenAI, Anthropic, DeepSeek, Bailian и другие OpenAI-совместимые эндпоинты. Ключ остаётся на этом телефоне.</string>
     <string name="nm_setup_source_fine_print">Для начала выберите один. Второй можно добавить позже.</string>
-    <string name="nm_setup_password_title">Задайте пароль</string>
-    <string name="nm_setup_password_sub">Аккаунт готов. С паролем ваши компьютеры и другие телефоны войдут сразу, не дожидаясь кода.</string>
-    <string name="nm_setup_password_set">Задать пароль</string>
-    <string name="nm_setup_password_fine_print">Необязательно. Задать или сменить его можно позже в разделе «Аккаунт».</string>
     <string name="nm_welcome_feat_chat">Чат, картинки, видео</string>
     <string name="nm_welcome_feat_chat_sub">Способная модель, генерация изображений и видео, инструменты, навыки и память, на вашем телефоне</string>
     <string name="nm_welcome_feat_hands">Руки: он пользуется вашим телефоном</string>
@@ -659,9 +655,6 @@
     <string name="nm_cloud_signin_title">Войти в The Hearth</string>
     <string name="nm_cloud_signin_subtitle">Сначала почта, потом одноразовый код. Этот релей пишет код в свой журнал.</string>
     <string name="nm_cloud_mode_code">По коду</string>
-    <string name="nm_cloud_mode_password">По паролю</string>
-    <string name="nm_cloud_password">Пароль</string>
-    <string name="nm_cloud_forgot_password">Забыли пароль? Войдите по коду</string>
     <string name="nm_cloud_identifier">Почта</string>
     <string name="nm_cloud_identifier_hint">you@example.com</string>
     <string name="nm_cloud_code">Код</string>
@@ -727,15 +720,10 @@
     <string name="nm_cloud_err_unreachable">Не удалось связаться с The Hearth. Проверьте соединение.</string>
     <string name="nm_cloud_err_generic">Что-то пошло не так.</string>
     <string name="nm_cloud_err_bad_credentials">Неверный e-mail или пароль.</string>
-    <string name="nm_cloud_err_no_password">У этого аккаунта ещё нет пароля. Войдите по коду, затем задайте его в разделе «Аккаунт».</string>
     <string name="nm_cloud_err_locked">Слишком много неверных попыток. Подождите несколько минут.</string>
-    <string name="nm_cloud_err_password_wrong">Текущий пароль неверен.</string>
-    <string name="nm_cloud_err_password_required">Сначала введите текущий пароль.</string>
-    <string name="nm_cloud_err_password_short">Пароль должен быть не короче 8 символов.</string>
-    <string name="nm_cloud_err_password_weak">Этот пароль слишком легко угадать.</string>
     <string name="nm_cloud_err_signup_closed">Регистрация на этом релее пока приостановлена. Уже существующий аккаунт может войти как прежде.</string>
     <string name="nm_cloud_err_domain_limited">Адреса этого домена исчерпали дневной лимит регистраций на этом релее. Попробуйте завтра или используйте другой адрес.</string>
-    <string name="nm_cloud_err_channel_unsupported">Этот релей не отправляет коды на такой тип адреса. Используйте другой тип (e-mail или номер телефона) или войдите по паролю.</string>
+    <string name="nm_cloud_err_channel_unsupported">Этот релей не отправляет коды на такой тип адреса. Используйте другой тип (e-mail или номер телефона).</string>
     <string name="nm_cloud_err_too_large">Это сообщение слишком велико для модели. Сократите его, уберите часть вложений или начните новый чат.</string>
     <string name="nm_cloud_err_content_rejected">Проверка содержимого у поставщика модели отклонила этот запрос. Попробуйте другие слова, а если это повторяется, начните новый чат: слова, к которым есть претензии, могут быть раньше в разговоре.</string>
     <string name="nm_cloud_err_provider_busy">Провайдер модели сейчас перегружен. Повторите через минуту.</string>
@@ -754,18 +742,6 @@
     <!-- 0.1.20: the account page -->
     <string name="nm_cloud_since">с %1$s</string>
     <string name="nm_cloud_account_id">Аккаунт %1$s…</string>
-    <string name="nm_cloud_password_set">Задан</string>
-    <string name="nm_cloud_password_unset">Не задан</string>
-    <string name="nm_cloud_password_title_set">Задать пароль</string>
-    <string name="nm_cloud_password_title_change">Сменить пароль</string>
-    <string name="nm_cloud_password_current">Текущий пароль</string>
-    <string name="nm_cloud_password_new">Новый пароль (8 символов или больше)</string>
-    <string name="nm_cloud_password_confirm">Повторите новый пароль</string>
-    <string name="nm_cloud_password_mismatch">Пароли не совпадают.</string>
-    <string name="nm_cloud_password_why">С паролем вы можете войти на другом устройстве, не дожидаясь кода. Сразу после входа по коду поле текущего пароля можно оставить пустым.</string>
-    <string name="nm_cloud_password_remove">Удалить пароль</string>
-    <string name="nm_cloud_password_saved">Пароль сохранён.</string>
-    <string name="nm_cloud_password_removed">Пароль удалён.</string>
     <string name="nm_cloud_devices_signed_in">Вход выполнен на</string>
     <string name="nm_cloud_device_unknown">Неизвестное устройство</string>
     <string name="nm_cloud_this_device">этот телефон</string>
@@ -1139,8 +1115,6 @@
     <string name="nm_models_search_clear">Очистить поиск</string>
     <string name="nm_models_no_match">Ни одна модель не подходит</string>
     <!-- Names for icon-only controls, read by screen readers (#338) -->
-    <string name="nm_a11y_show_password">Показать пароль</string>
-    <string name="nm_a11y_hide_password">Скрыть пароль</string>
     <string name="nm_a11y_avatar_candidate">Кандидат %1$d</string>
     <string name="nm_a11y_share_card">Карточка %1$d</string>
     <string name="nm_a11y_add">Добавить</string>
@@ -1195,4 +1169,15 @@
     <string name="nm_household_kind_alert">Сигнал</string>
     <string name="nm_menu_household">Дом</string>
     <string name="nm_household_needs_sign_in">Войдите, чтобы посмотреть.</string>
+    <string name="nm_work_menu">Работа</string>
+    <string name="nm_work_title_admin">Админ</string>
+    <string name="nm_work_title_staff">Сотрудник</string>
+    <string name="nm_work_board">Общее</string>
+    <string name="nm_work_mine">Мой список</string>
+    <string name="nm_work_notes">Заметки</string>
+    <string name="nm_work_add">Добавить</string>
+    <string name="nm_work_open">Свободно</string>
+    <string name="nm_work_assign">Назначить</string>
+    <string name="nm_work_save">Сохранить</string>
+    <string name="nm_work_empty">Пока пусто.</string>
 </resources>

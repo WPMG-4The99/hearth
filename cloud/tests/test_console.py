@@ -179,16 +179,16 @@ def test_admin_console_has_the_invites_view_in_both_languages():
     assert app_js.count('"invite.settled":') == 2
 
 
-def test_web_console_prints_the_relays_code_lifetime_and_password_length():
-    """The relay's ``CODE_TTL_S`` and ``PASSWORD_MIN_LEN`` are configurable; the console
-    reads them from ``/v1/config`` since 0.25 instead of saying ten minutes and 8 characters."""
+def test_web_console_prints_the_relays_code_lifetime():
+    """The relay's ``CODE_TTL_S`` is configurable; the console reads it from ``/v1/config``
+    since 0.25 instead of saying ten minutes. Sign-in is a code, so no password length is shown."""
     source = (CONSOLE / "app.js").read_text(encoding="utf-8")
-    assert '"/v1/config"' in source and "cfg.code_ttl_s" in source and "cfg.password_min_len" in source
-    assert source.count("codeSent: (m) =>") == 2 and source.count("pwShort: (n) =>") == 2 and source.count("pwWhy: (n) =>") == 2
+    assert '"/v1/config"' in source and "cfg.code_ttl_s" in source
+    assert source.count("codeSent: (m) =>") == 2
+    assert "pwShort:" not in source and "pwWhy:" not in source
     assert "十分钟" not in source and "ten minutes" not in source
-    assert "8 个字符" not in source and "8 位" not in source and "8 characters" not in source
-    # the default stands for a relay that does not send the fields yet
-    assert "code_ttl_s: 600" in source and "password_min_len: 8" in source
+    # the default stands for a relay that does not send the field yet
+    assert "code_ttl_s: 600" in source
 
 
 def test_admin_console_searches_and_filters_further():

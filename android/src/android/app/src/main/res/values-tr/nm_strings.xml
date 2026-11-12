@@ -633,10 +633,6 @@
     <string name="nm_setup_source_cloud_sub">Bu evin rölesindeki model. Yapıştırılacak bir şey yok.</string>
     <string name="nm_setup_source_own_sub">OpenAI, Anthropic, DeepSeek, Bailian ve diğer OpenAI uyumlu uç noktalar. Anahtar bu telefonda kalır.</string>
     <string name="nm_setup_source_fine_print">Başlamak için birini seç. Diğeri sonra eklenebilir.</string>
-    <string name="nm_setup_password_title">Bir parola belirle</string>
-    <string name="nm_setup_password_sub">Hesabın açıldı. Parolayla bilgisayarların ve diğer telefonların kod beklemeden hemen oturum açar.</string>
-    <string name="nm_setup_password_set">Parolayı belirle</string>
-    <string name="nm_setup_password_fine_print">İsteğe bağlı. Daha sonra Hesap altından belirleyebilir ya da değiştirebilirsin.</string>
     <string name="nm_welcome_feat_chat">Sohbet, resim, video</string>
     <string name="nm_welcome_feat_chat_sub">Yetkin bir model, görsel ve video üretimi, araçlar, beceriler ve bellek, telefonunda</string>
     <string name="nm_welcome_feat_hands">Eller: telefonunu kullanır</string>
@@ -653,9 +649,6 @@
     <string name="nm_cloud_signin_title">The Hearth oturumu aç</string>
     <string name="nm_cloud_signin_subtitle">Önce e-posta, sonra tek kullanımlık kod. Bu röle kodu kendi günlüğüne yazar.</string>
     <string name="nm_cloud_mode_code">Kodla</string>
-    <string name="nm_cloud_mode_password">Parolayla</string>
-    <string name="nm_cloud_password">Parola</string>
-    <string name="nm_cloud_forgot_password">Parolayı mı unuttun? Kodla oturum aç</string>
     <string name="nm_cloud_identifier">E-posta</string>
     <string name="nm_cloud_identifier_hint">sen@example.com</string>
     <string name="nm_cloud_code">Kod</string>
@@ -721,15 +714,10 @@
     <string name="nm_cloud_err_unreachable">The Hearth’a ulaşılamadı. Bağlantıyı kontrol et.</string>
     <string name="nm_cloud_err_generic">Bir şeyler ters gitti.</string>
     <string name="nm_cloud_err_bad_credentials">E-posta ya da parola yanlış.</string>
-    <string name="nm_cloud_err_no_password">Bu hesabın henüz parolası yok. Kodla oturum aç, sonra Hesap altından bir parola belirle.</string>
     <string name="nm_cloud_err_locked">Çok fazla yanlış deneme. Birkaç dakika bekle.</string>
-    <string name="nm_cloud_err_password_wrong">Mevcut parola yanlış.</string>
-    <string name="nm_cloud_err_password_required">Önce mevcut parolayı gir.</string>
-    <string name="nm_cloud_err_password_short">Parola en az 8 karakter olmalı.</string>
-    <string name="nm_cloud_err_password_weak">Bu parolayı tahmin etmek çok kolay.</string>
     <string name="nm_cloud_err_signup_closed">Bu relay’de kayıtlar şimdilik durduruldu. Zaten var olan bir hesap oturum açmaya devam edebilir.</string>
     <string name="nm_cloud_err_domain_limited">Bu alan adındaki adresler bu relay üzerinde bugünkü kayıt sınırına ulaştı. Yarın yeniden deneyin ya da başka bir adres kullanın.</string>
-    <string name="nm_cloud_err_channel_unsupported">Bu relay bu tür adreslere kod göndermiyor. Diğer türü (e-posta ya da telefon numarası) kullanın ya da parolanızla giriş yapın.</string>
+    <string name="nm_cloud_err_channel_unsupported">Bu relay bu tür adreslere kod göndermiyor. Diğer türü (e-posta ya da telefon numarası) kullanın.</string>
     <string name="nm_cloud_err_too_large">Bu mesaj model için fazla büyük. Kısalt, bazı ekleri çıkar ya da yeni bir sohbet başlat.</string>
     <string name="nm_cloud_err_content_rejected">Model sağlayıcısının içerik denetimi bu isteği reddetti. Başka sözcükler deneyin; tekrarlanırsa yeni bir sohbet başlatın, itiraz edilen sözcükler konuşmanın daha önceki kısmında olabilir.</string>
     <string name="nm_cloud_err_provider_busy">Model sağlayıcısı şu anda yoğun. Birazdan yeniden dene.</string>
@@ -748,18 +736,6 @@
     <!-- 0.1.20: the account page -->
     <string name="nm_cloud_since">%1$s tarihinden beri</string>
     <string name="nm_cloud_account_id">Hesap %1$s…</string>
-    <string name="nm_cloud_password_set">Belirlendi</string>
-    <string name="nm_cloud_password_unset">Belirlenmedi</string>
-    <string name="nm_cloud_password_title_set">Bir parola belirle</string>
-    <string name="nm_cloud_password_title_change">Parolayı değiştir</string>
-    <string name="nm_cloud_password_current">Mevcut parola</string>
-    <string name="nm_cloud_password_new">Yeni parola (8 karakter ya da daha fazla)</string>
-    <string name="nm_cloud_password_confirm">Yeni parolayı yinele</string>
-    <string name="nm_cloud_password_mismatch">İki parola birbirinden farklı.</string>
-    <string name="nm_cloud_password_why">Parolayla başka bir cihazda kod beklemeden oturum açabilirsin. Kodla oturum açtıktan hemen sonra mevcut parola boş bırakılabilir.</string>
-    <string name="nm_cloud_password_remove">Parolayı kaldır</string>
-    <string name="nm_cloud_password_saved">Parola kaydedildi.</string>
-    <string name="nm_cloud_password_removed">Parola kaldırıldı.</string>
     <string name="nm_cloud_devices_signed_in">Oturum açılan cihazlar</string>
     <string name="nm_cloud_device_unknown">Bilinmeyen cihaz</string>
     <string name="nm_cloud_this_device">bu telefon</string>
@@ -1131,8 +1107,6 @@
     <string name="nm_models_search_clear">Aramayı temizle</string>
     <string name="nm_models_no_match">Eşleşen model yok</string>
     <!-- Names for icon-only controls, read by screen readers (#338) -->
-    <string name="nm_a11y_show_password">Parolayı göster</string>
-    <string name="nm_a11y_hide_password">Parolayı gizle</string>
     <string name="nm_a11y_avatar_candidate">Aday %1$d</string>
     <string name="nm_a11y_share_card">Kart %1$d</string>
     <string name="nm_a11y_add">Ekle</string>
@@ -1187,4 +1161,15 @@
     <string name="nm_household_kind_alert">Uyarı</string>
     <string name="nm_menu_household">Ev</string>
     <string name="nm_household_needs_sign_in">Görmek için oturum aç.</string>
+    <string name="nm_work_menu">İş</string>
+    <string name="nm_work_title_admin">Yönetici</string>
+    <string name="nm_work_title_staff">Personel</string>
+    <string name="nm_work_board">Ortak</string>
+    <string name="nm_work_mine">Listem</string>
+    <string name="nm_work_notes">Notlar</string>
+    <string name="nm_work_add">Ekle</string>
+    <string name="nm_work_open">Boşta</string>
+    <string name="nm_work_assign">Ata</string>
+    <string name="nm_work_save">Kaydet</string>
+    <string name="nm_work_empty">Henüz yok.</string>
 </resources>

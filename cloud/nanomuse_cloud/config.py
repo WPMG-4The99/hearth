@@ -592,19 +592,6 @@ class Settings:
 
     code_ttl_s: int = field(default_factory=lambda: _int("CODE_TTL_S", 600))
     code_per_identifier_10m: int = field(default_factory=lambda: _int("CODE_PER_IDENTIFIER_10M", 3))
-    # Passwords are optional on top of the code: someone who set one may sign
-    # in with it on a new device without waiting for a message. After this
-    # many wrong tries in a row the password is locked for LOCKOUT_S seconds
-    # (a code still works, and setting a new password clears the lock).
-    password_min_len: int = field(default_factory=lambda: _int("PASSWORD_MIN_LEN", 8))
-    password_max_attempts: int = field(default_factory=lambda: _int("PASSWORD_MAX_ATTEMPTS", 5))
-    lockout_s: int = field(default_factory=lambda: _int("LOCKOUT_S", 900))
-    # Wrong passwords from one network address across all accounts per hour; the
-    # per-account lockout above does not stop a list of numbers tried once each.
-    login_fail_per_ip_hour: int = field(default_factory=lambda: _int("LOGIN_FAIL_PER_IP_HOUR", 30))
-    # How long after a code sign-in a password may be set without the old one
-    # (the "forgot my password" path: sign in with a code, set a new one).
-    password_reset_window_s: int = field(default_factory=lambda: _int("PASSWORD_RESET_WINDOW_S", 1800))
     # Members: phone numbers / e-mail addresses (comma-separated) that have no
     # daily cap — the operator and friends. Normalised like the identifiers
     # themselves, so "139 0000 1111" works. With SIGNUP_OPEN=0 the relay is
@@ -615,9 +602,14 @@ class Settings:
     # households are separated by commas or newlines. There is no self-service
     # linking: an address that is not in a household cannot reach another account.
     households: str = field(default_factory=lambda: _env("HOUSEHOLDS"))
+    # E-mail addresses that are household admins. Everyone else in a household is staff.
+    # An address here that is not also in a HOUSEHOLDS group has no household to administer.
+    # The app cannot change this. Read when the process starts.
+    household_admins: str = field(default_factory=lambda: _env("HOUSEHOLD_ADMINS"))
     # Kinds a feed key may return, even if the key was issued with more. Comma
     # separated. Empty means the feed sees nothing. Read when the process starts.
-    household_feed_kinds: str = field(default_factory=lambda: _env("HOUSEHOLD_FEED_KINDS", "check-in,panic,alert"))
+    # `task` is a shared-board change (added, done, assigned). Never a private note.
+    household_feed_kinds: str = field(default_factory=lambda: _env("HOUSEHOLD_FEED_KINDS", "check-in,panic,alert,task"))
     signup_open: bool = field(default_factory=lambda: _env("SIGNUP_OPEN", "1") not in ("0", "false", "no"))
     # A sign-in for an app store's reviewer, who cannot receive our codes: for the
     # e-mail addresses in REVIEW_ADDRESSES (comma-separated) a code request sends nothing and

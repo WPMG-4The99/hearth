@@ -2171,12 +2171,7 @@ export default class NanomuseCloud extends Service {
     })
   }
 
-  /** The other way in: the account's password instead of a code. */
-  login(identifier: string, password: string): Promise<CloudStatus> {
-    return this.serialize(async () => this.adopt(await this.relay.login(identifier.trim(), password, this.deviceName())))
-  }
-
-  /** A fresh key from either way in: wire the provider, remember the account, wear its look. */
+  /** A fresh key from a code sign-in: wire the provider, remember the account, wear its look. */
   private async adopt(signIn: SignIn): Promise<CloudStatus> {
     // C10: a different account than the one this device last held (the sync state remembers it through a
     // sign-out) — the account-scoped state starts over
@@ -3391,7 +3386,7 @@ export default class NanomuseCloud extends Service {
         const body = await json(req)
         return send(res, 200, await this.verify(String(body.identifier ?? ''), String(body.code ?? ''), String(body.invite ?? '')))
       }
-      // the account page, passed through: the sheet, the devices holding keys, the timeline, the password
+      // the account page, passed through: the sheet, the devices holding keys, the timeline
       if (req.method === 'GET' && route === '/config') return send(res, 200, await this.relay.config())
       if (req.method === 'GET' && route === '/me') return send(res, 200, await this.withToken((token) => this.relay.meSheet(token)))
       if (req.method === 'GET' && route === '/sessions') return send(res, 200, await this.withToken((token) => this.relay.sessions(token)))
@@ -3404,17 +3399,8 @@ export default class NanomuseCloud extends Service {
         const limit = Number(url.searchParams.get('limit') ?? '40')
         return send(res, 200, await this.withToken((token) => this.relay.events(token, Number.isFinite(limit) ? limit : 40)))
       }
-      if (req.method === 'POST' && route === '/password') {
-        const body = await json(req)
-        await this.withToken((token) => this.relay.setPassword(token, String(body.password ?? ''), typeof body.current === 'string' ? body.current : undefined))
-        return send(res, 204)
-      }
       if (req.method === 'POST' && route === '/sign-out-all') return send(res, 200, await this.endAll('sign-out-all'))
       if (req.method === 'POST' && route === '/delete-account') return send(res, 200, await this.endAll('delete'))
-      if (req.method === 'POST' && route === '/login') {
-        const body = await json(req)
-        return send(res, 200, await this.login(String(body.identifier ?? ''), String(body.password ?? '')))
-      }
       if (req.method === 'GET' && route === '/invite') {
         const invite = await this.invite()
         return invite ? send(res, 200, invite) : send(res, 404, { error: { code: 'signed_out', message: 'Sign in first' } })

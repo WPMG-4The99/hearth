@@ -210,7 +210,6 @@ def _accounts_by_method(s: Stats, days: int) -> list[dict[str, Any]]:
         {
             "method": str(r["channel"]),
             "accounts": int(r["accounts"] or 0),
-            "with_password": int(r["with_password"] or 0),
             "members": int(r["members"] or 0),
             "disabled": int(r["disabled"] or 0),
             "contribute": int(r["contribute"] or 0),
@@ -524,14 +523,13 @@ METRICS: list[Metric] = [
         "accounts_by_method",
         "Accounts by sign-in method",
         "账号 · 按登录方式",
-        "Every account grouped by its channel (phone or e-mail); with_password = a password is set; members = flagged unlimited by the operator (the environment's list is not counted here); "
+        "Every account grouped by its channel (phone or e-mail); members = flagged unlimited by the operator (the environment's list is not counted here); "
         "disabled, contribute (“help improve” on) and sync_on are the account flags as they stand now.",
-        "全部账号按渠道（手机 / 邮箱）分组；with_password = 设了密码；members = 后台设为成员（环境变量白名单不计入）；disabled、contribute（开启「帮助改进」）、sync_on 为账号当前的开关状态。",
+        "全部账号按渠道（手机 / 邮箱）分组；members = 后台设为成员（环境变量白名单不计入）；disabled、contribute（开启「帮助改进」）、sync_on 为账号当前的开关状态。",
         "table",
         (
             Column("method", "Method", "方式", "str"),
             Column("accounts", "Accounts", "账号", N),
-            Column("with_password", "With a password", "设了密码", N),
             Column("members", "Members", "成员", N),
             Column("disabled", "Disabled", "已停用", N),
             Column("contribute", "“Help improve” on", "开启「帮助改进」", N),

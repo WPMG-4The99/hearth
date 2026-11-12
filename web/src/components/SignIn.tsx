@@ -1,4 +1,4 @@
-import { KeyRound, Loader2, MessageSquareText } from "lucide-react";
+import { Loader2 } from "lucide-react";
 import { useEffect, useId, useState } from "react";
 import { api } from "../api";
 import { useT } from "../i18n";
@@ -10,7 +10,7 @@ import { useCloudConfig } from "./StarNudge";
 
 /**
  * Signing in to nanoMuse Cloud: a code sent to a mainland phone number (SMS) or an e-mail
- * address, or — once one is set — the account password. The same form everywhere it is needed (first run, the gate, the
+ * address. The same form everywhere it is needed (first run, the gate, the
  * account screen); the key lands in the vault on the machine running nanoMuse.
  *
  * A friend's invite code (``?invite=CODE`` on the page URL, remembered until used, or typed
@@ -59,12 +59,10 @@ export function SignIn({
   const t = useT();
   const ids = useId();
   const cfg = useCloudConfig();
-  const [mode, setMode] = useState<"code" | "password">("code");
   const [identifier, setIdentifier] = useState("");
   const [code, setCode] = useState("");
-  const [password, setPassword] = useState("");
   const [sent, setSent] = useState(false);
-  const [busy, setBusy] = useState<"code" | "verify" | "login" | "model" | null>(null);
+  const [busy, setBusy] = useState<"code" | "verify" | "model" | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [invite, setInvite] = useState("");
   const [inviteOpen, setInviteOpen] = useState(false);
@@ -110,7 +108,7 @@ export function SignIn({
     setError(null);
     try {
       const r = await api.cloudVerify(id, code.trim(), invite.trim());
-      // a brand-new account is owed two short steps (password, model source) — see FirstSignInSteps
+      // a brand-new account is asked which model answers — see FirstSignInSteps
       if (r.created) markFirstSignIn();
       setCode("");
       setSent(false);
@@ -127,23 +125,7 @@ export function SignIn({
     }
   };
 
-  const login = async () => {
-    const id = identifier.trim();
-    if (!id || !password) return;
-    setBusy("login");
-    setError(null);
-    try {
-      await api.cloudLogin(id, password);
-      setPassword("");
-      await finish();
-    } catch (e) {
-      setError(t((e as Error).message));
-    } finally {
-      setBusy(null);
-    }
-  };
-
-  const submit = () => void (mode === "password" ? login() : sent ? verify() : sendCode());
+  const submit = () => void (sent ? verify() : sendCode());
   const label = cta ?? (useAsModel ? t("Sign in and use its model") : t("Sign in"));
 
   return (
@@ -154,10 +136,6 @@ export function SignIn({
         submit();
       }}
     >
-      <div className="grid grid-cols-2 gap-1 rounded-2xl bg-surface-2/70 p-1 text-[13px] font-medium">
-        <ModeButton active={mode === "code"} onClick={() => setMode("code")} icon={<MessageSquareText size={14} />} label={t("With a code")} />
-        <ModeButton active={mode === "password"} onClick={() => setMode("password")} icon={<KeyRound size={14} />} label={t("With a password")} />
-      </div>
       <div>
         <label htmlFor={`${ids}-id`} className="text-[12px] text-muted">{isMainland() ? t("Mainland China phone number or e-mail") : t("E-mail (or a mainland China phone number)")}</label>
         <input
@@ -173,25 +151,11 @@ export function SignIn({
           placeholder={isMainland() ? t("138 0000 0000 or you@example.com") : "you@example.com"}
           className={cx(inputCls, "mt-1")}
         />
-        {mode === "code" && !sent && (!isMainland() || looksLikeForeignNumber(identifier)) && (
+        {!sent && (!isMainland() || looksLikeForeignNumber(identifier)) && (
           <p className="mt-1.5 text-[12px] text-muted">{t("Text-message codes reach mainland-China numbers only. Use an e-mail address instead.")}</p>
         )}
       </div>
-      {mode === "password" ? (
-        <div>
-          <label htmlFor={`${ids}-password`} className="text-[12px] text-muted">{t("Password")}</label>
-          <input
-            id={`${ids}-password`}
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            autoComplete="current-password"
-            className={cx(inputCls, "mt-1")}
-          />
-          <p className="mt-1.5 text-[12px] text-muted">{t("No password yet? Use a code first; set one under Account.")}</p>
-        </div>
-      ) : (
-        <>
+      <>
           {sent && (
             <div>
               <label htmlFor={`${ids}-code`} className="text-[12px] text-muted">{t("The code you received")}</label>
@@ -225,11 +189,10 @@ export function SignIn({
               {t("Have an invite code?")}
             </button>
           )}
-        </>
-      )}
+      </>
       {error && <div role="alert" className="rounded-2xl bg-rose-500/12 px-3 py-2 text-[12.5px] text-rose-700 dark:text-rose-300">{error}</div>}
       <div className="flex gap-2">
-        {mode === "code" && sent ? (
+        {sent ? (
           <>
             <button type="button" disabled={busy !== null} onClick={() => void sendCode()} className={secondaryBtn}>
               {t("Send again")}
@@ -238,29 +201,12 @@ export function SignIn({
               {busy ? <Loader2 size={15} className="animate-spin" /> : null} {label}
             </button>
           </>
-        ) : mode === "code" ? (
+        ) : (
           <button type="submit" disabled={busy !== null || !identifier.trim()} className={cx(primaryBtn, "flex-1 py-3")}>
             {busy === "code" ? <Loader2 size={15} className="animate-spin" /> : null} {t("Send me a code")}
-          </button>
-        ) : (
-          <button type="submit" disabled={busy !== null || !identifier.trim() || !password} className={cx(primaryBtn, "flex-1 py-3")}>
-            {busy ? <Loader2 size={15} className="animate-spin" /> : null} {label}
           </button>
         )}
       </div>
     </form>
-  );
-}
-
-function ModeButton({ active, onClick, icon, label }: { active: boolean; onClick: () => void; icon: React.ReactNode; label: string }) {
-  return (
-    <button
-      type="button"
-      onClick={onClick}
-      aria-pressed={active}
-      className={cx("flex items-center justify-center gap-1.5 rounded-xl px-2 py-2 transition", active ? "bg-surface text-fg shadow-sm" : "text-muted hover:text-fg")}
-    >
-      {icon} {label}
-    </button>
   );
 }

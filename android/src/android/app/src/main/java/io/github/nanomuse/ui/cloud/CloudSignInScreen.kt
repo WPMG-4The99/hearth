@@ -3,8 +3,6 @@ package io.github.nanomuse.ui.cloud
 import android.content.Intent
 import android.net.Uri
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -20,8 +18,6 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
-import androidx.compose.material.icons.outlined.Visibility
-import androidx.compose.material.icons.outlined.VisibilityOff
 import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ButtonDefaults
@@ -44,7 +40,6 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
@@ -54,8 +49,6 @@ import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
-import androidx.compose.ui.text.input.PasswordVisualTransformation
-import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -75,9 +68,9 @@ const val ROUTE_CLOUD_ACCOUNT = "nanomuse/cloud/account"
 private const val CLOUD_DOC_URL = "${NanoMuseCloud.PROJECT_URL}/blob/main/docs/cloud.md"
 
 /**
- * Sign in to nanoMuse Cloud: a mainland phone number (the code comes by SMS) or an e-mail
- * address, then the code it receives — or the account's password. The code box is marked as a
- * one-time code so the system's autofill or the keyboard can offer the SMS it just saw.
+ * Sign in to The Hearth: an e-mail address, then the code the relay emails. The code box takes
+ * four to six digits (an emailed code is six; a review code may be four) and is marked as a
+ * one-time code so the system's autofill or the keyboard can offer the message it just saw.
  * On success the relay is a provider with a default model, and the caller decides where to
  * go (the first run continues to "Meet nanoMuse"; from Settings it returns to the account page).
  */
@@ -99,9 +92,6 @@ fun CloudSignInScreen(
     var inviteOpen by remember { mutableStateOf(false) }
     var sending by remember { mutableStateOf(false) }
     var verifying by remember { mutableStateOf(false) }
-    var byPassword by remember { mutableStateOf(false) }
-    var password by remember { mutableStateOf("") }
-    var showPassword by remember { mutableStateOf(false) }
     var countdown by remember { mutableIntStateOf(0) }
     var error by remember { mutableStateOf<String?>(null) }
     // Someone's own relay (0.1.38): the address lives in NanoMuseCloud once "Use this server"
@@ -154,33 +144,11 @@ fun CloudSignInScreen(
         }
     }
 
-    fun login() {
-        if (verifying || identifier.isBlank() || password.isEmpty()) return
-        error = null
-        verifying = true
-        scope.launch {
-            try {
-                NanoMuseCloud.login(context, identifier, password)
-                onSignedIn()
-            } catch (e: CancellationException) {
-                throw e
-            } catch (e: Exception) {
-                error = NanoMuseCloud.describe(context, e)
-                verifying = false
-            }
-        }
-    }
-
     val canSubmit = when {
-        byPassword -> identifier.isNotBlank() && password.isNotEmpty() && !verifying
         codeSent -> code.length >= 4 && !verifying
         else -> identifier.isNotBlank() && !sending && !phoneAbroad
     }
-    fun submit() = when {
-        byPassword -> login()
-        codeSent -> verify()
-        else -> sendCode()
-    }
+    fun submit() = if (codeSent) verify() else sendCode()
 
     Scaffold(
         containerColor = MuseTones.surface,
@@ -243,22 +211,6 @@ fun CloudSignInScreen(
             }
             Spacer(Modifier.height(24.dp))
 
-            // Two ways in: a code to the address, or the password set under Account.
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .background(MuseTones.fill, RoundedCornerShape(12.dp))
-                    .padding(3.dp),
-            ) {
-                ModeTab(stringResource(R.string.nm_cloud_mode_code), selected = !byPassword, modifier = Modifier.weight(1f)) {
-                    byPassword = false; error = null
-                }
-                ModeTab(stringResource(R.string.nm_cloud_mode_password), selected = byPassword, modifier = Modifier.weight(1f)) {
-                    byPassword = true; error = null
-                }
-            }
-            Spacer(Modifier.height(16.dp))
-
             OutlinedTextField(
                 value = identifier,
                 onValueChange = { identifier = it; if (codeSent) { codeSent = false; code = "" } },
@@ -269,7 +221,7 @@ fun CloudSignInScreen(
                 keyboardOptions = KeyboardOptions(
                     // digits get the phone keypad, anything else the e-mail layout
                     keyboardType = if (identifier.trimStart().firstOrNull()?.let { it.isDigit() || it == '+' } == true) KeyboardType.Phone else KeyboardType.Email,
-                    imeAction = if (byPassword) ImeAction.Next else ImeAction.Send,
+                    imeAction = ImeAction.Send,
                 ),
                 keyboardActions = KeyboardActions(onSend = { sendCode() }),
                 shape = RoundedCornerShape(14.dp),
@@ -282,7 +234,7 @@ fun CloudSignInScreen(
                     .fillMaxWidth()
                     .semantics { contentType = ContentType.Username + ContentType.PhoneNumber + ContentType.EmailAddress },
             )
-            if (phoneAbroad && !byPassword) {
+            if (phoneAbroad) {
                 // the relay would answer `phone_region`; better said now, in the same words
                 Text(
                     text = stringResource(R.string.nm_cloud_sms_region),
@@ -293,40 +245,10 @@ fun CloudSignInScreen(
                 )
             }
             Spacer(Modifier.height(12.dp))
-            if (byPassword) {
-                OutlinedTextField(
-                    value = password,
-                    onValueChange = { password = it },
-                    label = { Text(stringResource(R.string.nm_cloud_password)) },
-                    singleLine = true,
-                    enabled = !verifying,
-                    visualTransformation = if (showPassword) VisualTransformation.None else PasswordVisualTransformation(),
-                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password, imeAction = ImeAction.Done),
-                    keyboardActions = KeyboardActions(onDone = { login() }),
-                    trailingIcon = {
-                        IconButton(onClick = { showPassword = !showPassword }) {
-                            Icon(
-                                if (showPassword) Icons.Outlined.VisibilityOff else Icons.Outlined.Visibility,
-                                contentDescription = stringResource(if (showPassword) R.string.nm_a11y_hide_password else R.string.nm_a11y_show_password),
-                                tint = muted,
-                            )
-                        }
-                    },
-                    shape = RoundedCornerShape(14.dp),
-                    colors = OutlinedTextFieldDefaults.colors(
-                        focusedBorderColor = MuseTones.action,
-                        cursorColor = MuseTones.action,
-                        focusedLabelColor = MuseTones.action,
-                    ),
-                    modifier = Modifier.fillMaxWidth(),
-                )
-                Spacer(Modifier.height(6.dp))
-                TextButton(onClick = { byPassword = false; error = null }, modifier = Modifier.align(Alignment.End)) {
-                    Text(stringResource(R.string.nm_cloud_forgot_password), color = MuseTones.action, fontSize = 13.sp)
-                }
-            } else Row(verticalAlignment = Alignment.CenterVertically) {
+            Row(verticalAlignment = Alignment.CenterVertically) {
                 OutlinedTextField(
                     value = code,
+                    // Four digits is enough for a review code. An emailed code is six. Both fit.
                     onValueChange = { v -> code = v.filter { it.isDigit() }.take(6) },
                     label = { Text(stringResource(R.string.nm_cloud_code)) },
                     singleLine = true,
@@ -364,14 +286,13 @@ fun CloudSignInScreen(
                 }
             }
 
-            if (!byPassword) {
-                Spacer(Modifier.height(6.dp))
-                if (!inviteOpen) {
-                    TextButton(onClick = { inviteOpen = true }, modifier = Modifier.align(Alignment.End)) {
-                        Text(stringResource(R.string.nm_cloud_invite_have), color = MuseTones.action, fontSize = 13.sp)
-                    }
-                } else {
-                    OutlinedTextField(
+            Spacer(Modifier.height(6.dp))
+            if (!inviteOpen) {
+                TextButton(onClick = { inviteOpen = true }, modifier = Modifier.align(Alignment.End)) {
+                    Text(stringResource(R.string.nm_cloud_invite_have), color = MuseTones.action, fontSize = 13.sp)
+                }
+            } else {
+                OutlinedTextField(
                         value = invite,
                         onValueChange = { v -> invite = v.uppercase().filter { it.isLetterOrDigit() }.take(8) },
                         label = { Text(stringResource(R.string.nm_cloud_invite_field)) },
@@ -385,8 +306,7 @@ fun CloudSignInScreen(
                             focusedLabelColor = MuseTones.action,
                         ),
                         modifier = Modifier.fillMaxWidth(),
-                    )
-                }
+                )
             }
 
             // Your own relay: a small link under the form, then the address, Check, Use this server.
@@ -422,7 +342,7 @@ fun CloudSignInScreen(
                     CircularProgressIndicator(modifier = Modifier.size(20.dp), strokeWidth = 2.dp, color = Color.White)
                 } else {
                     Text(
-                        text = if (byPassword || codeSent) stringResource(R.string.nm_cloud_verify) else stringResource(R.string.nm_cloud_send_code),
+                        text = if (codeSent) stringResource(R.string.nm_cloud_verify) else stringResource(R.string.nm_cloud_send_code),
                         fontSize = 16.sp,
                         fontWeight = FontWeight.Medium,
                     )
@@ -555,25 +475,5 @@ private fun RelayServerForm(enabled: Boolean, onClose: () -> Unit) {
                 modifier = Modifier.align(Alignment.End),
             ) { Text(stringResource(R.string.nm_cloud_server_default), color = MuseTones.action, fontSize = 13.sp) }
         }
-    }
-}
-
-/** One half of the code / password switch: a pill that is white when chosen. */
-@Composable
-private fun ModeTab(label: String, selected: Boolean, modifier: Modifier = Modifier, onClick: () -> Unit) {
-    Box(
-        modifier = modifier
-            .clip(RoundedCornerShape(10.dp))
-            .background(if (selected) MuseTones.surface else Color.Transparent)
-            .clickable(onClick = onClick)
-            .padding(vertical = 8.dp),
-        contentAlignment = Alignment.Center,
-    ) {
-        Text(
-            text = label,
-            fontSize = 13.sp,
-            fontWeight = if (selected) FontWeight.SemiBold else FontWeight.Medium,
-            color = if (selected) MaterialTheme.colorScheme.onSurface else MaterialTheme.colorScheme.onSurfaceVariant,
-        )
     }
 }

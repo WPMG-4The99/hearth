@@ -9,8 +9,8 @@ import { useStore } from "../store";
 
 /**
  * The door: this runtime insists on a nanoMuse Cloud account (cloud.required, the default),
- * so before anything else the person signs in — a code the first time, the password once
- * one is set. What comes with it is said plainly; the choice between the Cloud model and
+ * so before anything else the person signs in with a code. What comes with it is said
+ * plainly; the choice between the Cloud model and
  * a key of their own follows in setup. The door is not a wall: *Use your own API key
  * instead* steps past it into the setup's own-key path, and the sign-in waits under
  * Connections.

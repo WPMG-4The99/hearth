@@ -630,10 +630,6 @@
     <string name="nm_setup_source_cloud_sub">โมเดลบนรีเลย์ของบ้านนี้ ไม่มีอะไรต้องวาง</string>
     <string name="nm_setup_source_own_sub">OpenAI, Anthropic, DeepSeek, Bailian และ endpoint อื่นที่เข้ากันได้กับ OpenAI คีย์อยู่บนโทรศัพท์เครื่องนี้</string>
     <string name="nm_setup_source_fine_print">เลือกอย่างหนึ่งเพื่อเริ่ม อีกอย่างเพิ่มทีหลังได้</string>
-    <string name="nm_setup_password_title">ตั้งรหัสผ่าน</string>
-    <string name="nm_setup_password_sub">บัญชีของคุณพร้อมแล้ว เมื่อมีรหัสผ่าน คอมพิวเตอร์และโทรศัพท์เครื่องอื่นของคุณจะลงชื่อเข้าใช้ได้ทันทีโดยไม่ต้องรอรหัส</string>
-    <string name="nm_setup_password_set">ตั้งรหัสผ่าน</string>
-    <string name="nm_setup_password_fine_print">ไม่บังคับ ตั้งหรือเปลี่ยนภายหลังได้ใต้ บัญชี</string>
     <string name="nm_welcome_feat_chat">แชท รูปภาพ วิดีโอ</string>
     <string name="nm_welcome_feat_chat_sub">โมเดลที่ทำงานได้ดี การสร้างภาพและวิดีโอ เครื่องมือ ทักษะ และความทรงจำ บนโทรศัพท์ของคุณ</string>
     <string name="nm_welcome_feat_hands">มือ: มันใช้โทรศัพท์ของคุณ</string>
@@ -650,9 +646,6 @@
     <string name="nm_cloud_signin_title">เข้าสู่ The Hearth</string>
     <string name="nm_cloud_signin_subtitle">ใส่อีเมลก่อน แล้วใส่รหัสใช้ครั้งเดียว รีเลย์นี้เขียนรหัสลงในบันทึกของมัน</string>
     <string name="nm_cloud_mode_code">ด้วยรหัส</string>
-    <string name="nm_cloud_mode_password">ด้วยรหัสผ่าน</string>
-    <string name="nm_cloud_password">รหัสผ่าน</string>
-    <string name="nm_cloud_forgot_password">ลืมรหัสผ่าน ลงชื่อเข้าใช้ด้วยรหัสแทน</string>
     <string name="nm_cloud_identifier">อีเมล</string>
     <string name="nm_cloud_identifier_hint">you@example.com</string>
     <string name="nm_cloud_code">รหัส</string>
@@ -718,15 +711,10 @@
     <string name="nm_cloud_err_unreachable">ติดต่อ The Hearth ไม่ได้ ตรวจสอบการเชื่อมต่อ</string>
     <string name="nm_cloud_err_generic">มีบางอย่างผิดพลาด</string>
     <string name="nm_cloud_err_bad_credentials">อีเมลหรือรหัสผ่านไม่ถูกต้อง</string>
-    <string name="nm_cloud_err_no_password">บัญชีนี้ยังไม่มีรหัสผ่าน ลงชื่อเข้าใช้ด้วยรหัส แล้วตั้งรหัสผ่านใต้ บัญชี</string>
     <string name="nm_cloud_err_locked">พยายามผิดหลายครั้งเกินไป รอสักสองสามนาที</string>
-    <string name="nm_cloud_err_password_wrong">รหัสผ่านปัจจุบันไม่ถูกต้อง</string>
-    <string name="nm_cloud_err_password_required">กรอกรหัสผ่านปัจจุบันก่อน</string>
-    <string name="nm_cloud_err_password_short">รหัสผ่านต้องมีอย่างน้อย 8 ตัวอักษร</string>
-    <string name="nm_cloud_err_password_weak">รหัสผ่านนั้นเดาง่ายเกินไป</string>
     <string name="nm_cloud_err_signup_closed">รีเลย์นี้หยุดรับสมัครชั่วคราว บัญชีที่มีอยู่แล้วยังลงชื่อเข้าใช้ได้</string>
     <string name="nm_cloud_err_domain_limited">ที่อยู่ของโดเมนนี้ถึงขีดจำกัดการสมัครของวันนี้บนรีเลย์นี้แล้ว ลองใหม่พรุ่งนี้หรือใช้ที่อยู่อื่น</string>
-    <string name="nm_cloud_err_channel_unsupported">รีเลย์นี้ไม่ส่งรหัสไปยังที่อยู่ประเภทนี้ ใช้อีกประเภทหนึ่ง (อีเมลหรือหมายเลขโทรศัพท์) หรือลงชื่อเข้าใช้ด้วยรหัสผ่าน</string>
+    <string name="nm_cloud_err_channel_unsupported">รีเลย์นี้ไม่ส่งรหัสไปยังที่อยู่ประเภทนี้ ใช้อีกประเภทหนึ่ง (อีเมลหรือหมายเลขโทรศัพท์)</string>
     <string name="nm_cloud_err_too_large">ข้อความนี้ใหญ่เกินไปสำหรับโมเดล ย่อให้สั้นลง ตัดไฟล์แนบบางส่วนออก หรือเริ่มแชตใหม่</string>
     <string name="nm_cloud_err_content_rejected">การตรวจสอบเนื้อหาของผู้ให้บริการโมเดลปฏิเสธคำขอนี้ ลองใช้คำอื่น หรือถ้าเกิดซ้ำ ให้เริ่มแชทใหม่ เพราะคำที่ถูกปฏิเสธอาจอยู่ในช่วงต้นของบทสนทนา</string>
     <string name="nm_cloud_err_provider_busy">ผู้ให้บริการโมเดลกำลังยุ่งอยู่ ลองอีกครั้งในอีกสักครู่</string>
@@ -745,18 +733,6 @@
     <!-- 0.1.20: the account page -->
     <string name="nm_cloud_since">ตั้งแต่ %1$s</string>
     <string name="nm_cloud_account_id">บัญชี %1$s…</string>
-    <string name="nm_cloud_password_set">ตั้งแล้ว</string>
-    <string name="nm_cloud_password_unset">ยังไม่ตั้ง</string>
-    <string name="nm_cloud_password_title_set">ตั้งรหัสผ่าน</string>
-    <string name="nm_cloud_password_title_change">เปลี่ยนรหัสผ่าน</string>
-    <string name="nm_cloud_password_current">รหัสผ่านปัจจุบัน</string>
-    <string name="nm_cloud_password_new">รหัสผ่านใหม่ (8 ตัวอักษรขึ้นไป)</string>
-    <string name="nm_cloud_password_confirm">พิมพ์รหัสผ่านใหม่อีกครั้ง</string>
-    <string name="nm_cloud_password_mismatch">รหัสผ่านทั้งสองไม่ตรงกัน</string>
-    <string name="nm_cloud_password_why">เมื่อมีรหัสผ่าน คุณลงชื่อเข้าใช้บนอุปกรณ์อื่นได้โดยไม่ต้องรอรหัส หลังลงชื่อเข้าใช้ด้วยรหัสมาหมาด ๆ จะเว้นช่องรหัสผ่านปัจจุบันว่างไว้ได้</string>
-    <string name="nm_cloud_password_remove">ลบรหัสผ่าน</string>
-    <string name="nm_cloud_password_saved">บันทึกรหัสผ่านแล้ว</string>
-    <string name="nm_cloud_password_removed">ลบรหัสผ่านแล้ว</string>
     <string name="nm_cloud_devices_signed_in">ลงชื่อเข้าใช้บน</string>
     <string name="nm_cloud_device_unknown">อุปกรณ์ที่ไม่รู้จัก</string>
     <string name="nm_cloud_this_device">โทรศัพท์เครื่องนี้</string>
@@ -1127,8 +1103,6 @@
     <string name="nm_models_search_clear">ล้างการค้นหา</string>
     <string name="nm_models_no_match">ไม่มีโมเดลที่ตรงกัน</string>
     <!-- Names for icon-only controls, read by screen readers (#338) -->
-    <string name="nm_a11y_show_password">แสดงรหัสผ่าน</string>
-    <string name="nm_a11y_hide_password">ซ่อนรหัสผ่าน</string>
     <string name="nm_a11y_avatar_candidate">ตัวเลือกที่ %1$d</string>
     <string name="nm_a11y_share_card">การ์ดที่ %1$d</string>
     <string name="nm_a11y_add">เพิ่ม</string>
@@ -1183,4 +1157,15 @@
     <string name="nm_household_kind_alert">เตือน</string>
     <string name="nm_menu_household">บ้าน</string>
     <string name="nm_household_needs_sign_in">ลงชื่อเข้าใช้เพื่อดู</string>
+    <string name="nm_work_menu">งาน</string>
+    <string name="nm_work_title_admin">ผู้ดูแล</string>
+    <string name="nm_work_title_staff">พนักงาน</string>
+    <string name="nm_work_board">งานร่วม</string>
+    <string name="nm_work_mine">รายการของฉัน</string>
+    <string name="nm_work_notes">บันทึกงาน</string>
+    <string name="nm_work_add">เพิ่ม</string>
+    <string name="nm_work_open">ยังไม่มอบหมาย</string>
+    <string name="nm_work_assign">มอบหมาย</string>
+    <string name="nm_work_save">บันทึก</string>
+    <string name="nm_work_empty">ยังไม่มี</string>
 </resources>

@@ -696,6 +696,9 @@ fun AppNavigation(
         composable(io.github.nanomuse.household.ROUTE_HOUSEHOLD) { // nanoMuse: household check-ins, panics and alerts
             io.github.nanomuse.household.HouseholdScreen(onBack = { navController.safePopBackStack() })
         }
+        composable(io.github.nanomuse.household.ROUTE_WORK) { // nanoMuse: admin or staff household work
+            io.github.nanomuse.household.WorkScreen(onBack = { navController.safePopBackStack() })
+        }
         composable(io.github.nanomuse.ui.cloud.ROUTE_CLOUD_SIGN_IN) {
             io.github.nanomuse.ui.cloud.CloudSignInScreen(
                 onBack = { navController.safePopBackStack() },

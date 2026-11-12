@@ -630,10 +630,6 @@
     <string name="nm_setup_source_cloud_sub">この家の中継にあるモデル。貼り付けるものはありません。</string>
     <string name="nm_setup_source_own_sub">OpenAI、Anthropic、DeepSeek、百煉、その他の OpenAI 互換エンドポイント。キーはこの端末に残ります。</string>
     <string name="nm_setup_source_fine_print">始めるほうを一つ選ぶ。もう一方はあとから足せます。</string>
-    <string name="nm_setup_password_title">パスワードを設定</string>
-    <string name="nm_setup_password_sub">アカウントの準備ができました。パスワードがあれば、コンピューターやほかのスマートフォンでもコードを待たずにすぐサインインできます。</string>
-    <string name="nm_setup_password_set">パスワードを設定する</string>
-    <string name="nm_setup_password_fine_print">任意です。あとからアカウントで設定・変更できます。</string>
     <string name="nm_welcome_feat_chat">チャット、画像、動画</string>
     <string name="nm_welcome_feat_chat_sub">有能なモデル、画像と動画の生成、ツール、スキル、メモリ。すべてスマートフォンの上で</string>
     <string name="nm_welcome_feat_hands">ハンズ: スマートフォンを使います</string>
@@ -650,9 +646,6 @@
     <string name="nm_cloud_signin_title">The Hearth にログイン</string>
     <string name="nm_cloud_signin_subtitle">メールアドレスのあと、ワンタイムコード。この中継はコードを自分のログに書きます。</string>
     <string name="nm_cloud_mode_code">コードで</string>
-    <string name="nm_cloud_mode_password">パスワードで</string>
-    <string name="nm_cloud_password">パスワード</string>
-    <string name="nm_cloud_forgot_password">パスワードを忘れた場合はコードでサインイン</string>
     <string name="nm_cloud_identifier">メール</string>
     <string name="nm_cloud_identifier_hint">you@example.com</string>
     <string name="nm_cloud_code">コード</string>
@@ -718,15 +711,10 @@
     <string name="nm_cloud_err_unreachable">The Hearth に接続できません。接続を確認してください。</string>
     <string name="nm_cloud_err_generic">問題が起きました。</string>
     <string name="nm_cloud_err_bad_credentials">メールアドレスまたはパスワードが違います。</string>
-    <string name="nm_cloud_err_no_password">このアカウントにはまだパスワードがありません。コードでサインインしてから、アカウントで設定してください。</string>
     <string name="nm_cloud_err_locked">間違いが続きました。数分待ってください。</string>
-    <string name="nm_cloud_err_password_wrong">現在のパスワードが違います。</string>
-    <string name="nm_cloud_err_password_required">まず現在のパスワードを入力してください。</string>
-    <string name="nm_cloud_err_password_short">パスワードは 8 文字以上必要です。</string>
-    <string name="nm_cloud_err_password_weak">そのパスワードは推測されやすすぎます。</string>
     <string name="nm_cloud_err_signup_closed">このリレーでは新規登録を一時停止しています。すでにあるアカウントはそのままサインインできます。</string>
     <string name="nm_cloud_err_domain_limited">このドメインのアドレスは、このリレーでの本日の登録上限に達しました。明日もう一度試すか、別のアドレスを使ってください。</string>
-    <string name="nm_cloud_err_channel_unsupported">このリレーはその種類のアドレスには確認コードを送りません。別の種類（メールアドレスか電話番号）を使うか、パスワードでサインインしてください。</string>
+    <string name="nm_cloud_err_channel_unsupported">このリレーはその種類のアドレスには確認コードを送りません。別の種類（メールアドレスか電話番号）を使ってください。</string>
     <string name="nm_cloud_err_too_large">このメッセージはモデルには大きすぎます。短くするか、添付をいくつか外すか、新しいチャットを始めてください。</string>
     <string name="nm_cloud_err_content_rejected">モデル提供元のコンテンツ審査がこのリクエストを通しませんでした。言い方を変えてみてください。続くようなら新しいチャットを始めてください。問題とされた言葉は会話のもっと前にあることもあります。</string>
     <string name="nm_cloud_err_provider_busy">モデル提供元が混み合っています。少ししてからもう一度お試しください。</string>
@@ -745,18 +733,6 @@
     <!-- 0.1.20: the account page -->
     <string name="nm_cloud_since">%1$s から</string>
     <string name="nm_cloud_account_id">アカウント %1$s…</string>
-    <string name="nm_cloud_password_set">設定済み</string>
-    <string name="nm_cloud_password_unset">未設定</string>
-    <string name="nm_cloud_password_title_set">パスワードを設定</string>
-    <string name="nm_cloud_password_title_change">パスワードを変更</string>
-    <string name="nm_cloud_password_current">現在のパスワード</string>
-    <string name="nm_cloud_password_new">新しいパスワード（8 文字以上）</string>
-    <string name="nm_cloud_password_confirm">新しいパスワードをもう一度</string>
-    <string name="nm_cloud_password_mismatch">2 つのパスワードが一致しません。</string>
-    <string name="nm_cloud_password_why">パスワードがあれば、別のデバイスでコードを待たずにサインインできます。コードでサインインした直後なら、現在のパスワードは空のままでかまいません。</string>
-    <string name="nm_cloud_password_remove">パスワードを削除</string>
-    <string name="nm_cloud_password_saved">パスワードを保存しました。</string>
-    <string name="nm_cloud_password_removed">パスワードを削除しました。</string>
     <string name="nm_cloud_devices_signed_in">サインイン中のデバイス</string>
     <string name="nm_cloud_device_unknown">不明なデバイス</string>
     <string name="nm_cloud_this_device">この端末</string>
@@ -1127,8 +1103,6 @@
     <string name="nm_models_search_clear">検索をクリア</string>
     <string name="nm_models_no_match">一致するモデルはありません</string>
     <!-- Names for icon-only controls, read by screen readers (#338) -->
-    <string name="nm_a11y_show_password">パスワードを表示</string>
-    <string name="nm_a11y_hide_password">パスワードを隠す</string>
     <string name="nm_a11y_avatar_candidate">候補 %1$d</string>
     <string name="nm_a11y_share_card">カード %1$d</string>
     <string name="nm_a11y_add">追加</string>
@@ -1183,4 +1157,15 @@
     <string name="nm_household_kind_alert">知らせ</string>
     <string name="nm_menu_household">世帯</string>
     <string name="nm_household_needs_sign_in">見るにはログインしてください。</string>
+    <string name="nm_work_menu">仕事</string>
+    <string name="nm_work_title_admin">管理者</string>
+    <string name="nm_work_title_staff">スタッフ</string>
+    <string name="nm_work_board">共有</string>
+    <string name="nm_work_mine">自分のリスト</string>
+    <string name="nm_work_notes">仕事メモ</string>
+    <string name="nm_work_add">追加</string>
+    <string name="nm_work_open">未割り当て</string>
+    <string name="nm_work_assign">割り当て</string>
+    <string name="nm_work_save">保存</string>
+    <string name="nm_work_empty">まだありません。</string>
 </resources>

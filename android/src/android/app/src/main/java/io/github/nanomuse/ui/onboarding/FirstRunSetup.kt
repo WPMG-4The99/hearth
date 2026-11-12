@@ -32,7 +32,6 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Check
@@ -42,8 +41,6 @@ import androidx.compose.material.icons.outlined.CloudQueue
 import androidx.compose.material.icons.outlined.Computer
 import androidx.compose.material.icons.outlined.AutoAwesome
 import androidx.compose.material.icons.outlined.Key
-import androidx.compose.material.icons.outlined.Visibility
-import androidx.compose.material.icons.outlined.VisibilityOff
 import androidx.compose.material.icons.outlined.Layers
 import androidx.compose.material.icons.outlined.Settings
 import androidx.compose.material.icons.outlined.TouchApp
@@ -52,8 +49,6 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.OutlinedTextField
-import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
@@ -63,7 +58,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -74,14 +68,10 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.compose.LocalLifecycleOwner
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.input.KeyboardType
-import androidx.compose.ui.text.input.PasswordVisualTransformation
-import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.Lifecycle
-import kotlinx.coroutines.launch
 import androidx.lifecycle.LifecycleEventObserver
 import com.openminis.app.R
 import io.github.nanomuse.cloud.NanoMuseCloud
@@ -147,15 +137,14 @@ object FirstRunSetup {
     fun needed(signedIn: Boolean, hasProviders: Boolean, hasSessions: Boolean, done: Boolean): Boolean =
         signedIn && !hasSessions && !done
 
-    enum class Stage { WELCOME, PASSWORD, SOURCE, MODELS, HANDS, MEET }
+    enum class Stage { WELCOME, SOURCE, MODELS, HANDS, MEET }
 
     /**
-     * The page to show, from what the app has. A sign-in that *created* the account
-     * ([fresh]) is followed by one short, skippable page — a password, so the next device
-     * signs in without a code; it can be set under Account later. Signed out with a
-     * provider of one's own ([hasProviders]), the account pages (password, which model
-     * answers) are skipped: the source is the key already there.
+     * The page to show, from what the app has. Sign-in is a code only, so a new account
+     * goes on to which model answers. Signed out with a provider of one's own
+     * ([hasProviders]), that choice is the key already there.
      */
+    @Suppress("UNUSED_PARAMETER") // fresh and passwordAnswered stay so older call sites still compile
     fun stage(
         signedIn: Boolean,
         hasGroups: Boolean,
@@ -169,7 +158,6 @@ object FirstRunSetup {
     ): Stage = when {
         // Sign-in is the home's own wall. This page is not shown while signed out.
         !signedIn -> Stage.WELCOME
-        fresh && !passwordAnswered -> Stage.PASSWORD
         !sourceChosen -> Stage.SOURCE
         !hasGroups && !modelsSkipped -> Stage.MODELS
         !handsSeen && handsPossible -> Stage.HANDS
@@ -178,7 +166,7 @@ object FirstRunSetup {
 
     /** The dot that lights for a stage: account · phone · meet (the model pages fold into the first). */
     fun dot(stage: Stage): Int = when (stage) {
-        Stage.WELCOME, Stage.PASSWORD, Stage.SOURCE, Stage.MODELS -> 0
+        Stage.WELCOME, Stage.SOURCE, Stage.MODELS -> 0
         Stage.HANDS -> 1
         Stage.MEET -> 2
     }
@@ -215,12 +203,12 @@ fun FirstRunSetupScreen(
         owner.lifecycle.addObserver(obs)
         onDispose { owner.lifecycle.removeObserver(obs) }
     }
-    // a sign-in that created the account owes the password page; answered (or skipped) once
-    var fresh by remember(signedIn) { mutableStateOf(signedIn && NanoMuseCloud.freshAccount(context)) }
-    var passwordAnswered by remember { mutableStateOf(false) }
+    // A new account used to be asked for a password. The Hearth signs in with a code only,
+    // so that flag is cleared and the next page is which model answers.
+    if (signedIn && NanoMuseCloud.freshAccount(context)) NanoMuseCloud.clearFreshAccount(context)
     val stage = FirstRunSetup.stage(
         signedIn, hasGroups, sourceChosen, modelsSkipped, handsSeen,
-        fresh = fresh, passwordAnswered = passwordAnswered, hasProviders = hasProviders,
+        hasProviders = hasProviders,
     )
     val onSurface = MaterialTheme.colorScheme.onSurface
 
@@ -253,9 +241,6 @@ fun FirstRunSetupScreen(
                     FirstRunSetup.Stage.WELCOME -> WelcomePage(
                         onSignIn = onSignIn,
                         onOwnKey = { FirstRunSetup.markSourceChosen(context); sourceChosen = true; onAddProvider() },
-                    )
-                    FirstRunSetup.Stage.PASSWORD -> PasswordPage(
-                        onDone = { NanoMuseCloud.clearFreshAccount(context); passwordAnswered = true; fresh = false },
                     )
                     FirstRunSetup.Stage.SOURCE -> SourcePage(
                         onRelay = {
@@ -326,90 +311,6 @@ private fun SourcePage(onRelay: () -> Unit, onGrok: () -> Unit) {
         FeatureRow(Icons.Outlined.CloudQueue, stringResource(R.string.nm_setup_source_cloud), stringResource(R.string.nm_setup_source_cloud_sub))
         Spacer(Modifier.height(10.dp))
         FeatureRow(Icons.Outlined.Key, stringResource(R.string.nm_setup_source_grok), stringResource(R.string.nm_setup_source_grok_sub))
-    }
-}
-
-/**
- * Right after a sign-in that created the account: a password, so the next device signs in
- * without waiting for a code. Skippable; Account has the same form later.
- */
-@Composable
-private fun PasswordPage(onDone: () -> Unit) {
-    val context = LocalContext.current
-    val scope = rememberCoroutineScope()
-    var next by remember { mutableStateOf("") }
-    var again by remember { mutableStateOf("") }
-    var show by remember { mutableStateOf(false) }
-    var busy by remember { mutableStateOf(false) }
-    var error by remember { mutableStateOf<String?>(null) }
-    val fieldColors = OutlinedTextFieldDefaults.colors(
-        focusedBorderColor = MuseTones.action,
-        cursorColor = MuseTones.action,
-        focusedLabelColor = MuseTones.action,
-    )
-    val transformation = if (show) VisualTransformation.None else PasswordVisualTransformation()
-    Page(
-        hero = { HeroGlyph(Icons.Outlined.Key) },
-        title = stringResource(R.string.nm_setup_password_title),
-        subtitle = stringResource(R.string.nm_setup_password_sub),
-        primaryLabel = stringResource(R.string.nm_setup_password_set),
-        onPrimary = {
-            if (busy) return@Page
-            if (next.length < 8) { error = context.getString(R.string.nm_cloud_err_password_short); return@Page }
-            if (next != again) { error = context.getString(R.string.nm_cloud_password_mismatch); return@Page }
-            error = null
-            busy = true
-            scope.launch {
-                try {
-                    NanoMuseCloud.setPassword(context, next, null)
-                    onDone()
-                } catch (e: Exception) {
-                    error = NanoMuseCloud.describe(context, e)
-                }
-                busy = false
-            }
-        },
-        secondaryLabel = stringResource(R.string.nm_welcome_skip),
-        onSecondary = onDone,
-        finePrint = stringResource(R.string.nm_setup_password_fine_print),
-    ) {
-        OutlinedTextField(
-            value = next,
-            onValueChange = { next = it; error = null },
-            label = { Text(stringResource(R.string.nm_cloud_password_new)) },
-            singleLine = true,
-            visualTransformation = transformation,
-            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
-            colors = fieldColors,
-            trailingIcon = {
-                IconButton(onClick = { show = !show }) {
-                    Icon(
-                        if (show) Icons.Outlined.VisibilityOff else Icons.Outlined.Visibility,
-                        contentDescription = stringResource(if (show) R.string.nm_a11y_hide_password else R.string.nm_a11y_show_password),
-                        tint = MaterialTheme.colorScheme.onSurfaceVariant,
-                    )
-                }
-            },
-            shape = RoundedCornerShape(12.dp),
-            modifier = Modifier.fillMaxWidth(),
-        )
-        Spacer(Modifier.height(10.dp))
-        OutlinedTextField(
-            value = again,
-            onValueChange = { again = it; error = null },
-            label = { Text(stringResource(R.string.nm_cloud_password_confirm)) },
-            shape = RoundedCornerShape(12.dp),
-            singleLine = true,
-            visualTransformation = transformation,
-            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
-            colors = fieldColors,
-            isError = again.isNotEmpty() && again != next,
-            modifier = Modifier.fillMaxWidth(),
-        )
-        error?.let {
-            Spacer(Modifier.height(8.dp))
-            Text(it, fontSize = 12.5.sp, color = MaterialTheme.colorScheme.error, textAlign = TextAlign.Center)
-        }
     }
 }
 

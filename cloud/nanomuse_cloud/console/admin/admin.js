@@ -25,7 +25,7 @@
     enter: "进入", wrong: "口令不对。", offline: "连不上服务器。", refresh: "刷新", lock: "锁定", loading: "加载中…",
     today: "今天", week: "最近 7 天", period: (d) => `最近 ${d} 天`,
     kSamples: "保存的对话", kSamplesSub: (n) => `${n} 个账号开启了「帮助改进」`, exportSamples: "导出 JSONL", exportFailed: (why) => `导出没有成功：${why}。可以再试一次；如果一直这样，看服务器上 docker logs nanomuse-relay。`, exportCut: "下载中途断开", exportEmpty: "还没有可导出的对话。", contributes: "帮助改进", samples: "保存的对话（最近）", samplesNote: "只有开启了「帮助改进 nanoMuse 的 AI 模型」的账号才会保存这些内容：用户写的、模型回答的和它调用的工具，不含系统提示、工具返回的内容和图片；导出的文件不带账号 id。", user: "用户", assistant: "回答", more: "查看更多", noSamples: "还没有",
-    kAccounts: "账号", kAccountsSub: (c) => `${c.with_password || 0} 个设了密码 · ${c.unlimited || 0} 个成员 · ${c.disabled || 0} 个已停用`,
+    kAccounts: "账号", kAccountsSub: (c) => `${c.unlimited || 0} 个成员 · ${c.disabled || 0} 个已停用`,
     kActive: "活跃账号", kActiveSub: (n) => `${n} 个新注册`, kSpent: "花费", kSpentSub: (r, t) => `${fmt(r)} 次 · ${fmt(t)} tokens`,
     kOnline: "在线设备", kOnlineSub: (k, s) => `记住了 ${k} 台 · ${s} 个有效登录`, kSignals: "今天的信号",
     kSignalsSub: (s) => `${s.sign_ins} 次登录 · ${s.sign_in_failures} 次失败 · ${s.budget_refusals} 次超额 · ${s.upstream_errors} 次上游错误 · ${s.content_rejected} 次内容审核未放行 · ${s.calls} 通电话`,
@@ -57,11 +57,11 @@
     grant: "加额度", grantPrompt: (who) => `给 ${who} 加多少 tokens？负数扣减。`, credit: "加额度", creditPrompt: (who) => `给 ${who} 加多少元额度？负数扣减。（直接进入总额度，不过期）`, creditNote: "备注（比如 PR #12）", setPool: "设置额度", setPoolPrompt: (who, left) => `把 ${who} 的额度设成多少？现在剩 ${left}。\n写法：=5 → 剩余设为 ¥5；总额=20 → 总额度设为 ¥20；+3 / -2 → 加 ¥3 / 扣 ¥2。`, setPoolMany: (n) => `批量设置额度（${n} 人）`, setPoolManyPrompt: (n) => `给筛出来的 ${n} 个账号设置额度。\n写法：=5 → 每人剩余设为 ¥5；总额=20 → 每人总额度设为 ¥20；+3 / -2 → 每人加 ¥3 / 扣 ¥2。成员不受影响。`, setPoolManyConfirm: (w, n) => `对 ${n} 个账号执行「${w}」？`, setPoolDone: (n) => `已设置 ${n} 个账号的额度。`, poolBad: "没看懂。写法：=5、总额=20、+3、-2。", poolLine: (g, l, n, b) => `总额度 ${g}${l === null ? "" : `（剩 ${l}）`} · 邀请了 ${n} 人${b ? " · 领过早期共创奖励" : ""}`, invitedBy: "邀请人", disable: "停用", enable: "恢复", makeMember: "设为成员", unmakeMember: "取消成员",
     memberConfirm: (who) => `把 ${who} 设为成员？成员不受额度限制，费用由你承担。`, listedNote: "在服务器白名单里，改 ALLOWED_IDENTIFIERS 才能取消",
     disableConfirm: (who) => `停用 ${who}？TA 的所有设备会立刻断开，再登录会被拒。`, remove: "删除账号",
-    removeConfirm: (who) => `删除 ${who} 的账号、密钥、用量记录和设备？不可恢复。`, hasPassword: "已设密码", noPassword: "未设密码", identifierNote: "明文只在这里解出来看",
+    removeConfirm: (who) => `删除 ${who} 的账号、密钥、用量记录和设备？不可恢复。`, identifierNote: "明文只在这里解出来看",
     // config
     allowed: "白名单（不限额）", allowedNone: "（空）", sender: "验证码渠道", models: "模型", prices: "单价（¥）", rate: "汇率", rateLine: (r) => `1 美元 = ${r} 元（仅用于显示）`,
     perMinute: (n) => (n > 0 ? `每分钟 ${n} 次` : "不限频"), capLine: (c, u, b) => (c > 0 ? `非成员共 ¥${c}（≈ $${u}）· 邀请双方各 +¥${b}` : "不限花费"), signupOpen: "开放注册", signupClosed: "仅白名单可登录",
-    realtime: "实时通话", on: "开", off: "关", pwMin: (n) => `密码至少 ${n} 位`,
+    realtime: "实时通话", on: "开", off: "关",
     // runtime settings (relay 0.15): changed here, in force at once, kept across restarts
     rtTitle: "额度（即时生效）", rtNote: "在这里改，所有客户端立刻按新数字走：新注册拿新额度，账号页、登录页、用完时的提示都读服务器的数字，不用发版、用户不用做任何事。留空恢复环境变量的值。调低只影响之后注册的人，不会从任何人的池子里扣。",
     rtAllowance: "每个新账号的免费额度（¥）", rtBonus: "邀请奖励（¥，双方各得）", rtSignup: "开放注册", rtSignupOff: "关闭后只有白名单和成员能登录；已登录的人不受影响。",
@@ -132,7 +132,7 @@
     },
     seeAll: "查看全部", loadFailed: (e) => `没加载出来：${e}`, retry: "重试",
     fRegion: "地区", fProvince: "省 / 州", fCity: "城市", fChannel: "渠道", fStatus: "状态", fActivity: "活跃", fSpend: "花费", fClient: "客户端", fSort: "排序", fClear: "清除筛选", fAny: "不限", fCount: (n, t) => (n === t ? `共 ${fmt(t)} 个账号` : `筛出 ${fmt(n)} / ${fmt(t)} 个账号`),
-    stat: { member: "成员", disabled: "已停用", locked: "已锁定", password: "设了密码", nopassword: "未设密码", contributes: "开启「帮助改进」", exhausted: "额度用光", online: "有设备在线", new: "本期新注册" },
+    stat: { member: "成员", disabled: "已停用", locked: "已锁定", contributes: "开启「帮助改进」", exhausted: "额度用光", online: "有设备在线", new: "本期新注册" },
     act: { today: "24 小时内", "7d": "7 天内", "30d": "30 天内", older: "更早", never: "从未使用" },
     bucket: { 0: "¥0", lt1: "<¥1", "1to5": "¥1–5", "5to10": "¥5–10", ge10: "≥¥10" },
     sortBy: { active: "最近活跃", joined: "注册时间", spent: "累计花费", today: "今天花费", tokens: "tokens", requests: "请求数", left: "剩余额度", region: "地区", invites: "邀请人数" },
@@ -167,7 +167,7 @@
     enter: "Open", wrong: "That token is not right.", offline: "Cannot reach the server.", refresh: "Refresh", lock: "Lock", loading: "Loading…",
     today: "Today", week: "Last 7 days", period: (d) => `Last ${d} days`,
     kSamples: "Kept turns", kSamplesSub: (n) => `${n} accounts with “help improve” on`, exportSamples: "Export JSONL", exportFailed: (why) => `The export did not go through: ${why}. Try once more; if it keeps happening, see docker logs nanomuse-relay on the server.`, exportCut: "the download broke off", exportEmpty: "Nothing to export yet.", contributes: "helps improve", samples: "Kept conversations (recent)", samplesNote: "Kept only for accounts with “Help improve nanoMuse's AI models” on: what the person wrote, what the model answered and the tools it called; not the system prompt, tool results or pictures; the export carries no account ids.", user: "user", assistant: "reply", more: "Show more", noSamples: "None yet",
-    kAccounts: "Accounts", kAccountsSub: (c) => `${c.with_password || 0} with a password · ${c.unlimited || 0} members · ${c.disabled || 0} disabled`,
+    kAccounts: "Accounts", kAccountsSub: (c) => `${c.unlimited || 0} members · ${c.disabled || 0} disabled`,
     kActive: "Active accounts", kActiveSub: (n) => `${n} new`, kSpent: "Spent", kSpentSub: (r, t) => `${fmt(r)} requests · ${fmt(t)} tokens`,
     kOnline: "Devices online", kOnlineSub: (k, s) => `${k} remembered · ${s} live sign-ins`, kSignals: "Signals today",
     kSignalsSub: (s) => `${s.sign_ins} sign-ins · ${s.sign_in_failures} failed · ${s.budget_refusals} over budget · ${s.upstream_errors} upstream errors · ${s.content_rejected} content checks · ${s.calls} calls`,
@@ -198,10 +198,10 @@
     grant: "Grant", grantPrompt: (who) => `How many tokens for ${who}? Negative takes away.`, credit: "Add credit", creditPrompt: (who) => `How many yuan for ${who}? Negative takes away. (straight into the pool; never expires)`, creditNote: "Note (say, PR #12)", setPool: "Set the pool", setPoolPrompt: (who, left) => `Set ${who}'s pool to what? ${left} left now.\nWrite: =5 → ¥5 left; total=20 → a ¥20 pool; +3 / -2 → ¥3 more / ¥2 less.`, setPoolMany: (n) => `Set the pool for these ${n}`, setPoolManyPrompt: (n) => `Set the pool of the ${n} accounts shown.\nWrite: =5 → ¥5 left each; total=20 → a ¥20 pool each; +3 / -2 → ¥3 more / ¥2 less each. Members are not touched.`, setPoolManyConfirm: (w, n) => `"${w}" for ${n} accounts?`, setPoolDone: (n) => `${n} pool(s) set.`, poolBad: "Not understood. Write =5, total=20, +3 or -2.", poolLine: (g, l, n, b) => `pool ${g}${l === null ? "" : ` (${l} left)`} · ${n} invited${b ? " · took the early co-creation bonus" : ""}`, invitedBy: "invited by", disable: "Disable", enable: "Enable", makeMember: "Make member", unmakeMember: "Unmake member",
     memberConfirm: (who) => `Make ${who} a member? Members have no allowance limit; you pay their bill.`, listedNote: "on the server's list; edit ALLOWED_IDENTIFIERS to remove",
     disableConfirm: (who) => `Disable ${who}? Every device of theirs drops at once and cannot sign in again.`, remove: "Delete account",
-    removeConfirm: (who) => `Delete the account, keys, usage and devices of ${who}? This cannot be undone.`, hasPassword: "has a password", noPassword: "no password", identifierNote: "decrypted for this view only",
+    removeConfirm: (who) => `Delete the account, keys, usage and devices of ${who}? This cannot be undone.`, identifierNote: "decrypted for this view only",
     allowed: "Members (no cap)", allowedNone: "(none)", sender: "Code sender", models: "Models", prices: "Prices (¥)", rate: "Rate", rateLine: (r) => `1 USD = ${r} CNY (display only)`,
     perMinute: (n) => (n > 0 ? `${n} a minute` : "no rate limit"), capLine: (c, u, b) => (c > 0 ? `¥${c} (≈ $${u}) in all for non-members · +¥${b} an invite, to both sides` : "no spend limit"), signupOpen: "sign-up open", signupClosed: "members only",
-    realtime: "Real-time calls", on: "on", off: "off", pwMin: (n) => `passwords ≥ ${n} chars`,
+    realtime: "Real-time calls", on: "on", off: "off",
     rtTitle: "Allowance (in force at once)", rtNote: "Change it here and every client follows at once: new sign-ups get the new allowance, and the account pages, the sign-in pages and the used-up notice all read the server's figures; no release, nothing for anyone to do. Empty puts the environment's value back. A lower figure only changes what new accounts get; nothing is taken from anyone's pool.",
     rtAllowance: "Free allowance for each new account (¥)", rtBonus: "Invite bonus (¥, to both sides)", rtSignup: "Sign-up open", rtSignupOff: "Closed, only members and the list may sign in; whoever is signed in is unaffected.",
     rtEnv: (v) => `environment: ${v}`, rtSet: "set here", rtSave: "Save", rtSaved: "Saved and in force.", rtApply: (n) => `Bring ${n} older account${n === 1 ? "" : "s"} up to the current allowance`, rtApplyNone: "Every account has at least the current allowance.",
@@ -265,7 +265,7 @@
     },
     seeAll: "See all", loadFailed: (e) => `Could not load: ${e}`, retry: "Try again",
     fRegion: "Region", fProvince: "Province / state", fCity: "City", fChannel: "Channel", fStatus: "Status", fActivity: "Activity", fSpend: "Spend", fClient: "Client", fSort: "Sort", fClear: "Clear filters", fAny: "Any", fCount: (n, t) => (n === t ? `${fmt(t)} accounts` : `${fmt(n)} of ${fmt(t)} accounts`),
-    stat: { member: "members", disabled: "disabled", locked: "locked", password: "with a password", nopassword: "without a password", contributes: "“help improve” on", exhausted: "allowance used up", online: "a device online", new: "new this period" },
+    stat: { member: "members", disabled: "disabled", locked: "locked", contributes: "“help improve” on", exhausted: "allowance used up", online: "a device online", new: "new this period" },
     act: { today: "last 24 h", "7d": "last 7 days", "30d": "last 30 days", older: "longer ago", never: "never used" },
     bucket: { 0: "¥0", lt1: "<¥1", "1to5": "¥1–5", "5to10": "¥5–10", ge10: "≥¥10" },
     sortBy: { active: "last active", joined: "joined", spent: "spent", today: "spent today", tokens: "tokens", requests: "requests", left: "left", region: "region", invites: "invites" },
@@ -353,7 +353,7 @@
     "budget.refused": ["bad", ICON.warn], "upstream.error": ["bad", ICON.warn], "content.rejected": ["warn", ICON.warn], "call.ended": ["ok", ICON.realtime],
     "control.switch": ["warn", ICON.warn], "control.rule": ["warn", ICON.warn],
   };
-  const FILTERS = [["", "all"], ["sign_in.code,sign_in.password,sign_in.session,sign_in.failed,account.created", "signIns"], ["budget.refused", "refusals"], ["upstream.error", "errors"], ["content.rejected", "contentChecks"], ["call.ended", "calls"], ["password.set,password.changed,password.cleared", "passwords"]];
+  const FILTERS = [["", "all"], ["sign_in.code,sign_in.session,sign_in.failed,account.created", "signIns"], ["budget.refused", "refusals"], ["upstream.error", "errors"], ["content.rejected", "contentChecks"], ["call.ended", "calls"]];
   const VIEWS = ["overview", "people", "invites", "places", "money", "activity", "demo", "data", "site", "models", "health", "stats", "controls", "settings"];
   const PAGE = 50;
 
@@ -985,7 +985,6 @@
       h("span", { class: "pill" }, a.channel === "phone" ? T.phone : T.email),
       a.member ? h("span", { class: "pill ok", title: a.listed ? T.listedNote : "" }, a.listed ? T.listed : T.member) : null,
       a.review ? h("span", { class: "pill", title: T.reviewNote }, T.review) : null,
-      a.has_password ? h("span", { class: "pill violet" }, T.hasPassword) : h("span", { class: "pill" }, T.noPassword),
       a.disabled ? h("span", { class: "pill bad" }, T.disabled) : null,
       a.locked ? h("span", { class: "pill warn" }, T.locked) : null,
       a.contribute ? h("span", { class: "pill cyan" }, T.contributes) : null,
@@ -1112,7 +1111,7 @@
   const regionName = (p) => regionLabel(regionKey(p));
   const activityOf = (a) => { const t = a.last_active_at || a.last_seen_at; if (!t) return "never"; const d = nowS() - t; return d < 86400 ? "today" : d < 7 * 86400 ? "7d" : d < 30 * 86400 ? "30d" : "older"; };
   const spendBucket = (a) => { const c = Number(a.spent_cny || 0); return c <= 0 ? "0" : c < 1 ? "lt1" : c < 5 ? "1to5" : c < 10 ? "5to10" : "ge10"; };
-  const statusOk = (a, s) => !s || (s === "member" ? !!a.member : s === "disabled" ? !!a.disabled : s === "locked" ? !!a.locked : s === "password" ? !!a.has_password : s === "nopassword" ? !a.has_password
+  const statusOk = (a, s) => !s || (s === "member" ? !!a.member : s === "disabled" ? !!a.disabled : s === "locked" ? !!a.locked
     : s === "contributes" ? !!a.contribute : s === "exhausted" ? (!a.member && a.left_cny !== null && a.left_cny !== undefined && Number(a.left_cny) <= 0) : s === "online" ? (a.devices || []).some((d) => d.online) : s === "new" ? nowS() - (a.created_at || 0) < days * 86400 : true);
   const SORTS = {
     active: (a) => a.last_active_at || 0, joined: (a) => a.created_at || 0, spent: (a) => Number(a.spent_cny || 0), today: (a) => Number(a.spent_today_cny || 0), tokens: (a) => Number(a.used || 0),
@@ -1239,7 +1238,6 @@
               h("span", { class: "pill" }, a.channel === "phone" ? T.phone : T.email),
               a.member ? h("span", { class: "pill ok" }, a.listed ? T.listed : T.member) : null,
               a.review ? h("span", { class: "pill", title: T.reviewNote }, T.review) : null,
-              a.has_password ? h("span", { class: "pill violet" }, T.password) : null,
               a.disabled ? h("span", { class: "pill bad" }, T.disabled) : null,
               a.locked ? h("span", { class: "pill warn" }, T.locked) : null,
               a.invites ? h("span", { class: "pill violet", title: T.invSeeRanking, onclick: (e) => { e.stopPropagation(); go("invites", { q: a.identifier || a.hint }); } }, T.invPill(a.invites)) : null)))),
@@ -1265,7 +1263,7 @@
     const cols = [["identifier", (a) => a.identifier || ""], ["hint", (a) => a.hint], ["id", (a) => a.id], ["channel", (a) => a.channel], ["joined", (a) => iso(a.created_at)], ["region", (a) => placeText(placeOfAccount(a))],
       ["spent_cny", (a) => moneyN(a.spent_cny)], ["spent_today_cny", (a) => moneyN(a.spent_today_cny)], ["left_cny", (a) => (a.left_cny === null || a.left_cny === undefined ? "" : moneyN(a.left_cny))],
       ["tokens", (a) => a.used || 0], ["requests", (a) => a.requests || 0], ["last_active", (a) => iso(a.last_active_at)], ["member", (a) => (a.member ? 1 : 0)], ["disabled", (a) => (a.disabled ? 1 : 0)],
-      ["password", (a) => (a.has_password ? 1 : 0)], ["client", (a) => a.last_platform || ""], ["version", (a) => a.last_version || ""], ["devices", (a) => (a.devices || []).length],
+      ["client", (a) => a.last_platform || ""], ["version", (a) => a.last_version || ""], ["devices", (a) => (a.devices || []).length],
       // 0.26: who brought the account and how many it brought, since the page filters on both
       ["invited_by", (a) => (a.invited_by ? identOf(a.invited_by, "") || a.invited_by : "")], ["invites", (a) => a.invites || 0]];
     const esc = (v) => { const s = v === null || v === undefined ? "" : String(v); return /[",\n]/.test(s) ? `"${s.replace(/"/g, '""')}"` : s; };
@@ -1671,7 +1669,7 @@
       nudgesPanel(),
       h("div", { class: "panel" }, h("h2", {}, T.config),
         h("div", { class: "kv" },
-          h("b", {}, T.kAccounts), h("span", {}, `${s.signup_open ? T.signupOpen : T.signupClosed} · ${T.capLine(s.allowance_cny, s.allowance_usd, s.invite_bonus_cny)} · ${T.perMinute(s.per_minute_requests)} · ${T.pwMin(s.password_min_len || 8)}`),
+          h("b", {}, T.kAccounts), h("span", {}, `${s.signup_open ? T.signupOpen : T.signupClosed} · ${T.capLine(s.allowance_cny, s.allowance_usd, s.invite_bonus_cny)} · ${T.perMinute(s.per_minute_requests)}`),
           h("b", {}, T.realtime), h("span", {}, s.realtime_enabled ? T.on : T.off),
           h("b", {}, T.allowed), h("code", {}, (s.allowed_identifiers || []).join(", ") || T.allowedNone),
           h("b", {}, T.rate), h("span", {}, T.rateLine(rate)),

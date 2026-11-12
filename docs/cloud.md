@@ -8,8 +8,7 @@ provider, not a replacement.
 ## In the app
 
 Since 0.1.20 the account is where every app starts: the first screen asks for a
-phone number or an e-mail address and sends a six-digit code (or, once you have
-set one, takes your password) and then asks which model answers: the account's
+phone number or an e-mail address and sends a code (there is no password), then asks which model answers: the account's
 own (the Cloud) or a key of your own. Codes by SMS reach mainland China numbers
 only (号码认证服务 sends nowhere else); a Hong Kong, Taiwan or overseas number is
 told so at once (`phone_region`) and signs in with an e-mail address instead.
@@ -35,14 +34,12 @@ and your devices. After the code the app has:
   ([own-key.md](own-key.md#which-model-does-what)).
 
 *Settings → nanoMuse Cloud* (the *Account* screen) shows who is signed in (a
-masked hint, never the number) and since when; sets, changes or removes the
-**password** (eight characters or more; scrypt on the relay; locked for a while
-after repeated wrong attempts, and a fresh code sign-in opens it again); today's
+masked hint, never the number) and since when; today's
 spend against the allowance in ¥ and $ with a meter; **usage by kind** (chat,
 pictures, video) today and in all, and **by model**; the
-**sign-ins**: every device holding a key, how it signed in (code or password),
+**sign-ins**: every device holding a key, how it signed in (a code),
 when it was last used, each revocable; the account's own **history** (sign-ins,
-password changes, refusals; never message content); and the ways
+refusals; never message content); and the ways
 out: *Sign out* on this device, *Sign out everywhere*, *Delete the account*.
 The allowance belongs to the address: signing in again, on
 this phone or another, gives a new key for the same account and does not grant
@@ -84,13 +81,12 @@ The relay is the code in [`cloud/`](../cloud/README.md). It stores:
   so the operator can see who an account belongs to on the admin page (the
   database file alone shows nothing);
 - the hash of each key issued, with the device name you signed in from, how
-  (code or password) and when it was last used; revoked keys keep their row
+  (a code) and when it was last used; revoked keys keep their row
   so the sign-ins list can say so;
-- the password, if you set one, as an scrypt hash, never the password;
 - per request: the kind (chat, picture, video), the model, the token counts
   and the amount charged;
-- a timeline of account events (signed in, failed sign-in, password set or
-  changed, signed out, refused for budget, upstream error) with a
+- a timeline of account events (signed in, failed sign-in,
+  signed out, refused for budget, upstream error) with a
   device name, a model or an error code as the detail, never message content;
 - the id of each video task with its price and the provider's last word on it,
   so only the account that started one can poll it and the clip is charged once
@@ -383,8 +379,7 @@ account keeps a timeline, a line on it too; a deletion is counted on the Stats
 page. A disabled account that asks for a sign-in code gets the same `204` as anyone
 and no message is sent: the request counts towards the usual limits, nothing goes
 out, and the route says nothing about whether the number has an account or whether
-it is off; the person is told `403 account_disabled` when they sign in with a code,
-or with the right password (a wrong one is answered like any wrong password).
+it is off; the person is told `403 account_disabled` when they sign in with a code.
 
 nanoMuse asks for one thing in return: a star on
 [GitHub](https://github.com/nano-muse/nanoMuse), which is what helps the
@@ -494,6 +489,8 @@ whatever relay serves it at `/app`.
 
 Accounts linked by `HOUSEHOLDS` share one log: a check-in, a panic or an alert, each with the time, the sender's account and a short optional note. A panic or an alert is written before the relay tries to show it on another phone, so an offline phone does not lose it. `GET /v1/household/events` reads the rows the caller's households may see. `POST /v1/household/events` with `{"kind":"check-in"}` writes a check-in. An account that is not in a household gets `not_linked`.
 
+`HOUSEHOLD_ADMINS` is the list of e-mail addresses that are admins. Everyone else in a household is staff. The relay decides. The app cannot promote anyone. An admin can read and edit every private list and job note in the households they belong to. Staff can read and edit only their own. The shared board is `GET` and `POST /v1/household/board`: staff may add a task and mark it done, and only an admin may assign or reassign it. A shared change is a household-log row of kind `task` (for example `done: Walk the dog`). Private notes and private tasks are not written there. `HOUSEHOLD_FEED_KINDS` includes `task` unless the operator removes it.
+
 Jessica, or any other reader that must not control a phone, uses a feed key. The operator issues it from `POST /v1/admin/household-feed` and revokes it with `POST /v1/admin/household-feed/{id}/revoke`. The token is shown once, starts with `nmf_`, and is stored only as a hash. It cannot open the hub, chat or `/v1/me`. `HOUSEHOLD_FEED_KINDS` limits which kinds that read returns. Details are in [hub.md](hub.md#a-household-panic).
 
 ## Protocol
@@ -502,13 +499,11 @@ The app's calls, all JSON:
 
 ```
 GET  /healthz                                                 → {ok, version, models[], paused[]}; no key
-GET  /v1/config                                               → {version, signup_open, paused[], allowance_cny, allowance_usd, invite_bonus_cny, invitee_bonus_cny, usd_cny, invite_url, own_key_docs, openrouter_url, privacy_url, repo_url, improve_default, code_ttl_s, password_min_len}; no key, a minute's cache
+GET  /v1/config                                               → {version, signup_open, paused[], allowance_cny, allowance_usd, invite_bonus_cny, invitee_bonus_cny, usd_cny, invite_url, own_key_docs, openrouter_url, privacy_url, repo_url, improve_default, code_ttl_s}; no key, a minute's cache
 POST /v1/auth/code          {identifier}                      → 204 (a disabled account gets the same 204 and nothing is sent); 400 phone_region, 403 not_invited | signup_closed, 429 code_too_often | domain_limited, 502 send_failed
 POST /v1/auth/verify        {identifier, code, device, invite?} → {api_key, base_url, account, tokens, models, created, region}; 400 code_wrong | code_expired, 403 account_disabled
-POST /v1/auth/login         {identifier, password, device}    → the same; 401 bad_credentials, 429 locked, 400 no_password
-POST /v1/auth/password      Bearer  {password, current?}      → 204; "" with current removes it; 400 password_short | password_long | password_weak | password_wrong | password_required
 POST /v1/auth/session-key   Bearer  {device?, ttl_s?}         → {api_key, expires_at}; a key that lapses on its own (90 days at most); 403 session_from_session
-GET  /v1/me                 Bearer                            → {region: cn | intl | unknown, account{…, has_password, sessions, signed_in_via}, usage{today, total by kind / model}, tokens, spend{…, ways, guidance}, invite, contribute, models, defaults, base_url, clips, recent, nudges, paused[]}
+GET  /v1/me                 Bearer                            → {region: cn | intl | unknown, account{…, sessions, signed_in_via}, usage{today, total by kind / model}, tokens, spend{…, ways, guidance}, invite, contribute, models, defaults, base_url, clips, recent, nudges, paused[]}
 GET  /v1/me/invite          Bearer                            → {code, url, invites, bonus_cny, invitee_bonus_cny, bonus_when: "first_use", settled, pending, earned_cny, friends[]}
 GET  /v1/estimate           Bearer  ?images=5&clips=4&image_model=&video_model=&size=  → {cny, usd, parts[{kind, model, count, seconds?, cny}], left_cny, grant_cny, unlimited, affordable}; nothing charged
 POST /v1/me/contribute      Bearer  {on}                      → {on, samples, default_on, keeps[], privacy_url}; the "help improve" switch
@@ -530,10 +525,9 @@ GET  /v1/devices            Bearer                            → {devices: [{id
 DELETE /v1/devices/{id}     Bearer                            → 204; 409 device_online
 ```
 
-`code_ttl_s` and `password_min_len` in `/v1/config` are the relay's `CODE_TTL_S`
-and `PASSWORD_MIN_LEN`; the web console prints them in its sign-in and password
-forms, so a relay that sets other figures is described rightly, and an older
-relay without the two fields is read as ten minutes and eight characters.
+`code_ttl_s` in `/v1/config` is the relay's `CODE_TTL_S`; the web console prints
+it on the sign-in form, so a relay that sets another figure is described rightly,
+and an older relay without the field is read as ten minutes.
 
 Everything else is the OpenAI API: `GET /v1/models` (with `architecture`
 modalities so the picture model is recognisable, and a `nanomuse` block per

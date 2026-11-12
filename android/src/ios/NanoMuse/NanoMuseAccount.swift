@@ -4,7 +4,7 @@ import UIKit
 
 /// The account as the phone's account page reads it — `GET /v1/me` in full (relay 0.14+: the pool
 /// in yuan, usage by kind and by model, the invite), the devices holding a key, the account's own
-/// timeline, the password, and the ways out. Every field is optional on the wire: an older relay
+/// timeline, and the ways out. Every field is optional on the wire: an older relay
 /// sends fewer, and the page shows what it got. Mirror of the Android `CloudAccountScreen` data
 /// and the desktop `AccountPage`.
 struct NanoMuseSheet: Sendable {
@@ -52,7 +52,6 @@ struct NanoMuseSheet: Sendable {
     var hint: String
     var channel: String
     var member: Bool
-    var hasPassword: Bool
     var sessions: Int
     var spend: Spend?
     var today: [UsageRow]
@@ -111,7 +110,6 @@ struct NanoMuseSheet: Sendable {
             hint: account["hint"] as? String ?? "",
             channel: account["channel"] as? String ?? "",
             member: (account["member"] as? Bool) ?? ((account["member"] as? NSNumber)?.boolValue ?? false),
-            hasPassword: (account["has_password"] as? Bool) ?? ((account["has_password"] as? NSNumber)?.boolValue ?? false),
             sessions: Int(num(account["sessions"]) ?? 0),
             spend: spend,
             today: rows(todayBlock["by_kind"]),
@@ -212,13 +210,6 @@ extension NanoMuseCloud {
             let id = (e["id"] as? NSNumber).map { "\($0)" } ?? "\(ts)-\(index)"
             return NanoMuseEvent(id: id, at: Date(timeIntervalSince1970: ts), kind: e["kind"] as? String ?? "", detail: e["detail"] as? String ?? "")
         }
-    }
-
-    /// Set or change the password; an empty `password` with `current` removes it.
-    static func setPassword(_ password: String, current: String?) async throws {
-        var body: [String: Any] = ["password": password]
-        if let current, !current.isEmpty { body["current"] = current }
-        _ = try await call("POST", "/v1/auth/password", body: body, token: key())
     }
 
     /// Every device's key, this phone's included; then the provider leaves the app, and this

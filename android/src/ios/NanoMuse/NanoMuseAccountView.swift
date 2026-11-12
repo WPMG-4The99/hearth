@@ -1,7 +1,7 @@
 import SwiftUI
 
 /// The sections of the account page under the identity line, in the order of the Android
-/// account screen: the password, the devices holding a key, a star row (once, as the policy
+/// account screen: the devices holding a key, a star row (once, as the policy
 /// says), the pool in yuan with the ways on when it runs low (your own key, an invitation — and
 /// a star, once), the invite code, what was used by kind and by model, the account's timeline.
 /// Lives inside `NanoMuseCloudView`'s `Form`, which adds the links and the ways out below.
@@ -23,7 +23,6 @@ struct NanoMuseAccountSections: View {
 
     var body: some View {
         Group {
-            passwordSection
             sessionsSection
             if starAsk {
                 Section {
@@ -206,73 +205,6 @@ struct NanoMuseAccountSections: View {
         }
     }
 
-    // MARK: - Password
-
-    @State private var passwordOpen = false
-    @State private var currentPassword = ""
-    @State private var newPassword = ""
-    @State private var passwordBusy = false
-    @State private var passwordNote: String?
-
-    private var passwordSection: some View {
-        Section {
-            if passwordOpen {
-                if sheet?.hasPassword == true {
-                    SecureField(AppLocalized("Current password"), text: $currentPassword)
-                        .textContentType(.password)
-                }
-                SecureField(sheet?.hasPassword == true ? AppLocalized("New password (8 or more)") : AppLocalized("Password (8 or more)"), text: $newPassword)
-                    .textContentType(.newPassword)
-                HStack {
-                    Button(AppLocalized("Save")) { Task { await savePassword() } }
-                        .disabled(passwordBusy || !passwordValid)
-                    Spacer()
-                    Button(AppLocalized("Cancel"), role: .cancel) { passwordOpen = false; newPassword = ""; currentPassword = "" }
-                        .disabled(passwordBusy)
-                }
-            } else {
-                Button {
-                    passwordNote = nil
-                    passwordOpen = true
-                } label: {
-                    Label(sheet?.hasPassword == true ? AppLocalized("Change password") : AppLocalized("Add a password"), systemImage: "lock")
-                }
-            }
-        } header: {
-            Text(AppLocalized("Password"))
-        } footer: {
-            if let passwordNote {
-                Text(passwordNote)
-            } else if passwordOpen && sheet?.hasPassword == true {
-                Text(AppLocalized("Leave the new password empty to remove it."))
-            } else {
-                Text(AppLocalized("With one, you can sign in without waiting for a code. Codes keep working either way."))
-            }
-        }
-    }
-
-    private var passwordValid: Bool {
-        let has = sheet?.hasPassword == true
-        if has && currentPassword.isEmpty { return false }
-        if newPassword.isEmpty { return has } // removal
-        return newPassword.count >= 8
-    }
-
-    private func savePassword() async {
-        passwordBusy = true
-        defer { passwordBusy = false }
-        do {
-            try await NanoMuseCloud.setPassword(newPassword, current: currentPassword.isEmpty ? nil : currentPassword)
-            passwordNote = newPassword.isEmpty ? AppLocalized("Password removed.") : AppLocalized("Saved.")
-            passwordOpen = false
-            newPassword = ""
-            currentPassword = ""
-            await load()
-        } catch {
-            passwordNote = NanoMuseCloud.describe(error)
-        }
-    }
-
     // MARK: - Sessions
 
     @State private var sessionBusy: String?
@@ -286,7 +218,7 @@ struct NanoMuseAccountSections: View {
                 HStack {
                     VStack(alignment: .leading, spacing: 2) {
                         Text(s.device.isEmpty ? AppLocalized("A device") : s.device) + Text(s.current ? " · \(AppLocalized("this phone"))" : "")
-                        let via = s.via == "password" ? AppLocalized("a password") : AppLocalized("a code")
+                        let via = AppLocalized("a code")
                         let when = (s.lastUsedAt ?? s.createdAt).formatted(.relative(presentation: .named))
                         Text(String(format: AppLocalized("Signed in with %@ · last used %@"), via, when))
                             .font(.caption).foregroundStyle(.secondary)

@@ -636,10 +636,6 @@
     <string name="nm_setup_source_cloud_sub">Modelul de pe releul acestei case. Nimic de lipit.</string>
     <string name="nm_setup_source_own_sub">OpenAI, Anthropic, DeepSeek, Bailian și alte endpointuri compatibile OpenAI. Cheia rămâne pe acest telefon.</string>
     <string name="nm_setup_source_fine_print">Alege unul ca să începi. Celălalt se poate adăuga mai târziu.</string>
-    <string name="nm_setup_password_title">Setează o parolă</string>
-    <string name="nm_setup_password_sub">Contul tău e activ. Cu o parolă, computerele și celelalte telefoane ale tale se conectează imediat, fără să aștepte un cod.</string>
-    <string name="nm_setup_password_set">Setează parola</string>
-    <string name="nm_setup_password_fine_print">Opțional. O poți seta sau schimba mai târziu sub Cont.</string>
     <string name="nm_welcome_feat_chat">Chat, imagini, video</string>
     <string name="nm_welcome_feat_chat_sub">Un model capabil, generare de imagini și video, unelte, abilități și memorie, pe telefonul tău</string>
     <string name="nm_welcome_feat_hands">Mâini: îți folosește telefonul</string>
@@ -656,9 +652,6 @@
     <string name="nm_cloud_signin_title">Intră în The Hearth</string>
     <string name="nm_cloud_signin_subtitle">Întâi e-mailul, apoi codul de unică folosință. Acest releu scrie codul în jurnalul lui.</string>
     <string name="nm_cloud_mode_code">Cu un cod</string>
-    <string name="nm_cloud_mode_password">Cu o parolă</string>
-    <string name="nm_cloud_password">Parolă</string>
-    <string name="nm_cloud_forgot_password">Ai uitat parola? Conectează-te cu un cod</string>
     <string name="nm_cloud_identifier">E-mail</string>
     <string name="nm_cloud_identifier_hint">tu@example.com</string>
     <string name="nm_cloud_code">Cod</string>
@@ -724,15 +717,10 @@
     <string name="nm_cloud_err_unreachable">Nu s-a putut contacta The Hearth. Verifică conexiunea.</string>
     <string name="nm_cloud_err_generic">Ceva n-a mers.</string>
     <string name="nm_cloud_err_bad_credentials">E-mail sau parolă greșită.</string>
-    <string name="nm_cloud_err_no_password">Acest cont nu are încă parolă. Conectează-te cu un cod, apoi setează una sub Cont.</string>
     <string name="nm_cloud_err_locked">Prea multe încercări greșite. Așteaptă câteva minute.</string>
-    <string name="nm_cloud_err_password_wrong">Parola actuală e greșită.</string>
-    <string name="nm_cloud_err_password_required">Introdu mai întâi parola actuală.</string>
-    <string name="nm_cloud_err_password_short">Parola are nevoie de cel puțin 8 caractere.</string>
-    <string name="nm_cloud_err_password_weak">Parola e prea ușor de ghicit.</string>
     <string name="nm_cloud_err_signup_closed">Înscrierile sunt oprite pe acest relay deocamdată. Un cont care există deja se poate conecta în continuare.</string>
     <string name="nm_cloud_err_domain_limited">Adresele din acel domeniu au atins azi limita de înscrieri pe acest relay. Încearcă mâine sau folosește altă adresă.</string>
-    <string name="nm_cloud_err_channel_unsupported">Acest relay nu trimite coduri la acest tip de adresă. Folosește celălalt tip (e-mail sau număr de telefon) sau conectează-te cu parola.</string>
+    <string name="nm_cloud_err_channel_unsupported">Acest relay nu trimite coduri la acest tip de adresă. Folosește celălalt tip (e-mail sau număr de telefon).</string>
     <string name="nm_cloud_err_too_large">Mesajul acesta e prea mare pentru model. Scurtează-l, renunță la câteva atașamente sau începe o conversație nouă.</string>
     <string name="nm_cloud_err_content_rejected">Verificarea de conținut a furnizorului modelului a respins această cerere. Încearcă alte cuvinte sau, dacă se repetă, începe o conversație nouă: cuvintele respinse pot fi mai devreme în conversație.</string>
     <string name="nm_cloud_err_provider_busy">Furnizorul modelului e ocupat acum. Reîncearcă peste puțin timp.</string>
@@ -751,18 +739,6 @@
     <!-- 0.1.20: the account page -->
     <string name="nm_cloud_since">din %1$s</string>
     <string name="nm_cloud_account_id">Cont %1$s…</string>
-    <string name="nm_cloud_password_set">Setată</string>
-    <string name="nm_cloud_password_unset">Nesetată</string>
-    <string name="nm_cloud_password_title_set">Setează o parolă</string>
-    <string name="nm_cloud_password_title_change">Schimbă parola</string>
-    <string name="nm_cloud_password_current">Parola actuală</string>
-    <string name="nm_cloud_password_new">Parolă nouă (8 caractere sau mai multe)</string>
-    <string name="nm_cloud_password_confirm">Repetă parola nouă</string>
-    <string name="nm_cloud_password_mismatch">Cele două parole diferă.</string>
-    <string name="nm_cloud_password_why">Cu o parolă te poți conecta pe alt dispozitiv fără să aștepți un cod. Imediat după o conectare cu cod, parola actuală poate fi lăsată goală.</string>
-    <string name="nm_cloud_password_remove">Elimină parola</string>
-    <string name="nm_cloud_password_saved">Parolă salvată.</string>
-    <string name="nm_cloud_password_removed">Parolă eliminată.</string>
     <string name="nm_cloud_devices_signed_in">Conectat pe</string>
     <string name="nm_cloud_device_unknown">Dispozitiv necunoscut</string>
     <string name="nm_cloud_this_device">acest telefon</string>
@@ -1135,8 +1111,6 @@
     <string name="nm_models_search_clear">Șterge căutarea</string>
     <string name="nm_models_no_match">Niciun model nu se potrivește</string>
     <!-- Names for icon-only controls, read by screen readers (#338) -->
-    <string name="nm_a11y_show_password">Afișează parola</string>
-    <string name="nm_a11y_hide_password">Ascunde parola</string>
     <string name="nm_a11y_avatar_candidate">Candidatul %1$d</string>
     <string name="nm_a11y_share_card">Cardul %1$d</string>
     <string name="nm_a11y_add">Adaugă</string>
@@ -1191,4 +1165,15 @@
     <string name="nm_household_kind_alert">Alertă</string>
     <string name="nm_menu_household">Casa</string>
     <string name="nm_household_needs_sign_in">Conectează-te ca să vezi.</string>
+    <string name="nm_work_menu">Lucru</string>
+    <string name="nm_work_title_admin">Admin</string>
+    <string name="nm_work_title_staff">Personal</string>
+    <string name="nm_work_board">Comun</string>
+    <string name="nm_work_mine">Lista mea</string>
+    <string name="nm_work_notes">Note</string>
+    <string name="nm_work_add">Adaugă</string>
+    <string name="nm_work_open">Liber</string>
+    <string name="nm_work_assign">Atribuie</string>
+    <string name="nm_work_save">Salvează</string>
+    <string name="nm_work_empty">Nimic încă.</string>
 </resources>

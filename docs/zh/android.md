@@ -287,7 +287,7 @@ keytool -genkeypair -keystore ~/.nanomuse-release/nanomuse.jks -alias nanomuse \
 
 | 路径（`android/src/android/app/src/main/java/io/github/nanomuse/`） | 作用 |
 | --- | --- |
-| `cloud/NanoMuseCloud.kt` | 账号：用验证码或密码登录、加密存储里的 key、`/v1/me`、用量、会话、本地化的错误句子；中继的菜单和它的两个默认值（`for: chat` / `for: gui`） |
+| `cloud/NanoMuseCloud.kt` | 账号：用邮箱验证码登录、加密存储里的 key、`/v1/me`、用量、会话、本地化的错误句子；中继的菜单和它的两个默认值（`for: chat` / `for: gui`） |
 | `cloud/Region.kt`、`cloud/ProviderCatalogue.kt`、`cloud/Capabilities.kt`、`cloud/OwnKeyPresets.kt`、`cloud/ProfileSync.kt` | 哪个地区的厂商排前面（大陆 → 百炼，否则 OpenRouter 和 OpenAI）；从 `assets/nanomuse/providers.json` 读出的自带 key 目录，以及某个已配置的服务商对应哪家厂商；一个服务商覆盖什么和那些一句话的「不可用」提示；预填的服务商表单（`?preset=<id>[:oauth]`）；拉取和推送的中继 profile（名字、外观、连接器） |
 | `sync/` | 对话同步（契约 C7–C10）：`SyncEngine`（什么上传、什么下载；每个映射带 `owner`，只有本账号的）、`ConversationSync`（何时同步；`hidden`：另一个账号的聊天，从 `ChatRepository.observeSessions()` 里排除）、`LocalChats`、Room 存储 `nanomuse_sync.db`（含 C12 的 `session_owners` 表） |
 | `account/` | 契约 C12（0.1.40，[sync.md](sync.md)）：`AccountScope`（规则：一个会话是谁的聊天、账号的 key、列表排除什么、被拒绝的 key 保留什么（`keepOnRefusedKey`：全部保留，除非中继说 `account_deleted`）；有单元测试）、`AccountData`（执行规则：每个聊天一行归属记录，`leave` 把账号的聊天、记忆、动态、目标、例程、形象和偏好收起来或删掉，`enter` 把一个账号的东西带回来）。「库」标签遵循同一条规则：只列出聊天列表会显示的那些会话的工作区，共用一台手机时另一个账号的文件不会出现（`library/LibraryIndex.shows`，有单元测试） |

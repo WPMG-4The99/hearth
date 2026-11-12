@@ -86,7 +86,6 @@ object NanoMuseCloud {
     private const val KEY_GUIDANCE = "cloud.guidance_json"
     private const val KEY_ACCOUNT_ID = "cloud.account_id"
     private const val KEY_CREATED_AT = "cloud.created_at"
-    private const val KEY_HAS_PASSWORD = "cloud.has_password"
     private const val KEY_SESSIONS = "cloud.sessions"
     private const val KEY_VIA = "cloud.via"
     private const val KEY_USAGE = "cloud.usage_json"
@@ -100,7 +99,7 @@ object NanoMuseCloud {
     private const val KEY_CONTRIBUTE = "cloud.contribute"
     private const val KEY_CONTRIBUTE_DEFAULT = "cloud.contribute_default"
     private const val KEY_PRIVACY_URL = "cloud.privacy_url"
-    /** The code sign-in created the account: the first-run setup owes the password step. */
+    /** The code sign-in created the account. */
     private const val KEY_FRESH = "cloud.fresh_account"
     /** The relay refused the key and the phone kept the account's data aside (contract C12); the sign-in page says so until the next sign-in. */
     private const val KEY_ENDED = "cloud.sign_in_ended"
@@ -207,11 +206,9 @@ object NanoMuseCloud {
         val accountId: String = "",
         /** When the account was created (UNIX seconds); 0 when unknown. */
         val createdAt: Long = 0,
-        /** A password is set, so signing in elsewhere needs no code. */
-        val hasPassword: Boolean = false,
         /** Devices currently signed in, this one included. */
         val sessions: Int = 0,
-        /** How this phone signed in: "code" or "password". */
+        /** How this phone signed in. A code. */
         val via: String = "",
         /** Where the relay places the account — `"cn"` for mainland China (contract C5); empty when it did not say. */
         val region: String = "",
@@ -367,6 +364,48 @@ object NanoMuseCloud {
         return call(context, "POST", "/v1/household/events", JSONObject().put("kind", "check-in"), key)
     }
 
+    /** Role, the people this phone may see, and the shared board. Private notes stay off other staff. */
+    suspend fun householdWork(context: Context): JSONObject {
+        val key = apiKey(context) ?: throw CloudException("signed_out", "sign in")
+        return call(context, "GET", "/v1/household/work", null, key)
+    }
+
+    suspend fun householdSaveNotes(context: Context, ownerId: String, body: String): JSONObject {
+        val key = apiKey(context) ?: throw CloudException("signed_out", "sign in")
+        return call(context, "PUT", "/v1/household/private/$ownerId/notes", JSONObject().put("body", body), key)
+    }
+
+    suspend fun householdAddPrivate(context: Context, ownerId: String, text: String): JSONObject {
+        val key = apiKey(context) ?: throw CloudException("signed_out", "sign in")
+        return call(context, "POST", "/v1/household/private/$ownerId/tasks", JSONObject().put("text", text), key)
+    }
+
+    suspend fun householdTogglePrivate(context: Context, ownerId: String, taskId: String, done: Boolean): JSONObject {
+        val key = apiKey(context) ?: throw CloudException("signed_out", "sign in")
+        return call(
+            context,
+            "POST",
+            "/v1/household/private/$ownerId/tasks/$taskId",
+            JSONObject().put("done", done),
+            key,
+        )
+    }
+
+    suspend fun householdAddShared(context: Context, text: String): JSONObject {
+        val key = apiKey(context) ?: throw CloudException("signed_out", "sign in")
+        return call(context, "POST", "/v1/household/board", JSONObject().put("text", text), key)
+    }
+
+    suspend fun householdMarkShared(context: Context, taskId: String, done: Boolean): JSONObject {
+        val key = apiKey(context) ?: throw CloudException("signed_out", "sign in")
+        return call(context, "POST", "/v1/household/board/$taskId", JSONObject().put("done", done), key)
+    }
+
+    suspend fun householdAssign(context: Context, taskId: String, assigneeId: String): JSONObject {
+        val key = apiKey(context) ?: throw CloudException("signed_out", "sign in")
+        return call(context, "POST", "/v1/household/board/$taskId", JSONObject().put("assignee_id", assigneeId), key)
+    }
+
     /**
      * The invite bonus as the relay states it, for the lines that mention it ("+¥5 for each
      * of you") — the relay's figure can change from its operator's page at any time, so no
@@ -400,7 +439,6 @@ object NanoMuseCloud {
             usdCny = p.getFloat(KEY_USD_CNY, 0f).toDouble(),
             accountId = p.getString(KEY_ACCOUNT_ID, "") ?: "",
             createdAt = p.getLong(KEY_CREATED_AT, 0),
-            hasPassword = p.getBoolean(KEY_HAS_PASSWORD, false),
             sessions = p.getInt(KEY_SESSIONS, 0),
             via = p.getString(KEY_VIA, "") ?: "",
             region = p.getString(KEY_REGION, "") ?: "",
@@ -536,29 +574,6 @@ object NanoMuseCloud {
         // a friend's code counts for a new account only; the relay ignores it otherwise
         if (invite.isNotBlank()) body.put("invite", invite.trim())
         adopt(context, call(context, "POST", "/v1/auth/verify", body, token = null))
-    }
-
-    /** The password way in — for people who set one under Account; no code to wait for. */
-    suspend fun login(context: Context, identifier: String, password: String): Account = withContext(Dispatchers.IO) {
-        val body = JSONObject()
-            .put("identifier", identifier.trim())
-            .put("password", password)
-            .put("device", deviceName())
-        adopt(context, call(context, "POST", "/v1/auth/login", body, token = null))
-    }
-
-    /**
-     * Set or change the password. [current] is needed when one is set already — except right
-     * after a code sign-in, which is the "forgot it" path. An empty [password] with [current]
-     * removes it.
-     */
-    suspend fun setPassword(context: Context, password: String, current: String?) = withContext(Dispatchers.IO) {
-        val key = apiKey(context) ?: throw CloudException("bad_key", "Not signed in")
-        val body = JSONObject().put("password", password)
-        if (current != null) body.put("current", current) else body.put("current", JSONObject.NULL)
-        call(context, "POST", "/v1/auth/password", body, token = key)
-        prefs(context).edit().putBoolean(KEY_HAS_PASSWORD, password.isNotEmpty()).apply()
-        Unit
     }
 
     /** The devices signed in to this account, the current one first. */
@@ -790,13 +805,7 @@ object NanoMuseCloud {
             "upstream" -> context.getString(R.string.nm_cloud_err_relay_down)
             "unreachable" -> context.getString(R.string.nm_cloud_err_unreachable)
             "bad_credentials" -> context.getString(R.string.nm_cloud_err_bad_credentials)
-            "no_password" -> context.getString(R.string.nm_cloud_err_no_password)
-            "locked" -> context.getString(R.string.nm_cloud_err_locked)
-            "password_wrong" -> context.getString(R.string.nm_cloud_err_password_wrong)
-            "password_required" -> context.getString(R.string.nm_cloud_err_password_required)
-            "password_short" -> context.getString(R.string.nm_cloud_err_password_short)
-            "password_weak", "password_long" -> context.getString(R.string.nm_cloud_err_password_weak)
-            // no code of the relay's: the status says enough for a 413 (a proxy's plain
+            "locked" -> context.getString(R.string.nm_cloud_err_locked)            // no code of the relay's: the status says enough for a 413 (a proxy's plain
             // "Request too large"), a 401 and a 5xx; anything else shows the relay's sentence
             else -> when {
                 e.status == 413 -> context.getString(R.string.nm_cloud_err_too_large)
@@ -1044,7 +1053,6 @@ object NanoMuseCloud {
             .putFloat(KEY_USD_CNY, spend.optDouble("usd_cny", 0.0).toFloat())
             .putString(KEY_ACCOUNT_ID, account.optString("id"))
             .putLong(KEY_CREATED_AT, account.optLong("created_at", 0))
-            .putBoolean(KEY_HAS_PASSWORD, account.optBoolean("has_password", false))
             .putInt(KEY_SESSIONS, account.optInt("sessions", 0))
             .putString(KEY_VIA, account.optString("signed_in_via"))
             .putString(KEY_REGION, account.optString("region", reply.optString("region", "")))
@@ -1126,7 +1134,7 @@ object NanoMuseCloud {
             .remove(KEY_MEMBER).remove(KEY_SPENT_TODAY).remove(KEY_SPENT_TOTAL).remove(KEY_USD_CNY)
             .remove(KEY_GRANT).remove(KEY_LEFT).remove(KEY_WARN).remove(KEY_ALLOWANCE).remove(KEY_INVITEE_BONUS)
             .remove(KEY_OWN_KEY_DOCS).remove(KEY_GUIDANCE)
-            .remove(KEY_ACCOUNT_ID).remove(KEY_CREATED_AT).remove(KEY_HAS_PASSWORD).remove(KEY_SESSIONS).remove(KEY_VIA).remove(KEY_REGION).remove(KEY_USAGE)
+            .remove(KEY_ACCOUNT_ID).remove(KEY_CREATED_AT).remove(KEY_SESSIONS).remove(KEY_VIA).remove(KEY_REGION).remove(KEY_USAGE)
             .remove(KEY_INVITE_CODE).remove(KEY_INVITE_URL).remove(KEY_INVITES).remove(KEY_INVITE_BONUS).remove(KEY_INVITE_EARNED)
             .remove(KEY_CONTRIBUTE).remove(KEY_SAMPLES).remove(KEY_CONTRIBUTE_DEFAULT).remove(KEY_PRIVACY_URL).remove(KEY_FRESH).remove(KEY_WARNED_GRANT)
             .remove(KEY_MENU_IDS).remove(KEY_CATALOG_IDS).remove(KEY_RECOMMENDED).remove(KEY_SIGHTED).remove(KEY_CHAT_IDS).remove(KEY_GUI_IDS).remove(KEY_MODELS_AT)

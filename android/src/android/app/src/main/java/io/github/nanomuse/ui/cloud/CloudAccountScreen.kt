@@ -24,7 +24,6 @@ import androidx.compose.material.icons.outlined.DeleteOutline
 import androidx.compose.material.icons.outlined.Image
 import androidx.compose.material.icons.outlined.Language
 import androidx.compose.material.icons.automirrored.outlined.Logout
-import androidx.compose.material.icons.outlined.Password
 import androidx.compose.material.icons.outlined.PhoneAndroid
 import androidx.compose.material.icons.outlined.Phone
 import androidx.compose.material.icons.outlined.Refresh
@@ -38,8 +37,6 @@ import io.github.nanomuse.ui.muse.setPlainText
 import androidx.compose.material.icons.outlined.ContentCopy
 import androidx.compose.material.icons.outlined.PersonAdd
 import androidx.compose.material.icons.outlined.Share
-import androidx.compose.material.icons.outlined.Visibility
-import androidx.compose.material.icons.outlined.VisibilityOff
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -48,8 +45,6 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.OutlinedTextField
-import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
@@ -68,11 +63,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
-import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.input.KeyboardType
-import androidx.compose.ui.text.input.PasswordVisualTransformation
-import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -119,7 +110,6 @@ fun CloudAccountScreen(
     var events by remember { mutableStateOf<List<NanoMuseCloud.Event>>(emptyList()) }
     var refreshing by remember { mutableStateOf(false) }
     var showToday by remember { mutableStateOf(true) }
-    var passwordDialog by remember { mutableStateOf(false) }
     var confirm by remember { mutableStateOf<Confirm?>(null) }
     var changeServer by remember { mutableStateOf(false) }
     // the sign-out sheet's question, off every time it opens (contract C12)
@@ -241,13 +231,6 @@ fun CloudAccountScreen(
                         }
                     }
                     MuseRowDivider(inset = 16.dp)
-                    MuseRow(
-                        title = stringResource(R.string.nm_cloud_password),
-                        icon = Icons.Outlined.Password,
-                        value = stringResource(if (a?.hasPassword == true) R.string.nm_cloud_password_set else R.string.nm_cloud_password_unset),
-                        onClick = { passwordDialog = true },
-                    )
-                    MuseRowDivider()
                     MuseRow(
                         title = stringResource(R.string.nm_cloud_devices_signed_in),
                         icon = Icons.Outlined.PhoneAndroid,
@@ -785,19 +768,6 @@ fun CloudAccountScreen(
             },
         )
     }
-
-    if (passwordDialog) {
-        PasswordDialog(
-            hasPassword = account?.hasPassword == true,
-            onDismiss = { passwordDialog = false },
-            onSaved = { removed ->
-                passwordDialog = false
-                account = account?.copy(hasPassword = !removed)
-                notice = context.getString(if (removed) R.string.nm_cloud_password_removed else R.string.nm_cloud_password_saved)
-                refresh()
-            },
-        )
-    }
 }
 
 private enum class Confirm { SIGN_OUT, SIGN_OUT_ALL, DELETE }
@@ -824,124 +794,6 @@ private fun KeepChatsRow(keep: Boolean, onChange: (Boolean) -> Unit) {
         Spacer(Modifier.width(12.dp))
         Switch(checked = keep, onCheckedChange = onChange)
     }
-}
-
-/** Set, change or remove the password; the relay decides whether the current one is needed. */
-@Composable
-private fun PasswordDialog(hasPassword: Boolean, onDismiss: () -> Unit, onSaved: (removed: Boolean) -> Unit) {
-    val context = LocalContext.current
-    val scope = rememberCoroutineScope()
-    var current by remember { mutableStateOf("") }
-    var next by remember { mutableStateOf("") }
-    var again by remember { mutableStateOf("") }
-    var show by remember { mutableStateOf(false) }
-    var busy by remember { mutableStateOf(false) }
-    var error by remember { mutableStateOf<String?>(null) }
-    val muted = MaterialTheme.colorScheme.onSurfaceVariant
-    val fieldColors = OutlinedTextFieldDefaults.colors(
-        focusedBorderColor = MuseTones.action,
-        cursorColor = MuseTones.action,
-        focusedLabelColor = MuseTones.action,
-    )
-    val transformation = if (show) VisualTransformation.None else PasswordVisualTransformation()
-
-    fun save(remove: Boolean) {
-        if (busy) return
-        if (!remove) {
-            if (next.length < 8) { error = context.getString(R.string.nm_cloud_err_password_short); return }
-            if (next != again) { error = context.getString(R.string.nm_cloud_password_mismatch); return }
-        }
-        error = null
-        busy = true
-        scope.launch {
-            try {
-                NanoMuseCloud.setPassword(context, if (remove) "" else next, current.takeIf { it.isNotEmpty() })
-                onSaved(remove)
-            } catch (e: Exception) {
-                error = NanoMuseCloud.describe(context, e)
-            }
-            busy = false
-        }
-    }
-
-    AlertDialog(
-        onDismissRequest = onDismiss,
-        title = { Text(stringResource(if (hasPassword) R.string.nm_cloud_password_title_change else R.string.nm_cloud_password_title_set)) },
-        text = {
-            Column {
-                Text(
-                    text = stringResource(R.string.nm_cloud_password_why),
-                    style = MaterialTheme.typography.bodySmall,
-                    color = muted,
-                )
-                Spacer(Modifier.height(12.dp))
-                if (hasPassword) {
-                    OutlinedTextField(
-                        value = current,
-                        onValueChange = { current = it },
-                        label = { Text(stringResource(R.string.nm_cloud_password_current)) },
-                        singleLine = true,
-                        visualTransformation = transformation,
-                        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
-                        shape = RoundedCornerShape(12.dp),
-                        colors = fieldColors,
-                        modifier = Modifier.fillMaxWidth(),
-                    )
-                    Spacer(Modifier.height(8.dp))
-                }
-                OutlinedTextField(
-                    value = next,
-                    onValueChange = { next = it },
-                    label = { Text(stringResource(R.string.nm_cloud_password_new)) },
-                    singleLine = true,
-                    visualTransformation = transformation,
-                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
-                    trailingIcon = {
-                        IconButton(onClick = { show = !show }) {
-                            Icon(
-                                if (show) Icons.Outlined.VisibilityOff else Icons.Outlined.Visibility,
-                                contentDescription = stringResource(if (show) R.string.nm_a11y_hide_password else R.string.nm_a11y_show_password),
-                                tint = muted,
-                            )
-                        }
-                    },
-                    shape = RoundedCornerShape(12.dp),
-                    colors = fieldColors,
-                    modifier = Modifier.fillMaxWidth(),
-                )
-                Spacer(Modifier.height(8.dp))
-                OutlinedTextField(
-                    value = again,
-                    onValueChange = { again = it },
-                    label = { Text(stringResource(R.string.nm_cloud_password_confirm)) },
-                    singleLine = true,
-                    visualTransformation = transformation,
-                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
-                    shape = RoundedCornerShape(12.dp),
-                    colors = fieldColors,
-                    modifier = Modifier.fillMaxWidth(),
-                )
-                error?.let {
-                    Spacer(Modifier.height(8.dp))
-                    Text(it, style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.error)
-                }
-                if (hasPassword) {
-                    Spacer(Modifier.height(4.dp))
-                    TextButton(onClick = { save(remove = true) }, enabled = !busy, modifier = Modifier.align(Alignment.End)) {
-                        Text(stringResource(R.string.nm_cloud_password_remove), color = MaterialTheme.colorScheme.error, fontSize = 13.sp)
-                    }
-                }
-            }
-        },
-        confirmButton = {
-            TextButton(onClick = { save(remove = false) }, enabled = !busy && next.isNotEmpty()) {
-                Text(stringResource(R.string.save), color = MuseTones.action)
-            }
-        },
-        dismissButton = {
-            TextButton(onClick = onDismiss) { Text(stringResource(R.string.cancel)) }
-        },
-    )
 }
 
 /** One line of the usage table: a glyph, the kind, requests · tokens, and what it cost. */

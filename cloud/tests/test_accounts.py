@@ -1,4 +1,4 @@
-"""Passwords, sign-ins, the usage breakdown, calls and the operator's detail views."""
+"""Sign-ins, the usage breakdown, calls and the operator's detail views."""
 
 from __future__ import annotations
 
@@ -11,7 +11,7 @@ from nanomuse_cloud.config import Settings
 from nanomuse_cloud.db import Database
 from nanomuse_cloud.identifiers import BadIdentifier, parse
 from nanomuse_cloud.senders import LogSender
-from nanomuse_cloud.service import Cloud, check_password, hash_password
+from nanomuse_cloud.service import Cloud
 
 
 def make(**overrides):
@@ -28,8 +28,6 @@ def make(**overrides):
         per_minute_requests=100,
         allowance_cny=25,
         public_base="http://cloud.test",
-        password_max_attempts=3,
-        lockout_s=600,
     )
     kw.update(overrides)
     settings = Settings(**kw)
@@ -44,93 +42,15 @@ def auth(key: str) -> dict:
     return {"Authorization": f"Bearer {key}"}
 
 
-def test_password_hashing_roundtrip():
-    h = hash_password("correct horse")
-    assert h.startswith("scrypt$") and check_password("correct horse", h)
-    assert not check_password("wrong", h)
-    assert not check_password("x", "garbage")
-    assert hash_password("a") != hash_password("a")  # salted
-
-
-async def test_password_set_login_change_and_lockout():
+async def test_password_routes_are_gone_and_sign_in_is_a_code():
     app, client, sender, up, cloud, settings = make()
     first = await sign_up(client, sender, "13800138000", "pixel")
-    key1 = first["api_key"]
-    assert first["account"]["has_password"] is False and first["account"]["signed_in_via"] == "code"
-
-    # No password yet: the password sign-in says so instead of pretending.
+    assert first["account"]["signed_in_via"] == "code"
+    assert "has_password" not in first["account"]
     r = await client.post("/v1/auth/login", json={"identifier": "13800138000", "password": "whatever1", "device": "mac"})
-    assert r.status_code == 400 and r.json()["error"]["code"] == "no_password"
-
-    # Weak ones are refused; a proper one is set without `current` (none exists).
-    r = await client.post("/v1/auth/password", json={"password": "short"}, headers=auth(key1))
-    assert r.status_code == 400 and r.json()["error"]["code"] == "password_short"
-    r = await client.post("/v1/auth/password", json={"password": "aaaaaaaaaa"}, headers=auth(key1))
-    assert r.status_code == 400 and r.json()["error"]["code"] == "password_weak"
-    r = await client.post("/v1/auth/password", json={"password": "correct horse 1"}, headers=auth(key1))
-    assert r.status_code == 204
-    me = (await client.get("/v1/me", headers=auth(key1))).json()
-    assert me["account"]["has_password"] is True and me["account"]["password_set_at"]
-
-    # A second device signs in with the password: a new key, same account, via=password.
-    r = await client.post("/v1/auth/login", json={"identifier": "13800138000", "password": "correct horse 1", "device": "mac"})
-    assert r.status_code == 200, r.text
-    second = r.json()
-    key2 = second["api_key"]
-    assert key2 != key1 and second["account"]["id"] == first["account"]["id"]
-    assert second["account"]["signed_in_via"] == "password" and second["account"]["sessions"] == 2
-
-    # Unknown numbers and wrong passwords get the same answer.
-    r = await client.post("/v1/auth/login", json={"identifier": "13900001111", "password": "correct horse 1"})
-    assert r.status_code == 401 and r.json()["error"]["code"] == "bad_credentials"
-    r = await client.post("/v1/auth/login", json={"identifier": "13800138000", "password": "nope nope nope"})
-    assert r.status_code == 401 and r.json()["error"]["code"] == "bad_credentials"
-
-    # Changing it needs the current one — this key is well past the reset window.
-    cloud.db._conn.execute("UPDATE api_keys SET created_at=created_at-7200")
-    r = await client.post("/v1/auth/password", json={"password": "another one 2"}, headers=auth(key1))
-    assert r.status_code == 400 and r.json()["error"]["code"] == "password_required"
-    r = await client.post("/v1/auth/password", json={"password": "another one 2", "current": "wrong"}, headers=auth(key1))
-    assert r.status_code == 400 and r.json()["error"]["code"] == "password_wrong"
-    r = await client.post("/v1/auth/password", json={"password": "another one 2", "current": "correct horse 1"}, headers=auth(key1))
-    assert r.status_code == 204
-
-    # Three wrong tries lock the password (the code still works); a fresh code
-    # sign-in may then set a new password without the old one.
-    for _ in range(2):
-        r = await client.post("/v1/auth/login", json={"identifier": "13800138000", "password": "bad"})
-        assert r.status_code == 401
-    r = await client.post("/v1/auth/login", json={"identifier": "13800138000", "password": "bad"})
-    assert r.status_code == 429 and r.json()["error"]["code"] == "locked"
-    r = await client.post("/v1/auth/login", json={"identifier": "13800138000", "password": "another one 2"})
-    assert r.status_code == 429
-    third = await sign_up(client, sender, "13800138000", "ipad")
-    r = await client.post("/v1/auth/password", json={"password": "reset by code 3"}, headers=auth(third["api_key"]))
-    assert r.status_code == 204
-    r = await client.post("/v1/auth/login", json={"identifier": "13800138000", "password": "reset by code 3", "device": "win"})
-    assert r.status_code == 200
-
-    # The timeline shows what happened, never what was said.
-    events = (await client.get("/v1/me/events", headers=auth(key1))).json()["events"]
-    kinds = [e["kind"] for e in events]
-    assert "password.set" in kinds and "password.changed" in kinds and "sign_in.password" in kinds and "sign_in.failed" in kinds
-    assert all("detail" in e and len(e["detail"]) <= 200 for e in events)
-
-
-async def test_a_disabled_account_is_told_so_only_with_the_right_password():
-    """A probe at /v1/auth/login must not learn that an account exists and is disabled: a
-    wrong password gets the answer any wrong password gets, the right one hears disabled."""
-    app, client, sender, up, cloud, settings = make()
-    first = await sign_up(client, sender, "someone@example.com", "pixel")
+    assert r.status_code == 404
     r = await client.post("/v1/auth/password", json={"password": "correct horse 1"}, headers=auth(first["api_key"]))
-    assert r.status_code == 204
-    admin = {"X-Admin-Token": "admin"}
-    r = await client.post("/v1/admin/disable", headers=admin, json={"identifier": "someone@example.com"})
-    assert r.status_code == 204
-    r = await client.post("/v1/auth/login", json={"identifier": "someone@example.com", "password": "nope nope nope"})
-    assert r.status_code == 401 and r.json()["error"]["code"] == "bad_credentials"
-    r = await client.post("/v1/auth/login", json={"identifier": "someone@example.com", "password": "correct horse 1"})
-    assert r.status_code == 403 and r.json()["error"]["code"] == "account_disabled"
+    assert r.status_code == 404
 
 
 async def test_sessions_can_be_listed_and_revoked():
@@ -200,33 +120,31 @@ async def test_admin_overview_and_account_detail():
     await client.post("/v1/chat/completions", json={"model": "qwen3.8-27b", "messages": [{"role": "user", "content": "hi"}]}, headers=ha)
     await client.post("/v1/chat/completions", json={"model": "qwen3.8-flash", "messages": [{"role": "user", "content": "hi"}]}, headers=hb)
     await client.post("/v1/images/generations", json={"model": "qwen-image-3.0", "prompt": "a cat"}, headers=hb)
-    await client.post("/v1/auth/password", json={"password": "correct horse 1"}, headers=hb)
-    await client.post("/v1/auth/login", json={"identifier": "dev-a@example.com", "password": "wrong wrong"})
     admin = {"X-Admin-Token": "admin"}
 
     assert (await client.get("/v1/admin/overview")).status_code == 401
     r = await client.get("/v1/admin/overview", headers=admin)
     assert r.status_code == 200, r.text
     ov = r.json()
-    assert ov["accounts"]["total"] == 2 and ov["accounts"]["with_password"] == 1 and ov["accounts"]["live_keys"] == 2
+    assert ov["accounts"]["total"] == 2 and ov["accounts"]["live_keys"] == 2
     assert ov["today"]["requests"] == 3 and ov["today"]["active_accounts"] == 2 and ov["today"]["new_accounts"] == 2
     kinds = {row["kind"]: row for row in ov["today"]["by_kind"]}
     assert kinds["chat"]["requests"] == 2 and kinds["image"]["requests"] == 1
     models = {row["model"] for row in ov["period"]["by_model"]}
     assert models == {"qwen3.8-27b", "qwen3.8-flash", "qwen-image-3.0"}
-    assert ov["signals_today"]["sign_ins"] == 2 and ov["signals_today"]["sign_in_failures"] == 1
+    assert ov["signals_today"]["sign_ins"] == 2 and ov["signals_today"]["sign_in_failures"] == 0
     assert ov["top_accounts"][0]["hint"] == "de***@example.com" and ov["top_accounts"][0]["requests"] == 2
     # 0.22: the console shows accounts in full — the identifier rides beside the masked hint
     # (the hint stays for logs, mail and anything that leaves the console)
     assert ov["top_accounts"][0]["identifier"] == "dev-a@example.com"
-    assert ov["events"][0]["kind"] == "sign_in.failed" and ov["events"][0]["hint"] == "de***@example.com"
+    assert ov["events"][0]["kind"] == "sign_in.code" and ov["events"][0]["hint"] == "de***@example.com"
     assert ov["events"][0]["identifier"] == "dev-a@example.com"
 
     r = await client.get(f"/v1/admin/accounts/{b['account']['id']}", headers=admin)
     assert r.status_code == 200, r.text
     d = r.json()
-    assert d["account"]["identifier"] == "dev-a@example.com" and d["account"]["has_password"] is True
-    assert "password_hash" not in d["account"]
+    assert d["account"]["identifier"] == "dev-a@example.com"
+    assert "password_hash" not in d["account"] and "has_password" not in d["account"]
     assert (
         d["spend"]["requests_total"] == 2
         and d["spend"]["grant_cny"] == 25
@@ -235,20 +153,18 @@ async def test_admin_overview_and_account_detail():
     assert {row["kind"] for row in d["usage"]["period"]["by_kind"]} == {"chat", "image"}
     assert len(d["usage"]["period"]["by_day"]) == 2
     assert d["sessions"][0]["device"] == "mac" and d["sessions"][0]["revoked_at"] is None
-    assert [e["kind"] for e in d["events"]][:3] == ["sign_in.failed", "password.set", "sign_in.code"]
+    assert [e["kind"] for e in d["events"]][:1] == ["sign_in.code"]
     # the statement: the two requests and, first of all, the allowance itself
     assert len(d["recent"]) == 3 and {x["kind"] for x in d["recent"]} == {"chat", "image", "credit"}
     assert d["recent"][-1]["detail"] == {"credit_uy": 25_000_000, "from": "signup"}
     assert (await client.get("/v1/admin/accounts/nope", headers=admin)).status_code == 404
 
-    r = await client.get("/v1/admin/events?kind=sign_in.failed,password.set", headers=admin)
-    assert [e["kind"] for e in r.json()["events"]] == ["sign_in.failed", "password.set"]
+    r = await client.get("/v1/admin/events?kind=sign_in.code", headers=admin)
+    assert r.json()["events"]
 
     # The list view carries the new flags too.
     accounts = (await client.get("/v1/admin/accounts", headers=admin)).json()["accounts"]
-    byid = {x["id"]: x for x in accounts}
-    assert byid[b["account"]["id"]]["has_password"] is True and byid[a["account"]["id"]]["has_password"] is False
-    assert all("password_hash" not in x for x in accounts)
+    assert all("password_hash" not in x and "has_password" not in x for x in accounts)
 
 
 async def test_the_accounts_list_is_one_grouped_query_with_the_old_numbers():
@@ -910,10 +826,8 @@ async def test_gmail_dot_plus_and_googlemail_canonicalisation_and_legacy_lookup(
     legacy_id = cloud.db.new_account_id()
     enc = cloud.crypto.encrypt(legacy_id, legacy_raw)
     cloud.db.create_account(legacy_hash, "email", "ol***@gmail.com", 0, enc, account_id=legacy_id, grant_uy=10_000_000)
-    cloud.db.set_password(legacy_id, hash_password("correct horse 1"))
-
-    r = await client.post("/v1/auth/login", json={"identifier": "old.user@gmail.com", "password": "correct horse 1", "device": "mac"})
-    assert r.status_code == 200 and r.json()["account"]["id"] == legacy_id
+    legacy_login = await sign_up(client, sender, "old.user@gmail.com", "mac")
+    assert legacy_login["created"] is False and legacy_login["account"]["id"] == legacy_id
     # The row's id_hash is now upgraded to the canonical hash, so undotted sign-in matches too.
     again_login = await sign_up(client, sender, "olduser@gmail.com", "pixel")
     assert again_login["created"] is False and again_login["account"]["id"] == legacy_id

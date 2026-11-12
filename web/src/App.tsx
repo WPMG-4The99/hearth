@@ -85,8 +85,8 @@ export default function App() {
     return () => window.removeEventListener("hashchange", jump);
   }, [setTab]);
 
-  // A freshly created account is owed two short steps (a password, which model
-  // answers); they float over whatever comes next — setup or the chat.
+  // A freshly created account is asked which model answers; that step floats over
+  // whatever comes next — setup or the chat.
   const firstSteps = firstSignIn && state.hub?.account.signed_in ? <FirstSignInSteps /> : null;
 
   // Lite (inside the showcase's phone): the runtime there is set up by its host, so the

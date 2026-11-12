@@ -102,15 +102,15 @@ export function firstRunNeeded(input: NeededInput): boolean {
   return !input.signedIn || !input.hasModel || (!input.hasSessions && !input.done)
 }
 
-export type Stage = 'welcome' | 'password' | 'source' | 'models' | 'permissions' | 'meet'
+export type Stage = 'welcome' | 'source' | 'models' | 'permissions' | 'meet'
 
 export interface StageInput {
   signedIn: boolean
   /** A model can answer (the account's, or a key of the person's own in the harness). */
   hasModel: boolean
-  /** The account was created in this sign-in (the relay's `created`) and has no password yet. */
+  /** The account was created in this sign-in (the relay's `created`). */
   freshAccount: boolean
-  /** The password page was answered or skipped. */
+  /** Kept so an older firstrun file still parses. Sign-in is a code only, so it is ignored. */
   passwordSeen: boolean
   sourceChosen: 'cloud' | 'own' | null
   /** "Skip for now" on the models page, this run. */
@@ -122,7 +122,7 @@ export interface StageInput {
 
 /**
  * The page to show, in the phone's order: Welcome until the account (or, on a desktop, a
- * model of one's own) is there; a password for a fresh account; which model answers; the
+ * model of one's own) is there; which model answers; the
  * models page for one's own key until one is configured or skipped; the permissions where
  * the system gates them; then Meet. Welcome's second door ("Use your own API key instead",
  * as on the phone) leads to the models page with no account; Skip there, with no key saved,
@@ -130,7 +130,6 @@ export interface StageInput {
  */
 export function stageOf(s: StageInput): Stage {
   if (!s.signedIn && !s.hasModel) return s.sourceChosen === 'own' && !s.modelsSkipped ? 'models' : 'welcome'
-  if (s.signedIn && s.freshAccount && !s.passwordSeen) return 'password'
   if (s.sourceChosen === null) return 'source'
   if (s.sourceChosen === 'own' && !s.hasModel && !s.modelsSkipped) return 'models'
   if (s.gated && !s.permissionsSeen) return 'permissions'

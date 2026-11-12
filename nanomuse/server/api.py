@@ -429,16 +429,6 @@ class SyncStateBody(BaseModel):
     side_chats: bool | None = None
 
 
-class CloudLoginBody(BaseModel):
-    identifier: str = Field(min_length=3, max_length=200)
-    password: str = Field(min_length=1, max_length=128)
-
-
-class CloudPasswordBody(BaseModel):
-    password: str = Field(default="", max_length=128)
-    current: str | None = Field(default=None, max_length=128)
-
-
 class CloudSignOutAllBody(BaseModel):
     all: bool = False
 
@@ -1278,26 +1268,12 @@ def create_app(settings: Settings, service: MuseService | None = None) -> FastAP
         except CloudError as exc:
             raise _cloud_http(exc) from exc
 
-    @app.post("/api/cloud/login", dependencies=dep)
-    async def cloud_login(body: CloudLoginBody) -> dict[str, Any]:
-        try:
-            return _with_nudges(await svc.hub.login(body.identifier, body.password))
-        except CloudError as exc:
-            raise _cloud_http(exc) from exc
-
     @app.get("/api/nudges", dependencies=dep)
     async def nudges(refresh: bool = False) -> dict[str, Any]:
         """When the app may ask for a star on GitHub (contract C1): the relay's policy, read
         at most once a day (``?refresh=1`` asks now), the last good copy or the built-in
         defaults otherwise. The web keeps its own ledger of asks shown."""
         return await svc.nudges.refresh(force=refresh)
-
-    @app.post("/api/cloud/password", dependencies=dep)
-    async def cloud_password(body: CloudPasswordBody) -> dict[str, Any]:
-        try:
-            return await svc.hub.set_password(body.password, body.current)
-        except CloudError as exc:
-            raise _cloud_http(exc) from exc
 
     @app.get("/api/cloud/sessions", dependencies=dep)
     async def cloud_sessions() -> dict[str, Any]:

@@ -633,10 +633,6 @@
     <string name="nm_setup_source_cloud_sub">El modelo del relay de esta casa. Nada que pegar.</string>
     <string name="nm_setup_source_own_sub">OpenAI, Anthropic, DeepSeek, Bailian y otros endpoints compatibles con OpenAI. La clave se queda en este teléfono.</string>
     <string name="nm_setup_source_fine_print">Elige uno para empezar. El otro se puede añadir después.</string>
-    <string name="nm_setup_password_title">Crea una contraseña</string>
-    <string name="nm_setup_password_sub">Tu cuenta ya está dentro. Con una contraseña, tus computadoras y tus otros teléfonos inician sesión al momento, sin esperar un código.</string>
-    <string name="nm_setup_password_set">Guardar la contraseña</string>
-    <string name="nm_setup_password_fine_print">Opcional. Puedes crearla o cambiarla más tarde en Cuenta.</string>
     <string name="nm_welcome_feat_chat">Chat, imágenes, vídeo</string>
     <string name="nm_welcome_feat_chat_sub">Un modelo capaz, generación de imágenes y vídeo, herramientas, habilidades y memoria, en tu teléfono</string>
     <string name="nm_welcome_feat_hands">Manos: usa tu teléfono</string>
@@ -653,9 +649,6 @@
     <string name="nm_cloud_signin_title">Entrar en The Hearth</string>
     <string name="nm_cloud_signin_subtitle">Tu correo y luego el código de un solo uso. Este relay escribe el código en su registro.</string>
     <string name="nm_cloud_mode_code">Con un código</string>
-    <string name="nm_cloud_mode_password">Con una contraseña</string>
-    <string name="nm_cloud_password">Contraseña</string>
-    <string name="nm_cloud_forgot_password">¿Olvidaste la contraseña? Inicia sesión con un código</string>
     <string name="nm_cloud_identifier">Correo</string>
     <string name="nm_cloud_identifier_hint">tu@example.com</string>
     <string name="nm_cloud_code">Código</string>
@@ -721,15 +714,10 @@
     <string name="nm_cloud_err_unreachable">No se pudo conectar con The Hearth. Revisa la conexión.</string>
     <string name="nm_cloud_err_generic">Algo salió mal.</string>
     <string name="nm_cloud_err_bad_credentials">Correo o contraseña incorrectos.</string>
-    <string name="nm_cloud_err_no_password">Esta cuenta aún no tiene contraseña. Inicia sesión con un código y luego crea una en Cuenta.</string>
     <string name="nm_cloud_err_locked">Demasiados intentos fallidos. Espera unos minutos.</string>
-    <string name="nm_cloud_err_password_wrong">La contraseña actual es incorrecta.</string>
-    <string name="nm_cloud_err_password_required">Escribe primero la contraseña actual.</string>
-    <string name="nm_cloud_err_password_short">La contraseña necesita al menos 8 caracteres.</string>
-    <string name="nm_cloud_err_password_weak">Esa contraseña es demasiado fácil de adivinar.</string>
     <string name="nm_cloud_err_signup_closed">Los registros están pausados en este relay por ahora. Una cuenta que ya existe puede seguir iniciando sesión.</string>
     <string name="nm_cloud_err_domain_limited">Las direcciones de ese dominio han alcanzado hoy el límite de registros en este relay. Inténtalo mañana o usa otra dirección.</string>
-    <string name="nm_cloud_err_channel_unsupported">Este relay no envía códigos a ese tipo de dirección. Usa el otro tipo (correo o número de teléfono) o inicia sesión con tu contraseña.</string>
+    <string name="nm_cloud_err_channel_unsupported">Este relay no envía códigos a ese tipo de dirección. Usa el otro tipo (correo o número de teléfono).</string>
     <string name="nm_cloud_err_too_large">Ese mensaje es demasiado grande para el modelo. Acórtalo, quita algunos adjuntos o empieza un chat nuevo.</string>
     <string name="nm_cloud_err_content_rejected">La revisión de contenido del proveedor del modelo rechazó esta solicitud. Prueba con otras palabras o, si se repite, empieza un chat nuevo: las palabras que objeta pueden estar antes en la conversación.</string>
     <string name="nm_cloud_err_provider_busy">El proveedor del modelo está ocupado ahora mismo. Inténtalo de nuevo en un momento.</string>
@@ -748,18 +736,6 @@
     <!-- 0.1.20: the account page -->
     <string name="nm_cloud_since">desde %1$s</string>
     <string name="nm_cloud_account_id">Cuenta %1$s…</string>
-    <string name="nm_cloud_password_set">Creada</string>
-    <string name="nm_cloud_password_unset">Sin crear</string>
-    <string name="nm_cloud_password_title_set">Crear una contraseña</string>
-    <string name="nm_cloud_password_title_change">Cambiar la contraseña</string>
-    <string name="nm_cloud_password_current">Contraseña actual</string>
-    <string name="nm_cloud_password_new">Contraseña nueva (8 caracteres o más)</string>
-    <string name="nm_cloud_password_confirm">Repite la contraseña nueva</string>
-    <string name="nm_cloud_password_mismatch">Las dos contraseñas no coinciden.</string>
-    <string name="nm_cloud_password_why">Con una contraseña puedes iniciar sesión en otro dispositivo sin esperar un código. Justo después de iniciar sesión con un código, la contraseña actual puede dejarse vacía.</string>
-    <string name="nm_cloud_password_remove">Quitar la contraseña</string>
-    <string name="nm_cloud_password_saved">Contraseña guardada.</string>
-    <string name="nm_cloud_password_removed">Contraseña eliminada.</string>
     <string name="nm_cloud_devices_signed_in">Sesión iniciada en</string>
     <string name="nm_cloud_device_unknown">Dispositivo desconocido</string>
     <string name="nm_cloud_this_device">este teléfono</string>
@@ -1131,8 +1107,6 @@
     <string name="nm_models_search_clear">Borrar la búsqueda</string>
     <string name="nm_models_no_match">Ningún modelo coincide</string>
     <!-- Names for icon-only controls, read by screen readers (#338) -->
-    <string name="nm_a11y_show_password">Mostrar contraseña</string>
-    <string name="nm_a11y_hide_password">Ocultar contraseña</string>
     <string name="nm_a11y_avatar_candidate">Candidato %1$d</string>
     <string name="nm_a11y_share_card">Tarjeta %1$d</string>
     <string name="nm_a11y_add">Añadir</string>
@@ -1187,4 +1161,15 @@
     <string name="nm_household_kind_alert">Alerta</string>
     <string name="nm_menu_household">Casa</string>
     <string name="nm_household_needs_sign_in">Entra para verlo.</string>
+    <string name="nm_work_menu">Trabajo</string>
+    <string name="nm_work_title_admin">Admin</string>
+    <string name="nm_work_title_staff">Personal</string>
+    <string name="nm_work_board">Compartido</string>
+    <string name="nm_work_mine">Mi lista</string>
+    <string name="nm_work_notes">Notas</string>
+    <string name="nm_work_add">Añadir</string>
+    <string name="nm_work_open">Libre</string>
+    <string name="nm_work_assign">Asignar</string>
+    <string name="nm_work_save">Guardar</string>
+    <string name="nm_work_empty">Nada todavía.</string>
 </resources>

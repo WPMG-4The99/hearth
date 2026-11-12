@@ -205,15 +205,6 @@ class AccountManager:
         data = await self._relay("POST", "/v1/auth/verify", payload, ip)
         return await self._admit(data, ip)
 
-    async def login(self, identifier: str, password: str, ip: str) -> Account:
-        """The password way in — the account set one under Account earlier; no code to wait
-        for. The relay's answer (wrong password, no password yet, locked out) is passed on."""
-        if not self.s.web_enabled:
-            raise Refused(404, "web_off", "The web version is not turned on here.")
-        payload = {"identifier": identifier, "password": password, "device": "Web"}
-        data = await self._relay("POST", "/v1/auth/login", payload, ip)
-        return await self._admit(data, ip)
-
     async def _session_key(self, standing: str, ip: str) -> tuple[str, float]:
         """The key the relay issued at sign-in, traded for one that lapses on its own; the
         standing one is signed out again, so nothing of lasting worth is around to leak. An

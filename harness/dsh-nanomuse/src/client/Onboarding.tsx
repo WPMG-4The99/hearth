@@ -2,8 +2,7 @@
  * The first run, the way the phone does it (C4): the whole window, one page at a time,
  * three dots at the top and a gear to Settings. Welcome (the face, one line on what it is,
  * three feature rows, the free/open-source notice, "Sign in — free"); the sign-in itself
- * (a phone number or an e-mail, the six boxes of the code, or the password); a password
- * page for an account that was just created; "Which model answers?" (the Cloud model, or
+ * (a phone number or an e-mail, then the code); "Which model answers?" (the Cloud model, or
  * a key of one's own); the own-key step (C11: the region's providers from the catalogue, a
  * key taken inline, the ChatGPT sign-in, *More ways*; Continue once one is in, Skip for now
  * until then); the two permissions the hands need (macOS only — elsewhere the page is skipped); and
@@ -22,7 +21,7 @@ import { createElement as h, Fragment, useCallback, useEffect, useRef, useState,
 import { createPortal } from 'react-dom'
 import { firstRunNeeded, stageOf, dotOf, type Stage } from '../firstrun.ts'
 import { call, type CloudStatus, type Translate, failureText } from './api.ts'
-import { useCloudConfig, type AccountSheet } from './AccountPage.tsx'
+import { useCloudConfig } from './AccountPage.tsx'
 import { Avatar } from './Avatar.tsx'
 import { BrandMark } from './BrandMark.tsx'
 import { gatedPermissions, openLink, type PermissionKind } from './bridge.ts'
@@ -54,7 +53,7 @@ export interface OnboardingActions {
 }
 
 /** The sign-in's own screens, shown over the Welcome stage. */
-type SignInView = 'identifier' | 'code' | 'password'
+type SignInView = 'identifier' | 'code'
 
 /** How long Start may take to open the main chat before we stop waiting. */
 const START_MS = 12_000
@@ -114,7 +113,6 @@ export function makeOnboarding(t: Translate, _actions: OnboardingActions) {
     const [signIn, setSignIn] = useState<SignInView | null>(null)
     const [identifier, setIdentifier] = useState('')
     const [code, setCode] = useState('')
-    const [password, setPassword] = useState('')
     // A friend's invite code (optional, with the six digits): both get credit once this account makes its first request.
     const [invite, setInvite] = useState('')
     const [inviteOpen, setInviteOpen] = useState(false)
@@ -122,9 +120,6 @@ export function makeOnboarding(t: Translate, _actions: OnboardingActions) {
     const [busy, setBusy] = useState(false)
     const [error, setError] = useState<string | undefined>()
     const [resent, setResent] = useState(false)
-    // a sign-in that created the account owes the password page; answered (or skipped) once
-    const [fresh, setFresh] = useState(false)
-    const [passwordSeen, setPasswordSeen] = useState(false)
     const [modelsSkipped, setModelsSkipped] = useState(false)
     const [starting, setStarting] = useState(false)
     const [fading, setFading] = useState(false)
@@ -165,8 +160,8 @@ export function makeOnboarding(t: Translate, _actions: OnboardingActions) {
       ? stageOf({
           signedIn: status.signedIn,
           hasModel: status.ready,
-          freshAccount: fresh,
-          passwordSeen,
+          freshAccount: false,
+          passwordSeen: true,
           sourceChosen: rooms.firstRun.sourceChosen,
           modelsSkipped,
           gated,
@@ -221,12 +216,7 @@ export function makeOnboarding(t: Translate, _actions: OnboardingActions) {
         window.setTimeout(() => setResent(false), 4000)
       })
     }
-    const signedIn = async (next: CloudStatus, byCode: boolean) => {
-      // an account that has no password yet was (most likely) created just now: offer one
-      if (byCode) {
-        const sheet = await call<AccountSheet>('me').catch(() => undefined)
-        setFresh(sheet?.account?.has_password === false)
-      }
+    const signedIn = (next: CloudStatus) => {
       setStatus(next)
       setSignIn(null)
     }
@@ -236,28 +226,12 @@ export function makeOnboarding(t: Translate, _actions: OnboardingActions) {
         try {
           const next = await call<CloudStatus>('verify', { identifier: identifier.trim(), code: value, invite: invite.trim().toUpperCase() })
           setCode('')
-          await signedIn(next, true)
+          signedIn(next)
         } catch (err: unknown) {
           // a wrong code leaves empty boxes, not six digits to delete one by one
           setCode('')
           throw err
         }
-      })
-    }
-    const login = (event: FormEvent) => {
-      event.preventDefault()
-      void run(async () => {
-        const next = await call<CloudStatus>('login', { identifier: identifier.trim(), password })
-        setPassword('')
-        await signedIn(next, false)
-      })
-    }
-    const setPasswordNow = (event: FormEvent) => {
-      event.preventDefault()
-      void run(async () => {
-        await call('password', { password })
-        setPassword('')
-        setPasswordSeen(true)
       })
     }
     const choose = (source: 'cloud' | 'own') => {
@@ -308,21 +282,7 @@ export function makeOnboarding(t: Translate, _actions: OnboardingActions) {
         error ? h('div', { className: 'nm-ob-error', role: 'alert' }, error) : null,
         h(Pill, { disabled: busy || code.length !== 6, onClick: () => verify(code), className: 'nm-ob-wide' }, busy ? t('signingIn') : t('obNext')),
         h('div', { className: 'nm-ob-links' },
-          h('button', { type: 'button', className: 'nm-ob-link', onClick: () => { setError(undefined); setSignIn('password') } }, t('obOtherWay')),
-          h('span', { className: 'nm-ob-sep', 'aria-hidden': true }, '·'),
           h('button', { type: 'button', className: 'nm-ob-link', onClick: () => { setError(undefined); setCode(''); setSignIn('identifier') } }, t('obChangeIdentifier'))))
-    } else if (signIn === 'password') {
-      body = h('form', { className: 'nm-ob-center nm-ob-form', onSubmit: login },
-        h(BrandMark, { size: 72, className: 'nm-fr-hero-mark' }),
-        h('h1', { className: 'nm-ob-title' }, t('obPasswordTitle')),
-        h('p', { className: 'nm-ob-fine' }, identifier.trim()),
-        h('input', { className: 'nm-field', type: 'password', value: password, placeholder: t('obPassword'), autoComplete: 'current-password', autoFocus: true, 'aria-label': t('obPassword'), onChange: (e: FormEvent<HTMLInputElement>) => setPassword(e.currentTarget.value) }),
-        error ? h('div', { className: 'nm-ob-error', role: 'alert' }, error) : null,
-        h(Pill, { type: 'submit', disabled: busy || password.length === 0, className: 'nm-ob-wide' }, busy ? t('signingIn') : t('obSignIn')),
-        h('div', { className: 'nm-ob-links' },
-          h('button', { type: 'button', className: 'nm-ob-link', onClick: () => { setError(undefined); setSignIn('code') } }, t('obUseCode')),
-          h('span', { className: 'nm-ob-sep', 'aria-hidden': true }, '·'),
-          h('button', { type: 'button', className: 'nm-ob-link', onClick: () => { setError(undefined); setPassword(''); setSignIn('identifier') } }, t('obChangeIdentifier'))))
     } else if (stage === 'welcome') {
       // the app's mark, as on the phone (the face comes with the conversation, on the Meet page);
       // two doors: the account, or a key of one's own (the models page; the sign-in can come later)
@@ -344,15 +304,6 @@ export function makeOnboarding(t: Translate, _actions: OnboardingActions) {
           h('div', { className: 'nm-fr-notice-title' }, t('frNoticeTitle')),
           h('p', null, t('frNotice')),
           h('p', { className: 'nm-fr-notice-closing' }, t('frNoticeClosing'))))
-    } else if (stage === 'password') {
-      body = h('form', { className: 'nm-ob-center nm-fr-page', onSubmit: setPasswordNow },
-        h('h1', { className: 'nm-ob-title nm-ob-title-sm' }, t('frPasswordTitle')),
-        h('p', { className: 'nm-ob-sub' }, t('frPasswordSub')),
-        h('input', { className: 'nm-field', type: 'password', value: password, placeholder: t('obPassword'), autoComplete: 'new-password', autoFocus: true, 'aria-label': t('obPassword'), onChange: (e: FormEvent<HTMLInputElement>) => setPassword(e.currentTarget.value) }),
-        error ? h('div', { className: 'nm-ob-error', role: 'alert' }, error) : null,
-        h(Pill, { type: 'submit', disabled: busy || password.length < 6, className: 'nm-ob-wide nm-fr-primary' }, busy ? t('sending') : t('frPasswordSet')),
-        h('button', { type: 'button', className: 'nm-ob-skip', onClick: () => { setPassword(''); setPasswordSeen(true) } }, t('frSkip')),
-        h('p', { className: 'nm-ob-fine' }, t('frPasswordFine')))
     } else if (stage === 'source') {
       body = h(Page, {
         title: t('frSourceTitle'),

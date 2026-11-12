@@ -1,13 +1,12 @@
 /**
  * The account, as the phone and the web app show it: the pool in yuan with the two ways on
  * when it runs low (your own key, an invitation — and a star, once), the invite code, what was
- * used by kind and by model, the password, every device holding a key, the account's own
+ * used by kind and by model, every device holding a key, the account's own
  * timeline, and the way out (this device, every device, the account itself). Everything here
  * is read from the relay through the host's pass-through routes (`/nanomuse/cloud/me`,
- * `/sessions`, `/account-events`, `/password`, …); nothing of it is kept on the computer.
+ * `/sessions`, `/account-events`, …); nothing of it is kept on the computer.
  */
-import { Button, Input } from '@deepseek-ai/dsh-client-ui-primitives'
-import { createElement as h, Fragment, useEffect, useRef, useState, type FormEvent, type ReactNode } from 'react'
+import { createElement as h, Fragment, useEffect, useRef, useState, type ReactNode } from 'react'
 import { allowanceInfo, AllowanceWays, type Guidance } from './AllowanceWays.tsx'
 import { call, errorStyle, muted, row, type CloudStatus, type Translate, failureText } from './api.ts'
 import { openLink } from './bridge.ts'
@@ -19,7 +18,7 @@ import { starText } from '../nudges.ts'
 
 /** `GET /v1/me`, the parts this page reads (every field optional: an older relay sends fewer). */
 export interface AccountSheet {
-  account?: { id?: string; channel?: string; hint?: string; member?: boolean; has_password?: boolean; sessions?: number; signed_in_via?: string; created_at?: number; region?: string }
+  account?: { id?: string; channel?: string; hint?: string; member?: boolean; sessions?: number; signed_in_via?: string; created_at?: number; region?: string }
   /** Where the account is, as the relay sees it (0.1.34): `cn` or `intl`. */
   region?: string
   spend?: { total?: number; grant?: number; left?: number | null; unlimited?: boolean; warn?: boolean; usd_cny?: number; invite_bonus_cny?: number; invitee_bonus_cny?: number; own_key_docs?: string; guidance?: Guidance }
@@ -174,8 +173,6 @@ export function AccountPage({ t, status, locale, onEnded }: AccountPageProps): R
     sheet?.invite?.code ? h(Fragment, null, h('h3', { style: heading }, t('acInvite')), h(InviteBlock, { t, invite: sheet.invite })) : null,
     h('h3', { style: heading }, t('acUsage')),
     sheet ? h(Usage, { t, sheet }) : null,
-    h('h3', { style: heading }, t('acPassword')),
-    h(Password, { t, has: Boolean(a?.has_password), onChanged: reload }),
     h('h3', { style: heading }, t('acSessions')),
     h(Sessions, { t, sessions, locale, onChanged: reload, onEnded }),
     events && events.length > 0 ? h(Fragment, null, h('h3', { style: heading }, t('acTimeline')), h(Timeline, { events, locale })) : null,
@@ -266,42 +263,6 @@ function Usage({ t, sheet }: { t: Translate; sheet: AccountSheet }): ReactNode {
     which === 'total' && models.length
       ? h('div', { className: 'nm-card' }, models.map((r) => line(r, r.model ?? '')))
       : null)
-}
-
-// ---- the password --------------------------------------------------------------------------
-
-function Password({ t, has, onChanged }: { t: Translate; has: boolean; onChanged(): void }): ReactNode {
-  const [open, setOpen] = useState(false)
-  const [current, setCurrent] = useState('')
-  const [next, setNext] = useState('')
-  const [busy, setBusy] = useState(false)
-  const [error, setError] = useState<string | undefined>()
-  const [done, setDone] = useState<string | undefined>()
-  const submit = (event: FormEvent) => {
-    event.preventDefault()
-    setBusy(true)
-    setError(undefined)
-    void call('password', { password: next, ...(has ? { current } : {}) })
-      .then(() => { setOpen(false); setCurrent(''); setNext(''); setDone(next ? t('acPasswordSaved') : t('acPasswordRemoved')); onChanged() })
-      .catch((err: unknown) => setError(failureText(t, err)))
-      .finally(() => setBusy(false))
-  }
-  if (!open) {
-    return h('div', { className: 'nm-card' },
-      h('div', { className: 'nm-row' },
-        h('div', { className: 'nm-row-main' },
-          h('span', { className: 'nm-row-title' }, has ? t('acPasswordSet') : t('acPasswordNone')),
-          h('span', { className: 'nm-row-sub nm-wrap' }, done ?? t('acPasswordWhy'))),
-        h('button', { type: 'button', className: 'nm-pill nm-pill-ghost nm-pill-sm', onClick: () => { setDone(undefined); setOpen(true) } }, has ? t('acPasswordChange') : t('acPasswordAdd'))))
-  }
-  return h('form', { className: 'nm-card', style: { display: 'flex', flexDirection: 'column', gap: 8, padding: '12px 14px' }, onSubmit: submit },
-    has ? h(Input, { value: current, type: 'password', onChange: (e: FormEvent<HTMLInputElement>) => setCurrent(e.currentTarget.value), placeholder: t('acPasswordCurrent'), autoComplete: 'current-password', 'aria-label': t('acPasswordCurrent') }) : null,
-    h(Input, { value: next, type: 'password', onChange: (e: FormEvent<HTMLInputElement>) => setNext(e.currentTarget.value), placeholder: has ? t('acPasswordNew') : t('obPassword'), autoComplete: 'new-password', autoFocus: true, 'aria-label': t('acPasswordNew') }),
-    h('div', { style: muted }, has ? t('acPasswordRemoveHint') : t('acPasswordRule')),
-    error ? h('div', { style: errorStyle, role: 'alert' }, error) : null,
-    h('div', { style: row },
-      h(Button, { variant: 'primary', size: 'sm', type: 'submit', disabled: busy || (!has && next.length < 8) || (has && current.length === 0) || (next.length > 0 && next.length < 8) }, busy ? t('saving') : t('save')),
-      h(Button, { variant: 'ghost', size: 'sm', type: 'button', disabled: busy, onClick: () => { setOpen(false); setError(undefined) } }, t('cancel'))))
 }
 
 // ---- the devices holding a key ------------------------------------------------------------

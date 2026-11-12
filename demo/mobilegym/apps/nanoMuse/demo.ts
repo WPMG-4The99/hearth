@@ -104,19 +104,6 @@ export function verifySignInCode(
   });
 }
 
-/** The password way in, for accounts that set one under Account. */
-export function signInWithPassword(
-  gateway: string,
-  identifier: string,
-  password: string,
-): Promise<{ ticket: string; visitor: DemoVisitor }> {
-  return call(gateway, '/signin/login', {
-    method: 'POST',
-    headers: { 'content-type': 'application/json' },
-    body: JSON.stringify({ identifier, password }),
-  });
-}
-
 /** Hands the ticket back; the next demo asks for a sign-in again. */
 export async function signOut(gateway: string, ticket: string): Promise<void> {
   try {

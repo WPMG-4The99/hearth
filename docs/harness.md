@@ -223,8 +223,8 @@ screen in [desktop-muse.md](desktop-muse.md):
   the harness's preview notice, which stores its acknowledgement in the switched-off
   plugin's settings, is passed through.
 - **The first run.** Full-window sheets: welcome with the face and one *Sign in*
-  pill → *Sign in or create an account* (phone or e-mail) → six code boxes (or a
-  password: `/v1/auth/login`) → spinner → the permissions carousel (‹ ›): *Allow nanoMuse
+  pill → *Sign in or create an account* (phone or e-mail) → six code boxes → spinner →
+  the permissions carousel (‹ ›): *Allow nanoMuse
   to use your computer?* on macOS (Accessibility, Screen recording, each with *Allow*
   through the shell's bridge and a green check once granted), *…access your files?* (the
   workspace folder, *Change* through the native picker), *Your other devices* → *ready*.

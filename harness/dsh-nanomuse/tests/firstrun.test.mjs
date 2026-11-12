@@ -200,8 +200,8 @@ test('needed: the phone\'s rule — signed in, a model, and chats or Start', () 
 test('the pages come in the phone\'s order and light the dots the same way', () => {
   const base = { signedIn: false, hasModel: false, freshAccount: false, passwordSeen: false, sourceChosen: null, modelsSkipped: false, gated: true, permissionsSeen: false }
   assert.equal(stageOf(base), 'welcome')
-  // a fresh account owes the password page, once
-  assert.equal(stageOf({ ...base, signedIn: true, hasModel: true, freshAccount: true }), 'password')
+  // a new account goes to which model answers; there is no password page
+  assert.equal(stageOf({ ...base, signedIn: true, hasModel: true, freshAccount: true }), 'source')
   assert.equal(stageOf({ ...base, signedIn: true, hasModel: true, freshAccount: true, passwordSeen: true }), 'source')
   // signed in: which model answers, then the permissions, then Meet
   assert.equal(stageOf({ ...base, signedIn: true, hasModel: true }), 'source')
@@ -219,7 +219,7 @@ test('the pages come in the phone\'s order and light the dots the same way', () 
   assert.equal(stageOf({ ...base, sourceChosen: 'own' }), 'models')
   assert.equal(stageOf({ ...base, sourceChosen: 'own', modelsSkipped: true }), 'welcome')
   assert.equal(stageOf({ ...base, sourceChosen: 'cloud' }), 'welcome')
-  assert.deepEqual(['welcome', 'password', 'source', 'models', 'permissions', 'meet'].map(dotOf), [0, 0, 0, 0, 1, 2])
+  assert.deepEqual(['welcome', 'source', 'models', 'permissions', 'meet'].map(dotOf), [0, 0, 0, 1, 2])
 })
 
 test('the file is read tolerantly', () => {

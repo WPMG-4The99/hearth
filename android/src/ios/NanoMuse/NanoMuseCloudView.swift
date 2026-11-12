@@ -9,9 +9,6 @@ struct NanoMuseCloudView: View {
     @State private var identifier = ""
     @State private var code = ""
     @State private var codeSent = false
-    /// The other way in: the account's password instead of a code.
-    @State private var usePassword = false
-    @State private var password = ""
     /// A friend's invite code, optional, with the six digits.
     @State private var invite = ""
     @State private var inviteOpen = false
@@ -39,7 +36,7 @@ struct NanoMuseCloudView: View {
         Form {
             if signedIn {
                 // nanoMuse: the blocks and their order follow the Android account screen —
-                // identity, password, sessions, star, allowance, invite, usage, activity,
+                // identity, sessions, star, allowance, invite, usage, activity,
                 // devices, links, the ways out, the notice.
                 identitySection
                 NanoMuseAccountSections(account: $account)
@@ -252,11 +249,7 @@ struct NanoMuseCloudView: View {
                     .font(.footnote)
                     .foregroundStyle(.secondary)
             }
-            if usePassword {
-                SecureField(AppLocalized("Password"), text: $password)
-                    .textContentType(.password)
-                    .disabled(busy)
-            } else if codeSent {
+            if codeSent {
                 TextField(AppLocalized("Verification code"), text: $code)
                     .keyboardType(.numberPad)
                     .textContentType(.oneTimeCode)
@@ -275,30 +268,14 @@ struct NanoMuseCloudView: View {
         } footer: {
             if let message {
                 Text(message).foregroundStyle(failed ? Color.red : Color.secondary)
-            } else if inviteOpen && codeSent && !usePassword {
+            } else if inviteOpen && codeSent {
                 let bonus = "¥" + (config.inviteeBonusCny ?? 5).formatted(.number.precision(.fractionLength(0)))
                 Text(String(format: AppLocalized("A friend’s code on a first sign-in adds %@ for both of you after your first request."), bonus))
             }
         }
 
         Section {
-            if usePassword {
-                Button {
-                    Task { await signInWithPassword() }
-                } label: {
-                    HStack {
-                        Text(AppLocalized("Sign in"))
-                        if busy { Spacer(); ProgressView() }
-                    }
-                }
-                .disabled(busy || password.isEmpty || identifier.trimmingCharacters(in: .whitespaces).isEmpty)
-                Button(AppLocalized("Use a code instead")) {
-                    usePassword = false
-                    password = ""
-                    message = nil
-                }
-                .disabled(busy)
-            } else if codeSent {
+            if codeSent {
                 Button {
                     Task { await signIn() }
                 } label: {
@@ -308,11 +285,6 @@ struct NanoMuseCloudView: View {
                     }
                 }
                 .disabled(busy || code.trimmingCharacters(in: .whitespaces).isEmpty)
-                Button(AppLocalized("Use a password instead")) {
-                    usePassword = true
-                    message = nil
-                }
-                .disabled(busy)
                 Button(AppLocalized("Use another number or address")) {
                     codeSent = false
                     code = ""
@@ -327,11 +299,6 @@ struct NanoMuseCloudView: View {
                         Text(AppLocalized("Send code"))
                         if busy { Spacer(); ProgressView() }
                     }
-                }
-                .disabled(busy || identifier.trimmingCharacters(in: .whitespaces).isEmpty)
-                Button(AppLocalized("Sign in with a password")) {
-                    usePassword = true
-                    message = nil
                 }
                 .disabled(busy || identifier.trimmingCharacters(in: .whitespaces).isEmpty)
             }
@@ -402,22 +369,6 @@ struct NanoMuseCloudView: View {
             code = ""
             invite = ""
             inviteOpen = false
-            codeSent = false
-        } catch {
-            failed = true
-            message = NanoMuseCloud.describe(error)
-        }
-    }
-
-    private func signInWithPassword() async {
-        busy = true
-        failed = false
-        defer { busy = false }
-        do {
-            account = try await NanoMuseCloud.login(identifier: identifier, password: password)
-            message = nil
-            password = ""
-            usePassword = false
             codeSent = false
         } catch {
             failed = true

@@ -633,10 +633,6 @@
     <string name="nm_setup_source_cloud_sub">Ang modelo sa relay ng bahay na ito. Walang ididikit.</string>
     <string name="nm_setup_source_own_sub">OpenAI, Anthropic, DeepSeek, Bailian at iba pang OpenAI-compatible na endpoint. Nananatili sa teleponong ito ang key.</string>
     <string name="nm_setup_source_fine_print">Pumili ng isa para magsimula. Maidaragdag ang isa pa mamaya.</string>
-    <string name="nm_setup_password_title">Magtakda ng password</string>
-    <string name="nm_setup_password_sub">Nakapasok na ang account mo. Sa pamamagitan ng password, agad na makakapag-sign in ang mga computer at iba mong telepono, nang hindi naghihintay ng code.</string>
-    <string name="nm_setup_password_set">Itakda ang password</string>
-    <string name="nm_setup_password_fine_print">Opsyonal. Maaari mo itong itakda o palitan mamaya sa ilalim ng Account.</string>
     <string name="nm_welcome_feat_chat">Chat, mga larawan, video</string>
     <string name="nm_welcome_feat_chat_sub">Isang mahusay na modelo, paggawa ng larawan at video, mga tool, skill at memorya, sa telepono mo</string>
     <string name="nm_welcome_feat_hands">Mga kamay: ginagamit nito ang telepono mo</string>
@@ -653,9 +649,6 @@
     <string name="nm_cloud_signin_title">Mag-sign in sa The Hearth</string>
     <string name="nm_cloud_signin_subtitle">Email muna, tapos ang isang-beses na code. Isinusulat ng relay na ito ang code sa sarili nitong log.</string>
     <string name="nm_cloud_mode_code">Gamit ang code</string>
-    <string name="nm_cloud_mode_password">Gamit ang password</string>
-    <string name="nm_cloud_password">Password</string>
-    <string name="nm_cloud_forgot_password">Nakalimutan ang password? Mag-sign in gamit ang code</string>
     <string name="nm_cloud_identifier">Email</string>
     <string name="nm_cloud_identifier_hint">you@example.com</string>
     <string name="nm_cloud_code">Code</string>
@@ -721,15 +714,10 @@
     <string name="nm_cloud_err_unreachable">Hindi maabot ang The Hearth. Suriin ang koneksyon.</string>
     <string name="nm_cloud_err_generic">May nagkamali.</string>
     <string name="nm_cloud_err_bad_credentials">Maling e-mail o password.</string>
-    <string name="nm_cloud_err_no_password">Wala pang password ang account na ito. Mag-sign in gamit ang code, saka magtakda ng isa sa ilalim ng Account.</string>
     <string name="nm_cloud_err_locked">Masyadong maraming maling pagsubok. Maghintay ng ilang minuto.</string>
-    <string name="nm_cloud_err_password_wrong">Mali ang kasalukuyang password.</string>
-    <string name="nm_cloud_err_password_required">Ilagay muna ang kasalukuyang password.</string>
-    <string name="nm_cloud_err_password_short">Kailangan ng password ng hindi bababa sa 8 character.</string>
-    <string name="nm_cloud_err_password_weak">Masyadong madaling hulaan ang password na iyan.</string>
     <string name="nm_cloud_err_signup_closed">Naka-pause muna ang pag-sign up sa relay na ito. Puwede pa ring mag-sign in ang account na mayroon na.</string>
     <string name="nm_cloud_err_domain_limited">Naabot na ng mga address sa domain na iyon ang limitasyon sa pag-sign-up ngayong araw sa relay na ito. Subukan ulit bukas o gumamit ng ibang address.</string>
-    <string name="nm_cloud_err_channel_unsupported">Hindi nagpapadala ng code ang relay na ito sa ganoong uri ng address. Gamitin ang isa pang uri (e-mail o numero ng telepono), o mag-sign in gamit ang password.</string>
+    <string name="nm_cloud_err_channel_unsupported">Hindi nagpapadala ng code ang relay na ito sa ganoong uri ng address. Gamitin ang isa pang uri (e-mail o numero ng telepono).</string>
     <string name="nm_cloud_err_too_large">Masyadong malaki ang mensaheng iyan para sa model. Paikliin ito, alisin ang ilang attachment, o magsimula ng bagong chat.</string>
     <string name="nm_cloud_err_content_rejected">Tinanggihan ng content check ng model provider ang kahilingang ito. Subukan ang ibang mga salita, o magsimula ng bagong chat kung paulit-ulit itong nangyayari: ang mga salitang tinutulan nito ay maaaring nasa mas maagang bahagi ng usapan.</string>
     <string name="nm_cloud_err_provider_busy">Abala ngayon ang provider ng model. Subukan muli maya-maya.</string>
@@ -748,18 +736,6 @@
     <!-- 0.1.20: the account page -->
     <string name="nm_cloud_since">mula %1$s</string>
     <string name="nm_cloud_account_id">Account %1$s…</string>
-    <string name="nm_cloud_password_set">Nakatakda</string>
-    <string name="nm_cloud_password_unset">Hindi nakatakda</string>
-    <string name="nm_cloud_password_title_set">Magtakda ng password</string>
-    <string name="nm_cloud_password_title_change">Palitan ang password</string>
-    <string name="nm_cloud_password_current">Kasalukuyang password</string>
-    <string name="nm_cloud_password_new">Bagong password (8 character o higit pa)</string>
-    <string name="nm_cloud_password_confirm">Ulitin ang bagong password</string>
-    <string name="nm_cloud_password_mismatch">Magkaiba ang dalawang password.</string>
-    <string name="nm_cloud_password_why">Sa pamamagitan ng password, makakapag-sign in ka sa ibang device nang hindi naghihintay ng code. Kaagad pagkatapos ng pag-sign in gamit ang code, maaaring iwanang blangko ang kasalukuyang password.</string>
-    <string name="nm_cloud_password_remove">Alisin ang password</string>
-    <string name="nm_cloud_password_saved">Na-save ang password.</string>
-    <string name="nm_cloud_password_removed">Naalis ang password.</string>
     <string name="nm_cloud_devices_signed_in">Naka-sign in sa</string>
     <string name="nm_cloud_device_unknown">Hindi kilalang device</string>
     <string name="nm_cloud_this_device">teleponong ito</string>
@@ -1131,8 +1107,6 @@
     <string name="nm_models_search_clear">I-clear ang paghahanap</string>
     <string name="nm_models_no_match">Walang tumutugmang modelo</string>
     <!-- Names for icon-only controls, read by screen readers (#338) -->
-    <string name="nm_a11y_show_password">Ipakita ang password</string>
-    <string name="nm_a11y_hide_password">Itago ang password</string>
     <string name="nm_a11y_avatar_candidate">Kandidato %1$d</string>
     <string name="nm_a11y_share_card">Card %1$d</string>
     <string name="nm_a11y_add">Idagdag</string>
@@ -1187,4 +1161,15 @@
     <string name="nm_household_kind_alert">Alert</string>
     <string name="nm_menu_household">Bahay</string>
     <string name="nm_household_needs_sign_in">Mag-sign in para makita.</string>
+    <string name="nm_work_menu">Trabaho</string>
+    <string name="nm_work_title_admin">Admin</string>
+    <string name="nm_work_title_staff">Staff</string>
+    <string name="nm_work_board">Sabay</string>
+    <string name="nm_work_mine">Listahan ko</string>
+    <string name="nm_work_notes">Mga tala</string>
+    <string name="nm_work_add">Idagdag</string>
+    <string name="nm_work_open">Bukas</string>
+    <string name="nm_work_assign">Italaga</string>
+    <string name="nm_work_save">I-save</string>
+    <string name="nm_work_empty">Wala pa.</string>
 </resources>

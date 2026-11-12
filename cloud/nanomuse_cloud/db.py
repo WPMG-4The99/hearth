@@ -35,7 +35,7 @@ CREATE TABLE IF NOT EXISTS accounts (
     disabled      INTEGER NOT NULL DEFAULT 0,
     identifier_enc TEXT NOT NULL DEFAULT '',  -- AES-GCM of the phone / address, base64
     unlimited     INTEGER NOT NULL DEFAULT 0,  -- a member: no daily money cap (set by the operator)
-    password_hash TEXT NOT NULL DEFAULT '',    -- scrypt$salt$hash, empty = no password (codes only)
+    password_hash TEXT NOT NULL DEFAULT '',    -- unused; kept so an older file still opens
     password_set_at INTEGER,
     failed_logins INTEGER NOT NULL DEFAULT 0,  -- wrong passwords in a row
     locked_until  INTEGER,                     -- password sign-in refused until then
@@ -286,6 +286,30 @@ CREATE TABLE IF NOT EXISTS feed_keys (
     revoked_at    INTEGER,
     last_used_at  INTEGER
 );
+-- Private to one person. Other staff cannot read these. The household admin can.
+CREATE TABLE IF NOT EXISTS private_tasks (
+    id            TEXT PRIMARY KEY,
+    owner_id      TEXT NOT NULL,
+    text          TEXT NOT NULL,
+    done          INTEGER NOT NULL DEFAULT 0,
+    ts            INTEGER NOT NULL
+);
+CREATE INDEX IF NOT EXISTS private_tasks_owner ON private_tasks(owner_id, ts);
+CREATE TABLE IF NOT EXISTS private_notes (
+    account_id    TEXT PRIMARY KEY,
+    body          TEXT NOT NULL DEFAULT '',
+    updated_at    INTEGER NOT NULL
+);
+-- Shared board. Visible to the household of the person who added it.
+CREATE TABLE IF NOT EXISTS shared_tasks (
+    id            TEXT PRIMARY KEY,
+    creator_id    TEXT NOT NULL,
+    assignee_id   TEXT NOT NULL DEFAULT '',
+    text          TEXT NOT NULL,
+    done          INTEGER NOT NULL DEFAULT 0,
+    ts            INTEGER NOT NULL
+);
+CREATE INDEX IF NOT EXISTS shared_tasks_creator ON shared_tasks(creator_id, ts);
 """
 
 # How long a deleted account's key hashes are remembered. Long enough for every device of the
@@ -1265,32 +1289,6 @@ class Database:
                 (limit,),
             ).fetchall()
 
-    # -- passwords -----------------------------------------------------------------
-
-    def set_password(self, account_id: str, password_hash: str) -> None:
-        """Also clears any lock: a new password is a fresh start."""
-        with self.tx() as c:
-            c.execute(
-                "UPDATE accounts SET password_hash=?, password_set_at=?, failed_logins=0, locked_until=NULL WHERE id=?",
-                (password_hash, now() if password_hash else None, account_id),
-            )
-
-    def login_failed(self, account_id: str, max_attempts: int, lockout_s: int) -> int:
-        """Counts a wrong password; locks the account for `lockout_s` at the
-        limit. Returns how many tries are left (0 = locked now)."""
-        with self.tx() as c:
-            c.execute("UPDATE accounts SET failed_logins=failed_logins+1 WHERE id=?", (account_id,))
-            r = c.execute("SELECT failed_logins FROM accounts WHERE id=?", (account_id,)).fetchone()
-            failed = int(r[0]) if r else 0
-            if failed >= max_attempts:
-                c.execute("UPDATE accounts SET locked_until=?, failed_logins=0 WHERE id=?", (now() + lockout_s, account_id))
-                return 0
-        return max(0, max_attempts - failed)
-
-    def login_succeeded(self, account_id: str) -> None:
-        with self.tx() as c:
-            c.execute("UPDATE accounts SET failed_logins=0, locked_until=NULL WHERE id=?", (account_id,))
-
     def list_accounts(self, limit: int = 200) -> list[sqlite3.Row]:
         with self._lock:
             return self._conn.execute("SELECT * FROM accounts ORDER BY created_at DESC LIMIT ?", (limit,)).fetchall()
@@ -1386,7 +1384,7 @@ class Database:
     def accounts_by_channel(self) -> list[sqlite3.Row]:
         with self._lock:
             return self._conn.execute(
-                """SELECT channel, COUNT(*) AS accounts, SUM(CASE WHEN password_hash<>'' THEN 1 ELSE 0 END) AS with_password,
+                """SELECT channel, COUNT(*) AS accounts,
                           SUM(unlimited) AS members, SUM(disabled) AS disabled, SUM(contribute) AS contribute, SUM(sync_enabled) AS sync_on
                    FROM accounts GROUP BY channel ORDER BY accounts DESC"""
             ).fetchall()
@@ -1407,7 +1405,7 @@ class Database:
         with self._lock:
             return self._conn.execute(
                 "SELECT k.*, a.disabled AS account_disabled, a.granted, a.used, a.channel, a.hint, a.created_at AS account_created_at, "
-                "a.id_hash, a.unlimited AS account_unlimited, a.password_hash, a.password_set_at, "
+                "a.id_hash, a.unlimited AS account_unlimited, "
                 "a.invite_code, a.invites, a.grant_uy, a.contribute_bonus_at, a.contribute "
                 "FROM api_keys k JOIN accounts a ON a.id=k.account_id WHERE k.key_hash=?",
                 (key_hash,),
@@ -1681,8 +1679,7 @@ class Database:
     def account_counts(self) -> dict[str, int]:
         with self._lock:
             r = self._conn.execute(
-                """SELECT COUNT(*) AS total, SUM(disabled) AS disabled, SUM(unlimited) AS unlimited,
-                          SUM(CASE WHEN password_hash<>'' THEN 1 ELSE 0 END) AS with_password
+                """SELECT COUNT(*) AS total, SUM(disabled) AS disabled, SUM(unlimited) AS unlimited
                    FROM accounts"""
             ).fetchone()
             keys = self._conn.execute("SELECT COUNT(*) FROM api_keys WHERE revoked_at IS NULL").fetchone()
@@ -1691,7 +1688,6 @@ class Database:
             "total": int(r["total"] or 0),
             "disabled": int(r["disabled"] or 0),
             "unlimited": int(r["unlimited"] or 0),
-            "with_password": int(r["with_password"] or 0),
             "live_keys": int(keys[0]),
             "devices": int(devices[0]),
         }
@@ -2074,6 +2070,99 @@ class Database:
     def touch_feed_key(self, key_hash: str) -> None:
         with self.tx() as c:
             c.execute("UPDATE feed_keys SET last_used_at=? WHERE key_hash=?", (now(), key_hash))
+
+    def private_notes(self, account_id: str) -> str:
+        with self._lock:
+            row = self._conn.execute("SELECT body FROM private_notes WHERE account_id=?", (account_id,)).fetchone()
+        return str(row["body"]) if row else ""
+
+    def set_private_notes(self, account_id: str, body: str) -> None:
+        with self.tx() as c:
+            c.execute(
+                "INSERT INTO private_notes(account_id, body, updated_at) VALUES (?,?,?) "
+                "ON CONFLICT(account_id) DO UPDATE SET body=excluded.body, updated_at=excluded.updated_at",
+                (account_id, body, now()),
+            )
+
+    def private_tasks(self, owner_id: str) -> list[sqlite3.Row]:
+        with self._lock:
+            return list(
+                self._conn.execute(
+                    "SELECT * FROM private_tasks WHERE owner_id=? ORDER BY ts DESC, rowid DESC",
+                    (owner_id,),
+                ).fetchall()
+            )
+
+    def private_task(self, task_id: str) -> sqlite3.Row | None:
+        with self._lock:
+            return self._conn.execute("SELECT * FROM private_tasks WHERE id=?", (task_id,)).fetchone()
+
+    def insert_private_task(self, owner_id: str, text: str) -> str:
+        task_id = uuid.uuid4().hex
+        with self.tx() as c:
+            c.execute(
+                "INSERT INTO private_tasks(id, owner_id, text, done, ts) VALUES (?,?,?,?,?)",
+                (task_id, owner_id, text, 0, now()),
+            )
+        return task_id
+
+    def update_private_task(self, task_id: str, text: str | None, done: int | None) -> None:
+        sets: list[str] = []
+        args: list[Any] = []
+        if text is not None:
+            sets.append("text=?")
+            args.append(text)
+        if done is not None:
+            sets.append("done=?")
+            args.append(done)
+        if not sets:
+            return
+        args.append(task_id)
+        with self.tx() as c:
+            c.execute(f"UPDATE private_tasks SET {', '.join(sets)} WHERE id=?", args)
+
+    def shared_tasks_for(self, creator_ids: list[str]) -> list[sqlite3.Row]:
+        if not creator_ids:
+            return []
+        marks = ",".join("?" * len(creator_ids))
+        with self._lock:
+            return list(
+                self._conn.execute(
+                    f"SELECT * FROM shared_tasks WHERE creator_id IN ({marks}) ORDER BY ts DESC, rowid DESC",
+                    creator_ids,
+                ).fetchall()
+            )
+
+    def shared_task(self, task_id: str) -> sqlite3.Row | None:
+        with self._lock:
+            return self._conn.execute("SELECT * FROM shared_tasks WHERE id=?", (task_id,)).fetchone()
+
+    def insert_shared_task(self, creator_id: str, text: str, assignee_id: str) -> str:
+        task_id = uuid.uuid4().hex
+        with self.tx() as c:
+            c.execute(
+                "INSERT INTO shared_tasks(id, creator_id, assignee_id, text, done, ts) VALUES (?,?,?,?,?,?)",
+                (task_id, creator_id, assignee_id, text, 0, now()),
+            )
+        return task_id
+
+    def update_shared_task(self, task_id: str, text: str | None, done: int | None, assignee_id: str | None) -> None:
+        sets: list[str] = []
+        args: list[Any] = []
+        if text is not None:
+            sets.append("text=?")
+            args.append(text)
+        if done is not None:
+            sets.append("done=?")
+            args.append(done)
+        if assignee_id is not None:
+            sets.append("assignee_id=?")
+            args.append(assignee_id)
+        if not sets:
+            return
+        args.append(task_id)
+        with self.tx() as c:
+            c.execute(f"UPDATE shared_tasks SET {', '.join(sets)} WHERE id=?", args)
 
     def save_probe(self, probe: Probe) -> None:
         with self.tx() as c:
